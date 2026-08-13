@@ -1,7 +1,8 @@
-# Life Notes
+# PZB App
 
-Monorepo de la app de comunidad Life Notes. Ver [kickoff-app-life-notes.md](./kickoff-app-life-notes.md)
-para contexto completo del proyecto y las fases del MVP.
+Monorepo de la app oficial de Pilar Zambrano B. Ver
+[Brief App PilarZambranoB.pdf](./Brief%20App%20PilarZambranoB.pdf) para el contexto completo del
+proyecto (los 5 pilares, pricing, tono de marca).
 
 ## Estructura
 
@@ -22,11 +23,13 @@ packages/
    ```
 
 2. Completar en `.env.local`:
-   - `MONGODB_URI`: connection string de un cluster de MongoDB Atlas.
-   - `R2_*`: credenciales de un bucket de Cloudflare R2 (API token con permisos de
-     lectura/escritura sobre el bucket).
+   - `MONGODB_URI`: connection string de un cluster de MongoDB Atlas (o correr
+     `npm run dev-db` para levantar un Mongo en memoria solo de desarrollo, con
+     datos de prueba, sin tocar Atlas).
+   - `R2_*`: credenciales de un bucket de Cloudflare R2.
    - `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` / `CLERK_SECRET_KEY`: de una app de Clerk
-     (dashboard.clerk.com).
+     (dashboard.clerk.com). En desarrollo, Clerk genera llaves temporales
+     automáticamente si se dejan vacías; en producción son obligatorias.
 
 3. Instalar dependencias y correr en desarrollo:
 
@@ -35,19 +38,24 @@ packages/
    npm run dev
    ```
 
-4. (Opcional) Crear los índices iniciales en MongoDB:
+## Despliegue
 
-   ```bash
-   npm run db:init-indexes
-   ```
+- **GitHub**: repo privado, conectado a Vercel — cada push a `main` dispara un
+  deploy automático.
+- **Vercel**: [pzb-app.vercel.app](https://pzb-app.vercel.app). El Root Directory
+  del proyecto está fijado a `apps/web` (monorepo). Variables de entorno de
+  producción se configuran en el dashboard de Vercel, no se commitean.
 
-## Estado actual (Fase 1)
+## Estado actual
 
-- ✅ Next.js + TypeScript + Tailwind en `apps/web`.
-- ✅ Conexión a MongoDB Atlas (`src/lib/mongodb.ts`).
-- ✅ Cliente Cloudflare R2 para subir/firmar URLs de archivos (`src/lib/r2.ts`).
-- ✅ Autenticación con Clerk (`src/proxy.ts`, páginas `/sign-in` y `/sign-up`).
-- ✅ Modelos de datos iniciales (`src/models`): miembros/perfiles, eventos,
-  registros a eventos, sesiones de coaching.
-
-Siguiente paso: Fase 2 — registro/login completo y edición de perfil de usuaria.
+- ✅ Base técnica: Next.js + TypeScript + Tailwind, MongoDB Atlas, Cloudflare R2,
+  autenticación con Clerk.
+- ✅ Identidad visual de marca aplicada (Fraunces / Source Sans 3 / Cedarville
+  Cursive + paleta Beige Sand / Earth Brown / Dark Pine).
+- ✅ Onboarding con tipo de cuenta (Persona / Empresa) y home condicional.
+- ✅ Directorio de socias con búsqueda por nombre/profesión/palabra clave.
+- ✅ Módulo Coaching (The Alignment Partnership) completo: journey de 3 fases,
+  inversión, testimonios, CTA a WhatsApp.
+- ⏳ Pendiente: Add-Ons, Eventos, Zere Studio y Sobre Pilar (placeholders por
+  ahora); credenciales reales de Clerk/Mongo Atlas para que el deploy de Vercel
+  funcione de punta a punta.
