@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+:root {
+  /* PZB brand palette */
+  --pzb-beige-sand: #dad2c1;
+  --pzb-earth-brown: #594434;
+  --pzb-dark-pine: #515544;
+  --pzb-slate: #64747d;
+  --pzb-charcoal: #363636;
+  --pzb-cream: #f9f7f2;
+
+  --background: var(--pzb-cream);
+  --foreground: var(--pzb-charcoal);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-beige-sand: var(--pzb-beige-sand);
+  --color-earth-brown: var(--pzb-earth-brown);
+  --color-dark-pine: var(--pzb-dark-pine);
+  --color-slate: var(--pzb-slate);
+  --color-charcoal: var(--pzb-charcoal);
+  --color-cream: var(--pzb-cream);
+  --font-sans: var(--font-source-sans);
+  --font-serif: var(--font-fraunces);
+  --font-script: var(--font-cedarville);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), ui-sans-serif, sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}

@@ -1,0 +1,21 @@
+# dependencies
+node_modules/
+
+# env files
+.env
+.env.local
+.env.*.local
+
+# build outputs
+.next/
+out/
+build/
+dist/
+
+# misc
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+
+# Claude Code local settings (machine-specific)
+.claude/settings.local.json
