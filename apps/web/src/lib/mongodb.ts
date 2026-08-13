@@ -1,30 +1,32 @@
 import { MongoClient } from "mongodb";
 
-const uri = process.env.MONGODB_URI;
-
-if (!uri) {
-  throw new Error("Missing MONGODB_URI environment variable");
-}
-
 declare global {
   var _mongoClientPromise: Promise<MongoClient> | undefined;
 }
 
-let clientPromise: Promise<MongoClient>;
-
-if (process.env.NODE_ENV === "development") {
-  // Preserve the client across HMR reloads in dev.
-  if (!global._mongoClientPromise) {
-    global._mongoClientPromise = new MongoClient(uri).connect();
+function getClientPromise(): Promise<MongoClient> {
+  const uri = process.env.MONGODB_URI;
+  if (!uri) {
+    throw new Error("Missing MONGODB_URI environment variable");
   }
-  clientPromise = global._mongoClientPromise;
-} else {
-  clientPromise = new MongoClient(uri).connect();
+
+  if (process.env.NODE_ENV === "development") {
+    // Preserve the client across HMR reloads in dev.
+    if (!global._mongoClientPromise) {
+      global._mongoClientPromise = new MongoClient(uri).connect();
+    }
+    return global._mongoClientPromise;
+  }
+
+  return new MongoClient(uri).connect();
 }
 
-export default clientPromise;
+let clientPromise: Promise<MongoClient> | undefined;
 
 export async function getDb() {
+  if (!clientPromise) {
+    clientPromise = getClientPromise();
+  }
   const client = await clientPromise;
   return client.db(process.env.MONGODB_DB_NAME || "life_notes");
 }
