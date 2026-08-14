@@ -8,6 +8,7 @@ const PERSONA_NAV = [
   { href: "/home", label: "Comunidad" },
   { href: "/eventos", label: "Eventos" },
   { href: "/coaching", label: "Coaching" },
+  { href: "/add-ons", label: "Add-Ons" },
   { href: "/zere-studio", label: "Zere Studio" },
   { href: "/sobre-pilar", label: "Sobre Pilar" },
 ];

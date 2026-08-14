@@ -5,7 +5,8 @@ import { getMemberByClerkUserId } from "@/lib/members";
 
 const PERSONA_LINKS = [
   { href: "/eventos", title: "Eventos", subtitle: "Talleres y retiros" },
-  { href: "/coaching", title: "Coaching", subtitle: "+ Add-Ons de imagen" },
+  { href: "/coaching", title: "Coaching", subtitle: "The Alignment Partnership" },
+  { href: "/add-ons", title: "Add-Ons", subtitle: "Experiencias complementarias" },
   { href: "/zere-studio", title: "Zere Studio", subtitle: "Ver experiencias" },
 ];
 
@@ -59,7 +60,7 @@ export default async function HomePage() {
         <h2 className="text-xs uppercase tracking-wide text-slate">
           Explora
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {links.map((link) => (
             <Link
               key={link.href}
