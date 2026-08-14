@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "db:init-indexes": "tsx scripts/init-db.ts"
+    "db:init-indexes": "tsx scripts/init-db.ts",
+    "dev-db": "tsx scripts/dev-db.ts",
+    "make-admin": "tsx scripts/make-admin.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1106.0",

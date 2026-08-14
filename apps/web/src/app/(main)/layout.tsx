@@ -36,7 +36,10 @@ export default async function MainLayout({
     redirect("/onboarding");
   }
 
-  const nav = member.accountType === "empresa" ? EMPRESA_NAV : PERSONA_NAV;
+  const baseNav = member.accountType === "empresa" ? EMPRESA_NAV : PERSONA_NAV;
+  const nav = member.isAdmin
+    ? [...baseNav, { href: "/admin/eventos", label: "Admin" }]
+    : baseNav;
 
   return (
     <div className="flex flex-1 flex-col bg-cream">
