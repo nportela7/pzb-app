@@ -1,4 +1,6 @@
 import { MongoClient } from "mongodb";
+import { constants as cryptoConstants } from "node:crypto";
+import { createSecureContext } from "node:tls";
 
 declare global {
   var _mongoClientPromise: Promise<MongoClient> | undefined;
@@ -9,7 +11,16 @@ function connect(): Promise<MongoClient> {
   if (!uri) {
     throw new Error("Missing MONGODB_URI environment variable");
   }
-  return new MongoClient(uri, { serverSelectionTimeoutMS: 10_000 }).connect();
+  return new MongoClient(uri, {
+    serverSelectionTimeoutMS: 10_000,
+    // Node 17+ (OpenSSL 3.0) disables legacy TLS renegotiation by default,
+    // which some Atlas M0 clusters still rely on mid-handshake. Without this,
+    // connections intermittently fail with "SSL alert number 80" /
+    // tlsv1 alert internal error under Node's newer OpenSSL.
+    secureContext: createSecureContext({
+      secureOptions: cryptoConstants.SSL_OP_LEGACY_SERVER_CONNECT,
+    }),
+  }).connect();
 }
 
 let clientPromise: Promise<MongoClient> | undefined;

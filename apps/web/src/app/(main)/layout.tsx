@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { getMemberByClerkUserId } from "@/lib/members";
+import { MainNav } from "./main-nav";
 
 const PERSONA_NAV = [
   { href: "/home", label: "Comunidad" },
@@ -43,18 +44,10 @@ export default async function MainLayout({
         <Link href="/home" className="font-script text-2xl text-earth-brown">
           PZB.
         </Link>
-        <nav className="hidden sm:flex items-center gap-7 text-sm text-charcoal/70">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="hover:text-earth-brown transition-colors"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-        <UserButton />
+        <div className="flex items-center gap-4">
+          <MainNav items={nav} />
+          <UserButton />
+        </div>
       </header>
       <main className="flex flex-1 flex-col">{children}</main>
     </div>
