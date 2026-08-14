@@ -64,6 +64,52 @@ async function main() {
     { name: "member_search", weights: { name: 5, profession: 4, keywords: 3, bio: 1 } }
   );
 
+  const inDays = (n: number) => new Date(now.getTime() + n * 24 * 60 * 60 * 1000);
+  await db.collection("events").insertMany([
+    {
+      title: "Vision Board Session — grupal",
+      type: "taller",
+      description: "Sesión grupal para plasmar lo que quieres para el resto del año.",
+      location: "Estudio Pilar, CDMX",
+      isOnline: false,
+      startsAt: inDays(5),
+      priceCents: 350000,
+      currency: "mxn",
+      status: "published",
+      createdByClerkUserId: "dev_user_1",
+      createdAt: now,
+      updatedAt: now,
+    },
+    {
+      title: "Cena Life Notes de agosto",
+      type: "cena",
+      description: "Cena mensual de la comunidad, espacio para conectar sin agenda.",
+      location: "Por confirmar",
+      isOnline: false,
+      startsAt: inDays(12),
+      priceCents: 0,
+      currency: "mxn",
+      status: "published",
+      createdByClerkUserId: "dev_user_1",
+      createdAt: now,
+      updatedAt: now,
+    },
+    {
+      title: "Retiro de liderazgo — Zere Studio",
+      type: "zere_studio",
+      description: "Retiro corporativo de un día para equipos de liderazgo.",
+      location: "Valle de Bravo",
+      isOnline: false,
+      startsAt: inDays(30),
+      priceCents: 0,
+      currency: "mxn",
+      status: "published",
+      createdByClerkUserId: "dev_user_1",
+      createdAt: now,
+      updatedAt: now,
+    },
+  ]);
+
   await client.close();
 
   const envPath = join(process.cwd(), ".env.local");

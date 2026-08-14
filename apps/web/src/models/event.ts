@@ -1,8 +1,26 @@
 import { z } from "zod";
 import type { ObjectId } from "mongodb";
 
+export const EventType = z.enum([
+  "taller",
+  "cena",
+  "retiro",
+  "sesion_abierta",
+  "zere_studio",
+]);
+export type EventType = z.infer<typeof EventType>;
+
+export const EVENT_TYPE_LABELS: Record<EventType, string> = {
+  taller: "Taller",
+  cena: "Cena",
+  retiro: "Retiro",
+  sesion_abierta: "Sesión abierta",
+  zere_studio: "Zere Studio",
+};
+
 export const EventSchema = z.object({
   title: z.string().min(1),
+  type: EventType,
   description: z.string().max(5000).optional(),
   coverImageUrl: z.string().url().optional(),
   location: z.string().max(300).optional(),
