@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Fraunces, Source_Sans_3, Cedarville_Cursive } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import { esMX } from "@clerk/localizations";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -39,11 +40,49 @@ const clerkAppearance = {
     borderRadius: "0.75rem",
     fontFamily: "var(--font-source-sans), ui-sans-serif, sans-serif",
   },
+  elements: {
+    cardBox: {
+      boxShadow: "none",
+      border: "1px solid #DAD2C1",
+    },
+    card: {
+      backgroundColor: "#F9F7F2",
+    },
+    headerTitle: {
+      fontFamily: "var(--font-fraunces), Georgia, serif",
+      fontWeight: 400,
+      color: "#594434",
+    },
+    headerSubtitle: {
+      color: "#64747D",
+    },
+    formButtonPrimary: {
+      fontFamily: "var(--font-source-sans), ui-sans-serif, sans-serif",
+      textTransform: "none",
+      fontSize: "0.875rem",
+      boxShadow: "none",
+      "&:hover": {
+        backgroundColor: "#363636",
+      },
+    },
+    footer: {
+      backgroundColor: "#F9F7F2",
+    },
+    footerActionLink: {
+      color: "#594434",
+    },
+    dividerLine: {
+      backgroundColor: "#DAD2C1",
+    },
+    formFieldInput: {
+      borderColor: "#DAD2C1",
+    },
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <ClerkProvider appearance={clerkAppearance}>
+    <ClerkProvider appearance={clerkAppearance} localization={esMX}>
       <html
         lang="es"
         className={`${fraunces.variable} ${sourceSans.variable} ${cedarville.variable} h-full antialiased`}
