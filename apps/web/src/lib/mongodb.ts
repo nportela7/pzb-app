@@ -28,5 +28,5 @@ export async function getDb() {
     clientPromise = getClientPromise();
   }
   const client = await clientPromise;
-  return client.db(process.env.MONGODB_DB_NAME || "life_notes");
+  return client.db(process.env.MONGODB_DB_NAME || "pzb");
 }
