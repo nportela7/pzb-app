@@ -1,3 +1,5 @@
+import { Grain } from "@/components/Grain";
+
 const DIMENSIONS = [
   {
     name: "Identity",
@@ -59,18 +61,21 @@ const WHATSAPP_HREF =
 export default function AddOnsPage() {
   return (
     <div className="flex-1 bg-cream">
-      <section className="px-6 sm:px-10 pt-20 pb-16 max-w-3xl mx-auto">
-        <p className="text-xs tracking-[0.3em] uppercase text-slate mb-5">
-          Add-Ons &amp; Coaching de Imagen · Cómo te muestras
-        </p>
-        <h1 className="text-4xl sm:text-5xl text-earth-brown mb-6">
-          Experiencias <span className="italic font-normal">complementarias</span>
-        </h1>
-        <p className="text-lg text-charcoal/80 leading-relaxed max-w-xl">
-          Se agregan al programa principal cuando aparece la necesidad. No se
-          contratan todos de entrada: Pilar propone el correcto en el momento
-          correcto.
-        </p>
+      <section className="relative overflow-hidden px-6 sm:px-10 pt-20 pb-16">
+        <Grain opacity={0.05} />
+        <div className="relative max-w-3xl mx-auto">
+          <p className="text-xs tracking-[0.3em] uppercase text-slate mb-5">
+            Add-Ons &amp; Coaching de Imagen · Cómo te muestras
+          </p>
+          <h1 className="text-4xl sm:text-5xl text-earth-brown mb-6">
+            Experiencias <span className="italic font-normal">complementarias</span>
+          </h1>
+          <p className="text-lg text-charcoal/80 leading-relaxed max-w-xl">
+            Se agregan al programa principal cuando aparece la necesidad. No
+            se contratan todos de entrada: Pilar propone el correcto en el
+            momento correcto.
+          </p>
+        </div>
       </section>
 
       {DIMENSIONS.map((dimension, i) => (

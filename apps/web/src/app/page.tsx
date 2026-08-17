@@ -10,6 +10,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRef } from "react";
 import { ZereWordmark } from "@/components/ZereWordmark";
+import { Grain } from "@/components/Grain";
 import {
   motion,
   useReducedMotion,
@@ -344,8 +345,9 @@ export default function Home() {
       </section>
 
       {/* Zere Studio — its own sub-brand moment */}
-      <section className="px-6 sm:px-10 py-20 sm:py-28 bg-zere-sky">
-        <div className="max-w-3xl mx-auto">
+      <section className="relative overflow-hidden px-6 sm:px-10 py-20 sm:py-28 bg-zere-sky">
+        <Grain opacity={0.08} />
+        <div className="relative max-w-3xl mx-auto">
           <Reveal>
             <ZereWordmark className="text-2xl sm:text-3xl" />
             <p className="font-serif italic text-4xl sm:text-5xl text-zere-deep/25 mt-8 mb-6">

@@ -1,4 +1,5 @@
 import { ZereWordmark } from "@/components/ZereWordmark";
+import { Grain } from "@/components/Grain";
 
 const CLIENTES = [
   "Directores de Recursos Humanos que buscan experiencias de bienestar y cohesión para sus equipos",
@@ -41,8 +42,9 @@ const CONTACT_HREF =
 export default function ZereStudioPage() {
   return (
     <div className="flex-1 bg-cream">
-      <section className="px-6 sm:px-10 pt-20 pb-16 bg-zere-sky">
-        <div className="max-w-3xl mx-auto">
+      <section className="relative overflow-hidden px-6 sm:px-10 pt-20 pb-16 bg-zere-sky">
+        <Grain opacity={0.08} />
+        <div className="relative max-w-3xl mx-auto">
           <ZereWordmark className="text-2xl sm:text-3xl mb-8" />
           <p className="font-serif italic text-5xl sm:text-6xl text-zere-deep/25 mb-6">
             propósito
@@ -59,8 +61,9 @@ export default function ZereStudioPage() {
         </div>
       </section>
 
-      <section className="px-6 sm:px-10 py-16 bg-zere-deep">
-        <div className="max-w-3xl mx-auto">
+      <section className="relative overflow-hidden px-6 sm:px-10 py-16 bg-zere-deep">
+        <Grain opacity={0.1} />
+        <div className="relative max-w-3xl mx-auto">
           <p className="font-serif italic text-2xl text-cream leading-snug max-w-lg">
             &ldquo;Conectar mente, cuerpo y alma. Una experiencia
             transformadora no sucede sola: nace de reunir a las personas
@@ -80,8 +83,9 @@ export default function ZereStudioPage() {
         </ul>
       </section>
 
-      <section className="px-6 sm:px-10 py-16 bg-zere-sky">
-        <div className="max-w-3xl mx-auto">
+      <section className="relative overflow-hidden px-6 sm:px-10 py-16 bg-zere-sky">
+        <Grain opacity={0.08} />
+        <div className="relative max-w-3xl mx-auto">
           <h2 className="text-2xl text-zere-deep mb-10">Formatos</h2>
           <div className="grid sm:grid-cols-2 gap-5">
             {FORMATOS.map((formato) => (

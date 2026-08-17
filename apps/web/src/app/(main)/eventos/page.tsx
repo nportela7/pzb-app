@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { listUpcomingEvents } from "@/lib/events";
 import { EVENT_TYPE_LABELS, EventType } from "@/models/event";
+import { Grain } from "@/components/Grain";
 
 const FILTERS: { value?: EventType; label: string }[] = [
   { value: undefined, label: "Todos" },
@@ -48,15 +49,18 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
 
   return (
     <div className="flex-1 bg-cream">
-      <section className="px-6 sm:px-10 pt-20 pb-10 max-w-3xl mx-auto">
-        <p className="text-xs tracking-[0.3em] uppercase text-slate mb-5">
-          Calendario unificado
-        </p>
-        <h1 className="text-4xl sm:text-5xl text-earth-brown mb-6">Eventos</h1>
-        <p className="text-lg text-charcoal/80 leading-relaxed max-w-xl">
-          Talleres, cenas, retiros, sesiones abiertas y experiencias de Zere
-          Studio, todo en un solo calendario.
-        </p>
+      <section className="relative overflow-hidden px-6 sm:px-10 pt-20 pb-10">
+        <Grain opacity={0.05} />
+        <div className="relative max-w-3xl mx-auto">
+          <p className="text-xs tracking-[0.3em] uppercase text-slate mb-5">
+            Calendario unificado
+          </p>
+          <h1 className="text-4xl sm:text-5xl text-earth-brown mb-6">Eventos</h1>
+          <p className="text-lg text-charcoal/80 leading-relaxed max-w-xl">
+            Talleres, cenas, retiros, sesiones abiertas y experiencias de Zere
+            Studio, todo en un solo calendario.
+          </p>
+        </div>
       </section>
 
       <div className="px-6 sm:px-10 max-w-3xl mx-auto flex flex-wrap gap-2 mb-12">

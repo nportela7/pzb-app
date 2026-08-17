@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const WHATSAPP_HREF =
   "https://wa.me/525574141480?text=" +
   encodeURIComponent("Hola Pilar, me encantaría conocer más de tu trabajo.");
@@ -37,13 +39,23 @@ export default function SobrePilarPage() {
       </section>
 
       <section className="px-6 sm:px-10 py-16 bg-beige-sand/40">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto grid sm:grid-cols-[1fr_auto] gap-8 items-center">
           <p className="text-charcoal/80 leading-relaxed max-w-xl">
             Ha invertido como ángel en marcas de wellness y participa en
             diversos consejos directivos. Su ancla personal son los
             caballos; su creencia de trabajo: verse bien y sentirse bien van
             de la mano.
           </p>
+          <div className="w-full sm:w-40 aspect-[3/4] rounded-2xl overflow-hidden shrink-0">
+            <Image
+              src="/images/horse-field-portrait.jpg"
+              alt="Un caballo de pie en un campo, el ancla personal de Pilar"
+              width={3148}
+              height={4737}
+              className="w-full h-full object-cover"
+              sizes="160px"
+            />
+          </div>
         </div>
       </section>
 

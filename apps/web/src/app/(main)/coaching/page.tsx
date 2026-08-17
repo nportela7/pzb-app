@@ -1,3 +1,5 @@
+import { Grain } from "@/components/Grain";
+
 const PHASES = [
   {
     number: "01",
@@ -59,37 +61,40 @@ const WHATSAPP_HREF =
 export default function CoachingPage() {
   return (
     <div className="flex-1 bg-cream">
-      <section className="px-6 sm:px-10 pt-20 pb-20 max-w-3xl mx-auto">
-        <p className="text-xs tracking-[0.3em] uppercase text-slate mb-5">
-          Identity · Quién estás siendo
-        </p>
-        <h1 className="text-4xl sm:text-5xl text-earth-brown mb-6">
-          The Alignment <span className="italic font-normal">Partnership</span>
-        </h1>
-        <p className="text-lg text-charcoal/80 leading-relaxed max-w-xl">
-          El programa principal de coaching 1:1 de Pilar. Seis meses
-          trabajando identidad, imagen y decisiones como una sola
-          conversación.
-        </p>
+      <section className="relative overflow-hidden px-6 sm:px-10 pt-20 pb-20">
+        <Grain opacity={0.05} />
+        <div className="relative max-w-3xl mx-auto">
+          <p className="text-xs tracking-[0.3em] uppercase text-slate mb-5">
+            Identity · Quién estás siendo
+          </p>
+          <h1 className="text-4xl sm:text-5xl text-earth-brown mb-6">
+            The Alignment <span className="italic font-normal">Partnership</span>
+          </h1>
+          <p className="text-lg text-charcoal/80 leading-relaxed max-w-xl">
+            El programa principal de coaching 1:1 de Pilar. Seis meses
+            trabajando identidad, imagen y decisiones como una sola
+            conversación.
+          </p>
 
-        <dl className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-6 text-sm">
-          <div>
-            <dt className="text-slate mb-1">Duración</dt>
-            <dd className="text-charcoal">6 meses</dd>
-          </div>
-          <div>
-            <dt className="text-slate mb-1">Formato</dt>
-            <dd className="text-charcoal">8 sesiones · 90 min</dd>
-          </div>
-          <div>
-            <dt className="text-slate mb-1">Canal</dt>
-            <dd className="text-charcoal">WhatsApp, L–V 10–19h</dd>
-          </div>
-          <div>
-            <dt className="text-slate mb-1">Confidencialidad</dt>
-            <dd className="text-charcoal">Total</dd>
-          </div>
-        </dl>
+          <dl className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-6 text-sm">
+            <div>
+              <dt className="text-slate mb-1">Duración</dt>
+              <dd className="text-charcoal">6 meses</dd>
+            </div>
+            <div>
+              <dt className="text-slate mb-1">Formato</dt>
+              <dd className="text-charcoal">8 sesiones · 90 min</dd>
+            </div>
+            <div>
+              <dt className="text-slate mb-1">Canal</dt>
+              <dd className="text-charcoal">WhatsApp, L–V 10–19h</dd>
+            </div>
+            <div>
+              <dt className="text-slate mb-1">Confidencialidad</dt>
+              <dd className="text-charcoal">Total</dd>
+            </div>
+          </dl>
+        </div>
       </section>
 
       <section className="px-6 sm:px-10 py-20 bg-beige-sand/40">
@@ -155,8 +160,9 @@ export default function CoachingPage() {
         </div>
       </section>
 
-      <section className="px-6 sm:px-10 py-20 bg-earth-brown text-cream">
-        <div className="max-w-3xl mx-auto">
+      <section className="relative overflow-hidden px-6 sm:px-10 py-20 bg-earth-brown text-cream">
+        <Grain opacity={0.08} />
+        <div className="relative max-w-3xl mx-auto">
           <p className="font-script text-4xl mb-14">Client love</p>
           <div className="grid sm:grid-cols-2 gap-x-12 gap-y-10">
             {TESTIMONIALS.map((t, i) => (

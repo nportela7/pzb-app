@@ -1,4 +1,11 @@
 import { searchMembers } from "@/lib/members";
+import { MemberAvatar } from "@/components/MemberAvatar";
+import { Grain } from "@/components/Grain";
+
+const ACCOUNT_LABELS: Record<string, string> = {
+  persona: "Persona",
+  empresa: "Empresa",
+};
 
 export default async function DirectorioPage(props: PageProps<"/directorio">) {
   const { q } = await props.searchParams;
@@ -6,55 +13,70 @@ export default async function DirectorioPage(props: PageProps<"/directorio">) {
   const results = await searchMembers(query);
 
   return (
-    <div className="flex flex-1 flex-col gap-6 px-6 py-8 max-w-3xl mx-auto w-full">
-      <div>
-        <h1 className="text-2xl font-semibold">Directorio</h1>
-        <p className="text-sm text-black/60 dark:text-white/60 mt-1">
-          Busca por nombre, profesión o palabra clave.
-        </p>
-      </div>
+    <div className="flex-1 bg-cream">
+      <section className="relative overflow-hidden px-6 sm:px-10 pt-14 pb-10 bg-beige-sand/40">
+        <Grain opacity={0.06} />
+        <div className="relative max-w-3xl mx-auto">
+          <p className="text-xs tracking-[0.3em] uppercase text-slate mb-4">
+            Comunidad
+          </p>
+          <h1 className="text-3xl sm:text-4xl text-earth-brown mb-3">
+            Directorio de socias
+          </h1>
+          <p className="text-charcoal/70 max-w-lg leading-relaxed mb-8">
+            Encuentra a otras socias por nombre, profesión o palabra clave,
+            para conectar, colaborar o recomendarte.
+          </p>
 
-      <form method="get" className="flex gap-2">
-        <input
-          type="text"
-          name="q"
-          defaultValue={query}
-          placeholder="Ej. psicóloga, coach, Guadalajara"
-          className="flex-1 rounded-lg border border-black/10 dark:border-white/15 bg-transparent px-3 py-2 text-sm"
-        />
-        <button
-          type="submit"
-          className="rounded-lg bg-foreground text-background px-4 py-2 text-sm font-medium"
-        >
-          Buscar
-        </button>
-      </form>
+          <form method="get" className="flex gap-2 max-w-lg">
+            <input
+              type="text"
+              name="q"
+              defaultValue={query}
+              placeholder="Ej. psicóloga, coach, Guadalajara"
+              className="flex-1 rounded-full border border-earth-brown/20 bg-cream px-5 py-2.5 text-sm text-charcoal placeholder:text-slate focus:outline-none focus:border-earth-brown transition-colors"
+            />
+            <button
+              type="submit"
+              className="rounded-full bg-earth-brown text-cream px-6 py-2.5 text-sm font-medium hover:bg-charcoal transition-colors"
+            >
+              Buscar
+            </button>
+          </form>
+        </div>
+      </section>
 
-      <ul className="flex flex-col gap-3">
-        {results.length === 0 && (
-          <li className="text-sm text-black/60 dark:text-white/60">
+      <section className="px-6 sm:px-10 py-12 max-w-3xl mx-auto">
+        {results.length === 0 ? (
+          <p className="text-charcoal/70 leading-relaxed">
             No encontramos socias que coincidan con &ldquo;{query}&rdquo;.
-          </li>
+          </p>
+        ) : (
+          <ul className="flex flex-col divide-y divide-beige-sand">
+            {results.map((member) => (
+              <li
+                key={member._id.toString()}
+                className="flex items-center gap-4 py-5"
+              >
+                <MemberAvatar name={member.name} className="w-11 h-11" />
+                <div className="min-w-0 flex-1">
+                  <p className="text-charcoal font-medium truncate">
+                    {member.name}
+                  </p>
+                  {member.profession && (
+                    <p className="text-sm text-slate truncate">
+                      {member.profession}
+                    </p>
+                  )}
+                </div>
+                <span className="text-xs uppercase tracking-wide text-slate shrink-0">
+                  {ACCOUNT_LABELS[member.accountType] ?? member.accountType}
+                </span>
+              </li>
+            ))}
+          </ul>
         )}
-        {results.map((member) => (
-          <li
-            key={member._id.toString()}
-            className="rounded-lg border border-black/10 dark:border-white/15 p-4"
-          >
-            <div className="flex items-center justify-between">
-              <span className="font-medium">{member.name}</span>
-              <span className="text-xs uppercase tracking-wide text-black/40 dark:text-white/40">
-                {member.accountType}
-              </span>
-            </div>
-            {member.profession && (
-              <p className="text-sm text-black/60 dark:text-white/60 mt-1">
-                {member.profession}
-              </p>
-            )}
-          </li>
-        ))}
-      </ul>
+      </section>
     </div>
   );
 }
