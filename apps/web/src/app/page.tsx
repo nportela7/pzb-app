@@ -158,7 +158,7 @@ export default function Home() {
           className="absolute inset-3 sm:inset-6 rounded-2xl sm:rounded-3xl border border-white/40 pointer-events-none"
         />
 
-        {/* grass fading into cream at the very end of the image */}
+        {/* fading into the beige tone of the section below, at the very end of the image */}
         <div
           aria-hidden
           className="absolute inset-x-0 bottom-0 h-40 sm:h-56 backdrop-blur-md"
@@ -167,7 +167,7 @@ export default function Home() {
             WebkitMaskImage: "linear-gradient(to top, black, transparent)",
           }}
         />
-        <div className="absolute inset-x-0 bottom-0 h-48 sm:h-64 bg-gradient-to-t from-cream to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-48 sm:h-64 bg-gradient-to-t from-[#ede8de] to-transparent" />
 
         <div
           ref={heroTextRef}
