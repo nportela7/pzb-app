@@ -29,25 +29,20 @@ export default async function HomePage() {
   const links = member.accountType === "empresa" ? EMPRESA_LINKS : PERSONA_LINKS;
 
   return (
-    <div className="flex-1 bg-cream">
-      <section className="relative overflow-hidden h-56 sm:h-64">
-        <Image
-          src="/images/silhouette-sunset.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-[50%_75%]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/20 to-transparent" />
-        <Grain opacity={0.15} />
-        <div className="relative h-full max-w-3xl mx-auto w-full flex items-end gap-5 px-6 sm:px-10 pb-6">
-          <MemberAvatar name={member.name} className="w-14 h-14 text-xl ring-2 ring-cream/80" />
+    <div className="flex-1 bg-cream relative overflow-hidden">
+      <section className="relative overflow-hidden bg-dark-pine py-10">
+        <Grain opacity={0.12} />
+        <div className="relative max-w-3xl mx-auto w-full flex items-center gap-5 px-6 sm:px-10">
+          <MemberAvatar
+            name={member.name}
+            tone="onDark"
+            className="w-14 h-14 text-xl"
+          />
           <div>
             <h1 className="text-3xl text-cream">
               Hola, {member.name.split(" ")[0]}
             </h1>
-            <p className="text-sm text-cream/80 mt-1">
+            <p className="text-sm text-cream/70 mt-1">
               {member.accountType === "empresa"
                 ? "Esto es lo que se comparte hoy en la comunidad de Pilar."
                 : "Esto es lo que se comparte hoy en Life Notes."}
@@ -56,7 +51,33 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <div className="flex flex-col gap-10 px-6 sm:px-10 py-12 max-w-3xl mx-auto w-full">
+      {/* decorative silhouettes flanking the content column, wide screens only */}
+      <div
+        aria-hidden
+        className="hidden lg:block absolute left-0 top-24 bottom-0 w-56 pointer-events-none"
+      >
+        <Image
+          src="/images/silhouette-sunset.jpg"
+          alt=""
+          fill
+          sizes="224px"
+          className="object-cover object-right grayscale opacity-[0.07]"
+        />
+      </div>
+      <div
+        aria-hidden
+        className="hidden lg:block absolute right-0 top-24 bottom-0 w-56 pointer-events-none scale-x-[-1]"
+      >
+        <Image
+          src="/images/silhouette-sunset.jpg"
+          alt=""
+          fill
+          sizes="224px"
+          className="object-cover object-right grayscale opacity-[0.07]"
+        />
+      </div>
+
+      <div className="relative flex flex-col gap-10 px-6 sm:px-10 py-12 max-w-3xl mx-auto w-full">
         <section className="flex flex-col gap-3">
           <div className="flex items-center justify-between">
             <h2 className="text-xs tracking-[0.3em] uppercase text-slate">

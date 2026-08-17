@@ -20,13 +20,17 @@ function paletteIndex(name: string) {
 export function MemberAvatar({
   name,
   className = "",
+  tone = "auto",
 }: {
   name: string;
   className?: string;
+  tone?: "auto" | "onDark";
 }) {
+  const colors =
+    tone === "onDark" ? "bg-cream text-dark-pine" : PALETTE[paletteIndex(name)];
   return (
     <div
-      className={`flex items-center justify-center rounded-full font-serif text-lg shrink-0 ${PALETTE[paletteIndex(name)]} ${className}`}
+      className={`flex items-center justify-center rounded-full font-serif text-lg shrink-0 ${colors} ${className}`}
     >
       {initials(name)}
     </div>
