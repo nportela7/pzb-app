@@ -1,10 +1,10 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import { getMemberByClerkUserId } from "@/lib/members";
 import { MemberAvatar } from "@/components/MemberAvatar";
 import { Grain } from "@/components/Grain";
+import { Flourish } from "@/components/Flourish";
 
 const PERSONA_LINKS = [
   { href: "/eventos", title: "Eventos", subtitle: "Talleres y retiros" },
@@ -29,7 +29,7 @@ export default async function HomePage() {
   const links = member.accountType === "empresa" ? EMPRESA_LINKS : PERSONA_LINKS;
 
   return (
-    <div className="flex-1 bg-cream relative overflow-hidden">
+    <div className="flex-1 bg-cream">
       <section className="relative overflow-hidden bg-dark-pine py-10">
         <Grain opacity={0.12} />
         <div className="relative max-w-3xl mx-auto w-full flex items-center gap-5 px-6 sm:px-10">
@@ -51,77 +51,57 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* decorative silhouettes flanking the content column, wide screens only */}
-      <div
-        aria-hidden
-        className="hidden lg:block absolute left-0 top-24 bottom-0 w-56 pointer-events-none"
-      >
-        <Image
-          src="/images/silhouette-sunset.jpg"
-          alt=""
-          fill
-          sizes="224px"
-          className="object-cover object-right grayscale opacity-[0.07]"
-        />
-      </div>
-      <div
-        aria-hidden
-        className="hidden lg:block absolute right-0 top-24 bottom-0 w-56 pointer-events-none scale-x-[-1]"
-      >
-        <Image
-          src="/images/silhouette-sunset.jpg"
-          alt=""
-          fill
-          sizes="224px"
-          className="object-cover object-right grayscale opacity-[0.07]"
-        />
-      </div>
+      <div className="relative">
+        {/* decorative flourishes flanking the content column, wide screens only */}
+        <Flourish className="hidden lg:block absolute left-10 top-0 bottom-0 w-16 text-earth-brown/20 pointer-events-none" />
+        <Flourish className="hidden lg:block absolute right-10 top-0 bottom-0 w-16 text-earth-brown/20 pointer-events-none -scale-x-100" />
 
-      <div className="relative flex flex-col gap-10 px-6 sm:px-10 py-12 max-w-3xl mx-auto w-full">
-        <section className="flex flex-col gap-3">
-          <div className="flex items-center justify-between">
-            <h2 className="text-xs tracking-[0.3em] uppercase text-slate">
-              Directorio
-            </h2>
-            <Link
-              href="/directorio"
-              className="text-sm text-earth-brown hover:text-charcoal transition-colors"
-            >
-              Buscar socias →
-            </Link>
-          </div>
-          <div className="rounded-2xl border border-beige-sand bg-beige-sand/30 p-5 text-sm text-charcoal/70 leading-relaxed">
-            Encuentra a otras socias por nombre, profesión o palabra clave, por
-            ejemplo &ldquo;psicóloga&rdquo;.
-          </div>
-        </section>
-
-        <section className="flex flex-col gap-3">
-          <h2 className="text-xs tracking-[0.3em] uppercase text-slate">
-            Explora
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {links.map((link) => (
+        <div className="relative flex flex-col gap-10 px-6 sm:px-10 py-12 max-w-3xl mx-auto w-full">
+          <section className="flex flex-col gap-3">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xs tracking-[0.3em] uppercase text-slate">
+                Directorio
+              </h2>
               <Link
-                key={link.href}
-                href={link.href}
-                className="group rounded-2xl border border-beige-sand p-5 hover:border-earth-brown transition-colors"
+                href="/directorio"
+                className="text-sm text-earth-brown hover:text-charcoal transition-colors"
               >
-                <span className="flex items-center justify-between">
-                  <span className="font-serif text-lg text-charcoal">
-                    {link.title}
-                  </span>
-                  <span className="text-earth-brown/40 group-hover:text-earth-brown group-hover:translate-x-0.5 transition-all">
-                    →
-                  </span>
-                </span>
-                <span className="block text-sm text-slate mt-1">
-                  {link.subtitle}
-                </span>
+                Buscar socias →
               </Link>
-            ))}
-          </div>
-        </section>
+            </div>
+            <div className="rounded-2xl border border-beige-sand bg-beige-sand/30 p-5 text-sm text-charcoal/70 leading-relaxed">
+              Encuentra a otras socias por nombre, profesión o palabra clave, por
+              ejemplo &ldquo;psicóloga&rdquo;.
+            </div>
+          </section>
+
+          <section className="flex flex-col gap-3">
+            <h2 className="text-xs tracking-[0.3em] uppercase text-slate">
+              Explora
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {links.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="group rounded-2xl border border-beige-sand p-5 hover:border-earth-brown transition-colors"
+                >
+                  <span className="flex items-center justify-between">
+                    <span className="font-serif text-lg text-charcoal">
+                      {link.title}
+                    </span>
+                    <span className="text-earth-brown/40 group-hover:text-earth-brown group-hover:translate-x-0.5 transition-all">
+                      →
+                    </span>
+                  </span>
+                  <span className="block text-sm text-slate mt-1">
+                    {link.subtitle}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </section>
+        </div>
       </div>
     </div>
   );
