@@ -141,16 +141,15 @@ export default function Home() {
 
   return (
     <div className="flex flex-1 flex-col bg-cream">
-      {/* Hero — full, uncropped image; keeps revealing as you scroll */}
-      <div className="relative w-full overflow-hidden">
+      {/* Hero — horizontal, contained */}
+      <div className="relative w-full aspect-[1/2] sm:aspect-[16/9] overflow-hidden">
         <Image
-          src="/images/horse-field-portrait.jpg"
-          alt="Un caballo de pie, solo, en un campo verde y neblinoso"
-          width={3148}
-          height={4737}
+          src="/images/silhouette-sunset.jpg"
+          alt="Silueta de una mujer al atardecer, con el cabello al viento"
+          fill
           priority
           sizes="100vw"
-          className="block w-full h-auto"
+          className="object-cover object-[48%_89%] sm:object-[48%_92%]"
         />
 
         {/* inset frame, drawn just inside the image edges, running its full length */}
