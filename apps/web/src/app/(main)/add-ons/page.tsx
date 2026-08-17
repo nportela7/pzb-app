@@ -4,6 +4,7 @@ const DIMENSIONS = [
   {
     name: "Identity",
     tagline: "Quién estás siendo",
+    accent: "bg-earth-brown",
     items: [
       { title: "Deep Dive Session", price: "$3,500 MXN", detail: "2 horas · Sesión para ir al fondo de algo específico" },
       { title: "Energy Assessment", price: "$2,500 MXN", detail: "iPEC · 7 niveles · Perfil energético" },
@@ -13,6 +14,7 @@ const DIMENSIONS = [
   {
     name: "Image",
     tagline: "Cómo te muestras",
+    accent: "bg-dark-pine",
     items: [
       { title: "Closet Detox", price: "$5,500 MXN", detail: "3–4 horas · Editamos qué ya no te representa" },
       { title: "Closet Styling", price: "$6,500 MXN", detail: "2–3 horas · 8–12 looks nuevos con lo que ya tienes" },
@@ -23,6 +25,7 @@ const DIMENSIONS = [
   {
     name: "Decision",
     tagline: "Qué eliges desde aquí",
+    accent: "bg-slate",
     items: [
       { title: "Vision Board Session", price: "$3,500 MXN", detail: "2–3 horas · Plasmar lo que quieres para decidir con claridad" },
       { title: "Strategic Network Intro", price: "$5,000 MXN", detail: "Por conexión · Conexión intencional con la red de Pilar" },
@@ -62,7 +65,7 @@ export default function AddOnsPage() {
   return (
     <div className="flex-1 bg-cream">
       <section className="relative overflow-hidden px-6 sm:px-10 pt-20 pb-16">
-        <Grain opacity={0.05} />
+        <Grain opacity={0.12} />
         <div className="relative max-w-3xl mx-auto">
           <p className="text-xs tracking-[0.3em] uppercase text-slate mb-5">
             Add-Ons &amp; Coaching de Imagen · Cómo te muestras
@@ -86,7 +89,8 @@ export default function AddOnsPage() {
           }
         >
           <div className="max-w-3xl mx-auto">
-            <div className="flex items-baseline gap-3 mb-8">
+            <div className="flex items-center gap-3 mb-8">
+              <span className={`w-2.5 h-2.5 rounded-full ${dimension.accent}`} />
               <h2 className="text-2xl text-earth-brown">{dimension.name}</h2>
               <span className="text-sm text-slate italic">
                 {dimension.tagline}

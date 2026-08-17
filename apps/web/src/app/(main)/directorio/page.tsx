@@ -15,7 +15,7 @@ export default async function DirectorioPage(props: PageProps<"/directorio">) {
   return (
     <div className="flex-1 bg-cream">
       <section className="relative overflow-hidden px-6 sm:px-10 pt-14 pb-10 bg-beige-sand/40">
-        <Grain opacity={0.06} />
+        <Grain opacity={0.12} />
         <div className="relative max-w-3xl mx-auto">
           <p className="text-xs tracking-[0.3em] uppercase text-slate mb-4">
             Comunidad

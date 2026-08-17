@@ -1,6 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { getMemberByClerkUserId } from "@/lib/members";
 import { MemberAvatar } from "@/components/MemberAvatar";
 import { Grain } from "@/components/Grain";
@@ -29,15 +30,24 @@ export default async function HomePage() {
 
   return (
     <div className="flex-1 bg-cream">
-      <section className="relative overflow-hidden px-6 sm:px-10 pt-12 pb-10 bg-beige-sand/40">
-        <Grain opacity={0.06} />
-        <div className="relative max-w-3xl mx-auto w-full flex items-center gap-5">
-          <MemberAvatar name={member.name} className="w-14 h-14 text-xl" />
+      <section className="relative overflow-hidden h-56 sm:h-64">
+        <Image
+          src="/images/silhouette-sunset.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[50%_75%]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/20 to-transparent" />
+        <Grain opacity={0.15} />
+        <div className="relative h-full max-w-3xl mx-auto w-full flex items-end gap-5 px-6 sm:px-10 pb-6">
+          <MemberAvatar name={member.name} className="w-14 h-14 text-xl ring-2 ring-cream/80" />
           <div>
-            <h1 className="text-3xl text-earth-brown">
+            <h1 className="text-3xl text-cream">
               Hola, {member.name.split(" ")[0]}
             </h1>
-            <p className="text-sm text-charcoal/70 mt-1">
+            <p className="text-sm text-cream/80 mt-1">
               {member.accountType === "empresa"
                 ? "Esto es lo que se comparte hoy en la comunidad de Pilar."
                 : "Esto es lo que se comparte hoy en Life Notes."}

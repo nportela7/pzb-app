@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Grain } from "@/components/Grain";
 
 const PHASES = [
@@ -62,38 +63,50 @@ export default function CoachingPage() {
   return (
     <div className="flex-1 bg-cream">
       <section className="relative overflow-hidden px-6 sm:px-10 pt-20 pb-20">
-        <Grain opacity={0.05} />
-        <div className="relative max-w-3xl mx-auto">
-          <p className="text-xs tracking-[0.3em] uppercase text-slate mb-5">
-            Identity · Quién estás siendo
-          </p>
-          <h1 className="text-4xl sm:text-5xl text-earth-brown mb-6">
-            The Alignment <span className="italic font-normal">Partnership</span>
-          </h1>
-          <p className="text-lg text-charcoal/80 leading-relaxed max-w-xl">
-            El programa principal de coaching 1:1 de Pilar. Seis meses
-            trabajando identidad, imagen y decisiones como una sola
-            conversación.
-          </p>
+        <Grain opacity={0.1} />
+        <div className="relative max-w-3xl mx-auto grid sm:grid-cols-[1fr_auto] gap-10 items-center">
+          <div>
+            <p className="text-xs tracking-[0.3em] uppercase text-slate mb-5">
+              Identity · Quién estás siendo
+            </p>
+            <h1 className="text-4xl sm:text-5xl text-earth-brown mb-6">
+              The Alignment <span className="italic font-normal">Partnership</span>
+            </h1>
+            <p className="text-lg text-charcoal/80 leading-relaxed max-w-xl">
+              El programa principal de coaching 1:1 de Pilar. Seis meses
+              trabajando identidad, imagen y decisiones como una sola
+              conversación.
+            </p>
 
-          <dl className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-6 text-sm">
-            <div>
-              <dt className="text-slate mb-1">Duración</dt>
-              <dd className="text-charcoal">6 meses</dd>
-            </div>
-            <div>
-              <dt className="text-slate mb-1">Formato</dt>
-              <dd className="text-charcoal">8 sesiones · 90 min</dd>
-            </div>
-            <div>
-              <dt className="text-slate mb-1">Canal</dt>
-              <dd className="text-charcoal">WhatsApp, L–V 10–19h</dd>
-            </div>
-            <div>
-              <dt className="text-slate mb-1">Confidencialidad</dt>
-              <dd className="text-charcoal">Total</dd>
-            </div>
-          </dl>
+            <dl className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-6 text-sm">
+              <div>
+                <dt className="text-slate mb-1">Duración</dt>
+                <dd className="text-charcoal">6 meses</dd>
+              </div>
+              <div>
+                <dt className="text-slate mb-1">Formato</dt>
+                <dd className="text-charcoal">8 sesiones · 90 min</dd>
+              </div>
+              <div>
+                <dt className="text-slate mb-1">Canal</dt>
+                <dd className="text-charcoal">WhatsApp, L–V 10–19h</dd>
+              </div>
+              <div>
+                <dt className="text-slate mb-1">Confidencialidad</dt>
+                <dd className="text-charcoal">Total</dd>
+              </div>
+            </dl>
+          </div>
+          <div className="hidden sm:block w-40 aspect-[3/4] rounded-2xl overflow-hidden shrink-0">
+            <Image
+              src="/images/silhouette-sunset.jpg"
+              alt=""
+              width={2016}
+              height={2016}
+              className="w-full h-full object-cover"
+              sizes="160px"
+            />
+          </div>
         </div>
       </section>
 
@@ -161,7 +174,7 @@ export default function CoachingPage() {
       </section>
 
       <section className="relative overflow-hidden px-6 sm:px-10 py-20 bg-earth-brown text-cream">
-        <Grain opacity={0.08} />
+        <Grain opacity={0.12} />
         <div className="relative max-w-3xl mx-auto">
           <p className="font-script text-4xl mb-14">Client love</p>
           <div className="grid sm:grid-cols-2 gap-x-12 gap-y-10">
