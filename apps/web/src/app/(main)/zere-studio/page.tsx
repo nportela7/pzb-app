@@ -1,12 +1,37 @@
+import Image from "next/image";
 import { ZereWordmark } from "@/components/ZereWordmark";
+import { ZereMark } from "@/components/ZereMark";
 import { Grain } from "@/components/Grain";
 
 const CLIENTES = [
-  "Directores de Recursos Humanos que buscan experiencias de bienestar y cohesión para sus equipos",
-  "Facilitadoras y coaches que necesitan un espacio o socio para producir sus propios retiros y talleres",
-  "Speakers y formadoras que quieren dar sus sesiones en un entorno curado y profesional",
-  "Líderes empresariales que buscan retiros de liderazgo y toma de decisiones con intención",
-  "Marcas y organizaciones que quieren crear experiencias memorables para sus comunidades internas",
+  {
+    role: "Recursos Humanos",
+    detail: "Buscan experiencias de bienestar y cohesión para sus equipos.",
+  },
+  {
+    role: "Facilitadoras y coaches",
+    detail: "Necesitan un espacio o socio para producir sus propios retiros y talleres.",
+  },
+  {
+    role: "Speakers y formadoras",
+    detail: "Quieren dar sus sesiones en un entorno curado y profesional.",
+  },
+  {
+    role: "Líderes empresariales",
+    detail: "Buscan retiros de liderazgo y toma de decisiones con intención.",
+  },
+  {
+    role: "Marcas y organizaciones",
+    detail: "Quieren crear experiencias memorables para sus comunidades internas.",
+  },
+];
+
+const CLIENT_ACCENTS = [
+  "bg-zere-sky text-zere-deep",
+  "bg-zere-deep/15 text-zere-deep",
+  "bg-earth-brown/15 text-earth-brown",
+  "bg-zere-sky text-zere-deep",
+  "bg-zere-deep/15 text-zere-deep",
 ];
 
 const FORMATOS = [
@@ -43,9 +68,21 @@ export default function ZereStudioPage() {
   return (
     <div className="flex-1 bg-cream">
       <section className="relative overflow-hidden px-6 sm:px-10 pt-20 pb-16 bg-zere-sky">
+        <Image
+          src="/images/zere-water-ripple.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-zere-sky/80" />
         <Grain opacity={0.08} />
         <div className="relative max-w-3xl mx-auto">
-          <ZereWordmark className="text-2xl sm:text-3xl mb-8" />
+          <div className="flex items-center gap-4 mb-8">
+            <ZereWordmark className="text-2xl sm:text-3xl" />
+            <ZereMark className="w-9 h-6 text-zere-deep/60" />
+          </div>
           <p className="font-serif italic text-5xl sm:text-6xl text-zere-deep/25 mb-6">
             propósito
           </p>
@@ -73,14 +110,27 @@ export default function ZereStudioPage() {
       </section>
 
       <section className="px-6 sm:px-10 py-16 max-w-3xl mx-auto">
-        <h2 className="text-2xl text-zere-deep mb-8">Para quién</h2>
-        <ul className="flex flex-col divide-y divide-zere-sky">
-          {CLIENTES.map((item) => (
-            <li key={item} className="py-4 text-charcoal/80 leading-relaxed max-w-lg">
-              {item}
-            </li>
+        <h2 className="text-2xl text-zere-deep mb-10">Para quién</h2>
+        <div className="grid sm:grid-cols-2 gap-5">
+          {CLIENTES.map((item, i) => (
+            <div
+              key={item.role}
+              className="flex items-start gap-4 rounded-2xl border border-zere-sky p-5"
+            >
+              <span
+                className={`flex items-center justify-center w-10 h-10 rounded-full font-serif text-sm shrink-0 ${CLIENT_ACCENTS[i % CLIENT_ACCENTS.length]}`}
+              >
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div>
+                <p className="text-charcoal font-medium mb-1">{item.role}</p>
+                <p className="text-sm text-charcoal/70 leading-relaxed">
+                  {item.detail}
+                </p>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       </section>
 
       <section className="relative overflow-hidden px-6 sm:px-10 py-16 bg-zere-sky">

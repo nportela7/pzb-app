@@ -10,6 +10,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRef } from "react";
 import { ZereWordmark } from "@/components/ZereWordmark";
+import { ZereMark } from "@/components/ZereMark";
 import { Grain } from "@/components/Grain";
 import {
   motion,
@@ -345,10 +346,21 @@ export default function Home() {
 
       {/* Zere Studio — its own sub-brand moment */}
       <section className="relative overflow-hidden px-6 sm:px-10 py-20 sm:py-28 bg-zere-sky">
+        <Image
+          src="/images/zere-water-ripple.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-zere-sky/80" />
         <Grain opacity={0.08} />
         <div className="relative max-w-3xl mx-auto">
           <Reveal>
-            <ZereWordmark className="text-2xl sm:text-3xl" />
+            <div className="flex items-center gap-4">
+              <ZereWordmark className="text-2xl sm:text-3xl" />
+              <ZereMark className="w-9 h-6 text-zere-deep/60" />
+            </div>
             <p className="font-serif italic text-4xl sm:text-5xl text-zere-deep/25 mt-8 mb-6">
               serenidad
             </p>
