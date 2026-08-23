@@ -262,8 +262,8 @@ export default function Home() {
       </section>
 
       {/* Sobre Pilar */}
-      <section className="px-6 sm:px-10 py-20 sm:py-28 overflow-hidden">
-        <div className="max-w-3xl mx-auto grid sm:grid-cols-[1fr_auto] gap-8 sm:gap-4 items-center">
+      <section className="px-6 sm:px-10 py-20 sm:py-28">
+        <div className="max-w-3xl mx-auto">
           <Reveal>
             <Eyebrow>Sobre Pilar</Eyebrow>
             <h2 className="text-3xl sm:text-4xl text-earth-brown mt-4 mb-6 text-balance">
@@ -283,17 +283,6 @@ export default function Home() {
               Conocer su historia
             </Link>
           </Reveal>
-          <motion.p
-            aria-hidden
-            initial={{ opacity: 0, x: 24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.8, ease: EASE }}
-            className="hidden sm:block font-serif italic text-6xl lg:text-7xl text-earth-brown/10 leading-none whitespace-nowrap select-none"
-            style={{ writingMode: "vertical-rl" }}
-          >
-            Strategic Life Editor
-          </motion.p>
         </div>
       </section>
 
