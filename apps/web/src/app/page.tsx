@@ -117,11 +117,11 @@ const ADDON_DIMENSIONS = [
 ];
 
 const EVENT_TYPES = [
-  "Talleres",
-  "Cenas",
-  "Retiros",
-  "Sesiones abiertas",
-  "Zere Studio",
+  { label: "Talleres", dot: "bg-earth-brown" },
+  { label: "Cenas", dot: "bg-dark-pine" },
+  { label: "Retiros", dot: "bg-slate" },
+  { label: "Sesiones abiertas", dot: "bg-earth-brown" },
+  { label: "Zere Studio", dot: "bg-zere-deep", ring: "border-zere-deep/25 hover:border-zere-deep/50 hover:bg-zere-sky/25" },
 ];
 
 export default function Home() {
@@ -457,11 +457,17 @@ export default function Home() {
           >
             {EVENT_TYPES.map((type) => (
               <motion.span
-                key={type}
+                key={type.label}
                 variants={fadeUp}
-                className="rounded-full border border-earth-brown/25 px-5 py-2 text-sm text-earth-brown"
+                whileHover={{ y: -2 }}
+                transition={{ duration: 0.2, ease: EASE }}
+                className={`inline-flex items-center gap-2.5 rounded-full border px-5 py-2 text-sm text-earth-brown bg-cream transition-colors ${
+                  type.ring ??
+                  "border-earth-brown/25 hover:border-earth-brown/50 hover:bg-beige-sand/40"
+                }`}
               >
-                {type}
+                <span className={`w-1.5 h-1.5 rounded-full ${type.dot}`} />
+                {type.label}
               </motion.span>
             ))}
           </motion.div>
