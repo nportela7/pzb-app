@@ -9,7 +9,9 @@
     "lint": "eslint",
     "db:init-indexes": "tsx scripts/init-db.ts",
     "dev-db": "tsx scripts/dev-db.ts",
-    "make-admin": "tsx scripts/make-admin.ts"
+    "make-admin": "tsx scripts/make-admin.ts",
+    "seed-demo-prod": "tsx scripts/seed-production-demo.ts",
+    "unseed-demo": "tsx scripts/unseed-production-demo.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1106.0",
