@@ -1,32 +1,9 @@
 import { MongoClient } from "mongodb";
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
+import { DEMO_MEMBER_PREFIX, DEMO_EVENT_CREATOR } from "../src/lib/demo-content";
 
-// Removes everything inserted by scripts/seed-production-demo.ts.
-
-function loadEnvFile(path: string) {
-  let contents: string;
-  try {
-    contents = readFileSync(path, "utf8");
-  } catch {
-    return;
-  }
-  for (const line of contents.split("\n")) {
-    const match = line.match(/^([A-Za-z_][A-Za-z0-9_]*)=(.*)$/);
-    if (!match) continue;
-    const key = match[1];
-    let value = match[2].trim();
-    if (
-      (value.startsWith('"') && value.endsWith('"')) ||
-      (value.startsWith("'") && value.endsWith("'"))
-    ) {
-      value = value.slice(1, -1);
-    }
-    if (!(key in process.env)) process.env[key] = value;
-  }
-}
-
-loadEnvFile(join(process.cwd(), ".env.production.local"));
+// Removes everything inserted by scripts/seed-production-demo.ts (or
+// the /seed-demo owner-only route). See that script's header for why
+// this generally isn't usable against the real production DB.
 
 async function main() {
   const uri = process.env.MONGODB_URI;
@@ -43,10 +20,10 @@ async function main() {
 
   const members = await db
     .collection("members")
-    .deleteMany({ clerkUserId: { $regex: /^demo_member_/ } });
+    .deleteMany({ clerkUserId: { $regex: `^${DEMO_MEMBER_PREFIX}` } });
   const events = await db
     .collection("events")
-    .deleteMany({ createdByClerkUserId: "demo_admin" });
+    .deleteMany({ createdByClerkUserId: DEMO_EVENT_CREATOR });
 
   console.log(`✓ ${members.deletedCount} socias de demo borradas.`);
   console.log(`✓ ${events.deletedCount} eventos de demo borrados.`);
