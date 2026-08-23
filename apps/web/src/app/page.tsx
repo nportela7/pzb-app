@@ -12,6 +12,8 @@ import { useRef } from "react";
 import { ZereWordmark } from "@/components/ZereWordmark";
 import { ZereMark } from "@/components/ZereMark";
 import { Grain } from "@/components/Grain";
+import { ScrollProgressRail } from "@/components/ScrollProgressRail";
+import { SectionIndex } from "@/components/SectionIndex";
 import {
   motion,
   useReducedMotion,
@@ -142,6 +144,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-1 flex-col bg-cream">
+      <ScrollProgressRail />
       {/* Hero — horizontal, contained */}
       <div className="relative w-full aspect-[1/2] sm:aspect-[16/9] overflow-hidden">
         <Image
@@ -262,7 +265,8 @@ export default function Home() {
       </section>
 
       {/* Sobre Pilar */}
-      <section className="px-6 sm:px-10 py-20 sm:py-28">
+      <section className="relative px-6 sm:px-10 py-20 sm:py-28">
+        <SectionIndex n="01" label="Sobre Pilar" />
         <div className="max-w-3xl mx-auto">
           <Reveal>
             <Eyebrow>Sobre Pilar</Eyebrow>
@@ -287,7 +291,8 @@ export default function Home() {
       </section>
 
       {/* Coaching */}
-      <section className="px-6 sm:px-10 py-20 sm:py-28 bg-beige-sand/40">
+      <section className="relative px-6 sm:px-10 py-20 sm:py-28 bg-beige-sand/40">
+        <SectionIndex n="02" label="Coaching" />
         <div className="max-w-3xl mx-auto">
           <Reveal>
             <Eyebrow>Coaching</Eyebrow>
@@ -344,6 +349,7 @@ export default function Home() {
         />
         <div className="absolute inset-0 bg-zere-sky/80" />
         <Grain opacity={0.08} />
+        <SectionIndex n="03" label="Zere Studio" tone="zere" />
         <div className="relative max-w-3xl mx-auto">
           <Reveal>
             <div className="flex items-center gap-4">
@@ -397,7 +403,8 @@ export default function Home() {
       </section>
 
       {/* Comunidad */}
-      <section className="px-6 sm:px-10 py-20 sm:py-28 bg-beige-sand/40">
+      <section className="relative px-6 sm:px-10 py-20 sm:py-28 bg-beige-sand/40">
+        <SectionIndex n="04" label="Comunidad" />
         <div className="max-w-3xl mx-auto text-center">
           <Reveal>
             <Eyebrow>Comunidad</Eyebrow>
@@ -428,7 +435,8 @@ export default function Home() {
       </section>
 
       {/* Eventos */}
-      <section className="px-6 sm:px-10 py-20 sm:py-28">
+      <section className="relative px-6 sm:px-10 py-20 sm:py-28">
+        <SectionIndex n="05" label="Eventos" />
         <div className="max-w-3xl mx-auto">
           <Reveal>
             <Eyebrow>Eventos</Eyebrow>
@@ -469,7 +477,8 @@ export default function Home() {
       </section>
 
       {/* Add-Ons */}
-      <section className="px-6 sm:px-10 py-20 sm:py-28 bg-beige-sand/40">
+      <section className="relative px-6 sm:px-10 py-20 sm:py-28 bg-beige-sand/40">
+        <SectionIndex n="06" label="Add-Ons" />
         <div className="max-w-3xl mx-auto">
           <Reveal>
             <Eyebrow>Add-Ons</Eyebrow>
