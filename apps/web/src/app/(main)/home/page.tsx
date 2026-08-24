@@ -1,7 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { getMemberByClerkUserId, searchMembers } from "@/lib/members";
+import { countMembers, getMemberByClerkUserId, searchMembers } from "@/lib/members";
 import { listUpcomingEvents } from "@/lib/events";
 import { EVENT_TYPE_LABELS } from "@/models/event";
 import { MemberAvatar } from "@/components/MemberAvatar";
@@ -35,14 +35,20 @@ export default async function HomePage() {
 
   const links = member.accountType === "empresa" ? EMPRESA_LINKS : PERSONA_LINKS;
 
-  const [recentMembers, upcomingEvents] = await Promise.all([
+  const [recentMembers, upcomingEvents, memberCount] = await Promise.all([
     searchMembers(""),
     listUpcomingEvents(),
+    countMembers(),
   ]);
-  const otherMembers = recentMembers
-    .filter((m) => m.clerkUserId !== member.clerkUserId)
-    .slice(0, 6);
   const nextEvents = upcomingEvents.slice(0, 3);
+  const topProfessions = Array.from(
+    new Set(
+      recentMembers
+        .filter((m) => m.clerkUserId !== member.clerkUserId)
+        .map((m) => m.profession)
+        .filter((p): p is string => !!p)
+    )
+  ).slice(0, 4);
 
   return (
     <div className="flex-1 bg-cream">
@@ -115,39 +121,46 @@ export default async function HomePage() {
           )}
 
           <section className="flex flex-col gap-3">
-            <div className="flex items-center justify-between">
-              <h2 className="text-xs tracking-[0.3em] uppercase text-slate">
-                Directorio
-              </h2>
-              <Link
-                href="/directorio"
-                className="text-sm text-earth-brown hover:text-charcoal transition-colors"
-              >
-                Buscar socias →
-              </Link>
+            <h2 className="text-xs tracking-[0.3em] uppercase text-slate">
+              Comunidad
+            </h2>
+            <div className="rounded-2xl border border-earth-brown/20 p-6 sm:p-8">
+              <h3 className="font-serif italic text-2xl sm:text-3xl text-earth-brown mb-5">
+                Encuentra a tu socia.
+              </h3>
+              <form action="/directorio" method="get">
+                <input
+                  type="text"
+                  name="q"
+                  placeholder="Psicóloga, Guadalajara, diseño…"
+                  className="w-full font-serif italic text-lg text-charcoal bg-transparent border-b-2 border-earth-brown pb-2.5 outline-none placeholder:text-charcoal/35"
+                />
+              </form>
+              {topProfessions.length > 0 && (
+                <div className="flex flex-wrap gap-2 mt-5">
+                  {topProfessions.map((profession) => (
+                    <Link
+                      key={profession}
+                      href={`/directorio?q=${encodeURIComponent(profession)}`}
+                      className="text-sm text-earth-brown border border-earth-brown/25 rounded-full px-3.5 py-1.5 hover:border-earth-brown/50 transition-colors"
+                    >
+                      {profession}
+                    </Link>
+                  ))}
+                </div>
+              )}
+              <div className="flex items-baseline justify-between mt-6 text-sm">
+                <span className="text-slate">
+                  {memberCount} {memberCount === 1 ? "socia" : "socias"} en la red
+                </span>
+                <Link
+                  href="/directorio"
+                  className="text-earth-brown border-b border-earth-brown/40 hover:border-earth-brown transition-colors"
+                >
+                  Ver directorio completo →
+                </Link>
+              </div>
             </div>
-            {otherMembers.length > 0 ? (
-              <div className="rounded-2xl border border-beige-sand p-5 flex flex-wrap items-center gap-3">
-                {otherMembers.map((m) => (
-                  <Link
-                    key={m._id.toString()}
-                    href="/directorio"
-                    className="flex items-center gap-2 pr-3 rounded-full hover:bg-beige-sand/30 transition-colors"
-                    title={m.profession ?? m.name}
-                  >
-                    <MemberAvatar name={m.name} className="w-9 h-9 text-sm" />
-                    <span className="text-sm text-charcoal/80 max-w-[9rem] truncate">
-                      {m.name}
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            ) : (
-              <div className="rounded-2xl border border-beige-sand bg-beige-sand/30 p-5 text-sm text-charcoal/70 leading-relaxed">
-                Encuentra a otras socias por nombre, profesión o palabra clave, por
-                ejemplo &ldquo;psicóloga&rdquo;.
-              </div>
-            )}
           </section>
 
           <section className="flex flex-col gap-3">

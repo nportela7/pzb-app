@@ -60,3 +60,8 @@ export async function searchMembers(query: string) {
     .limit(30)
     .toArray();
 }
+
+export async function countMembers() {
+  const db = await getDb();
+  return db.collection(MEMBERS_COLLECTION).countDocuments();
+}
