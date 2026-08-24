@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { seedDemoAction, unseedDemoAction } from "./actions";
+import { seedDemoAction, unseedDemoAction, initIndexesAction } from "./actions";
 
 export function SeedDemoButtons() {
   const [pending, startTransition] = useTransition();
@@ -21,6 +21,13 @@ export function SeedDemoButtons() {
     });
   }
 
+  function runInitIndexes() {
+    startTransition(async () => {
+      await initIndexesAction();
+      setMessage("✓ Índices de la base creados/actualizados (incluye búsqueda de texto).");
+    });
+  }
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap gap-3">
@@ -37,6 +44,13 @@ export function SeedDemoButtons() {
           className="rounded-full border border-earth-brown/30 text-earth-brown px-6 py-2.5 text-sm font-medium hover:border-earth-brown transition-colors disabled:opacity-50"
         >
           Borrar datos de demo
+        </button>
+        <button
+          onClick={runInitIndexes}
+          disabled={pending}
+          className="rounded-full border border-earth-brown/30 text-earth-brown px-6 py-2.5 text-sm font-medium hover:border-earth-brown transition-colors disabled:opacity-50"
+        >
+          Crear índices de la base
         </button>
       </div>
       {message && (

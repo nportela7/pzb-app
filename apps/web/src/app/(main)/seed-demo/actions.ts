@@ -6,6 +6,7 @@ import { getMemberByClerkUserId } from "@/lib/members";
 import { getDb } from "@/lib/mongodb";
 import { MEMBERS_COLLECTION } from "@/models/member";
 import { EVENTS_COLLECTION } from "@/models/event";
+import { initIndexes } from "@/models/init-indexes";
 import {
   buildDemoMembers,
   buildDemoEvents,
@@ -56,6 +57,12 @@ export async function seedDemoAction() {
   }
 
   return { memberCount, eventCount };
+}
+
+export async function initIndexesAction() {
+  await requireOwner();
+  await initIndexes();
+  return { ok: true };
 }
 
 export async function unseedDemoAction() {
