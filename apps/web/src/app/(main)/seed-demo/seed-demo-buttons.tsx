@@ -23,8 +23,17 @@ export function SeedDemoButtons() {
 
   function runInitIndexes() {
     startTransition(async () => {
-      await initIndexesAction();
-      setMessage("✓ Índices de la base creados/actualizados (incluye búsqueda de texto).");
+      try {
+        const results = await initIndexesAction();
+        const lines = results.map(
+          (r) => `${r.ok ? "✓" : "✗"} ${r.label}${r.error ? ` — ${r.error}` : ""}`
+        );
+        setMessage(lines.join("\n"));
+      } catch (err) {
+        setMessage(
+          `✗ Falló por completo: ${err instanceof Error ? err.message : String(err)}`
+        );
+      }
     });
   }
 
@@ -54,7 +63,7 @@ export function SeedDemoButtons() {
         </button>
       </div>
       {message && (
-        <p className="text-sm text-charcoal/80 rounded-xl bg-beige-sand/40 px-4 py-3">
+        <p className="text-sm text-charcoal/80 rounded-xl bg-beige-sand/40 px-4 py-3 whitespace-pre-wrap">
           {message}
         </p>
       )}

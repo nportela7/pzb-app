@@ -61,8 +61,7 @@ export async function seedDemoAction() {
 
 export async function initIndexesAction() {
   await requireOwner();
-  await initIndexes();
-  return { ok: true };
+  return initIndexes();
 }
 
 export async function unseedDemoAction() {
