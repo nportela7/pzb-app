@@ -324,7 +324,7 @@ export function LandingPage({
               <span className="float-left font-serif text-5xl leading-[0.8] pr-2 text-earth-brown">
                 S
               </span>
-              e define a sí misma como Strategic Life Editor: alguien que
+              e define como Strategic Life Editor: alguien que
               ayuda a sus clientas a editar su vida desde adentro hacia
               afuera, integrando identidad, imagen y decisiones.
             </p>
