@@ -85,10 +85,13 @@ function Ticker({
       : tone === "zere"
         ? "after:text-zere-deep/40"
         : "after:text-cream/25";
+  // Repeated well past what any real screen width needs, so the
+  // "-50%" loop point never lands on a visible gap between words.
+  const filled = Array(8).fill(items).flat();
   return (
     <div className={`overflow-hidden py-2.5 whitespace-nowrap ${bg}`}>
-      <div className="inline-flex marquee-track">
-        {[...items, ...items].map((item, i) => (
+      <div className="inline-flex marquee-track" style={{ animationDuration: "208s" }}>
+        {[...filled, ...filled].map((item, i) => (
           <span
             key={i}
             className={`text-[0.68rem] tracking-[0.24em] uppercase px-6 flex items-center gap-6 after:content-['·'] ${text} ${dot}`}
@@ -192,8 +195,14 @@ export function LandingPage({
     shouldReduceMotion ? [0, 0] : [0, -50],
   );
 
-  const reelFirstHalf = members.slice(0, Math.ceil(members.length / 2));
-  const reelSecondHalf = members.slice(Math.ceil(members.length / 2));
+  // Repeated well past what any real screen width needs, so the
+  // "-50%" loop point never lands on a visible gap between names.
+  const reelFirstHalf = Array(8)
+    .fill(members.slice(0, Math.ceil(members.length / 2)))
+    .flat();
+  const reelSecondHalf = Array(8)
+    .fill(members.slice(Math.ceil(members.length / 2)))
+    .flat();
 
   return (
     <div className="flex flex-1 flex-col bg-cream">
@@ -542,7 +551,7 @@ export function LandingPage({
         {reelFirstHalf.length > 0 && (
           <div className="mt-12 -mx-6 sm:-mx-10 flex flex-col gap-2">
             <div className="overflow-hidden whitespace-nowrap">
-              <div className="inline-flex marquee-track">
+              <div className="inline-flex marquee-track" style={{ animationDuration: "208s" }}>
                 {[...reelFirstHalf, ...reelFirstHalf].map((m, i) => (
                   <span
                     key={i}
@@ -562,7 +571,7 @@ export function LandingPage({
               <div className="overflow-hidden whitespace-nowrap">
                 <div
                   className="inline-flex marquee-track"
-                  style={{ animationDirection: "reverse" }}
+                  style={{ animationDirection: "reverse", animationDuration: "208s" }}
                 >
                   {[...reelSecondHalf, ...reelSecondHalf].map((m, i) => (
                     <span

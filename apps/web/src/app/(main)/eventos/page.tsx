@@ -55,6 +55,9 @@ const WHATSAPP_HREF =
   encodeURIComponent("Hola Pilar, quiero saber más sobre los próximos eventos.");
 
 const TICKER_ITEMS = ["Registro por WhatsApp", "Cupo limitado", "Precios en MXN"];
+// Repeated well past what any real screen width needs, so the
+// "-50%" loop point never lands on a visible gap between words.
+const TICKER_ITEMS_FILLED = Array(8).fill(TICKER_ITEMS).flat();
 
 export default async function EventosPage(props: PageProps<"/eventos">) {
   const { type } = await props.searchParams;
@@ -111,8 +114,8 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
       </nav>
 
       <div className="overflow-hidden bg-dark-pine py-2.5 whitespace-nowrap">
-        <div className="inline-flex marquee-track">
-          {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
+        <div className="inline-flex marquee-track" style={{ animationDuration: "208s" }}>
+          {[...TICKER_ITEMS_FILLED, ...TICKER_ITEMS_FILLED].map((item, i) => (
             <span
               key={i}
               className="text-[0.68rem] tracking-[0.24em] uppercase text-cream/85 px-6 flex items-center gap-6 after:content-['·'] after:text-cream/35"
