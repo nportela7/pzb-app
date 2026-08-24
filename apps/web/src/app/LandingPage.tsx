@@ -379,7 +379,7 @@ export function LandingPage({
             </h2>
           </Reveal>
         </div>
-        <div className="max-w-3xl mx-auto -mx-6 sm:-mx-10 mb-10">
+        <div className="-mx-6 sm:-mx-10 mb-10">
           <Ticker
             items={["Descubrir", "Explorar", "Editar", "Reescribir", "Integrar", "Sostener"]}
             tone="cream"
@@ -487,9 +487,11 @@ export function LandingPage({
               crear momentos memorables con propósito.
             </p>
           </Reveal>
-          <div className="-mx-6 sm:-mx-10 mb-10">
-            <Ticker items={["Talleres", "Cenas corporativas", "Retiros", "Experiencias"]} />
-          </div>
+        </div>
+        <div className="relative -mx-6 sm:-mx-10 mb-10">
+          <Ticker items={["Talleres", "Cenas corporativas", "Retiros", "Experiencias"]} />
+        </div>
+        <div className="relative max-w-3xl mx-auto">
           <motion.div
             variants={stagger}
             initial="hidden"
@@ -543,7 +545,7 @@ export function LandingPage({
         </div>
 
         {reelFirstHalf.length > 0 && (
-          <div className="mt-12 flex flex-col gap-2">
+          <div className="mt-12 -mx-6 sm:-mx-10 flex flex-col gap-2">
             <div className="overflow-hidden whitespace-nowrap">
               <div className="inline-flex marquee-track">
                 {[...reelFirstHalf, ...reelFirstHalf].map((m, i) => (
