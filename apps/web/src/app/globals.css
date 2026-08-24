@@ -56,3 +56,19 @@ p:not(.uppercase) {
   font-family: var(--font-serif), Georgia, serif;
   font-weight: 300;
 }
+
+/* Editorial marquee ticker, used on Eventos and a few landing sections. */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 26s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
