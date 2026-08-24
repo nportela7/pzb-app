@@ -10,7 +10,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRef } from "react";
 import { ZereMark } from "@/components/ZereMark";
-import { Grain } from "@/components/Grain";
 import { ScrollProgressRail } from "@/components/ScrollProgressRail";
 import { SectionIndex } from "@/components/SectionIndex";
 import {
@@ -66,11 +65,26 @@ function Ticker({
   tone = "dark",
 }: {
   items: string[];
-  tone?: "dark" | "cream";
+  tone?: "dark" | "cream" | "zere";
 }) {
-  const bg = tone === "dark" ? "bg-dark-pine" : "bg-cream/10";
-  const text = tone === "dark" ? "text-cream/85" : "text-cream/70";
-  const dot = tone === "dark" ? "after:text-cream/35" : "after:text-cream/25";
+  const bg =
+    tone === "dark"
+      ? "bg-dark-pine"
+      : tone === "zere"
+        ? "bg-cream/90"
+        : "bg-cream/10";
+  const text =
+    tone === "dark"
+      ? "text-cream/85"
+      : tone === "zere"
+        ? "text-zere-deep"
+        : "text-cream/70";
+  const dot =
+    tone === "dark"
+      ? "after:text-cream/35"
+      : tone === "zere"
+        ? "after:text-zere-deep/40"
+        : "after:text-cream/25";
   return (
     <div className={`overflow-hidden py-2.5 whitespace-nowrap ${bg}`}>
       <div className="inline-flex marquee-track">
@@ -443,74 +457,55 @@ export function LandingPage({
       </section>
 
       {/* Zere Studio — its own sub-brand moment */}
-      <section className="relative overflow-hidden px-6 sm:px-10 py-20 sm:py-28 bg-zere-sky">
-        <Image
-          src="/images/zere-water-ripple.jpg"
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-zere-sky/80" />
-        <Grain opacity={0.08} />
-        <SectionIndex n="03" label="Zere Studio" tone="zere" />
+      <section className="relative px-6 sm:px-10 py-20 sm:py-28 bg-zere-deep text-zere-sky">
+        <SectionIndex n="03" label="Zere Studio" tone="cream" />
         <div className="relative max-w-3xl mx-auto">
           <Reveal>
             <div className="flex items-center gap-4">
               <ZereMark className="w-10 h-7 text-zere-sky" />
               <div>
-                <h2 className="flex items-baseline gap-2 font-serif italic text-4xl sm:text-5xl text-cream">
+                <h2 className="flex items-baseline gap-2 font-serif italic font-light text-4xl sm:text-5xl text-cream">
                   zere
                   <span className="font-sans not-italic font-medium text-[0.28em] tracking-[0.22em] uppercase text-zere-sky/90">
                     Studio
                   </span>
                 </h2>
-                <p className="flex items-baseline flex-wrap gap-2 mt-2 text-sm">
-                  <span className="font-serif italic text-cream/90">
-                    ze&middot;re
-                  </span>
-                  <span className="text-zere-sky/40">|</span>
-                  <span className="italic text-xs text-zere-sky/65">
-                    sust.
-                  </span>
-                  <span className="text-zere-sky/90">
-                    calma profunda; serenidad.
-                  </span>
+                <p className="font-serif italic text-2xl sm:text-3xl text-cream/90 mt-2">
+                  zere<span className="text-zere-sky/50 mx-1">&middot;</span>nidad
                 </p>
               </div>
             </div>
-            <h3 className="text-3xl sm:text-4xl text-zere-deep mt-10 mb-4 text-balance">
-              Experiencias con intención para empresas
-            </h3>
-            <p className="text-zere-ink/70 max-w-lg leading-relaxed mb-10">
-              Para equipos de liderazgo, facilitadoras y marcas que buscan
-              crear momentos memorables con propósito.
+            <p className="font-serif font-light text-lg sm:text-xl leading-relaxed max-w-lg mt-8 mb-10 text-zere-sky/95">
+              Experiencias con intención para empresas: para equipos de
+              liderazgo, facilitadoras y marcas que buscan crear momentos
+              memorables con propósito.
             </p>
           </Reveal>
         </div>
         <div className="relative -mx-6 sm:-mx-10 mb-10">
-          <Ticker items={["Talleres", "Cenas corporativas", "Retiros", "Experiencias"]} />
+          <Ticker items={["Talleres", "Cenas corporativas", "Retiros", "Experiencias"]} tone="zere" />
         </div>
         <div className="relative max-w-3xl mx-auto">
+          <p className="text-[0.68rem] tracking-[0.22em] uppercase text-zere-sky/70 mb-3">
+            Formatos
+          </p>
           <motion.div
             variants={stagger}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="grid sm:grid-cols-2 gap-5"
+            className="grid sm:grid-cols-2 gap-px rounded-2xl overflow-hidden bg-zere-sky/20"
           >
             {FORMATOS.map((formato) => (
               <motion.div
                 key={formato.title}
                 variants={fadeUp}
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.25, ease: EASE }}
-                className="rounded-2xl bg-cream/70 p-6 hover:bg-cream transition-colors"
+                className="bg-zere-deep p-7"
               >
-                <h3 className="text-lg text-zere-deep mb-2">
+                <h3 className="font-serif italic text-lg text-cream mb-2">
                   {formato.title}
                 </h3>
-                <p className="text-sm text-zere-ink/70 leading-relaxed max-w-sm">
+                <p className="text-sm text-zere-sky/85 leading-relaxed max-w-sm">
                   {formato.body}
                 </p>
               </motion.div>
@@ -519,7 +514,7 @@ export function LandingPage({
           <Reveal className="mt-14">
             <Link
               href="/zere-studio"
-              className="inline-block text-sm text-zere-deep border-b border-zere-deep/40 hover:border-zere-deep transition-colors"
+              className="inline-block rounded-full px-8 py-3 bg-cream text-zere-deep text-sm tracking-wide hover:bg-zere-sky transition-colors"
             >
               Descubrir Zere Studio
             </Link>
