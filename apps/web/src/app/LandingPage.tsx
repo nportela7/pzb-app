@@ -335,25 +335,33 @@ export function LandingPage({
               Conocer su historia
             </Link>
           </Reveal>
-          <Reveal className="flex flex-col border-t border-earth-brown/20">
-            <div className="flex items-baseline justify-between gap-4 py-3.5 border-b border-earth-brown/20 text-sm">
-              <span className="font-serif text-lg text-earth-brown">
-                Monterrey
-              </span>
-              <span className="text-slate">Creció</span>
-            </div>
-            <div className="flex items-baseline justify-between gap-4 py-3.5 border-b border-earth-brown/20 text-sm">
-              <span className="font-serif text-lg text-earth-brown">
-                Boston &amp; Madrid
-              </span>
-              <span className="text-slate">Estudió</span>
-            </div>
-            <div className="flex items-baseline justify-between gap-4 py-3.5 border-b border-earth-brown/20 text-sm">
-              <span className="font-serif text-lg text-earth-brown">
-                11 años
-              </span>
-              <span className="text-slate">En Ciudad de México</span>
-            </div>
+          <Reveal className="flex flex-col">
+            {[
+              { place: "Monterrey", tag: "Origen" },
+              { place: "Boston & Madrid", tag: "Formación" },
+              { place: "Ciudad de México", tag: "Hoy · 11 años" },
+            ].map((stop, i, arr) => (
+              <div key={stop.place} className="relative grid grid-cols-[1.4rem_1fr] gap-4 py-4">
+                <span
+                  aria-hidden
+                  className="mt-2 w-2 h-2 rounded-full bg-earth-brown"
+                />
+                {i < arr.length - 1 && (
+                  <span
+                    aria-hidden
+                    className="absolute left-[0.42rem] top-8 bottom-0 w-px bg-earth-brown/20"
+                  />
+                )}
+                <div>
+                  <p className="font-serif text-xl text-earth-brown leading-none">
+                    {stop.place}
+                  </p>
+                  <p className="text-[0.68rem] tracking-[0.18em] uppercase text-slate mt-1.5">
+                    {stop.tag}
+                  </p>
+                </div>
+              </div>
+            ))}
           </Reveal>
         </div>
       </section>
