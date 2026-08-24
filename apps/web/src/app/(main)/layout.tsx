@@ -6,7 +6,8 @@ import { getMemberByClerkUserId } from "@/lib/members";
 import { MainNav } from "./main-nav";
 
 const PERSONA_NAV = [
-  { href: "/home", label: "Comunidad" },
+  { href: "/home", label: "Home" },
+  { href: "/directorio", label: "Comunidad" },
   { href: "/eventos", label: "Eventos" },
   { href: "/coaching", label: "Coaching" },
   { href: "/add-ons", label: "Add-Ons" },
@@ -15,7 +16,8 @@ const PERSONA_NAV = [
 ];
 
 const EMPRESA_NAV = [
-  { href: "/home", label: "Comunidad" },
+  { href: "/home", label: "Home" },
+  { href: "/directorio", label: "Comunidad" },
   { href: "/zere-studio", label: "Zere Studio" },
   { href: "/eventos", label: "Eventos" },
   { href: "/sobre-pilar", label: "Sobre Pilar" },
