@@ -1,6 +1,12 @@
 import Link from "next/link";
-import { listDirectory, listDirectoryFacets } from "@/lib/members";
+import {
+  listDirectory,
+  listDirectoryFacets,
+  listMostActiveMembers,
+  listNewMembers,
+} from "@/lib/members";
 import { AutoSubmitSelect } from "./auto-submit-select";
+import { MonogramCard } from "@/components/MonogramCard";
 
 const ACCOUNT_LABELS: Record<string, string> = {
   persona: "Persona",
@@ -21,9 +27,13 @@ export default async function DirectorioPage(props: PageProps<"/directorio">) {
   const accountType = str(params.accountType) as "persona" | "empresa" | undefined;
   const letter = str(params.letter)?.toUpperCase();
 
-  const [results, facets] = await Promise.all([
+  const isBrowsing = !q && !profession && !location && !accountType && !letter;
+
+  const [results, facets, mostActive, newest] = await Promise.all([
     listDirectory({ q, profession, location, accountType }),
     listDirectoryFacets(),
+    isBrowsing ? listMostActiveMembers(5) : Promise.resolve([]),
+    isBrowsing ? listNewMembers(5) : Promise.resolve([]),
   ]);
 
   const availableLetters = new Set(
@@ -59,6 +69,49 @@ export default async function DirectorioPage(props: PageProps<"/directorio">) {
           Directorio
         </h1>
       </section>
+
+      {isBrowsing && mostActive.length > 0 && (
+        <div className="bg-earth-brown mb-10">
+          <div className="px-6 sm:px-10 py-8 max-w-3xl mx-auto">
+            <p className="flex items-center gap-3 text-xs tracking-[0.3em] uppercase text-cream/65 mb-4">
+              <span className="w-8 h-px bg-cream/45" />
+              Socias más activas
+            </p>
+            <div className="flex gap-4 overflow-x-auto -mx-6 sm:-mx-10 px-6 sm:px-10 pb-1">
+              {mostActive.map((member) => (
+                <MonogramCard
+                  key={member._id.toString()}
+                  name={member.name}
+                  profession={member.profession}
+                  photoUrl={member.photoUrl}
+                  href={`/directorio?q=${encodeURIComponent(member.name)}`}
+                  tone="onDark"
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isBrowsing && newest.length > 0 && (
+        <div className="px-6 sm:px-10 max-w-3xl mx-auto mb-10">
+          <p className="flex items-center gap-3 text-xs tracking-[0.3em] uppercase text-slate mb-4">
+            <span className="w-8 h-px bg-slate" />
+            Nuevas socias
+          </p>
+          <div className="flex gap-4 overflow-x-auto -mx-6 sm:-mx-10 px-6 sm:px-10 pb-1">
+            {newest.map((member) => (
+              <MonogramCard
+                key={member._id.toString()}
+                name={member.name}
+                profession={member.profession}
+                photoUrl={member.photoUrl}
+                href={`/directorio?q=${encodeURIComponent(member.name)}`}
+              />
+            ))}
+          </div>
+        </div>
+      )}
 
       <form className="px-6 sm:px-10 max-w-3xl mx-auto" action="/directorio" method="get">
         <div className="flex items-center gap-3 bg-cream border-[1.5px] border-earth-brown rounded-full px-5 py-3">
