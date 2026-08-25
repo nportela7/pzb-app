@@ -13,6 +13,16 @@ const dateFormatter = new Intl.DateTimeFormat("es-MX", {
   month: "short",
 });
 
+const todayFormatter = new Intl.DateTimeFormat("es-MX", {
+  weekday: "long",
+  day: "numeric",
+  month: "long",
+});
+
+function capitalize(s: string) {
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
 const PERSONA_LINKS = [
   { href: "/eventos", title: "Eventos", subtitle: "Talleres y retiros" },
   { href: "/coaching", title: "Coaching", subtitle: "The Alignment Partnership" },
@@ -52,22 +62,33 @@ export default async function HomePage() {
 
   return (
     <div className="flex-1 bg-cream">
-      <section className="relative overflow-hidden bg-dark-pine py-10">
+      <section className="relative overflow-hidden bg-dark-pine py-10 sm:py-12">
         <Grain opacity={0.12} />
+        <span
+          aria-hidden
+          className="absolute right-0 top-1/2 -translate-y-1/2 font-serif italic font-light text-[7rem] sm:text-[10rem] leading-none text-transparent select-none pointer-events-none"
+          style={{ WebkitTextStroke: "1.5px rgba(249,247,242,0.14)" }}
+        >
+          {member.name.trim()[0]?.toUpperCase()}
+        </span>
         <div className="relative max-w-3xl mx-auto w-full flex items-center gap-5 px-6 sm:px-10">
           <MemberAvatar
             name={member.name}
             tone="onDark"
-            className="w-14 h-14 text-xl"
+            className="w-[4.6rem] h-[4.6rem] text-2xl shrink-0"
           />
           <div>
-            <h1 className="text-3xl text-cream">
-              Hola, {member.name.split(" ")[0]}
+            <p className="flex items-center gap-3 text-xs tracking-[0.26em] uppercase text-cream/60 mb-1.5">
+              <span className="w-6 h-px bg-cream/45" />
+              {capitalize(todayFormatter.format(new Date()))}
+            </p>
+            <h1 className="font-serif italic font-light text-3xl sm:text-4xl text-cream leading-tight">
+              Hola, {member.name.split(" ")[0]}.
             </h1>
             <p className="text-sm text-cream/70 mt-1">
               {member.accountType === "empresa"
-                ? "Esto es lo que se comparte hoy en la comunidad de Pilar."
-                : "Esto es lo que se comparte hoy en Life Notes."}
+                ? "Esto es lo que se mueve hoy en la comunidad de Pilar."
+                : "Esto es lo que se mueve hoy en tu comunidad."}
             </p>
           </div>
         </div>
