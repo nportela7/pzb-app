@@ -1,9 +1,5 @@
 import Link from "next/link";
-import {
-  countMembers,
-  listDirectory,
-  listDirectoryFacets,
-} from "@/lib/members";
+import { listDirectory, listDirectoryFacets } from "@/lib/members";
 import { AutoSubmitSelect } from "./auto-submit-select";
 
 const ACCOUNT_LABELS: Record<string, string> = {
@@ -25,10 +21,9 @@ export default async function DirectorioPage(props: PageProps<"/directorio">) {
   const accountType = str(params.accountType) as "persona" | "empresa" | undefined;
   const letter = str(params.letter)?.toUpperCase();
 
-  const [results, facets, totalCount] = await Promise.all([
+  const [results, facets] = await Promise.all([
     listDirectory({ q, profession, location, accountType }),
     listDirectoryFacets(),
-    countMembers(),
   ]);
 
   const availableLetters = new Set(
@@ -60,26 +55,35 @@ export default async function DirectorioPage(props: PageProps<"/directorio">) {
           <span className="w-8 h-px bg-slate" />
           Comunidad
         </p>
-        <h1 className="font-serif italic text-4xl sm:text-5xl text-earth-brown mb-3">
+        <h1 className="font-serif italic font-medium text-5xl sm:text-6xl text-earth-brown">
           Directorio
         </h1>
-        <p className="text-sm text-slate">
-          <span className="text-earth-brown font-medium">{totalCount}</span>{" "}
-          {totalCount === 1 ? "socia" : "socias"} en la red — busca por
-          nombre, profesión, ciudad o palabra clave.
-        </p>
       </section>
 
       <form className="px-6 sm:px-10 max-w-3xl mx-auto" action="/directorio" method="get">
-        <input
-          type="text"
-          name="q"
-          defaultValue={q}
-          placeholder="Buscar por nombre, profesión, ciudad…"
-          className="w-full font-serif italic text-xl sm:text-2xl text-charcoal bg-transparent border-b-2 border-earth-brown pb-2.5 outline-none placeholder:text-charcoal/35"
-        />
+        <div className="flex items-center gap-3 bg-cream border-[1.5px] border-earth-brown rounded-full px-5 py-3">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            className="text-earth-brown/60 shrink-0"
+          >
+            <circle cx="11" cy="11" r="7" />
+            <path d="M21 21l-4.3-4.3" />
+          </svg>
+          <input
+            type="text"
+            name="q"
+            defaultValue={q}
+            placeholder="Buscar por nombre, profesión, ciudad…"
+            className="flex-1 font-serif italic text-lg text-charcoal bg-transparent outline-none placeholder:text-charcoal/40"
+          />
+        </div>
 
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-4">
+        <div className="flex flex-wrap items-center gap-2 mt-4">
           <AutoSubmitSelect
             name="profession"
             label="Profesión"
@@ -101,7 +105,7 @@ export default async function DirectorioPage(props: PageProps<"/directorio">) {
           {activeFilterCount > 0 && (
             <Link
               href={q ? `/directorio?q=${encodeURIComponent(q)}` : "/directorio"}
-              className="text-sm text-slate hover:text-charcoal transition-colors"
+              className="text-sm text-slate hover:text-charcoal transition-colors ml-1"
             >
               {activeFilterCount} {activeFilterCount === 1 ? "filtro activo" : "filtros activos"} · Limpiar
             </Link>
