@@ -77,7 +77,7 @@ export default async function DirectorioPage(props: PageProps<"/directorio">) {
               <span className="w-8 h-px bg-cream/45" />
               Socias más activas
             </p>
-            <div className="flex gap-4 overflow-x-auto -mx-6 sm:-mx-10 px-6 sm:px-10 pb-1">
+            <div className="grid grid-cols-5 gap-2 sm:gap-4">
               {mostActive.map((member) => (
                 <MonogramCard
                   key={member._id.toString()}
