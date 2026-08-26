@@ -37,7 +37,7 @@ export function PortraitCard({
     >
       <span
         aria-hidden
-        className="absolute -bottom-2 -right-3 w-20 h-20 sm:w-24 sm:h-24 text-dark-pine opacity-[0.16] pointer-events-none"
+        className="absolute -bottom-2 -right-3 w-20 h-20 sm:w-24 sm:h-24 text-dark-pine opacity-[0.08] pointer-events-none"
         style={{ transform: `rotate(${rotationFor(name)}deg)` }}
       >
         <svg viewBox="0 0 100 100" className="w-full h-full">
