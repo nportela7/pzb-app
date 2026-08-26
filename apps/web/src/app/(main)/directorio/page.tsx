@@ -7,6 +7,7 @@ import {
 } from "@/lib/members";
 import { AutoSubmitSelect } from "./auto-submit-select";
 import { MonogramCard } from "@/components/MonogramCard";
+import { PortraitCard } from "@/components/PortraitCard";
 
 const ACCOUNT_LABELS: Record<string, string> = {
   persona: "Persona",
@@ -99,9 +100,9 @@ export default async function DirectorioPage(props: PageProps<"/directorio">) {
             <span className="w-8 h-px bg-slate" />
             Nuevas socias
           </p>
-          <div className="flex gap-4 overflow-x-auto -mx-6 sm:-mx-10 px-6 sm:px-10 pb-1">
+          <div className="grid grid-cols-5 gap-2 sm:gap-4">
             {newest.map((member) => (
-              <MonogramCard
+              <PortraitCard
                 key={member._id.toString()}
                 name={member.name}
                 profession={member.profession}
