@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { splitName } from "@/lib/name";
 
 // A small hand-drawn pine sprig — dark-pine is a brand color by name,
 // so this is the literal thing. Rotation is hashed from the name so
@@ -28,6 +29,7 @@ export function PortraitCard({
   photoUrl?: string;
   href: string;
 }) {
+  const { first, last } = splitName(name);
   return (
     <Link
       href={href}
@@ -64,8 +66,13 @@ export function PortraitCard({
       )}
 
       <p className="relative font-serif text-sm sm:text-base text-charcoal leading-tight truncate w-full">
-        {name}
+        {first}
       </p>
+      {last && (
+        <p className="relative font-serif text-sm sm:text-base text-charcoal leading-tight truncate w-full">
+          {last}
+        </p>
+      )}
       {profession && (
         <p className="relative text-[0.62rem] sm:text-xs text-slate mt-0.5 truncate w-full">
           {profession}

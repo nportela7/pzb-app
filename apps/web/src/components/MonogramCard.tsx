@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { splitName } from "@/lib/name";
 
 export function MonogramCard({
   name,
@@ -15,6 +16,7 @@ export function MonogramCard({
   tone?: "onCream" | "onDark";
 }) {
   const initial = name.trim()[0]?.toUpperCase() ?? "";
+  const { first, last } = splitName(name);
 
   return (
     <Link href={href} className="min-w-0">
@@ -43,8 +45,15 @@ export function MonogramCard({
       <p
         className={`font-serif text-sm sm:text-base mt-1.5 sm:mt-2 leading-tight truncate ${tone === "onDark" ? "text-cream" : "text-charcoal"}`}
       >
-        {name}
+        {first}
       </p>
+      {last && (
+        <p
+          className={`font-serif text-sm sm:text-base leading-tight truncate ${tone === "onDark" ? "text-cream" : "text-charcoal"}`}
+        >
+          {last}
+        </p>
+      )}
       {profession && (
         <p
           className={`text-[0.65rem] sm:text-xs mt-0.5 truncate ${tone === "onDark" ? "text-cream/60" : "text-slate"}`}
