@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { getDb } from "@/lib/mongodb";
 import {
   MEMBERS_COLLECTION,
@@ -13,6 +14,27 @@ export async function getMemberByClerkUserId(clerkUserId: string) {
   return db
     .collection<MemberProfile>(MEMBERS_COLLECTION)
     .findOne({ clerkUserId });
+}
+
+export async function getMemberById(id: string) {
+  if (!ObjectId.isValid(id)) return null;
+  const db = await getDb();
+  return db
+    .collection<MemberProfile>(MEMBERS_COLLECTION)
+    .findOne({ _id: new ObjectId(id) });
+}
+
+export async function listMembersInLocation(
+  location: string,
+  excludeClerkUserId: string,
+  limit = 4
+) {
+  const db = await getDb();
+  return db
+    .collection<MemberProfile>(MEMBERS_COLLECTION)
+    .find({ location, clerkUserId: { $ne: excludeClerkUserId } })
+    .limit(limit)
+    .toArray();
 }
 
 export async function createMemberProfile(input: {

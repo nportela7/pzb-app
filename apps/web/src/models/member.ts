@@ -15,12 +15,16 @@ export const MemberProfileSchema = z.object({
   keywords: z.array(z.string().max(50)).max(10).default([]),
   interests: z.array(z.string()).default([]),
   location: z.string().max(200).optional(),
+  businessName: z.string().max(200).optional(),
+  memberPerk: z.string().max(300).optional(),
   contactVisibility: z.enum(["public", "members", "private"]).default("members"),
   contactMethods: z
     .object({
       email: z.string().email().optional(),
       whatsapp: z.string().optional(),
       instagram: z.string().optional(),
+      linkedin: z.string().optional(),
+      website: z.string().optional(),
     })
     .default({}),
   isAdmin: z.boolean().default(false),

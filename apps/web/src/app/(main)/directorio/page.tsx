@@ -85,7 +85,7 @@ export default async function DirectorioPage(props: PageProps<"/directorio">) {
                   name={member.name}
                   profession={member.profession}
                   photoUrl={member.photoUrl}
-                  href={`/directorio?q=${encodeURIComponent(member.name)}`}
+                  href={`/directorio/${member._id.toString()}`}
                   tone="onDark"
                 />
               ))}
@@ -107,7 +107,7 @@ export default async function DirectorioPage(props: PageProps<"/directorio">) {
                 name={member.name}
                 profession={member.profession}
                 photoUrl={member.photoUrl}
-                href={`/directorio?q=${encodeURIComponent(member.name)}`}
+                href={`/directorio/${member._id.toString()}`}
               />
             ))}
           </div>
@@ -216,7 +216,10 @@ export default async function DirectorioPage(props: PageProps<"/directorio">) {
                       aria-hidden
                       className="absolute -left-3 top-3 bottom-3 w-[3px] origin-center scale-y-0 bg-earth-brown transition-transform duration-200 group-hover:scale-y-100"
                     />
-                    <div className="grid grid-cols-[1fr_auto] items-baseline gap-4 py-3 border-b border-earth-brown/10 transition-[padding] duration-200 group-hover:pl-3">
+                    <Link
+                      href={`/directorio/${member._id.toString()}`}
+                      className="grid grid-cols-[1fr_auto] items-baseline gap-4 py-3 border-b border-earth-brown/10 transition-[padding] duration-200 group-hover:pl-3"
+                    >
                       <div className="min-w-0">
                         <p className="font-serif text-lg text-charcoal truncate">
                           {member.name}
@@ -230,7 +233,7 @@ export default async function DirectorioPage(props: PageProps<"/directorio">) {
                       <span className="text-xs uppercase tracking-wide text-slate shrink-0">
                         {ACCOUNT_LABELS[member.accountType] ?? member.accountType}
                       </span>
-                    </div>
+                    </Link>
                   </li>
                 ))}
               </ul>
