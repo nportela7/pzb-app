@@ -24,6 +24,14 @@ const DEMO_MEMBERS_BASE = [
     keywords: ["psicología", "transiciones", "terapia individual"],
     interests: ["bienestar emocional", "lectura", "senderismo"],
     location: "Ciudad de México",
+    businessName: "Consulta Valentina Reyes",
+    memberPerk: "20% de descuento en tu primera sesión",
+    contactMethods: {
+      instagram: "valentina.reyes.psic",
+      whatsapp: "5215500000001",
+      linkedin: "https://linkedin.com/in/valentina-reyes-demo",
+      website: "https://valentinareyes-demo.mx",
+    },
   },
   {
     clerkUserId: "demo_member_camila",
@@ -35,6 +43,13 @@ const DEMO_MEMBERS_BASE = [
     keywords: ["fotografía", "retrato", "dirección de arte"],
     interests: ["cine", "café de especialidad"],
     location: "Guadalajara",
+    businessName: "Camila Duarte Fotografía",
+    memberPerk: "15% de descuento en sesiones de retrato editorial",
+    contactMethods: {
+      instagram: "camiladuarte.foto",
+      whatsapp: "5215500000002",
+      website: "https://camiladuarte-demo.mx",
+    },
   },
   {
     clerkUserId: "demo_member_renata",
@@ -46,6 +61,13 @@ const DEMO_MEMBERS_BASE = [
     keywords: ["branding", "marca personal", "comunicación"],
     interests: ["diseño", "viajes de trabajo"],
     location: "Monterrey",
+    businessName: "Renata Solís Consultoría",
+    memberPerk: "Diagnóstico de marca personal sin costo (1 hora)",
+    contactMethods: {
+      instagram: "renatasolis.marca",
+      whatsapp: "5215500000003",
+      linkedin: "https://linkedin.com/in/renata-solis-demo",
+    },
   },
   {
     clerkUserId: "demo_member_ines",
@@ -57,6 +79,12 @@ const DEMO_MEMBERS_BASE = [
     keywords: ["nutrición", "hábitos", "bienestar integral"],
     interests: ["cocina", "yoga"],
     location: "Querétaro",
+    businessName: "Nutrición Inés Barragán",
+    memberPerk: "10% de descuento en plan nutricional de 3 meses",
+    contactMethods: {
+      instagram: "ines.nutrio",
+      whatsapp: "5215500000004",
+    },
   },
   {
     clerkUserId: "demo_member_paola",
@@ -68,6 +96,13 @@ const DEMO_MEMBERS_BASE = [
     keywords: ["diseño de interiores", "espacios", "colaboraciones"],
     interests: ["arquitectura", "arte contemporáneo"],
     location: "Ciudad de México",
+    businessName: "Estudio Iturbide",
+    memberPerk: "Primera consultoría de espacio sin costo",
+    contactMethods: {
+      instagram: "estudioiturbide",
+      whatsapp: "5215500000005",
+      website: "https://estudioiturbide-demo.mx",
+    },
   },
   {
     clerkUserId: "demo_member_daniela",
@@ -79,6 +114,12 @@ const DEMO_MEMBERS_BASE = [
     keywords: ["derecho corporativo", "consultoría", "reinvención profesional"],
     interests: ["running", "podcasts"],
     location: "Monterrey",
+    businessName: "Chávez Legal",
+    memberPerk: "Primera asesoría legal sin costo (30 min)",
+    contactMethods: {
+      linkedin: "https://linkedin.com/in/daniela-chavez-demo",
+      whatsapp: "5215500000006",
+    },
   },
   {
     clerkUserId: "demo_member_cardamomo",
@@ -90,6 +131,13 @@ const DEMO_MEMBERS_BASE = [
     keywords: ["eventos", "producción", "experiencias"],
     interests: ["colaboraciones de marca"],
     location: "Ciudad de México",
+    businessName: "Estudio Cardamomo",
+    memberPerk: "10% de descuento en producción de eventos para socias",
+    contactMethods: {
+      instagram: "estudiocardamomo",
+      whatsapp: "5215500000007",
+      website: "https://estudiocardamomo-demo.mx",
+    },
   },
 ];
 
@@ -172,7 +220,7 @@ export function buildDemoMembers(now: Date) {
     keywords: m.keywords,
     interests: m.interests,
     contactVisibility: "members" as const,
-    contactMethods: {},
+    contactMethods: m.contactMethods ?? {},
     isAdmin: false,
     onboardingCompletedAt: now,
     createdAt: now,
