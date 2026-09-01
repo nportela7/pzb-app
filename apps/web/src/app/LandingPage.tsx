@@ -208,7 +208,7 @@ export function LandingPage({
     <div className="flex flex-1 flex-col bg-cream">
       <ScrollProgressRail />
       {/* Hero — solid brown, no photo, bold editorial type */}
-      <div className="relative w-full min-h-[88vh] sm:min-h-[85vh] overflow-hidden bg-earth-brown flex flex-col">
+      <div className="relative w-full min-h-[100svh] overflow-hidden bg-earth-brown flex flex-col">
         <Grain opacity={0.05} />
         <span
           aria-hidden
