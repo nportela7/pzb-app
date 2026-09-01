@@ -228,12 +228,12 @@ export function LandingPage({
           <span className="font-script text-3xl text-cream">PZB.</span>
           <div className="flex items-center gap-4">
             <Show when="signed-out">
-              <SignInButton>
+              <SignInButton forceRedirectUrl="/home">
                 <button className="text-sm text-cream/75 hover:text-cream transition-colors">
                   Iniciar sesión
                 </button>
               </SignInButton>
-              <SignUpButton>
+              <SignUpButton forceRedirectUrl="/home">
                 <button className="text-sm rounded-full px-5 py-2 bg-cream text-earth-brown font-medium hover:bg-beige-sand transition-colors">
                   Crear cuenta
                 </button>
@@ -284,7 +284,7 @@ export function LandingPage({
 
             <motion.div variants={fadeUp}>
               <Show when="signed-out">
-                <SignUpButton>
+                <SignUpButton forceRedirectUrl="/home">
                   <button className="inline-flex items-center gap-2 rounded-full px-8 py-3.5 bg-cream text-earth-brown text-sm font-semibold tracking-wide hover:bg-beige-sand hover:-translate-y-0.5 transition-all">
                     Sé parte de la comunidad
                     <span aria-hidden>→</span>
@@ -602,7 +602,7 @@ export function LandingPage({
 
         <Reveal className="mt-12 text-center">
           <Show when="signed-out">
-            <SignUpButton>
+            <SignUpButton forceRedirectUrl="/home">
               <button className="rounded-full px-8 py-3 bg-earth-brown text-cream text-sm tracking-wide hover:bg-charcoal transition-colors">
                 Únete a la comunidad
               </button>
@@ -724,7 +724,7 @@ export function LandingPage({
             <span className="not-italic font-light">desde adentro?</span>
           </h2>
           <Show when="signed-out">
-            <SignUpButton>
+            <SignUpButton forceRedirectUrl="/home">
               <button className="rounded-full px-8 py-3 bg-cream text-charcoal text-sm tracking-wide hover:bg-beige-sand transition-colors">
                 Crear cuenta
               </button>
