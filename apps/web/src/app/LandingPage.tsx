@@ -7,6 +7,7 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import Link from "next/link";
+import Image from "next/image";
 import { useRef } from "react";
 import { ZereMark } from "@/components/ZereMark";
 import { Grain } from "@/components/Grain";
@@ -327,30 +328,51 @@ export function LandingPage({
       </section>
 
       {/* Sobre Pilar */}
-      <section className="relative px-6 sm:px-10 py-12 sm:py-16">
+      <section className="relative overflow-hidden px-6 sm:px-10 py-12 sm:py-16">
         <SectionIndex n="01" label="Sobre Pilar" />
-        <div className="max-w-3xl mx-auto grid sm:grid-cols-[1.1fr_0.9fr] gap-10 sm:gap-12 sm:items-end">
-          <Reveal>
-            <Eyebrow>Sobre Pilar</Eyebrow>
-            <h2 className="text-3xl sm:text-4xl text-earth-brown mt-4 mb-6 text-balance">
-              Emprendedora, inversionista y consejera.
-            </h2>
-            <p className="text-charcoal/80 leading-relaxed max-w-xl mb-4">
-              <span className="float-left font-serif text-5xl leading-[0.8] pr-2 text-earth-brown">
-                S
+        <div className="max-w-5xl mx-auto">
+          <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-10 lg:gap-16 items-center mb-12">
+            <Reveal className="relative">
+              <span
+                aria-hidden
+                className="absolute -top-10 -left-8 font-serif italic font-light text-[10rem] leading-none text-earth-brown/[0.07] select-none pointer-events-none"
+              >
+                P
               </span>
-              e define como Strategic Life Editor: alguien que
-              ayuda a sus clientas a editar su vida desde adentro hacia
-              afuera, integrando identidad, imagen y decisiones.
-            </p>
-            <Link
-              href="/sobre-pilar"
-              className="inline-block mt-2 text-sm text-earth-brown border-b border-earth-brown/40 hover:border-earth-brown transition-colors"
-            >
-              Conocer su historia
-            </Link>
-          </Reveal>
-          <Reveal className="flex flex-col">
+              <div className="relative aspect-[3/4] max-w-sm mx-auto lg:max-w-none rounded-3xl overflow-hidden">
+                <Image
+                  src="/images/pilar-portrait.jpg"
+                  alt="Pilar Zambrano B."
+                  fill
+                  sizes="(min-width: 1024px) 38vw, 90vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-earth-brown mix-blend-multiply opacity-[0.12]" />
+                <div className="absolute inset-3 rounded-2xl border border-cream/50 pointer-events-none" />
+              </div>
+            </Reveal>
+            <Reveal>
+              <Eyebrow>Sobre Pilar</Eyebrow>
+              <h2 className="text-3xl sm:text-4xl text-earth-brown mt-4 mb-6 text-balance">
+                Emprendedora, inversionista y consejera.
+              </h2>
+              <p className="text-charcoal/80 leading-relaxed max-w-xl mb-4">
+                <span className="float-left font-serif text-5xl leading-[0.8] pr-2 text-earth-brown">
+                  S
+                </span>
+                e define como Strategic Life Editor: alguien que
+                ayuda a sus clientas a editar su vida desde adentro hacia
+                afuera, integrando identidad, imagen y decisiones.
+              </p>
+              <Link
+                href="/sobre-pilar"
+                className="inline-block mt-2 text-sm text-earth-brown border-b border-earth-brown/40 hover:border-earth-brown transition-colors"
+              >
+                Conocer su historia
+              </Link>
+            </Reveal>
+          </div>
+          <Reveal className="flex flex-col max-w-sm">
             {[
               { place: "Monterrey", tag: "Origen" },
               { place: "Boston & Madrid", tag: "Formación" },
