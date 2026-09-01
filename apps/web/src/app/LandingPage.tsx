@@ -339,7 +339,7 @@ export function LandingPage({
               >
                 P
               </span>
-              <div className="relative aspect-[3/4] max-w-sm mx-auto lg:max-w-none rounded-3xl overflow-hidden">
+              <div className="relative aspect-[3/4] max-w-sm mx-auto lg:max-w-none rounded-3xl overflow-hidden shadow-[0_24px_48px_-20px_rgba(89,68,52,0.35)]">
                 <Image
                   src="/images/pilar-portrait.jpg"
                   alt="Pilar Zambrano B."
