@@ -261,13 +261,6 @@ export function LandingPage({
             animate="show"
             className="flex flex-col gap-2"
           >
-            <motion.p
-              variants={fadeUp}
-              className="uppercase flex items-center gap-3 text-xs tracking-[0.3em] text-cream/60 mb-4"
-            >
-              <span className="w-9 h-px bg-cream/40" />
-              Coaching de identidad, imagen y decisiones
-            </motion.p>
             <motion.h1
               variants={fadeUp}
               className="font-serif font-light text-6xl sm:text-8xl leading-[0.95] text-cream text-balance"
@@ -279,24 +272,13 @@ export function LandingPage({
               </span>
             </motion.h1>
 
-            <motion.div
-              variants={fadeUp}
-              className="flex items-baseline gap-3 mt-9 mb-7"
-            >
-              <span className="font-script text-3xl text-cream">
-                Pilar Zambrano B.
-              </span>
-              <span className="uppercase text-[0.68rem] tracking-[0.18em] text-cream/55">
-                Strategic Life Editor
-              </span>
-            </motion.div>
-
             <motion.p
               variants={fadeUp}
-              className="text-base text-cream/80 max-w-md leading-relaxed mb-9"
+              className="text-base text-cream/80 max-w-md leading-relaxed mt-9 mb-9"
             >
-              Experiencias con intención para empresas. Y una comunidad que se
-              sostiene entre mujeres.
+              Coaching de identidad, imagen y decisiones. Experiencias con
+              intención para empresas. Y una comunidad que se sostiene entre
+              mujeres.
             </motion.p>
 
             <motion.div variants={fadeUp}>
@@ -345,7 +327,7 @@ export function LandingPage({
       </section>
 
       {/* Sobre Pilar */}
-      <section className="relative px-6 sm:px-10 py-20 sm:py-28">
+      <section className="relative px-6 sm:px-10 py-12 sm:py-16">
         <SectionIndex n="01" label="Sobre Pilar" />
         <div className="max-w-3xl mx-auto grid sm:grid-cols-[1.1fr_0.9fr] gap-10 sm:gap-12 sm:items-end">
           <Reveal>
@@ -400,7 +382,7 @@ export function LandingPage({
       </section>
 
       {/* Coaching */}
-      <section className="relative px-6 sm:px-10 py-20 sm:py-28 bg-charcoal text-cream">
+      <section className="relative px-6 sm:px-10 py-12 sm:py-16 bg-charcoal text-cream">
         <SectionIndex n="02" label="Coaching" tone="cream" />
         <div className="max-w-3xl mx-auto">
           <Reveal>
@@ -412,7 +394,7 @@ export function LandingPage({
             </h2>
           </Reveal>
         </div>
-        <div className="-mx-6 sm:-mx-10 mb-10">
+        <div className="-mx-6 sm:-mx-10 mb-10 mt-8 lg:mt-36">
           <Ticker
             items={["Descubrir", "Explorar", "Editar", "Reescribir", "Integrar", "Sostener"]}
             tone="cream"
@@ -476,7 +458,7 @@ export function LandingPage({
       </section>
 
       {/* Zere Studio — its own sub-brand moment */}
-      <section className="relative px-6 sm:px-10 py-20 sm:py-28 bg-zere-deep text-zere-sky">
+      <section className="relative px-6 sm:px-10 py-12 sm:py-16 bg-zere-deep text-zere-sky">
         <SectionIndex n="03" label="Zere Studio" tone="cream" />
         <div className="relative max-w-3xl mx-auto">
           <Reveal>
@@ -501,7 +483,7 @@ export function LandingPage({
             </p>
           </Reveal>
         </div>
-        <div className="relative -mx-6 sm:-mx-10 mb-10">
+        <div className="relative -mx-6 sm:-mx-10 mb-10 lg:mt-4">
           <Ticker items={["Talleres", "Cenas corporativas", "Retiros", "Experiencias"]} tone="zere" />
         </div>
         <div className="relative max-w-3xl mx-auto">
@@ -542,7 +524,7 @@ export function LandingPage({
       </section>
 
       {/* Comunidad */}
-      <section className="relative overflow-hidden px-6 sm:px-10 py-20 sm:py-28 bg-beige-sand/40">
+      <section className="relative overflow-hidden px-6 sm:px-10 py-12 sm:py-16 bg-beige-sand/40">
         <SectionIndex n="04" label="Comunidad" />
         <div className="max-w-3xl mx-auto text-center">
           <Reveal>
@@ -622,7 +604,7 @@ export function LandingPage({
       </section>
 
       {/* Eventos */}
-      <section className="relative px-6 sm:px-10 py-20 sm:py-28">
+      <section className="relative px-6 sm:px-10 py-12 sm:py-16">
         <SectionIndex n="05" label="Eventos" />
         <div className="max-w-3xl mx-auto">
           <Reveal>
@@ -670,7 +652,7 @@ export function LandingPage({
       </section>
 
       {/* Add-Ons */}
-      <section className="relative px-6 sm:px-10 py-20 sm:py-28 bg-beige-sand/40">
+      <section className="relative px-6 sm:px-10 py-12 sm:py-16 bg-beige-sand/40">
         <SectionIndex n="06" label="Add-Ons" />
         <div className="max-w-3xl mx-auto">
           <Reveal>
@@ -719,7 +701,7 @@ export function LandingPage({
       </section>
 
       {/* CTA final */}
-      <section className="px-6 sm:px-10 py-24 sm:py-32 bg-charcoal">
+      <section className="px-6 sm:px-10 py-16 sm:py-20 bg-charcoal">
         <Reveal className="max-w-xl mx-auto text-center flex flex-col items-center gap-8">
           <h2 className="font-serif italic font-light text-4xl sm:text-6xl leading-tight text-cream text-balance">
             ¿Lista para editar tu vida{" "}
