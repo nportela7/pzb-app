@@ -6,9 +6,9 @@ const DIMENSIONS = [
     tagline: "Quién estás siendo",
     accent: "bg-earth-brown",
     items: [
-      { title: "Deep Dive Session", price: "$3,500 MXN", detail: "2 horas · Sesión para ir al fondo de algo específico" },
-      { title: "Energy Assessment", price: "$2,500 MXN", detail: "iPEC · 7 niveles · Perfil energético" },
-      { title: "Human Design", price: "$3,500 MXN", detail: "Lectura + interpretación · Cómo decides mejor" },
+      { title: "Deep Dive Session", detail: "2 horas · Sesión para ir al fondo de algo específico" },
+      { title: "Energy Assessment", detail: "iPEC · 7 niveles · Perfil energético" },
+      { title: "Human Design", detail: "Lectura + interpretación · Cómo decides mejor" },
     ],
   },
   {
@@ -16,10 +16,10 @@ const DIMENSIONS = [
     tagline: "Cómo te muestras",
     accent: "bg-dark-pine",
     items: [
-      { title: "Closet Detox", price: "$5,500 MXN", detail: "3–4 horas · Editamos qué ya no te representa" },
-      { title: "Closet Styling", price: "$6,500 MXN", detail: "2–3 horas · 8–12 looks nuevos con lo que ya tienes" },
-      { title: "Shopping Day", price: "15% comisión", detail: "Día completo · mínimo $30k de compra" },
-      { title: "Photoshoot", price: "Cotización", detail: "Branding personal con partners de confianza" },
+      { title: "Closet Detox", detail: "3–4 horas · Editamos qué ya no te representa" },
+      { title: "Closet Styling", detail: "2–3 horas · 8–12 looks nuevos con lo que ya tienes" },
+      { title: "Shopping Day", detail: "Día completo · comisión sobre lo comprado" },
+      { title: "Photoshoot", detail: "Branding personal con partners de confianza" },
     ],
   },
   {
@@ -27,9 +27,9 @@ const DIMENSIONS = [
     tagline: "Qué eliges desde aquí",
     accent: "bg-slate",
     items: [
-      { title: "Vision Board Session", price: "$3,500 MXN", detail: "2–3 horas · Plasmar lo que quieres para decidir con claridad" },
-      { title: "Strategic Network Intro", price: "$5,000 MXN", detail: "Por conexión · Conexión intencional con la red de Pilar" },
-      { title: "Decision Intensive", price: "$8,000 MXN", detail: "3 horas + seguimiento · Llegas con el dilema, sales con dirección" },
+      { title: "Vision Board Session", detail: "2–3 horas · Plasmar lo que quieres para decidir con claridad" },
+      { title: "Strategic Network Intro", detail: "Por conexión · Conexión intencional con la red de Pilar" },
+      { title: "Decision Intensive", detail: "3 horas + seguimiento · Llegas con el dilema, sales con dirección" },
     ],
   },
 ];
@@ -37,21 +37,15 @@ const DIMENSIONS = [
 const COMBOS = [
   {
     title: "The Visual Edit",
-    price: "$16,500 MXN",
     detail: "Closet Detox + Closet Styling + Photoshoot consult",
-    saving: "Ahorras $2,000",
   },
   {
     title: "The Strategic Edit",
-    price: "$10,000 MXN",
     detail: "Vision Board Session + Decision Intensive",
-    saving: "Ahorras $1,500",
   },
   {
     title: "The Full Transformation",
-    price: "Por cotización",
     detail: "Las 3 dimensiones juntas, diseñado a la medida",
-    saving: null,
   },
 ];
 
@@ -76,7 +70,8 @@ export default function AddOnsPage() {
           <p className="text-lg text-charcoal/80 leading-relaxed max-w-xl">
             Se agregan al programa principal cuando aparece la necesidad. No
             se contratan todos de entrada: Pilar propone el correcto en el
-            momento correcto.
+            momento correcto. Todos son sobre cotización, ajustados a lo que
+            necesitas.
           </p>
         </div>
       </section>
@@ -108,8 +103,8 @@ export default function AddOnsPage() {
                       {item.detail}
                     </p>
                   </div>
-                  <p className="text-charcoal font-medium whitespace-nowrap">
-                    {item.price}
+                  <p className="text-sm text-earth-brown italic whitespace-nowrap">
+                    Sobre cotización
                   </p>
                 </li>
               ))}
@@ -131,12 +126,7 @@ export default function AddOnsPage() {
                 <p className="text-sm text-slate leading-relaxed flex-1">
                   {combo.detail}
                 </p>
-                <div>
-                  <p className="text-charcoal font-medium">{combo.price}</p>
-                  {combo.saving && (
-                    <p className="text-sm text-dark-pine mt-1">{combo.saving}</p>
-                  )}
-                </div>
+                <p className="text-sm text-earth-brown italic">Sobre cotización</p>
               </div>
             ))}
           </div>
