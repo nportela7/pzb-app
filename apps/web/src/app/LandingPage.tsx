@@ -370,18 +370,18 @@ export function LandingPage({
               >
                 Conocer su historia
               </Link>
-              <div className="relative mt-8 max-w-sm">
+              <div className="relative mt-14 max-w-sm">
                 <span
                   aria-hidden
-                  className="absolute left-1 right-1 top-1 h-px bg-earth-brown/20"
+                  className="absolute left-0 right-0 top-1 h-px bg-earth-brown/20"
                 />
-                <div className="relative flex items-start justify-between gap-4">
+                <div className="relative grid grid-cols-3 gap-2">
                   {[
                     { place: "Monterrey", tag: "Origen" },
                     { place: "Boston & Madrid", tag: "Formación" },
                     { place: "Ciudad de México", tag: "Hoy · 11 años" },
                   ].map((stop) => (
-                    <div key={stop.place} className="flex flex-col items-start">
+                    <div key={stop.place} className="flex flex-col items-center text-center">
                       <span
                         aria-hidden
                         className="w-2 h-2 rounded-full bg-earth-brown mb-3"
