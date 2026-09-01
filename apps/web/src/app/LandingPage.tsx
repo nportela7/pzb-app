@@ -331,7 +331,7 @@ export function LandingPage({
       <section className="relative overflow-hidden px-6 sm:px-10 py-12 sm:py-16">
         <SectionIndex n="01" label="Sobre Pilar" />
         <div className="max-w-5xl mx-auto">
-          <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-10 lg:gap-16 items-center mb-12">
+          <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-10 lg:gap-16 items-center">
             <Reveal className="relative">
               <span
                 aria-hidden
@@ -370,36 +370,34 @@ export function LandingPage({
               >
                 Conocer su historia
               </Link>
-            </Reveal>
-          </div>
-          <Reveal className="flex flex-col max-w-sm">
-            {[
-              { place: "Monterrey", tag: "Origen" },
-              { place: "Boston & Madrid", tag: "Formación" },
-              { place: "Ciudad de México", tag: "Hoy · 11 años" },
-            ].map((stop, i, arr) => (
-              <div key={stop.place} className="relative grid grid-cols-[1.4rem_1fr] gap-4 py-4">
+              <div className="relative mt-8 max-w-sm">
                 <span
                   aria-hidden
-                  className="mt-2 w-2 h-2 rounded-full bg-earth-brown"
+                  className="absolute left-1 right-1 top-1 h-px bg-earth-brown/20"
                 />
-                {i < arr.length - 1 && (
-                  <span
-                    aria-hidden
-                    className="absolute left-[0.42rem] top-8 bottom-0 w-px bg-earth-brown/20"
-                  />
-                )}
-                <div>
-                  <p className="font-serif text-xl text-earth-brown leading-none">
-                    {stop.place}
-                  </p>
-                  <p className="text-[0.68rem] tracking-[0.18em] uppercase text-slate mt-1.5">
-                    {stop.tag}
-                  </p>
+                <div className="relative flex items-start justify-between gap-4">
+                  {[
+                    { place: "Monterrey", tag: "Origen" },
+                    { place: "Boston & Madrid", tag: "Formación" },
+                    { place: "Ciudad de México", tag: "Hoy · 11 años" },
+                  ].map((stop) => (
+                    <div key={stop.place} className="flex flex-col items-start">
+                      <span
+                        aria-hidden
+                        className="w-2 h-2 rounded-full bg-earth-brown mb-3"
+                      />
+                      <p className="font-serif text-base sm:text-lg text-earth-brown leading-none">
+                        {stop.place}
+                      </p>
+                      <p className="text-[0.62rem] tracking-[0.16em] uppercase text-slate mt-1.5">
+                        {stop.tag}
+                      </p>
+                    </div>
+                  ))}
                 </div>
               </div>
-            ))}
-          </Reveal>
+            </Reveal>
+          </div>
         </div>
       </section>
 
