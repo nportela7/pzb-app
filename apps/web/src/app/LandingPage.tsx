@@ -402,7 +402,7 @@ export function LandingPage({
       </section>
 
       {/* Coaching */}
-      <section className="relative px-6 sm:px-10 py-12 sm:py-16 bg-charcoal text-cream">
+      <section className="relative px-6 sm:px-10 py-12 sm:py-16 bg-earth-brown text-cream">
         <SectionIndex n="02" label="Coaching" tone="cream" />
         <div className="max-w-3xl mx-auto">
           <Reveal>
@@ -450,7 +450,7 @@ export function LandingPage({
                 </span>
                 <div>
                   <h3 className="text-xl mb-2">{phase.title}</h3>
-                  <p className="text-cream/78 leading-relaxed max-w-lg mb-3">
+                  <p className="text-cream/78 leading-relaxed mb-3">
                     {phase.body}
                   </p>
                   <span className="inline-block text-[0.68rem] tracking-[0.18em] uppercase text-cream/55 border border-cream/25 rounded-full px-3 py-1">
