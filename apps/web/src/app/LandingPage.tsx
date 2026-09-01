@@ -263,7 +263,7 @@ export function LandingPage({
           >
             <motion.h1
               variants={fadeUp}
-              className="font-serif font-light text-6xl sm:text-8xl leading-[0.95] text-cream text-balance"
+              className="font-serif font-light text-5xl sm:text-7xl leading-[0.95] text-cream text-balance"
             >
               Styling your life.
               <br />
@@ -393,12 +393,6 @@ export function LandingPage({
               El proceso, en tres fases
             </h2>
           </Reveal>
-        </div>
-        <div className="-mx-6 sm:-mx-10 mb-10 mt-8 lg:mt-36">
-          <Ticker
-            items={["Descubrir", "Explorar", "Editar", "Reescribir", "Integrar", "Sostener"]}
-            tone="cream"
-          />
         </div>
         <div className="max-w-3xl mx-auto">
           <motion.ol
