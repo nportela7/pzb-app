@@ -511,27 +511,27 @@ export function LandingPage({
               {/* ripple rings — hidden until hover, then expand + fade like water, looping */}
               <span
                 aria-hidden
-                className="zere-ripple-ring absolute inset-0 rounded-full border border-zere-deep/50 opacity-0 group-hover:opacity-100 group-hover:[animation:zere-ripple_1.8s_ease-out_infinite]"
+                className="zere-ripple-ring absolute inset-0 rounded-full border border-zere-deep/50 opacity-0 group-hover:opacity-100 group-hover:[animation:zere-ripple_3.6s_ease-in-out_infinite]"
               />
               <span
                 aria-hidden
-                className="zere-ripple-ring absolute inset-0 rounded-full border border-zere-deep/50 opacity-0 group-hover:opacity-100 group-hover:[animation:zere-ripple_1.8s_ease-out_infinite] group-hover:[animation-delay:0.6s]"
+                className="zere-ripple-ring absolute inset-0 rounded-full border border-zere-deep/50 opacity-0 group-hover:opacity-100 group-hover:[animation:zere-ripple_3.6s_ease-in-out_infinite] group-hover:[animation-delay:1.2s]"
               />
               <span
                 aria-hidden
-                className="zere-ripple-ring absolute inset-0 rounded-full border border-zere-deep/50 opacity-0 group-hover:opacity-100 group-hover:[animation:zere-ripple_1.8s_ease-out_infinite] group-hover:[animation-delay:1.2s]"
+                className="zere-ripple-ring absolute inset-0 rounded-full border border-zere-deep/50 opacity-0 group-hover:opacity-100 group-hover:[animation:zere-ripple_3.6s_ease-in-out_infinite] group-hover:[animation-delay:2.4s]"
               />
               {/* static rings, ease outward slightly on hover */}
               <span
                 aria-hidden
-                className="absolute inset-0 rounded-full border border-zere-deep/20 transition-transform duration-500 group-hover:scale-105"
+                className="absolute inset-0 rounded-full border border-zere-deep/20 transition-transform duration-1000 ease-in-out group-hover:scale-105"
               />
               <span
                 aria-hidden
-                className="absolute inset-[14%] rounded-full border border-zere-deep/20 transition-transform duration-500 group-hover:scale-105"
+                className="absolute inset-[14%] rounded-full border border-zere-deep/20 transition-transform duration-1000 ease-in-out group-hover:scale-105"
               />
-              <div className="relative w-[52%] aspect-square rounded-full bg-cream flex items-center justify-center shadow-[0_20px_40px_-16px_rgba(21,76,97,0.35)] transition-transform duration-300 ease-out group-hover:scale-[0.92]">
-                <ZereMark className="w-[42%] h-[42%] text-zere-deep transition-transform duration-300 ease-out group-hover:scale-110" />
+              <div className="relative w-[52%] aspect-square rounded-full bg-cream flex items-center justify-center shadow-[0_20px_40px_-16px_rgba(21,76,97,0.35)] transition-transform duration-700 ease-in-out group-hover:scale-[0.92]">
+                <ZereMark className="w-[42%] h-[42%] text-zere-deep transition-transform duration-700 ease-in-out group-hover:scale-110" />
               </div>
             </Reveal>
           </div>
