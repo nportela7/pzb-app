@@ -145,12 +145,12 @@ export default function SobrePilarPage() {
           </div>
           <div className="flex items-center gap-4">
             <a
-              href="https://instagram.com/pilarzambranob"
+              href="https://www.instagram.com/by.pilarzambranob/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-cream/90 hover:text-cream transition-colors whitespace-nowrap"
             >
-              @pilarzambranob
+              @by.pilarzambranob
             </a>
             <a
               href={WHATSAPP_HREF}
