@@ -12,12 +12,12 @@ export function MainNav({
 
   return (
     <div className="relative">
-      <nav className="hidden sm:flex items-center gap-7 text-sm text-charcoal/70">
+      <nav className="hidden sm:flex items-center gap-7 font-serif text-[1.05rem] text-charcoal/70">
         {items.map((item) => (
           <Link
             key={item.href}
             href={item.href}
-            className="hover:text-earth-brown transition-colors"
+            className="hover:text-earth-brown hover:italic transition-colors"
           >
             {item.label}
           </Link>
@@ -50,7 +50,7 @@ export function MainNav({
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
-              className="block px-4 py-2.5 text-sm text-charcoal/80 hover:bg-beige-sand/40 hover:text-earth-brown transition-colors"
+              className="block px-4 py-2.5 font-serif text-base text-charcoal/80 hover:bg-beige-sand/40 hover:text-earth-brown transition-colors"
             >
               {item.label}
             </Link>
