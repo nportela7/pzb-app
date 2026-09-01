@@ -319,20 +319,23 @@ export function LandingPage({
       </div>
 
       {/* Quote */}
-      <section className="relative overflow-hidden px-6 sm:px-10 py-24 sm:py-32 bg-beige-sand/40">
+      <section className="relative overflow-hidden px-6 sm:px-10 py-12 sm:py-16 bg-beige-sand/40">
         <span
           aria-hidden
           className="absolute -top-4 sm:-top-10 left-4 sm:left-8 font-serif italic text-[9rem] sm:text-[13rem] leading-none text-earth-brown/[0.12] select-none"
         >
           &ldquo;
         </span>
-        <Reveal className="relative max-w-2xl mx-auto">
-          <p className="font-serif italic text-3xl sm:text-4xl text-earth-brown leading-tight text-balance">
-            Creo que la vida se vive, no se mide. Y que las mejores decisiones
-            nunca vienen de la obediencia, sino de escucharte realmente para
-            entender quién eres y lo que tienes que soltar.
+        <Reveal className="relative max-w-3xl mx-auto">
+          <p className="font-serif italic text-2xl sm:text-3xl text-earth-brown leading-tight text-balance">
+            <span className="font-semibold not-italic">
+              La vida se vive, no se mide.
+            </span>{" "}
+            Las mejores decisiones nunca vienen de la obediencia, sino de
+            escucharte realmente para entender quién eres y lo que tienes que
+            soltar.
           </p>
-          <p className="mt-8 font-script text-2xl text-charcoal">
+          <p className="mt-6 font-script text-2xl text-charcoal">
             Pilar Zambrano B.
           </p>
           <p className="text-xs tracking-[0.3em] uppercase text-slate mt-1">
