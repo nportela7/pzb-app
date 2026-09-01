@@ -7,9 +7,9 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import Link from "next/link";
-import Image from "next/image";
 import { useRef } from "react";
 import { ZereMark } from "@/components/ZereMark";
+import { Grain } from "@/components/Grain";
 import { ScrollProgressRail } from "@/components/ScrollProgressRail";
 import { SectionIndex } from "@/components/SectionIndex";
 import {
@@ -207,107 +207,114 @@ export function LandingPage({
   return (
     <div className="flex flex-1 flex-col bg-cream">
       <ScrollProgressRail />
-      {/* Hero — horizontal, contained */}
-      <div className="relative w-full aspect-[1/2] sm:aspect-[16/9] overflow-hidden">
-        <Image
-          src="/images/silhouette-sunset.jpg"
-          alt="Silueta de una mujer al atardecer, con el cabello al viento"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-[48%_89%] sm:object-[48%_92%]"
-        />
-
-        {/* inset frame, drawn just inside the image edges, running its full length */}
-        <div
+      {/* Hero — solid brown, no photo, bold editorial type */}
+      <div className="relative w-full min-h-[88vh] sm:min-h-[85vh] overflow-hidden bg-earth-brown flex flex-col">
+        <Grain opacity={0.05} />
+        <span
           aria-hidden
-          className="absolute inset-3 sm:inset-6 rounded-2xl sm:rounded-3xl border border-white/40 pointer-events-none"
-        />
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-serif italic font-light text-[9rem] sm:text-[18rem] leading-none whitespace-nowrap text-transparent select-none pointer-events-none tracking-tight"
+          style={{ WebkitTextStroke: "1.5px rgba(249,247,242,0.055)" }}
+        >
+          PZB
+        </span>
 
-        {/* fading into the beige tone of the section below, at the very end of the image */}
-        <div
-          aria-hidden
-          className="absolute inset-x-0 bottom-0 h-40 sm:h-56 backdrop-blur-md"
-          style={{
-            maskImage: "linear-gradient(to top, black, transparent)",
-            WebkitMaskImage: "linear-gradient(to top, black, transparent)",
-          }}
-        />
-        <div className="absolute inset-x-0 bottom-0 h-48 sm:h-64 bg-gradient-to-t from-[#ede8de] to-transparent" />
+        <motion.header
+          initial={{ opacity: 0, y: -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: EASE }}
+          className="relative flex items-center justify-between px-6 sm:px-10 pt-8 sm:pt-10"
+        >
+          <span className="font-script text-3xl text-cream">PZB.</span>
+          <div className="flex items-center gap-4">
+            <Show when="signed-out">
+              <SignInButton>
+                <button className="text-sm text-cream/75 hover:text-cream transition-colors">
+                  Iniciar sesión
+                </button>
+              </SignInButton>
+              <SignUpButton>
+                <button className="text-sm rounded-full px-5 py-2 bg-cream text-earth-brown font-medium hover:bg-beige-sand transition-colors">
+                  Crear cuenta
+                </button>
+              </SignUpButton>
+            </Show>
+            <Show when="signed-in">
+              <Link
+                href="/home"
+                className="text-sm text-cream/75 hover:text-cream transition-colors"
+              >
+                Ir a la comunidad
+              </Link>
+              <UserButton />
+            </Show>
+          </div>
+        </motion.header>
 
         <div
           ref={heroTextRef}
-          className="absolute inset-x-0 top-0 flex flex-col gap-8 sm:gap-10 px-6 sm:px-10 pt-8 sm:pt-10"
+          className="relative flex-1 flex flex-col justify-center px-6 sm:px-10 py-12 max-w-3xl"
         >
-          <motion.header
-            initial={{ opacity: 0, y: -16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: EASE }}
-            className="flex items-start justify-between"
-          >
-            <span className="font-script text-3xl text-charcoal">PZB.</span>
-            <div className="flex flex-col items-end gap-3">
-              <div className="flex items-center gap-4">
-                <Show when="signed-out">
-                  <SignInButton>
-                    <button className="text-sm text-charcoal/80 hover:text-charcoal transition-colors">
-                      Iniciar sesión
-                    </button>
-                  </SignInButton>
-                  <SignUpButton>
-                    <button className="text-sm rounded-full px-5 py-2 bg-charcoal text-cream hover:bg-earth-brown transition-colors">
-                      Crear cuenta
-                    </button>
-                  </SignUpButton>
-                </Show>
-                <Show when="signed-in">
-                  <Link
-                    href="/home"
-                    className="text-sm text-charcoal/80 hover:text-charcoal transition-colors"
-                  >
-                    Ir a la comunidad
-                  </Link>
-                  <UserButton />
-                </Show>
-              </div>
-              <p className="text-sm font-serif italic text-charcoal/70">
-                Pilar Zambrano B.
-              </p>
-            </div>
-          </motion.header>
-
           <motion.div
             style={{ opacity: heroOpacity, y: heroY }}
             variants={stagger}
             initial="hidden"
             animate="show"
-            className="flex flex-col gap-6 max-w-xl"
+            className="flex flex-col gap-2"
           >
-            <motion.h1
-              variants={fadeUp}
-              className="font-serif text-5xl sm:text-7xl leading-[0.95] text-charcoal text-balance"
-            >
-              Styling your life.{" "}
-              <span className="italic font-normal">Your own way.</span>
-            </motion.h1>
             <motion.p
               variants={fadeUp}
-              className="text-base text-charcoal/80 max-w-md leading-relaxed"
+              className="uppercase flex items-center gap-3 text-xs tracking-[0.3em] text-cream/60 mb-4"
             >
-              Coaching de identidad, imagen y decisiones. Experiencias con
-              intención para empresas. Y una comunidad que se sostiene entre
-              mujeres.
+              <span className="w-9 h-px bg-cream/40" />
+              Coaching de identidad, imagen y decisiones
             </motion.p>
+            <motion.h1
+              variants={fadeUp}
+              className="font-serif font-light text-6xl sm:text-8xl leading-[0.95] text-cream text-balance"
+            >
+              Styling your life.
+              <br />
+              <span className="italic font-normal text-beige-sand">
+                Your own way.
+              </span>
+            </motion.h1>
+
+            <motion.div
+              variants={fadeUp}
+              className="flex items-baseline gap-3 mt-9 mb-7"
+            >
+              <span className="font-script text-3xl text-cream">
+                Pilar Zambrano B.
+              </span>
+              <span className="uppercase text-[0.68rem] tracking-[0.18em] text-cream/55">
+                Strategic Life Editor
+              </span>
+            </motion.div>
+
+            <motion.p
+              variants={fadeUp}
+              className="text-base text-cream/80 max-w-md leading-relaxed mb-9"
+            >
+              Experiencias con intención para empresas. Y una comunidad que se
+              sostiene entre mujeres.
+            </motion.p>
+
             <motion.div variants={fadeUp}>
               <Show when="signed-out">
                 <SignUpButton>
-                  <button className="rounded-full px-8 py-3 bg-charcoal text-cream text-sm tracking-wide hover:bg-earth-brown transition-colors">
-                    Únete a nuestra comunidad
+                  <button className="inline-flex items-center gap-2 rounded-full px-8 py-3.5 bg-cream text-earth-brown text-sm font-semibold tracking-wide hover:bg-beige-sand hover:-translate-y-0.5 transition-all">
+                    Sé parte de la comunidad
+                    <span aria-hidden>→</span>
                   </button>
                 </SignUpButton>
               </Show>
             </motion.div>
           </motion.div>
+        </div>
+
+        <div className="relative hidden sm:flex items-center gap-3 self-end px-10 pb-8 text-[0.65rem] tracking-[0.2em] uppercase text-cream/45">
+          Scroll
+          <span className="w-px h-9 bg-cream/35" />
         </div>
       </div>
 
