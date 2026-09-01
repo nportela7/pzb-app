@@ -81,7 +81,7 @@ export default function ZereStudioPage() {
         <div className="relative max-w-3xl mx-auto">
           <div className="flex items-center gap-4 mb-8">
             <ZereWordmark className="text-2xl sm:text-3xl" />
-            <ZereMark className="w-9 h-6 text-zere-deep/60" />
+            <ZereMark className="w-8 h-7 text-zere-deep/60" />
           </div>
           <p className="font-serif italic text-5xl sm:text-6xl text-zere-deep/25 mb-6">
             propósito
@@ -98,14 +98,44 @@ export default function ZereStudioPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden px-6 sm:px-10 py-16 bg-zere-deep">
-        <Grain opacity={0.1} />
-        <div className="relative max-w-3xl mx-auto">
-          <p className="font-serif italic text-2xl text-cream leading-snug max-w-lg">
-            &ldquo;Conectar mente, cuerpo y alma. Una experiencia
-            transformadora no sucede sola: nace de reunir a las personas
-            correctas en un entorno cuidado.&rdquo;
-          </p>
+      <section className="px-6 sm:px-10 py-16 sm:py-20">
+        <div className="max-w-3xl mx-auto grid sm:grid-cols-[0.85fr_1.15fr] gap-10 sm:gap-14 items-center">
+          <div className="flex justify-center">
+            <div className="relative w-full max-w-[16rem] aspect-square">
+              <span
+                aria-hidden
+                className="absolute inset-0 rounded-full border border-zere-deep/20"
+              />
+              <span
+                aria-hidden
+                className="absolute inset-[10%] rounded-full border border-zere-deep/20"
+              />
+              <div className="absolute inset-[16%] rounded-full overflow-hidden shadow-[0_30px_60px_-20px_rgba(21,76,97,0.35)]">
+                <Image
+                  src="/images/zere-water-ripple.jpg"
+                  alt=""
+                  fill
+                  sizes="256px"
+                  className="object-cover"
+                />
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className="flex items-center gap-3 mb-5">
+              <ZereMark className="w-7 h-6 text-zere-deep" />
+              <ZereWordmark className="text-lg" />
+            </div>
+            <p className="font-serif italic text-3xl sm:text-4xl leading-tight text-zere-deep mb-5 text-balance">
+              Conectar <span className="font-medium not-italic">mente, cuerpo y alma.</span>{" "}
+              Una experiencia transformadora no sucede sola.
+            </p>
+            <p className="text-zere-ink/80 leading-relaxed max-w-md">
+              Nace de reunir a las personas correctas en un entorno cuidado —
+              el mismo cuidado con el que diseñamos cada retiro, cena y
+              taller de Zere Studio.
+            </p>
+          </div>
         </div>
       </section>
 

@@ -474,36 +474,59 @@ export function LandingPage({
       </section>
 
       {/* Zere Studio — its own sub-brand moment */}
-      <section className="relative px-6 sm:px-10 py-12 sm:py-16 bg-zere-deep text-zere-sky">
-        <SectionIndex n="03" label="Zere Studio" tone="cream" />
-        <div className="relative max-w-3xl mx-auto">
-          <Reveal>
-            <div className="flex items-center gap-4">
-              <ZereMark className="w-10 h-7 text-zere-sky" />
-              <div>
-                <h2 className="flex items-baseline gap-2 font-serif italic font-light text-4xl sm:text-5xl text-cream">
-                  zere
-                  <span className="font-sans not-italic font-medium text-[0.28em] tracking-[0.22em] uppercase text-zere-sky/90">
-                    Studio
-                  </span>
-                </h2>
-                <p className="font-serif italic text-2xl sm:text-3xl text-cream/90 mt-2">
-                  zere<span className="text-zere-sky/50 mx-1">&middot;</span>nidad
-                </p>
+      <section className="relative overflow-hidden px-6 sm:px-10 py-12 sm:py-16 bg-zere-sky">
+        <Grain opacity={0.06} />
+        <SectionIndex n="03" label="Zere Studio" tone="zere" />
+        <div className="relative max-w-5xl mx-auto">
+          <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-16 items-center mb-10">
+            <Reveal>
+              <div className="flex items-center gap-4">
+                <ZereMark className="w-9 h-8 text-zere-deep" />
+                <div>
+                  <h2 className="flex items-baseline gap-2 font-serif italic font-light text-4xl sm:text-5xl text-zere-deep">
+                    zere
+                    <span className="font-sans not-italic font-medium text-[0.28em] tracking-[0.22em] uppercase text-zere-deep/80">
+                      Studio
+                    </span>
+                  </h2>
+                  <p className="font-serif italic text-2xl sm:text-3xl text-zere-deep/70 mt-2">
+                    zere<span className="text-zere-deep/40 mx-1">&middot;</span>nidad
+                  </p>
+                </div>
               </div>
-            </div>
-            <p className="font-serif font-light text-lg sm:text-xl leading-relaxed max-w-lg mt-8 mb-10 text-zere-sky/95">
-              Experiencias con intención para empresas: para equipos de
-              liderazgo, facilitadoras y marcas que buscan crear momentos
-              memorables con propósito.
-            </p>
-          </Reveal>
+              <p className="font-serif font-light text-lg sm:text-xl leading-relaxed max-w-lg mt-8 mb-8 text-zere-ink/85">
+                Experiencias con intención para empresas: para equipos de
+                liderazgo, facilitadoras y marcas que buscan crear momentos
+                memorables con propósito.
+              </p>
+              <Link
+                href="/zere-studio"
+                className="inline-flex items-center gap-2 rounded-full px-8 py-3 bg-zere-deep text-cream text-sm font-medium tracking-wide hover:bg-charcoal transition-colors"
+              >
+                Descubrir Zere Studio
+                <span aria-hidden>→</span>
+              </Link>
+            </Reveal>
+            <Reveal className="relative flex items-center justify-center aspect-square max-w-[16rem] mx-auto lg:max-w-none">
+              <span
+                aria-hidden
+                className="absolute inset-0 rounded-full border border-zere-deep/20"
+              />
+              <span
+                aria-hidden
+                className="absolute inset-[14%] rounded-full border border-zere-deep/20"
+              />
+              <div className="relative w-[52%] aspect-square rounded-full bg-cream flex items-center justify-center shadow-[0_20px_40px_-16px_rgba(21,76,97,0.35)]">
+                <ZereMark className="w-[42%] h-[42%] text-zere-deep" />
+              </div>
+            </Reveal>
+          </div>
         </div>
-        <div className="relative -mx-6 sm:-mx-10 mb-10 lg:mt-4">
+        <div className="relative -mx-6 sm:-mx-10 mb-10">
           <Ticker items={["Talleres", "Cenas corporativas", "Retiros", "Experiencias"]} tone="zere" />
         </div>
-        <div className="relative max-w-3xl mx-auto">
-          <p className="text-[0.68rem] tracking-[0.22em] uppercase text-zere-sky/70 mb-3">
+        <div className="relative max-w-5xl mx-auto">
+          <p className="text-[0.68rem] tracking-[0.22em] uppercase text-zere-deep/60 mb-3">
             Formatos
           </p>
           <motion.div
@@ -511,31 +534,25 @@ export function LandingPage({
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="grid sm:grid-cols-2 gap-px rounded-2xl overflow-hidden bg-zere-sky/20"
+            className="grid sm:grid-cols-2 gap-5"
           >
             {FORMATOS.map((formato) => (
               <motion.div
                 key={formato.title}
                 variants={fadeUp}
-                className="bg-zere-deep p-7"
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.25, ease: EASE }}
+                className="rounded-2xl bg-cream/70 p-6 hover:bg-cream transition-colors"
               >
-                <h3 className="font-serif italic text-lg text-cream mb-2">
+                <h3 className="text-lg text-zere-deep mb-2">
                   {formato.title}
                 </h3>
-                <p className="text-sm text-zere-sky/85 leading-relaxed max-w-sm">
+                <p className="text-sm text-zere-ink/70 leading-relaxed max-w-sm">
                   {formato.body}
                 </p>
               </motion.div>
             ))}
           </motion.div>
-          <Reveal className="mt-14">
-            <Link
-              href="/zere-studio"
-              className="inline-block rounded-full px-8 py-3 bg-cream text-zere-deep text-sm tracking-wide hover:bg-zere-sky transition-colors"
-            >
-              Descubrir Zere Studio
-            </Link>
-          </Reveal>
         </div>
       </section>
 
