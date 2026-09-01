@@ -302,7 +302,7 @@ export function LandingPage({
               <Show when="signed-out">
                 <SignUpButton>
                   <button className="rounded-full px-8 py-3 bg-charcoal text-cream text-sm tracking-wide hover:bg-earth-brown transition-colors">
-                    Conocer más
+                    Únete a nuestra comunidad
                   </button>
                 </SignUpButton>
               </Show>
