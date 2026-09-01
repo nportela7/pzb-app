@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { getInstagramFeed } from "@/lib/instagram";
+import { InstagramTicker } from "@/components/InstagramTicker";
 
 const WHATSAPP_HREF =
   "https://wa.me/525574141480?text=" +
@@ -10,7 +12,9 @@ const TIMELINE = [
   { place: "Ciudad de México", tag: "Hoy · 11 años" },
 ];
 
-export default function SobrePilarPage() {
+export default async function SobrePilarPage() {
+  const posts = await getInstagramFeed();
+
   return (
     <div className="flex-1 bg-cream">
       <section className="px-6 sm:px-10 pt-16 pb-6 max-w-4xl mx-auto">
@@ -134,6 +138,15 @@ export default function SobrePilarPage() {
           </div>
         </dl>
       </section>
+
+      {posts.length > 0 && (
+        <section className="pb-16">
+          <p className="text-center text-[0.65rem] tracking-[0.2em] uppercase text-slate mb-5">
+            Últimas publicaciones · @by.pilarzambranob
+          </p>
+          <InstagramTicker posts={posts} />
+        </section>
+      )}
 
       <section className="px-6 sm:px-10 pb-20">
         <div className="max-w-3xl mx-auto rounded-2xl bg-dark-pine text-cream px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
