@@ -14,6 +14,9 @@
   --zere-deep: #154c61;
   --zere-ink: #3b434c;
 
+  /* Coaching "expediente" accent — editorial redline */
+  --redline: #9b3a26;
+
   --background: var(--pzb-cream);
   --foreground: var(--pzb-charcoal);
 }
@@ -30,6 +33,7 @@
   --color-zere-sky: var(--zere-sky);
   --color-zere-deep: var(--zere-deep);
   --color-zere-ink: var(--zere-ink);
+  --color-redline: var(--redline);
   --font-sans: var(--font-source-sans);
   --font-serif: var(--font-fraunces);
   --font-script: var(--font-cedarville);
