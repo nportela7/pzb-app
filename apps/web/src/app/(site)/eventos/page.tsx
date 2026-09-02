@@ -2,6 +2,7 @@ import Link from "next/link";
 import { listUpcomingEvents } from "@/lib/events";
 import { EVENT_TYPE_LABELS, EventType } from "@/models/event";
 import { Grain } from "@/components/Grain";
+import { WHATSAPP_MESSAGES, whatsappHref } from "@/lib/cta";
 
 const FILTERS: { value?: EventType; label: string }[] = [
   { value: undefined, label: "Todos" },
@@ -50,9 +51,7 @@ function formatPrice(cents: number, currency: string) {
   return currencyFormatters[key].format(cents / 100);
 }
 
-const WHATSAPP_HREF =
-  "https://wa.me/525574141480?text=" +
-  encodeURIComponent("Hola Pilar, quiero saber más sobre los próximos eventos.");
+const WHATSAPP_HREF = whatsappHref(WHATSAPP_MESSAGES.eventos);
 
 const TICKER_ITEMS = ["Registro por WhatsApp", "Cupo limitado", "Precios en MXN"];
 // Repeated well past what any real screen width needs, so the
@@ -70,7 +69,7 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
 
   return (
     <div className="flex-1 bg-cream">
-      <section className="relative overflow-hidden px-6 sm:px-10 pt-16 sm:pt-24 pb-8 sm:pb-14">
+      <section className="relative overflow-hidden px-6 sm:px-10 pt-6 sm:pt-12 pb-8 sm:pb-14">
         <Grain opacity={0.1} />
         <div className="relative max-w-3xl mx-auto">
           <p className="flex items-center gap-3 text-xs tracking-[0.32em] uppercase text-slate mb-6">

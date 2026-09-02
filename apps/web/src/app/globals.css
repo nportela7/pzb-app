@@ -45,6 +45,57 @@ body {
   font-family: var(--font-sans), ui-sans-serif, sans-serif;
 }
 
+/* The parts of the page the browser draws for us still belong to the brand:
+   selection, caret, focus ring and scrollbar all ship in system colours
+   otherwise, and read as someone else's design inside ours. */
+::selection {
+  background: var(--pzb-beige-sand);
+  color: var(--pzb-earth-brown);
+}
+
+html {
+  scroll-behavior: smooth;
+  caret-color: var(--pzb-earth-brown);
+  scrollbar-color: rgba(89, 68, 52, 0.35) transparent;
+  scrollbar-width: thin;
+  /* The header floats above the page, so anchored sections must stop
+     below it instead of underneath. */
+  scroll-padding-top: 6rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--pzb-earth-brown);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* On the dark surfaces the brown ring disappears into the background. */
+.bg-earth-brown :focus-visible,
+.bg-charcoal :focus-visible,
+.bg-dark-pine :focus-visible {
+  outline-color: var(--pzb-cream);
+}
+
+a {
+  text-underline-offset: 0.2em;
+}
+
+/* Drag-scrolled carousels: the track keeps its own arrow buttons and
+   progress rule, so the native bar is redundant chrome across the cards. */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 h1,
 h2,
 h3 {

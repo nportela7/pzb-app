@@ -1,10 +1,9 @@
 import Image from "next/image";
 import { getInstagramFeed } from "@/lib/instagram";
 import { InstagramTicker } from "@/components/InstagramTicker";
+import { WHATSAPP_MESSAGES, whatsappHref } from "@/lib/cta";
 
-const WHATSAPP_HREF =
-  "https://wa.me/525574141480?text=" +
-  encodeURIComponent("Hola Pilar, me encantaría conocer más de tu trabajo.");
+const WHATSAPP_HREF = whatsappHref(WHATSAPP_MESSAGES.general);
 
 const TIMELINE = [
   { place: "Monterrey", tag: "Origen" },
@@ -17,7 +16,7 @@ export default async function SobrePilarPage() {
 
   return (
     <div className="flex-1 bg-cream">
-      <section className="px-6 sm:px-10 pt-16 pb-6 max-w-4xl mx-auto">
+      <section className="px-6 sm:px-10 pt-8 pb-6 max-w-4xl mx-auto">
         <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-center">
           <div>
             <div className="relative aspect-[3/4] max-w-sm mx-auto lg:max-w-none rounded-md overflow-hidden shadow-[0_24px_48px_-20px_rgba(89,68,52,0.35)]">

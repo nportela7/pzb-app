@@ -1,4 +1,5 @@
 import { Grain } from "@/components/Grain";
+import { WHATSAPP_MESSAGES, whatsappHref } from "@/lib/cta";
 
 const DIMENSIONS = [
   {
@@ -49,16 +50,12 @@ const COMBOS = [
   },
 ];
 
-const WHATSAPP_HREF =
-  "https://wa.me/525574141480?text=" +
-  encodeURIComponent(
-    "Hola Pilar, quiero información sobre los Add-Ons / experiencias complementarias."
-  );
+const WHATSAPP_HREF = whatsappHref(WHATSAPP_MESSAGES.addOns);
 
 export default function AddOnsPage() {
   return (
     <div className="flex-1 bg-cream">
-      <section className="relative overflow-hidden px-6 sm:px-10 pt-20 pb-16">
+      <section className="relative overflow-hidden px-6 sm:px-10 pt-10 pb-16">
         <Grain opacity={0.12} />
         <div className="relative max-w-3xl mx-auto">
           <p className="text-xs tracking-[0.3em] uppercase text-slate mb-5">

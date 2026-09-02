@@ -1,5 +1,6 @@
 import { Grain } from "@/components/Grain";
 import { CoachingPhaseTabs } from "@/components/CoachingPhaseTabs";
+import { WHATSAPP_MESSAGES, whatsappHref } from "@/lib/cta";
 
 const PHASES = [
   {
@@ -45,17 +46,13 @@ const TESTIMONIALS = [
   },
 ];
 
-const WHATSAPP_HREF =
-  "https://wa.me/525574141480?text=" +
-  encodeURIComponent(
-    "Hola Pilar, quiero cotizar mi proceso de The Alignment Partnership."
-  );
+const WHATSAPP_HREF = whatsappHref(WHATSAPP_MESSAGES.coaching);
 
 export default function CoachingPage() {
   return (
     <div className="flex-1 bg-cream">
       <section
-        className="relative overflow-hidden px-6 sm:px-10 pt-20 pb-16 bg-beige-sand"
+        className="relative overflow-hidden px-6 sm:px-10 pt-10 pb-16 bg-beige-sand"
         style={{
           backgroundImage:
             "radial-gradient(rgba(54,54,54,.14) 1px, transparent 1px)",

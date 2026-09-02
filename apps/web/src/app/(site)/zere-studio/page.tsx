@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ZereWordmark } from "@/components/ZereWordmark";
 import { ZereMark } from "@/components/ZereMark";
 import { Grain } from "@/components/Grain";
+import { WHATSAPP_MESSAGES, whatsappHref } from "@/lib/cta";
 
 const CLIENTES = [
   {
@@ -60,14 +61,12 @@ const PROCESO = [
   { number: "04", title: "Ejecutar", body: "Todo fluye el día del evento; el cliente solo tiene que estar presente." },
 ];
 
-const CONTACT_HREF =
-  "https://wa.me/525574141480?text=" +
-  encodeURIComponent("Hola, quiero explorar una colaboración con Zere Studio.");
+const CONTACT_HREF = whatsappHref(WHATSAPP_MESSAGES.empresas);
 
 export default function ZereStudioPage() {
   return (
     <div className="flex-1 bg-cream">
-      <section className="relative overflow-hidden px-6 sm:px-10 pt-20 pb-16 bg-zere-sky">
+      <section className="relative overflow-hidden px-6 sm:px-10 pt-10 pb-16 bg-zere-sky">
         <Image
           src="/images/zere-water-ripple.jpg"
           alt=""
