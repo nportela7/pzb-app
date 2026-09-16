@@ -27,6 +27,13 @@ const fadeUp = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
 };
 
+// Same fade + translateY, tuned to the 400-600ms window for newly
+// added blocks (logo strip, testimonial, CTA).
+const fadeUpFast = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
+};
+
 const stagger = {
   hidden: {},
   show: { transition: { staggerChildren: 0.12 } },
@@ -35,13 +42,15 @@ const stagger = {
 function Reveal({
   children,
   className,
+  variants = fadeUp,
 }: {
   children: React.ReactNode;
   className?: string;
+  variants?: typeof fadeUp;
 }) {
   return (
     <motion.div
-      variants={fadeUp}
+      variants={variants}
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.3 }}
@@ -64,9 +73,13 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 function Ticker({
   items,
   tone = "dark",
+  renderItem,
+  durationSeconds = 208,
 }: {
   items: string[];
   tone?: "dark" | "cream" | "zere";
+  renderItem?: (item: string) => React.ReactNode;
+  durationSeconds?: number;
 }) {
   const bg =
     tone === "dark"
@@ -91,15 +104,24 @@ function Ticker({
   const filled = Array(8).fill(items).flat();
   return (
     <div className={`overflow-hidden py-2.5 whitespace-nowrap ${bg}`}>
-      <div className="inline-flex marquee-track" style={{ animationDuration: "208s" }}>
-        {[...filled, ...filled].map((item, i) => (
-          <span
-            key={i}
-            className={`text-[0.68rem] tracking-[0.24em] uppercase px-6 flex items-center gap-6 after:content-['·'] ${text} ${dot}`}
-          >
-            {item}
-          </span>
-        ))}
+      <div
+        className="inline-flex marquee-track"
+        style={{ animationDuration: `${durationSeconds}s` }}
+      >
+        {[...filled, ...filled].map((item, i) =>
+          renderItem ? (
+            <span key={i} className="px-6 flex items-center">
+              {renderItem(item)}
+            </span>
+          ) : (
+            <span
+              key={i}
+              className={`text-[0.68rem] tracking-[0.24em] uppercase px-6 flex items-center gap-6 after:content-['·'] ${text} ${dot}`}
+            >
+              {item}
+            </span>
+          ),
+        )}
       </div>
     </div>
   );
@@ -130,19 +152,85 @@ const FORMATOS = [
   {
     title: "Talleres",
     body: "Aprendizaje en acción para equipos. Espacios para destrabar, activar y dar herramientas concretas.",
+    icon: "talleres",
   },
   {
     title: "Cenas corporativas",
     body: "Una mesa bien elegida lo cambia todo. Conversaciones que importan, en un ambiente íntimo.",
+    icon: "cenas",
   },
   {
     title: "Retiros",
     body: "Un espacio para pausar, ordenar y reconectar, lejos del ruido y con dirección clara.",
+    icon: "retiros",
   },
   {
     title: "Experiencias",
     body: "Momentos curados con propósito que dejan marca en quien asiste y en la cultura que construyen.",
+    icon: "experiencias",
   },
+] as const;
+
+// Minimal line-art icons, same stroke weight/style as Flourish.tsx —
+// no icon library needed for four static marks.
+function FormatIcon({
+  name,
+  className,
+}: {
+  name: (typeof FORMATOS)[number]["icon"];
+  className?: string;
+}) {
+  const common = {
+    viewBox: "0 0 24 24",
+    fill: "none" as const,
+    stroke: "currentColor",
+    strokeWidth: 1.4,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    "aria-hidden": true,
+    className,
+  };
+  switch (name) {
+    case "talleres":
+      return (
+        <svg {...common}>
+          <circle cx="8" cy="8.5" r="4" />
+          <circle cx="15.5" cy="14.5" r="4" />
+        </svg>
+      );
+    case "cenas":
+      return (
+        <svg {...common}>
+          <path d="M6 3v8a2 2 0 0 0 2 2v8" />
+          <path d="M6 3v5M9 3v5" />
+          <path d="M18 3c-1.5 0-2.5 1.5-2.5 4s1 4 2.5 4v10" />
+        </svg>
+      );
+    case "retiros":
+      return (
+        <svg {...common}>
+          <path d="M4 18 9.5 8l3 5.5L15 10l5 8H4Z" />
+          <circle cx="17" cy="6.5" r="1.6" />
+        </svg>
+      );
+    case "experiencias":
+      return (
+        <svg {...common}>
+          <path d="M12 3.5c.8 3.2 2.8 5.2 6 6-3.2.8-5.2 2.8-6 6-.8-3.2-2.8-5.2-6-6 3.2-.8 5.2-2.8 6-6Z" />
+        </svg>
+      );
+  }
+}
+
+// Placeholder wordmarks — swap for real client logo images (SVG/PNG)
+// once Zere Studio shares its B2B roster.
+const B2B_LOGOS = [
+  "Marca 01",
+  "Empresa 02",
+  "Estudio 03",
+  "Grupo 04",
+  "Firma 05",
+  "Casa 06",
 ];
 
 const ADDON_DIMENSIONS = [
@@ -211,6 +299,23 @@ export function LandingPage({
       {/* Hero — solid brown, no photo, bold editorial type */}
       <div className="relative w-full min-h-[100svh] overflow-hidden bg-earth-brown flex flex-col">
         <Grain opacity={0.05} />
+        <span
+          aria-hidden
+          className="pzb-blob top-[-8%] left-[-8%] w-[50vw] h-[50vw] max-w-[560px] max-h-[560px]"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(218,210,193,0.28), transparent 70%)",
+          }}
+        />
+        <span
+          aria-hidden
+          className="pzb-blob bottom-[-12%] right-[-10%] w-[40vw] h-[40vw] max-w-[440px] max-h-[440px]"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(249,247,242,0.16), transparent 70%)",
+            animationDelay: "4s",
+          }}
+        />
         <span
           aria-hidden
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-serif italic font-light text-[9rem] sm:text-[18rem] leading-none whitespace-nowrap text-transparent select-none pointer-events-none tracking-tight"
@@ -339,6 +444,14 @@ export function LandingPage({
               >
                 P
               </span>
+              <span
+                aria-hidden
+                className="pzb-blob -top-8 -right-8 w-52 h-52 sm:w-64 sm:h-64"
+                style={{
+                  background:
+                    "radial-gradient(circle, rgba(89,68,52,0.22), transparent 70%)",
+                }}
+              />
               <div className="relative aspect-[3/4] max-w-sm mx-auto lg:max-w-none rounded-3xl overflow-hidden shadow-[0_24px_48px_-20px_rgba(89,68,52,0.35)]">
                 <Image
                   src="/images/pilar-portrait.jpg"
@@ -352,7 +465,7 @@ export function LandingPage({
               </div>
             </Reveal>
             <Reveal>
-              <Eyebrow>Sobre Pilar</Eyebrow>
+              <Eyebrow>01 · Sobre Pilar</Eyebrow>
               <h2 className="text-3xl sm:text-4xl text-earth-brown mt-4 mb-6 text-balance">
                 Emprendedora, inversionista y consejera.
               </h2>
@@ -407,7 +520,7 @@ export function LandingPage({
         <div className="max-w-3xl mx-auto">
           <Reveal>
             <Eyebrow>
-              <span className="text-cream/70">Coaching</span>
+              <span className="text-cream/70">02 · Coaching</span>
             </Eyebrow>
             <h2 className="font-serif italic text-3xl sm:text-4xl mt-4 mb-8 text-balance">
               El proceso, en tres fases
@@ -475,10 +588,33 @@ export function LandingPage({
       <section className="relative overflow-hidden px-6 sm:px-10 py-12 sm:py-16 bg-zere-sky">
         <Grain opacity={0.06} />
         <SectionIndex n="03" label="Zere Studio" tone="zere" />
+
+        {/* Social proof — B2B logo marquee, same marquee-track pattern as
+            the directorio de socias reel further down the page. */}
+        <Reveal
+          variants={fadeUpFast}
+          className="relative -mx-6 sm:-mx-10 mb-10"
+        >
+          <p className="text-center text-[0.65rem] tracking-[0.22em] uppercase text-zere-deep/50 mb-3">
+            Empresas que ya vivieron una experiencia Zere
+          </p>
+          <Ticker
+            items={B2B_LOGOS}
+            tone="zere"
+            durationSeconds={60}
+            renderItem={(item) => (
+              <span className="font-serif italic text-lg sm:text-xl text-zere-deep/70">
+                {item}
+              </span>
+            )}
+          />
+        </Reveal>
+
         <div className="relative max-w-5xl mx-auto">
           <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-16 items-center mb-10">
             <Reveal>
-              <div className="flex items-center gap-4">
+              <Eyebrow>03 · Zere Studio</Eyebrow>
+              <div className="flex items-center gap-4 mt-4">
                 <ZereMark className="w-9 h-8 text-zere-deep" />
                 <div>
                   <h2 className="flex items-baseline gap-2 font-serif italic font-light text-4xl sm:text-5xl text-zere-deep">
@@ -546,7 +682,7 @@ export function LandingPage({
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="grid sm:grid-cols-2 gap-5"
+            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5"
           >
             {FORMATOS.map((formato) => (
               <motion.div
@@ -556,6 +692,10 @@ export function LandingPage({
                 transition={{ duration: 0.25, ease: EASE }}
                 className="rounded-2xl bg-cream/70 p-6 hover:bg-cream transition-colors"
               >
+                <FormatIcon
+                  name={formato.icon}
+                  className="w-7 h-7 text-zere-deep mb-4"
+                />
                 <h3 className="text-lg text-zere-deep mb-2">
                   {formato.title}
                 </h3>
@@ -565,6 +705,32 @@ export function LandingPage({
               </motion.div>
             ))}
           </motion.div>
+
+          {/* Testimonio destacado — mismo peso visual que la cita de Pilar
+              en el hero. Copy placeholder, a reemplazar por el equipo. */}
+          <div className="relative mt-16 max-w-2xl mx-auto">
+            <span
+              aria-hidden
+              className="absolute -top-6 sm:-top-10 left-0 font-serif italic text-[7rem] sm:text-[10rem] leading-none text-zere-deep/[0.12] select-none pointer-events-none"
+            >
+              &ldquo;
+            </span>
+            <Reveal variants={fadeUpFast} className="relative">
+              <p className="font-serif italic text-xl sm:text-2xl text-zere-deep leading-snug text-balance">
+                {/* PLACEHOLDER — reemplazar con testimonio real de una
+                    clienta o empresa que vivió un retiro/taller Zere. */}
+                Un espacio que nos dio permiso de pausar y volver a elegir
+                cómo queríamos liderar. El equipo salió con más claridad de
+                la que llegó.
+              </p>
+              <p className="mt-6 font-script text-xl text-zere-deep">
+                Nombre Apellido
+              </p>
+              <p className="text-xs tracking-[0.3em] uppercase text-zere-deep/60 mt-1">
+                Cargo · Empresa (placeholder)
+              </p>
+            </Reveal>
+          </div>
         </div>
       </section>
 
@@ -573,7 +739,7 @@ export function LandingPage({
         <SectionIndex n="04" label="Comunidad" />
         <div className="max-w-3xl mx-auto text-center">
           <Reveal>
-            <Eyebrow>Comunidad</Eyebrow>
+            <Eyebrow>04 · Comunidad</Eyebrow>
             <h2 className="text-3xl sm:text-4xl text-earth-brown mt-4 mb-6 text-balance">
               Una red que se sostiene entre mujeres
             </h2>
@@ -653,7 +819,7 @@ export function LandingPage({
         <SectionIndex n="05" label="Eventos" />
         <div className="max-w-3xl mx-auto">
           <Reveal>
-            <Eyebrow>Eventos</Eyebrow>
+            <Eyebrow>05 · Eventos</Eyebrow>
             <h2 className="text-3xl sm:text-4xl text-earth-brown mt-4 mb-6 text-balance">
               Un calendario para encontrarse en persona
             </h2>
@@ -701,7 +867,7 @@ export function LandingPage({
         <SectionIndex n="06" label="Add-Ons" />
         <div className="max-w-3xl mx-auto">
           <Reveal>
-            <Eyebrow>Add-Ons</Eyebrow>
+            <Eyebrow>06 · Add-Ons</Eyebrow>
             <h2 className="text-3xl sm:text-4xl text-earth-brown mt-4 mb-14 text-balance">
               Servicios a la carta, cuando los necesitas
             </h2>
@@ -745,16 +911,28 @@ export function LandingPage({
         </div>
       </section>
 
-      {/* CTA final */}
-      <section className="px-6 sm:px-10 py-16 sm:py-20 bg-charcoal">
-        <Reveal className="max-w-xl mx-auto text-center flex flex-col items-center gap-8">
+      {/* CTA final — full-bleed with background image, reserves its
+          height up front (min-h) so the image never causes layout shift. */}
+      <section className="relative overflow-hidden min-h-[75vh] sm:min-h-[640px] flex items-center justify-center px-6 sm:px-10 py-20">
+        <Image
+          src="/images/silhouette-sunset.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/95 via-charcoal/65 to-charcoal/50" />
+        <Reveal
+          variants={fadeUpFast}
+          className="relative max-w-xl mx-auto text-center flex flex-col items-center gap-10"
+        >
           <h2 className="font-serif italic font-light text-4xl sm:text-6xl leading-tight text-cream text-balance">
             ¿Lista para editar tu vida{" "}
             <span className="not-italic font-light">desde adentro?</span>
           </h2>
           <Show when="signed-out">
             <SignUpButton forceRedirectUrl="/home">
-              <button className="rounded-full px-8 py-3 bg-cream text-charcoal text-sm tracking-wide hover:bg-beige-sand transition-colors">
+              <button className="rounded-full px-12 py-5 bg-cream text-charcoal text-base font-semibold tracking-wide hover:bg-beige-sand hover:-translate-y-0.5 transition-all">
                 Crear cuenta
               </button>
             </SignUpButton>
@@ -762,7 +940,7 @@ export function LandingPage({
           <Show when="signed-in">
             <Link
               href="/home"
-              className="rounded-full px-8 py-3 bg-cream text-charcoal text-sm tracking-wide hover:bg-beige-sand transition-colors"
+              className="rounded-full px-12 py-5 bg-cream text-charcoal text-base font-semibold tracking-wide hover:bg-beige-sand hover:-translate-y-0.5 transition-all"
             >
               Ir a la comunidad
             </Link>

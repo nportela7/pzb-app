@@ -95,3 +95,34 @@ p:not(.uppercase) {
     animation: none !important;
   }
 }
+
+/* Soft ambient blobs behind key photos (hero, Sobre Pilar). Only
+   transform/opacity are animated — no layout or paint cost outside
+   the element's own compositor layer, and no space is reserved for
+   them since they're purely decorative and absolutely positioned. */
+@keyframes pzb-blob-drift {
+  0%,
+  100% {
+    transform: scale(1) translate(0, 0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.08) translate(2%, -2%);
+    opacity: 0.8;
+  }
+}
+
+.pzb-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(48px);
+  pointer-events: none;
+  animation: pzb-blob-drift 14s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pzb-blob {
+    animation: none;
+  }
+}
