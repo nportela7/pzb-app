@@ -128,32 +128,22 @@ export default function PreviewLandingPage() {
         </div>
       </div>
 
-      {/* SOBRE PILAR — big, visual, minimal copy */}
-      <section className="px-6 sm:px-10 py-20 sm:py-28">
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div className="relative aspect-[4/5] rounded-md overflow-hidden shadow-[0_30px_60px_-24px_rgba(89,68,52,0.4)]">
-            <Image
-              src="/images/horse-field-portrait.jpg"
-              alt=""
-              fill
-              sizes="(min-width: 1024px) 45vw, 90vw"
-              className="object-cover"
-            />
-          </div>
+      {/* SOBRE PILAR — about hero with floating credibility card */}
+      <section className="px-6 sm:px-10 pt-20 sm:pt-28 pb-16">
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-[1fr_0.9fr] gap-12 lg:gap-20 items-center">
           <div>
             <p className="text-xs tracking-[0.28em] uppercase text-slate mb-6">
               Sobre Pilar
             </p>
             <h2 className="text-4xl sm:text-5xl leading-tight text-earth-brown font-light mb-8 text-balance">
-              Su ancla es la tierra.
+              La editora estratégica
               <br />
-              <span className="italic font-normal">
-                Su método, la claridad.
-              </span>
+              <span className="italic font-normal">detrás del método.</span>
             </h2>
             <p className="text-lg text-charcoal/75 leading-relaxed max-w-md">
               Emprendedora, inversionista y consejera. Ayuda a sus clientas a
-              editar su vida desde adentro hacia afuera.
+              editar su vida desde adentro hacia afuera, integrando
+              identidad, imagen y decisiones.
             </p>
             <a
               href="/sobre-pilar"
@@ -162,6 +152,49 @@ export default function PreviewLandingPage() {
               Conocer su historia →
             </a>
           </div>
+
+          <div className="relative aspect-[4/5] rounded-md overflow-hidden shadow-[0_30px_60px_-24px_rgba(89,68,52,0.4)]">
+            <Image
+              src="/images/pilar-portrait.jpg"
+              alt="Pilar Zambrano B."
+              fill
+              sizes="(min-width: 1024px) 40vw, 90vw"
+              className="object-cover"
+            />
+            <div className="absolute left-5 right-5 bottom-5 sm:left-auto sm:right-6 sm:bottom-6 sm:max-w-[15rem] bg-cream/95 rounded-md p-5 shadow-[0_20px_40px_-16px_rgba(36,31,26,0.5)]">
+              <p className="text-[0.62rem] tracking-[0.2em] uppercase text-slate mb-2">
+                Premio Mujeres en las Artes
+              </p>
+              <p className="font-serif italic text-lg text-earth-brown leading-snug">
+                &ldquo;Impulsando el bienestar y la conexión entre mujeres en
+                México.&rdquo;
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ROLES — several photos, Brendon-Burchard-about-page style breakdown */}
+      <section className="px-6 sm:px-10 pb-20 sm:pb-28">
+        <div className="max-w-6xl mx-auto flex flex-col gap-16 sm:gap-24">
+          <RoleRow
+            index="01"
+            role="Fundadora"
+            title="Construyó una comunidad antes de construir un método."
+            body="Fundó UMA, una comunidad de mujeres líderes que dirigió casi cuatro años. Hoy esa comunidad vive a través de Life Notes, una red de 275 mujeres."
+            image="/images/pilar-portrait.jpg"
+            imageAlt="Pilar Zambrano B."
+            reverse={false}
+          />
+          <RoleRow
+            index="02"
+            role="Coach"
+            title="Once años acompañando decisiones, no dictándolas."
+            body="Certificada por iPEC, acompaña a sus clientas con un método propio: descubrir, editar e integrar, sin perder nunca su voz en el proceso."
+            image="/images/pilar-event.jpg"
+            imageAlt="Pilar Zambrano B. en un evento en vivo"
+            reverse={true}
+          />
         </div>
       </section>
 
@@ -361,6 +394,57 @@ export default function PreviewLandingPage() {
       <footer className="px-6 sm:px-10 py-10 text-center text-xs text-cream/50 bg-charcoal">
         © {new Date().getFullYear()} Pilar Zambrano B. — Propuesta comercial /preview
       </footer>
+    </div>
+  );
+}
+
+function RoleRow({
+  index,
+  role,
+  title,
+  body,
+  image,
+  imageAlt,
+  reverse,
+}: {
+  index: string;
+  role: string;
+  title: string;
+  body: string;
+  image: string;
+  imageAlt: string;
+  reverse: boolean;
+}) {
+  return (
+    <div
+      className={`grid lg:grid-cols-[0.8fr_1.2fr] gap-8 lg:gap-16 items-center ${
+        reverse ? "lg:[&>*:first-child]:order-2" : ""
+      }`}
+    >
+      <div className="relative aspect-[4/3] rounded-md overflow-hidden">
+        <Image
+          src={image}
+          alt={imageAlt}
+          fill
+          sizes="(min-width: 1024px) 35vw, 90vw"
+          className="object-cover"
+        />
+      </div>
+      <div>
+        <span
+          className="font-serif italic text-3xl text-transparent"
+          style={{ WebkitTextStroke: "1px rgba(89,68,52,.5)" }}
+        >
+          {index}
+        </span>
+        <p className="text-xs tracking-[0.24em] uppercase text-slate mt-3 mb-3">
+          {role}
+        </p>
+        <h3 className="text-2xl sm:text-3xl text-earth-brown font-normal leading-snug mb-4 text-balance">
+          {title}
+        </h3>
+        <p className="text-charcoal/70 leading-relaxed max-w-md">{body}</p>
+      </div>
     </div>
   );
 }
