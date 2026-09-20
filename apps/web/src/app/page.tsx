@@ -1,6 +1,6 @@
 import { searchMembers } from "@/lib/members";
 import { listUpcomingEvents } from "@/lib/events";
-import { EVENT_TYPE_LABELS } from "@/models/event";
+import { toEventBanner } from "@/lib/event-banner";
 import { LandingPage } from "./LandingPage";
 
 export default async function Home() {
@@ -10,25 +10,11 @@ export default async function Home() {
     .slice(0, 8)
     .map((m) => ({ name: m.name, profession: m.profession! }));
 
-  // The next real date on the calendar is the only honest urgency this page
-  // has. Nothing is rendered when there isn't one.
-  const [nextEvent] = await listUpcomingEvents();
+  // The banner carousel is the only event surface on this page now. Dates are
+  // formatted here, on the server, so the client component never has to touch
+  // a Date across the boundary.
+  const events = await listUpcomingEvents();
+  const eventBanners = events.slice(0, 6).map(toEventBanner);
 
-  return (
-    <LandingPage
-      members={reelMembers}
-      nextEvent={
-        nextEvent
-          ? {
-              title: nextEvent.title,
-              // ObjectId and Date don't cross into a client component.
-              startsAt: nextEvent.startsAt.toISOString(),
-              typeLabel: EVENT_TYPE_LABELS[nextEvent.type],
-              location: nextEvent.location ?? null,
-              isOnline: nextEvent.isOnline,
-            }
-          : null
-      }
-    />
-  );
+  return <LandingPage members={reelMembers} eventBanners={eventBanners} />;
 }

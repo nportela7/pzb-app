@@ -35,6 +35,13 @@ function parseEventForm(formData: FormData) {
       String(formData.get("description")).trim()
         ? String(formData.get("description")).trim()
         : undefined,
+    // An empty input posts "", which EventSchema's .url() would reject — the
+    // field is optional, so nothing typed has to become nothing stored.
+    coverImageUrl:
+      typeof formData.get("coverImageUrl") === "string" &&
+      String(formData.get("coverImageUrl")).trim()
+        ? String(formData.get("coverImageUrl")).trim()
+        : undefined,
     location:
       typeof formData.get("location") === "string" &&
       String(formData.get("location")).trim()

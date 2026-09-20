@@ -1,9 +1,36 @@
 import Image from "next/image";
+import { Grain } from "@/components/Grain";
 import { getInstagramFeed } from "@/lib/instagram";
 import { InstagramTicker } from "@/components/InstagramTicker";
 import { WHATSAPP_MESSAGES, whatsappHref } from "@/lib/cta";
 
 const WHATSAPP_HREF = whatsappHref(WHATSAPP_MESSAGES.general);
+
+/**
+ * ── PARA EDITAR ───────────────────────────────────────────────────────
+ * Reconocimientos: se renderizan en orden. Agregá o sacá entradas acá.
+ */
+const CREDENTIALS = [
+  { label: "Fundó", value: "UMA" },
+  { label: "Hoy", value: "PZB." },
+  { label: "2024", value: "Premio Mujeres en las Artes" },
+];
+
+/**
+ * Testimonio en video. Mientras sea null el bloque NO se renderiza y los
+ * reconocimientos ocupan el ancho completo — misma regla que PROOF_POINTS
+ * en src/lib/proof.ts: un hueco vacío resta más de lo que suma.
+ *
+ * Para activarlo: poné el archivo en public/, y acá
+ *   { src: "/videos/testimonio.mp4", poster: "/images/...jpg",
+ *     name: "Nombre Apellido", role: "Clienta, 2025" }
+ */
+const ABOUT_VIDEO: {
+  src: string;
+  poster: string;
+  name: string;
+  role: string;
+} | null = null;
 
 const TIMELINE = [
   { place: "Monterrey", tag: "Origen" },
@@ -16,62 +43,98 @@ export default async function SobrePilarPage() {
 
   return (
     <div className="flex-1 bg-cream">
-      <section className="px-6 sm:px-10 pt-8 pb-6 max-w-4xl mx-auto">
-        <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-center">
-          <div>
-            <div className="relative aspect-[3/4] max-w-sm mx-auto lg:max-w-none rounded-md overflow-hidden shadow-[0_24px_48px_-20px_rgba(89,68,52,0.35)]">
+      {/* Presentación — retrato grande sobre bloque de marca, texto al lado,
+          y debajo la prueba social. El bloque de video sólo aparece cuando
+          ABOUT_VIDEO deja de ser null. */}
+      <section className="px-6 sm:px-10 pt-8 pb-6 max-w-6xl mx-auto">
+        <div className="grid gap-4 lg:grid-cols-[1.35fr_1fr]">
+          {/* Retrato sobre earth-brown, con grano: el equivalente nuestro al
+              bloque de color plano, sin salirnos del lenguaje editorial. */}
+          <div className="relative overflow-hidden rounded-3xl bg-earth-brown">
+            <div className="relative aspect-[4/5] sm:aspect-[4/3] lg:aspect-[5/4]">
               <Image
                 src="/images/pilar-portrait.jpg"
                 alt="Pilar Zambrano B."
                 fill
-                sizes="(min-width: 1024px) 40vw, 90vw"
+                priority
+                sizes="(min-width: 1024px) 55vw, 100vw"
                 className="object-cover"
               />
+              <div
+                aria-hidden
+                className="absolute inset-0 bg-earth-brown mix-blend-multiply opacity-[0.18]"
+              />
             </div>
-            <div className="border-l-2 border-earth-brown pl-4 mt-4 max-w-sm mx-auto lg:max-w-none">
-              <p className="font-serif italic font-light text-sm text-earth-brown/85 leading-relaxed">
-                &ldquo;La vida se vive, no se mide.&rdquo;
-              </p>
-            </div>
+            <Grain opacity={0.07} />
           </div>
 
-          <div>
-            <h1 className="font-serif text-5xl sm:text-6xl leading-[1.02] text-earth-brown mb-1">
+          <div className="flex flex-col justify-center rounded-3xl bg-beige-sand/45 p-8 sm:p-10">
+            <h1 className="font-serif text-4xl leading-[1.02] text-earth-brown sm:text-5xl">
               Pilar
               <br />
               Zambrano B.
             </h1>
-            <p className="font-script text-2xl text-charcoal/55 mb-6">
+            <p className="mt-2 font-script text-2xl text-charcoal/55">
               Strategic Life Editor
             </p>
-            <p className="text-charcoal/80 leading-relaxed max-w-md mb-8">
+            <p className="mt-6 max-w-md leading-relaxed text-charcoal/80">
               Emprendedora, inversionista y consejera. Ayuda a sus clientas a
-              editar su vida desde adentro hacia afuera, integrando
-              identidad, imagen y decisiones.
+              editar su vida desde adentro hacia afuera, integrando identidad,
+              imagen y decisiones.
             </p>
-            <div className="flex gap-9 pt-6 border-t border-earth-brown/20">
-              <div>
-                <p className="text-[0.65rem] tracking-[0.14em] uppercase text-slate mb-1">
-                  Fundó
+            <p className="mt-6 border-l-2 border-earth-brown pl-4 font-serif text-sm font-light italic leading-relaxed text-earth-brown/85">
+              &ldquo;La vida se vive, no se mide.&rdquo;
+            </p>
+            <a
+              href={WHATSAPP_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-flex items-center gap-2 self-start rounded-full bg-earth-brown px-7 py-3.5 text-sm font-semibold tracking-wide text-cream transition-colors hover:bg-charcoal"
+            >
+              Escribir por WhatsApp
+              <span aria-hidden>&rarr;</span>
+            </a>
+          </div>
+
+          {/* Fila de abajo: reconocimientos y, cuando exista, el video. */}
+          <div className="flex flex-col justify-center rounded-3xl border border-earth-brown/20 p-8 sm:p-10">
+            <p className="text-[0.65rem] uppercase tracking-[0.2em] text-charcoal/70">
+              Reconocimientos
+            </p>
+            <dl className="mt-6 flex flex-wrap gap-x-10 gap-y-6">
+              {CREDENTIALS.map((item) => (
+                <div key={item.label}>
+                  <dt className="mb-1 text-[0.65rem] uppercase tracking-[0.14em] text-slate">
+                    {item.label}
+                  </dt>
+                  <dd className="font-serif text-lg text-earth-brown text-balance">
+                    {item.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          {ABOUT_VIDEO && (
+            <div className="relative overflow-hidden rounded-3xl bg-charcoal">
+              <video
+                src={ABOUT_VIDEO.src}
+                poster={ABOUT_VIDEO.poster}
+                controls
+                playsInline
+                preload="none"
+                className="aspect-video h-full w-full object-cover"
+              />
+              <div className="pointer-events-none absolute bottom-5 left-6">
+                <p className="font-serif text-lg text-cream">
+                  {ABOUT_VIDEO.name}
                 </p>
-                <p className="font-serif text-lg text-earth-brown">UMA</p>
-              </div>
-              <div>
-                <p className="text-[0.65rem] tracking-[0.14em] uppercase text-slate mb-1">
-                  Hoy
-                </p>
-                <p className="font-serif text-lg text-earth-brown">PZB.</p>
-              </div>
-              <div>
-                <p className="text-[0.65rem] tracking-[0.14em] uppercase text-slate mb-1">
-                  2024
-                </p>
-                <p className="font-serif text-lg text-earth-brown">
-                  Premio Mujeres en las Artes
+                <p className="text-[0.62rem] uppercase tracking-[0.2em] text-cream/70">
+                  {ABOUT_VIDEO.role}
                 </p>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
 

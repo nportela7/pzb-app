@@ -6,6 +6,34 @@ declare global {
   var _mongoClientPromise: Promise<MongoClient> | undefined;
 }
 
+const LOOPBACK = /\/\/(?:[^@/]*@)?(?:127\.0\.0\.1|localhost|\[::1\])/;
+
+/**
+ * Un ECONNREFUSED contra localhost casi siempre significa una sola cosa en
+ * dev: la base local no está levantada, o MONGODB_URI quedó apuntando a un
+ * puerto viejo. El error crudo de driver escupe 40 líneas de
+ * TopologyDescription y no dice qué hacer — esto sí.
+ */
+function explainConnectionFailure(err: unknown, uri: string): unknown {
+  const message = err instanceof Error ? err.message : String(err);
+  if (!message.includes("ECONNREFUSED") || !LOOPBACK.test(uri)) return err;
+
+  return new Error(
+    [
+      `No hay un MongoDB escuchando en ${uri}.`,
+      "",
+      "La base de desarrollo no está levantada, o MONGODB_URI en .env.local",
+      "apunta a un puerto viejo. Para arreglarlo:",
+      "",
+      "  brew services start mongodb-community   # levanta el mongod local",
+      "  npm run dev-db                          # siembra y fija .env.local",
+      "",
+      "Después reiniciá `next dev` para que tome el .env.local actualizado.",
+    ].join("\n"),
+    { cause: err }
+  );
+}
+
 function connect(): Promise<MongoClient> {
   const uri = process.env.MONGODB_URI;
   if (!uri) {
@@ -20,7 +48,11 @@ function connect(): Promise<MongoClient> {
     secureContext: createSecureContext({
       secureOptions: cryptoConstants.SSL_OP_LEGACY_SERVER_CONNECT,
     }),
-  }).connect();
+  })
+    .connect()
+    .catch((err) => {
+      throw explainConnectionFailure(err, uri);
+    });
 }
 
 let clientPromise: Promise<MongoClient> | undefined;

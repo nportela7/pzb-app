@@ -80,6 +80,24 @@ export function EventForm({
         />
       </div>
 
+      <div className="flex flex-col gap-2">
+        <label htmlFor="coverImageUrl" className="text-sm font-medium text-charcoal">
+          Imagen del banner (URL)
+        </label>
+        <input
+          id="coverImageUrl"
+          name="coverImageUrl"
+          type="url"
+          defaultValue={event?.coverImageUrl}
+          placeholder="https://..."
+          className="rounded-lg border border-beige-sand bg-transparent px-3 py-2 text-sm text-charcoal"
+        />
+        <p className="text-xs text-charcoal/60">
+          Si se deja vacío se usa la imagen por defecto del tipo de evento.
+          Horizontal, mínimo 1600px de ancho.
+        </p>
+      </div>
+
       <div className="grid grid-cols-2 gap-4">
         <div className="flex flex-col gap-2">
           <label htmlFor="startsAt" className="text-sm font-medium text-charcoal">

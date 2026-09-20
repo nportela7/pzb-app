@@ -13,6 +13,8 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { PUBLIC_NAV } from "@/lib/nav";
 import { INSTAGRAM_URL, WHATSAPP_MESSAGES, whatsappHref } from "@/lib/cta";
 import { TestimonialCarousel } from "@/components/TestimonialCarousel";
+import { EventBannerCarousel } from "@/components/EventBannerCarousel";
+import type { EventBanner } from "@/lib/event-banner";
 import { TESTIMONIALS } from "@/lib/testimonials";
 import { VISIBLE_PROOF_POINTS } from "@/lib/proof";
 import {
@@ -149,6 +151,14 @@ const CREDENCIALES = [
  * within a few seconds and take that door, instead of scrolling the whole
  * catalogue looking for the part that applies to her.
  */
+
+/** Formación de Pilar, renderizada en orden. Editar acá, no en el JSX. */
+const CREDENTIALS = [
+  { label: "Coaching", value: "iPEC · Escuela Domingo Delgado" },
+  { label: "Académica", value: "Boston University · IE Business School" },
+  { label: "Certificaciones", value: "Hogan · Kellogg · Constelaciones Familiares" },
+];
+
 const PATHS = [
   {
     key: "coaching",
@@ -157,6 +167,7 @@ const PATHS = [
     body: "Seis meses de acompañamiento 1:1 sobre identidad, imagen y decisiones. Un solo expediente que se abre, se documenta y se cierra con un plan que se sostiene solo.",
     action: "Ver el proceso",
     href: "/coaching",
+    image: "/images/pilar-portrait.jpg",
   },
   {
     key: "empresas",
@@ -165,6 +176,7 @@ const PATHS = [
     body: "Talleres, cenas corporativas, retiros y experiencias diseñadas por Zere Studio. Momentos curados que dejan marca en quien asiste y en la cultura que construye.",
     action: "Conocer Zere Studio",
     href: "/zere-studio",
+    image: "/images/zere-water-ripple.jpg",
   },
   {
     key: "comunidad",
@@ -173,8 +185,41 @@ const PATHS = [
     body: "Un directorio de socias para encontrarse, colaborar y recomendarse entre sí, más un calendario de eventos para verse fuera de la pantalla.",
     action: "Ver los próximos eventos",
     href: "/eventos",
+    image: "/images/silhouette-sunset.jpg",
   },
 ];
+
+/**
+ * Each path already owns a colour further down the page (03 is earth-brown,
+ * 06 is zere-sky), so the stack reuses them instead of inventing a palette.
+ * Backgrounds must be opaque: a stacked card covers the one behind it.
+ */
+const PATH_TONES: Record<
+  string,
+  { card: string; kicker: string; title: string; body: string; cta: string }
+> = {
+  coaching: {
+    card: "bg-earth-brown",
+    kicker: "text-cream/65",
+    title: "text-cream",
+    body: "text-cream/75",
+    cta: "bg-cream text-earth-brown hover:bg-beige-sand",
+  },
+  empresas: {
+    card: "bg-zere-sky",
+    kicker: "text-zere-ink/60",
+    title: "text-zere-ink",
+    body: "text-zere-ink/75",
+    cta: "bg-zere-deep text-cream hover:bg-zere-ink",
+  },
+  comunidad: {
+    card: "bg-beige-sand",
+    kicker: "text-charcoal/70",
+    title: "text-earth-brown",
+    body: "text-charcoal/80",
+    cta: "bg-earth-brown text-cream hover:bg-charcoal",
+  },
+};
 
 /**
  * The concrete results each phase produces, lifted verbatim from the
@@ -269,38 +314,12 @@ const FORMATOS = [
   },
 ];
 
-const EVENT_TYPES = [
-  { label: "Talleres", dot: "bg-earth-brown" },
-  { label: "Cenas", dot: "bg-dark-pine" },
-  { label: "Retiros", dot: "bg-slate" },
-  { label: "Sesiones abiertas", dot: "bg-earth-brown" },
-  {
-    label: "Zere Studio",
-    dot: "bg-zere-deep",
-    ring: "border-zere-deep/25 hover:border-zere-deep/50 hover:bg-zere-sky/25",
-  },
-];
-
-export type NextEvent = {
-  title: string;
-  /** ISO string — Dates don't survive the server/client boundary. */
-  startsAt: string;
-  typeLabel: string;
-  location: string | null;
-  isOnline: boolean;
-};
-
-const eventDateFormatter = new Intl.DateTimeFormat("es-MX", {
-  day: "numeric",
-  month: "long",
-});
-
 export function LandingPage({
   members,
-  nextEvent,
+  eventBanners,
 }: {
   members: { name: string; profession: string }[];
-  nextEvent: NextEvent | null;
+  eventBanners: EventBanner[];
 }) {
   const heroTextRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
@@ -503,49 +522,79 @@ export function LandingPage({
             </p>
           </Reveal>
 
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.15 }}
-            className="mt-12 grid sm:grid-cols-3 border-t border-l border-earth-brown/20"
-          >
-            {PATHS.map((path) => (
-              <motion.div key={path.key} variants={fadeUp}>
-                <Link
-                  href={path.href}
-                  className="group relative flex h-full flex-col p-7 sm:p-8 border-b border-r border-earth-brown/20 transition-colors hover:bg-beige-sand/35"
+          {/* Stacked cards: each one sticks a little lower than the last, so
+              the card below scrolls up and covers it, leaving a spine with the
+              kicker still readable. Pure CSS — the scroll IS the animation, so
+              no fadeUp here: a live transform would fight position:sticky.
+              Note this only works while no ancestor sets overflow:hidden. */}
+          <div className="mt-14">
+            {PATHS.map((path, i) => {
+              const tone = PATH_TONES[path.key];
+              return (
+                <div
+                  key={path.key}
+                  className="sticky"
+                  // 5.5rem clears the fixed header; each card then sits 2.75rem
+                  // lower, which is exactly the spine the kicker needs.
+                  style={{ top: `${5.5 + i * 2.75}rem` }}
                 >
-                  <p className="text-[0.68rem] tracking-[0.22em] uppercase text-charcoal/75">
-                    {path.kicker}
-                  </p>
-                  <h3 className="font-serif text-2xl sm:text-[1.7rem] leading-tight text-earth-brown mt-3 mb-4 text-balance">
-                    {path.title}
-                  </h3>
-                  <p className="text-sm text-charcoal/75 leading-relaxed">
-                    {path.body}
-                  </p>
-                  <span className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-earth-brown">
-                    {path.action}
-                    <span
-                      aria-hidden
-                      className="inline-block transition-transform duration-300 group-hover:translate-x-1.5"
-                    >
-                      →
-                    </span>
-                  </span>
-                </Link>
-              </motion.div>
-            ))}
-          </motion.div>
+                  <article
+                    className={`grid overflow-hidden rounded-3xl shadow-[0_-8px_40px_-24px_rgba(54,54,54,0.45)] sm:min-h-[62vh] sm:grid-cols-[1fr_0.8fr] ${tone.card}`}
+                  >
+                    <div className="flex flex-col justify-center p-8 sm:p-12 sm:py-14">
+                      <p
+                        className={`text-[0.68rem] uppercase tracking-[0.22em] ${tone.kicker}`}
+                      >
+                        {path.kicker}
+                      </p>
+                      <h3
+                        className={`mt-5 font-serif text-3xl leading-tight text-balance sm:text-4xl ${tone.title}`}
+                      >
+                        {path.title}
+                      </h3>
+                      <p className={`mt-5 max-w-md leading-relaxed ${tone.body}`}>
+                        {path.body}
+                      </p>
+                      <Link
+                        href={path.href}
+                        className={`group mt-9 inline-flex items-center gap-2 self-start rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition-colors ${tone.cta}`}
+                      >
+                        {path.action}
+                        <span
+                          aria-hidden
+                          className="inline-block transition-transform duration-300 group-hover:translate-x-1.5"
+                        >
+                          &rarr;
+                        </span>
+                      </Link>
+                    </div>
+
+                    <div className="relative order-first min-h-[12rem] sm:order-none sm:min-h-0">
+                      <Image
+                        src={path.image}
+                        alt=""
+                        fill
+                        sizes="(min-width: 640px) 40vw, 100vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  </article>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
 
       {/* Qué cambia — the destination, stated plainly */}
-      <section className="relative overflow-hidden px-6 sm:px-10 py-16 sm:py-24 bg-dark-pine text-cream">
-        <Grain opacity={0.08} />
+      <section
+        className="relative overflow-hidden px-6 sm:px-10 py-16 sm:py-24 bg-cover bg-center text-cream"
+        style={{ backgroundImage: "url('/images/close-up-green-jade-texture.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-black/80" aria-hidden="true" />
+        <Grain opacity={1} />
         <SectionIndex n="02" label="Qué cambia" tone="cream" />
-        <div className="relative max-w-5xl mx-auto">
+        <div className="relative z-10 max-w-5xl mx-auto">
           <Reveal className="max-w-2xl">
             <h2 className="font-serif text-3xl sm:text-5xl leading-[1.05] text-balance">
               A los seis meses,{" "}
@@ -655,9 +704,8 @@ export function LandingPage({
                 <motion.li
                   key={phase.number}
                   variants={fadeUp}
-                  className={`grid grid-cols-[3.25rem_1fr] sm:grid-cols-[4rem_1fr] gap-4 sm:gap-6 py-6 ${
-                    i === 0 ? "border-t border-cream/15" : ""
-                  } border-b border-cream/15`}
+                  className={`grid grid-cols-[3.25rem_1fr] sm:grid-cols-[4rem_1fr] gap-4 sm:gap-6 py-6 ${i === 0 ? "border-t border-cream/15" : ""
+                    } border-b border-cream/15`}
                 >
                   <span className="relative">
                     <span
@@ -802,7 +850,7 @@ export function LandingPage({
       </section>
 
       {/* Zere Studio — its own sub-brand moment */}
-      <section className="relative overflow-hidden px-6 sm:px-10 py-16 sm:py-24 bg-zere-sky">
+      {/* <section className="relative overflow-hidden px-6 sm:px-10 py-16 sm:py-24 bg-zere-sky">
         <Grain opacity={0.06} />
         <SectionIndex n="06" label="Zere Studio" tone="zere" />
         <div className="relative max-w-5xl mx-auto">
@@ -846,7 +894,6 @@ export function LandingPage({
               </div>
             </Reveal>
             <Reveal className="group relative flex items-center justify-center aspect-square max-w-[16rem] mx-auto lg:max-w-none cursor-default">
-              {/* ripple rings — hidden until hover, then expand + fade like water, looping */}
               <span
                 aria-hidden
                 className="zere-ripple-ring absolute inset-0 rounded-full border border-zere-deep/50 opacity-0 group-hover:opacity-100 group-hover:[animation:zere-ripple_3.6s_ease-in-out_infinite]"
@@ -859,7 +906,6 @@ export function LandingPage({
                 aria-hidden
                 className="zere-ripple-ring absolute inset-0 rounded-full border border-zere-deep/50 opacity-0 group-hover:opacity-100 group-hover:[animation:zere-ripple_3.6s_ease-in-out_infinite] group-hover:[animation-delay:2.4s]"
               />
-              {/* static rings, ease outward slightly on hover */}
               <span
                 aria-hidden
                 className="absolute inset-0 rounded-full border border-zere-deep/20 transition-transform duration-1000 ease-in-out group-hover:scale-105"
@@ -904,80 +950,86 @@ export function LandingPage({
             ))}
           </motion.div>
         </div>
-      </section>
+      </section> */}
 
       {/* Sobre Pilar — authority */}
       <section className="relative overflow-hidden px-6 sm:px-10 py-16 sm:py-24">
         <SectionIndex n="07" label="Sobre Pilar" />
         <div className="max-w-5xl mx-auto">
-          <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-10 lg:gap-16 items-center">
-            <Reveal className="relative">
-              <span
-                aria-hidden
-                className="absolute -top-10 -left-8 font-serif italic font-light text-[10rem] leading-none text-earth-brown/[0.07] select-none pointer-events-none"
-              >
-                P
-              </span>
-              <div className="relative aspect-[3/4] max-w-sm mx-auto lg:max-w-none rounded-3xl overflow-hidden shadow-[0_24px_48px_-20px_rgba(89,68,52,0.35)]">
+          <div className="grid gap-4 lg:grid-cols-[1.15fr_1fr]">
+            {/* Retrato sobre bloque de marca: el equivalente nuestro al bloque
+                de color plano de la referencia, sin salir del lenguaje
+                editorial (grano, multiply, filete interior). */}
+            <Reveal className="relative overflow-hidden rounded-3xl bg-earth-brown">
+              <div className="relative aspect-[4/5] sm:aspect-[4/3] lg:aspect-auto lg:h-full lg:min-h-[32rem]">
                 <Image
                   src="/images/pilar-portrait.jpg"
                   alt="Pilar Zambrano B."
                   fill
-                  sizes="(min-width: 1024px) 38vw, 90vw"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-earth-brown mix-blend-multiply opacity-[0.12]" />
-                <div className="absolute inset-3 rounded-2xl border border-cream/50 pointer-events-none" />
+                <div
+                  aria-hidden
+                  className="absolute inset-0 bg-earth-brown mix-blend-multiply opacity-[0.12]"
+                />
+                <div
+                  aria-hidden
+                  className="absolute inset-4 rounded-2xl border border-cream/40 pointer-events-none"
+                />
+              </div>
+              <Grain opacity={0.07} />
+            </Reveal>
+
+            <Reveal className="relative flex flex-col justify-center rounded-3xl bg-beige-sand/45 p-8 sm:p-10">
+              <span
+                aria-hidden
+                className="absolute -top-8 right-4 font-serif italic font-light text-[9rem] leading-none text-earth-brown/[0.07] select-none pointer-events-none"
+              >
+                P
+              </span>
+              <div className="relative">
+                <Eyebrow>Sobre Pilar</Eyebrow>
+                <h2 className="text-3xl sm:text-4xl text-earth-brown mt-5 mb-6 text-balance">
+                  Emprendedora, inversionista y consejera.
+                </h2>
+                <p className="text-charcoal/80 leading-relaxed">
+                  <span className="float-left font-serif text-5xl leading-[0.8] pr-2 text-earth-brown">
+                    S
+                  </span>
+                  e define como Strategic Life Editor: alguien que ayuda a sus
+                  clientas a editar su vida desde adentro hacia afuera,
+                  integrando identidad, imagen y decisiones. Fundó UMA, y en
+                  2024 recibió el Premio Mujeres en las Artes.
+                </p>
+                <Link
+                  href="/sobre-pilar"
+                  className="mt-8 inline-flex items-center gap-2 self-start rounded-full bg-earth-brown px-7 py-3.5 text-sm font-semibold tracking-wide text-cream transition-colors hover:bg-charcoal"
+                >
+                  Conocer su historia
+                  <span aria-hidden>&rarr;</span>
+                </Link>
               </div>
             </Reveal>
-            <Reveal>
-              <Eyebrow>Sobre Pilar</Eyebrow>
-              <h2 className="text-3xl sm:text-4xl text-earth-brown mt-5 mb-6 text-balance">
-                Emprendedora, inversionista y consejera.
-              </h2>
-              <p className="text-charcoal/80 leading-relaxed max-w-xl mb-6">
-                <span className="float-left font-serif text-5xl leading-[0.8] pr-2 text-earth-brown">
-                  S
-                </span>
-                e define como Strategic Life Editor: alguien que ayuda a sus
-                clientas a editar su vida desde adentro hacia afuera,
-                integrando identidad, imagen y decisiones. Fundó UMA, y en 2024
-                recibió el Premio Mujeres en las Artes.
+
+            {/* Formación, en su propia fila: es la prueba social dura de la
+                sección y merece leerse como bloque, no como pie de página. */}
+            <Reveal className="rounded-3xl border border-earth-brown/20 p-8 sm:p-10 lg:col-span-2">
+              <p className="text-[0.65rem] uppercase tracking-[0.2em] text-charcoal/70">
+                Formación
               </p>
-
-              <dl className="grid sm:grid-cols-3 gap-x-8 gap-y-5 max-w-xl mb-8 border-t border-earth-brown/20 pt-6">
-                <div>
-                  <dt className="text-[0.65rem] tracking-[0.16em] uppercase text-charcoal/75 mb-1.5">
-                    Coaching
-                  </dt>
-                  <dd className="text-sm text-charcoal">
-                    iPEC · Escuela Domingo Delgado
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-[0.65rem] tracking-[0.16em] uppercase text-charcoal/75 mb-1.5">
-                    Académica
-                  </dt>
-                  <dd className="text-sm text-charcoal">
-                    Boston University · IE Business School
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-[0.65rem] tracking-[0.16em] uppercase text-charcoal/75 mb-1.5">
-                    Certificaciones
-                  </dt>
-                  <dd className="text-sm text-charcoal">
-                    Hogan · Kellogg · Constelaciones Familiares
-                  </dd>
-                </div>
+              <dl className="mt-6 grid gap-x-10 gap-y-6 sm:grid-cols-3">
+                {CREDENTIALS.map((item) => (
+                  <div key={item.label}>
+                    <dt className="mb-1.5 text-[0.65rem] uppercase tracking-[0.16em] text-charcoal/75">
+                      {item.label}
+                    </dt>
+                    <dd className="text-sm text-charcoal text-balance">
+                      {item.value}
+                    </dd>
+                  </div>
+                ))}
               </dl>
-
-              <Link
-                href="/sobre-pilar"
-                className="inline-block text-sm text-earth-brown border-b border-earth-brown/40 hover:border-earth-brown transition-colors"
-              >
-                Conocer su historia
-              </Link>
             </Reveal>
           </div>
         </div>
@@ -1069,95 +1121,18 @@ export function LandingPage({
         </Reveal>
       </section>
 
-      {/* Eventos */}
+      {/* Eventos — the banner carousel is the whole section now */}
       <section className="relative px-6 sm:px-10 py-16 sm:py-24">
         <SectionIndex n="09" label="Eventos" />
-        <div className="max-w-5xl mx-auto grid lg:grid-cols-[1fr_0.85fr] gap-10 lg:gap-16 items-center">
-          <div>
-            <Reveal>
-              <Eyebrow>Eventos</Eyebrow>
-              <h2 className="text-3xl sm:text-4xl text-earth-brown mt-5 mb-6 text-balance">
-                Un calendario para encontrarse en persona
-              </h2>
-              <p className="text-charcoal/75 max-w-lg leading-relaxed mb-8">
-                Talleres, cenas, retiros y sesiones abiertas — momentos para
-                vivir la comunidad fuera de la pantalla.
-              </p>
-            </Reveal>
-            <motion.div
-              variants={stagger}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.3 }}
-              className="flex flex-wrap gap-3 mb-9"
-            >
-              {EVENT_TYPES.map((type) => (
-                <motion.span
-                  key={type.label}
-                  variants={fadeUp}
-                  whileHover={{ y: -2 }}
-                  transition={{ duration: 0.2, ease: EASE }}
-                  className={`inline-flex items-center gap-2.5 rounded-full border px-5 py-2 text-sm text-earth-brown bg-cream transition-colors ${
-                    type.ring ??
-                    "border-earth-brown/25 hover:border-earth-brown/50 hover:bg-beige-sand/40"
-                  }`}
-                >
-                  <span className={`w-1.5 h-1.5 rounded-full ${type.dot}`} />
-                  {type.label}
-                </motion.span>
-              ))}
-            </motion.div>
-            <Reveal>
-              <Link
-                href="/eventos"
-                className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 bg-earth-brown text-cream text-sm font-semibold tracking-wide hover:bg-charcoal transition-colors"
-              >
-                Ver el calendario
-                <span aria-hidden>→</span>
-              </Link>
-            </Reveal>
-          </div>
-          <Reveal className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-[0_24px_48px_-20px_rgba(89,68,52,0.35)]">
-            <Image
-              src="/images/silhouette-sunset.jpg"
-              alt="Encuentro de la comunidad al atardecer"
-              fill
-              sizes="(min-width: 1024px) 38vw, 90vw"
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-earth-brown mix-blend-multiply opacity-[0.15]" />
-          </Reveal>
-        </div>
+        <Reveal className="max-w-5xl mx-auto">
+          <EventBannerCarousel
+            items={eventBanners}
+            heading="Próximos eventos"
+            moreHref="/eventos"
+            moreLabel="Explora todos los eventos"
+          />
+        </Reveal>
       </section>
-
-      {/* Próxima fecha — the only honest urgency on this page */}
-      {nextEvent && (
-        <section className="px-6 sm:px-10 pb-4">
-          <Reveal className="mx-auto flex max-w-5xl flex-col gap-5 rounded-3xl bg-beige-sand px-7 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-10">
-            <div className="min-w-0">
-              <p className="text-[0.7rem] uppercase tracking-[0.22em] text-charcoal/80">
-                Próximo encuentro ·{" "}
-                {eventDateFormatter.format(new Date(nextEvent.startsAt))}
-              </p>
-              <p className="mt-2 font-serif text-2xl sm:text-3xl text-earth-brown text-balance">
-                {nextEvent.title}
-              </p>
-              <p className="mt-1.5 text-sm text-charcoal/80">
-                {nextEvent.typeLabel}
-                {nextEvent.location ? ` · ${nextEvent.location}` : ""}
-                {nextEvent.isOnline ? " · En línea" : ""}
-              </p>
-            </div>
-            <Link
-              href="/eventos"
-              className="inline-flex shrink-0 items-center justify-center gap-2 self-start rounded-full bg-earth-brown px-7 py-3.5 text-sm font-semibold tracking-wide text-cream transition-colors hover:bg-charcoal sm:self-auto"
-            >
-              Reservar mi lugar
-              <span aria-hidden>→</span>
-            </Link>
-          </Reveal>
-        </section>
-      )}
 
       {/* CTA final */}
       <section className="relative overflow-hidden px-6 sm:px-10 py-20 sm:py-28 bg-charcoal">

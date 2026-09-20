@@ -23,4 +23,14 @@ export const WHATSAPP_MESSAGES = {
   general: "Hola Pilar, me encantaría conocer más de tu trabajo.",
 } as const;
 
+/**
+ * Opener for one specific event. The title travels inside the message so
+ * Pilar knows which banner the visitor tapped without having to ask.
+ */
+export function eventoWhatsappHref(title: string) {
+  return whatsappHref(
+    `Hola Pilar, quiero más información sobre "${title}".`
+  );
+}
+
 export const INSTAGRAM_URL = "https://www.instagram.com/pilarzambranob/";
