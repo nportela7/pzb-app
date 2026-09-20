@@ -374,16 +374,16 @@ export function LandingPage({
 
         <div
           ref={heroTextRef}
-          className="relative flex-1 flex flex-col justify-center px-6 sm:px-10 pt-28 pb-16 max-w-3xl"
+          className="shell relative flex-1 flex flex-col justify-center pt-28 pb-16"
         >
           <motion.div
             style={{ opacity: heroOpacity, y: heroY }}
             initial="hidden"
             animate="show"
             variants={{ show: { transition: { staggerChildren: 0.14 } } }}
-            className="flex flex-col"
+            className="flex w-full max-w-[52rem] flex-col"
           >
-            <h1 className="font-serif font-light text-5xl sm:text-7xl leading-[0.95] text-cream text-balance">
+            <h1 className="font-serif font-light text-5xl sm:text-7xl lg:text-8xl leading-[0.95] text-cream text-balance">
               <span className="block overflow-hidden pb-[0.08em]">
                 <motion.span variants={heroLine} className="block">
                   Styling your life.
@@ -448,7 +448,7 @@ export function LandingPage({
           </motion.div>
         </div>
 
-        <div className="relative hidden sm:flex items-center gap-3 self-end px-10 pb-8 text-[0.65rem] tracking-[0.2em] uppercase text-cream/65">
+        <div className="relative hidden sm:flex items-center gap-3 self-end pb-8 pe-[var(--shell-gutter)] text-[0.65rem] tracking-[0.2em] uppercase text-cream/65">
           Scroll
           <span className="w-px h-9 bg-cream/35" />
         </div>
@@ -459,13 +459,13 @@ export function LandingPage({
 
       {/* Cifras — hard proof, before any poetry */}
       {VISIBLE_PROOF_POINTS.length > 0 && (
-        <section className="px-6 sm:px-10 py-12 sm:py-16 border-b border-earth-brown/12">
+        <section className="py-12 sm:py-16 border-b border-earth-brown/12">
           <motion.dl
             variants={stagger}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.4 }}
-            className="mx-auto flex max-w-5xl flex-wrap justify-center gap-x-16 gap-y-8 sm:justify-between"
+            className="shell flex flex-wrap justify-center gap-x-16 gap-y-8 sm:justify-between"
           >
             {VISIBLE_PROOF_POINTS.map((point) => (
               <motion.div key={point.label} variants={fadeUp} className="text-center">
@@ -482,15 +482,15 @@ export function LandingPage({
       )}
 
       {/* Quote */}
-      <section className="relative overflow-hidden px-6 sm:px-10 py-14 sm:py-20 bg-beige-sand/40">
+      <section className="relative overflow-hidden py-14 sm:py-20 bg-beige-sand/40">
         <span
           aria-hidden
           className="absolute -top-4 sm:-top-10 left-4 sm:left-8 font-serif italic text-[9rem] sm:text-[13rem] leading-none text-earth-brown/[0.12] select-none"
         >
           &ldquo;
         </span>
-        <Reveal className="relative max-w-3xl mx-auto">
-          <p className="font-serif italic text-2xl sm:text-3xl text-earth-brown leading-tight text-balance">
+        <Reveal className="shell relative">
+          <p className="measure font-serif italic text-2xl sm:text-3xl text-earth-brown leading-tight text-balance">
             <span className="font-semibold not-italic">
               La vida se vive, no se mide.
             </span>{" "}
@@ -508,9 +508,9 @@ export function LandingPage({
       </section>
 
       {/* Los tres caminos — the segmentation grid */}
-      <section className="relative px-6 sm:px-10 py-16 sm:py-24">
+      <section className="relative py-16 sm:py-24">
         <SectionIndex n="01" label="Por dónde empezar" />
-        <div className="max-w-5xl mx-auto">
+        <div className="shell">
           <Reveal className="max-w-2xl">
             <h2 className="text-3xl sm:text-5xl text-earth-brown text-balance">
               ¿En qué momento{" "}
@@ -588,13 +588,13 @@ export function LandingPage({
 
       {/* Qué cambia — the destination, stated plainly */}
       <section
-        className="relative overflow-hidden px-6 sm:px-10 py-16 sm:py-24 bg-cover bg-center text-cream"
+        className="relative overflow-hidden py-16 sm:py-24 bg-cover bg-center text-cream"
         style={{ backgroundImage: "url('/images/close-up-green-jade-texture.jpg')" }}
       >
         <div className="absolute inset-0 bg-black/80" aria-hidden="true" />
         <Grain opacity={1} />
         <SectionIndex n="02" label="Qué cambia" tone="cream" />
-        <div className="relative z-10 max-w-5xl mx-auto">
+        <div className="shell relative z-10">
           <Reveal className="max-w-2xl">
             <h2 className="font-serif text-3xl sm:text-5xl leading-[1.05] text-balance">
               A los seis meses,{" "}
@@ -640,10 +640,10 @@ export function LandingPage({
       </section>
 
       {/* The Alignment Partnership — the flagship offer */}
-      <section className="relative px-6 sm:px-10 py-16 sm:py-24 bg-earth-brown text-cream">
+      <section className="relative py-16 sm:py-24 bg-earth-brown text-cream">
         <Grain opacity={0.07} />
         <SectionIndex n="03" label="Coaching 1:1" tone="cream" />
-        <div className="relative max-w-5xl mx-auto">
+        <div className="shell relative">
           <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-start">
             <Reveal>
               <Eyebrow>
@@ -742,10 +742,10 @@ export function LandingPage({
       </section>
 
       {/* Testimonios — the proof wall */}
-      <section className="relative overflow-hidden px-6 sm:px-10 py-16 sm:py-24 bg-beige-sand/45">
+      <section className="relative overflow-hidden py-16 sm:py-24 bg-beige-sand/45">
         <Grain opacity={0.05} />
         <SectionIndex n="04" label="Testimonios" />
-        <div className="relative max-w-5xl mx-auto">
+        <div className="shell relative">
           <Reveal className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-xl">
               <p className="font-script text-4xl sm:text-5xl text-earth-brown mb-4">
@@ -786,9 +786,9 @@ export function LandingPage({
       </section>
 
       {/* Add-Ons — the à-la-carte offer */}
-      <section className="relative px-6 sm:px-10 py-16 sm:py-24">
+      <section className="relative py-16 sm:py-24">
         <SectionIndex n="05" label="Add-Ons" />
-        <div className="max-w-5xl mx-auto">
+        <div className="shell">
           <Reveal className="max-w-2xl">
             <Eyebrow>Add-Ons</Eyebrow>
             <h2 className="text-3xl sm:text-4xl text-earth-brown mt-5 mb-4 text-balance">
@@ -822,7 +822,7 @@ export function LandingPage({
                 <p className="text-sm text-charcoal mb-3">
                   {dimension.tagline}
                 </p>
-                <p className="text-sm text-charcoal/75 leading-relaxed">
+                <p className="measure-tight text-sm text-charcoal/75 leading-relaxed">
                   {dimension.detail}
                 </p>
               </motion.div>
@@ -850,10 +850,10 @@ export function LandingPage({
       </section>
 
       {/* Zere Studio — its own sub-brand moment */}
-      {/* <section className="relative overflow-hidden px-6 sm:px-10 py-16 sm:py-24 bg-zere-sky">
+      {/* <section className="relative overflow-hidden py-16 sm:py-24 bg-zere-sky">
         <Grain opacity={0.06} />
         <SectionIndex n="06" label="Zere Studio" tone="zere" />
-        <div className="relative max-w-5xl mx-auto">
+        <div className="shell relative">
           <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-16 items-center mb-12">
             <Reveal>
               <div className="flex items-center gap-4">
@@ -920,13 +920,13 @@ export function LandingPage({
             </Reveal>
           </div>
         </div>
-        <div className="relative -mx-6 sm:-mx-10 mb-12">
+        <div className="relative mb-12">
           <Ticker
             items={["Talleres", "Cenas corporativas", "Retiros", "Experiencias"]}
             tone="zere"
           />
         </div>
-        <div className="relative max-w-5xl mx-auto">
+        <div className="shell relative">
           <motion.div
             variants={stagger}
             initial="hidden"
@@ -953,9 +953,9 @@ export function LandingPage({
       </section> */}
 
       {/* Sobre Pilar — authority */}
-      <section className="relative overflow-hidden px-6 sm:px-10 py-16 sm:py-24">
+      <section className="relative overflow-hidden py-16 sm:py-24">
         <SectionIndex n="07" label="Sobre Pilar" />
-        <div className="max-w-5xl mx-auto">
+        <div className="shell">
           <div className="grid gap-4 lg:grid-cols-[1.15fr_1fr]">
             {/* Retrato sobre bloque de marca: el equivalente nuestro al bloque
                 de color plano de la referencia, sin salir del lenguaje
@@ -993,7 +993,7 @@ export function LandingPage({
                 <h2 className="text-3xl sm:text-4xl text-earth-brown mt-5 mb-6 text-balance">
                   Emprendedora, inversionista y consejera.
                 </h2>
-                <p className="text-charcoal/80 leading-relaxed">
+                <p className="measure text-charcoal/80 leading-relaxed">
                   <span className="float-left font-serif text-5xl leading-[0.8] pr-2 text-earth-brown">
                     S
                   </span>
@@ -1036,7 +1036,7 @@ export function LandingPage({
       </section>
 
       {/* Comunidad */}
-      <section className="relative overflow-hidden px-6 sm:px-10 py-16 sm:py-24 bg-beige-sand/40">
+      <section className="relative overflow-hidden px-[var(--shell-gutter)] py-16 sm:py-24 bg-beige-sand/40">
         <SectionIndex n="08" label="Comunidad" />
         <div className="max-w-3xl mx-auto text-center">
           <Reveal>
@@ -1053,7 +1053,7 @@ export function LandingPage({
         </div>
 
         {reelFirstHalf.length > 0 && (
-          <div className="mt-12 -mx-6 sm:-mx-10 flex flex-col gap-2">
+          <div className="mt-12 -mx-[var(--shell-gutter)] flex flex-col gap-2">
             <div className="overflow-hidden whitespace-nowrap">
               <div className="inline-flex marquee-track" style={{ animationDuration: "208s" }}>
                 {[...reelFirstHalf, ...reelFirstHalf].map((m, i) => (
@@ -1122,9 +1122,9 @@ export function LandingPage({
       </section>
 
       {/* Eventos — the banner carousel is the whole section now */}
-      <section className="relative px-6 sm:px-10 py-16 sm:py-24">
+      <section className="relative py-16 sm:py-24">
         <SectionIndex n="09" label="Eventos" />
-        <Reveal className="max-w-5xl mx-auto">
+        <Reveal className="shell">
           <EventBannerCarousel
             items={eventBanners}
             heading="Próximos eventos"
@@ -1135,7 +1135,7 @@ export function LandingPage({
       </section>
 
       {/* CTA final */}
-      <section className="relative overflow-hidden px-6 sm:px-10 py-20 sm:py-28 bg-charcoal">
+      <section className="relative overflow-hidden px-[var(--shell-gutter)] py-20 sm:py-28 bg-charcoal">
         <Grain opacity={0.06} />
         <Reveal className="relative max-w-2xl mx-auto text-center flex flex-col items-center gap-8">
           <h2 className="font-serif italic font-light text-4xl sm:text-6xl leading-[1.05] text-cream text-balance">

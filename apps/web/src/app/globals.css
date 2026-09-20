@@ -19,6 +19,14 @@
 
   --background: var(--pzb-cream);
   --foreground: var(--pzb-charcoal);
+
+  /* Page shell. One cap and one gutter for every band on the page, so the
+     header, the content and the footer all sit on the same vertical axis
+     instead of each inventing its own width. The gutter grows with the
+     viewport: 1.5rem on a phone, 5.5rem on a desktop, so a wide screen
+     reads as deliberate margin rather than as a narrow page stretched. */
+  --shell-max: 1680px;
+  --shell-gutter: clamp(1.5rem, 5vw, 5.5rem);
 }
 
 @theme inline {
@@ -43,6 +51,27 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), ui-sans-serif, sans-serif;
+}
+
+/* The shell carries the width AND the gutter, so a section element is free
+   to be a full-bleed band of colour. Anything that should break out of the
+   measure -- a marquee, a carousel, an image -- simply lives outside it. */
+@utility shell {
+  width: 100%;
+  max-width: var(--shell-max);
+  margin-inline: auto;
+  padding-inline: var(--shell-gutter);
+}
+
+/* Width is for the layout; measure is for the eye. A line of prose stops
+   being readable past ~75 characters no matter how much room the shell
+   gives it, so running text caps itself in `ch` and lets the grid be wide. */
+@utility measure {
+  max-width: 64ch;
+}
+
+@utility measure-tight {
+  max-width: 44ch;
 }
 
 /* The parts of the page the browser draws for us still belong to the brand:
