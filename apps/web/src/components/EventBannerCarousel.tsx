@@ -1,9 +1,8 @@
 "use client";
 
-import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useReducedMotion } from "motion/react";
+import { useSnapCarousel } from "@/lib/use-snap-carousel";
 import { eventoWhatsappHref } from "@/lib/cta";
 import type { EventBanner } from "@/lib/event-banner";
 
@@ -46,26 +45,7 @@ export function EventBannerCarousel({
   moreHref: string;
   moreLabel: string;
 }) {
-  const trackRef = useRef<HTMLUListElement>(null);
-  const [active, setActive] = useState(0);
-  const shouldReduceMotion = useReducedMotion();
-
-  function readScroll() {
-    const el = trackRef.current;
-    if (!el) return;
-    // One slide fills the track, so the index is just how many widths in we are.
-    setActive(Math.round(el.scrollLeft / el.clientWidth));
-  }
-
-  function goTo(index: number) {
-    const el = trackRef.current;
-    if (!el) return;
-    const clamped = Math.max(0, Math.min(index, items.length - 1));
-    el.scrollTo({
-      left: clamped * el.clientWidth,
-      behavior: shouldReduceMotion ? "auto" : "smooth",
-    });
-  }
+  const { trackRef, active, readScroll, goTo } = useSnapCarousel(items.length);
 
   if (items.length === 0) return null;
 
@@ -90,18 +70,16 @@ export function EventBannerCarousel({
             <button
               type="button"
               onClick={() => goTo(active - 1)}
-              disabled={active === 0}
               aria-label="Evento anterior"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-earth-brown/30 text-earth-brown transition-colors hover:border-earth-brown hover:bg-earth-brown hover:text-cream disabled:pointer-events-none disabled:opacity-30"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-earth-brown/30 text-earth-brown transition-colors hover:border-earth-brown hover:bg-earth-brown hover:text-cream"
             >
               <Chevron direction="prev" />
             </button>
             <button
               type="button"
               onClick={() => goTo(active + 1)}
-              disabled={active === items.length - 1}
               aria-label="Evento siguiente"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-earth-brown/30 text-earth-brown transition-colors hover:border-earth-brown hover:bg-earth-brown hover:text-cream disabled:pointer-events-none disabled:opacity-30"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-earth-brown/30 text-earth-brown transition-colors hover:border-earth-brown hover:bg-earth-brown hover:text-cream"
             >
               <Chevron direction="next" />
             </button>

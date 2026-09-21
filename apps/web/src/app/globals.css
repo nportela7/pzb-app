@@ -125,20 +125,29 @@ a {
   display: none;
 }
 
-h1,
-h2,
-h3 {
-  font-family: var(--font-serif), Georgia, serif;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-}
+/* These live in @layer base for one reason: `p:not(.uppercase)` has a
+   higher specificity (0,1,1) than a utility class like `.font-script`
+   (0,1,0), so unlayered it silently beat every font utility on a <p>.
+   That is why `<p class="font-script">` rendered in the serif while the
+   same class on an <a> did not. Tailwind orders base BEFORE utilities,
+   so from inside the layer these lose to any utility regardless of
+   specificity — which is exactly what a default should do. */
+@layer base {
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif), Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
 
-/* Body copy reads in the same serif as the headings, at a lighter
-   weight — one typographic voice instead of a generic sans mixed in.
-   Labels (uppercase eyebrows, tags) stay in the sans for contrast. */
-p:not(.uppercase) {
-  font-family: var(--font-serif), Georgia, serif;
-  font-weight: 300;
+  /* Body copy reads in the same serif as the headings, at a lighter
+     weight — one typographic voice instead of a generic sans mixed in.
+     Labels (uppercase eyebrows, tags) stay in the sans for contrast. */
+  p:not(.uppercase) {
+    font-family: var(--font-serif), Georgia, serif;
+    font-weight: 300;
+  }
 }
 
 /* Editorial marquee ticker, used on Eventos and a few landing sections. */

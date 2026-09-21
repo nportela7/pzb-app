@@ -6,14 +6,17 @@ import Image from "next/image";
 import { useRef } from "react";
 import { ZereMark } from "@/components/ZereMark";
 import { Grain } from "@/components/Grain";
+import { PaintedBackdrop } from "@/components/PaintedBackdrop";
+import { HeroPortrait } from "@/components/HeroPortrait";
 import { ScrollProgressRail } from "@/components/ScrollProgressRail";
-import { SectionIndex } from "@/components/SectionIndex";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { PUBLIC_NAV } from "@/lib/nav";
 import { INSTAGRAM_URL, WHATSAPP_MESSAGES, whatsappHref } from "@/lib/cta";
 import { TestimonialCarousel } from "@/components/TestimonialCarousel";
 import { EventBannerCarousel } from "@/components/EventBannerCarousel";
+import { AnnotatedStatement } from "@/components/AnnotatedStatement";
+import { PortraitGallery, type PortraitSlide } from "@/components/PortraitGallery";
 import type { EventBanner } from "@/lib/event-banner";
 import { TESTIMONIALS } from "@/lib/testimonials";
 import { VISIBLE_PROOF_POINTS } from "@/lib/proof";
@@ -151,6 +154,33 @@ const CREDENCIALES = [
  * within a few seconds and take that door, instead of scrolling the whole
  * catalogue looking for the part that applies to her.
  */
+
+/**
+ * El bloque de retrato de "Sobre Pilar".
+ *
+ * OJO: hoy esto reusa las tres imágenes que ya vivían en /public/images
+ * porque son las únicas que hay. Para que la galería diga algo, tienen que
+ * ser fotos REALES de Pilar trabajando -- en taller, en sesión, en escenario.
+ * Tres fotos del mismo retrato con distinto recorte no son una galería.
+ * El label es lo que se lee abajo a la izquierda: dos o tres palabras.
+ */
+const PILAR_GALLERY: PortraitSlide[] = [
+  {
+    src: "/images/pilar-portrait.jpg",
+    label: "Pilar Zambrano B.",
+    alt: "Retrato de Pilar Zambrano B.",
+  },
+  {
+    src: "/images/horse-field-portrait.jpg",
+    label: "Fuera de la pantalla",
+    alt: "Pilar en el campo, a caballo",
+  },
+  {
+    src: "/images/silhouette-sunset.jpg",
+    label: "El proceso",
+    alt: "Silueta a contraluz al atardecer",
+  },
+];
 
 /** Formación de Pilar, renderizada en orden. Editar acá, no en el JSX. */
 const CREDENTIALS = [
@@ -361,27 +391,24 @@ export function LandingPage({
         }}
       />
 
-      {/* Hero — solid brown, no photo, bold editorial type */}
+      {/* Hero — painted brown ground, copy left, Pilar right.
+          The outlined PZB monogram that used to sit behind this is gone: the
+          paint is the texture now, and two background treatments competing
+          for the same space just muddied each other. Restoring it is one
+          <span>, if the mark is missed. */}
       <div className="relative w-full min-h-[100svh] overflow-hidden bg-earth-brown flex flex-col">
+        <PaintedBackdrop />
         <Grain opacity={0.05} />
-        <span
-          aria-hidden
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-serif italic font-light text-[9rem] sm:text-[18rem] leading-none whitespace-nowrap text-transparent select-none pointer-events-none tracking-tight"
-          style={{ WebkitTextStroke: "1.5px rgba(249,247,242,0.055)" }}
-        >
-          PZB
-        </span>
 
-        <div
-          ref={heroTextRef}
-          className="shell relative flex-1 flex flex-col justify-center pt-28 pb-16"
-        >
+        <div className="shell relative flex flex-1 items-center pt-28 pb-16">
+          <div className="grid w-full items-center gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14">
+          <div ref={heroTextRef} className="flex flex-col">
           <motion.div
             style={{ opacity: heroOpacity, y: heroY }}
             initial="hidden"
             animate="show"
             variants={{ show: { transition: { staggerChildren: 0.14 } } }}
-            className="flex w-full max-w-[52rem] flex-col"
+            className="flex w-full flex-col"
           >
             <h1 className="font-serif font-light text-5xl sm:text-7xl lg:text-8xl leading-[0.95] text-cream text-balance">
               <span className="block overflow-hidden pb-[0.08em]">
@@ -446,6 +473,28 @@ export function LandingPage({
               (CDMX)
             </motion.p>
           </motion.div>
+          </div>
+
+            {/* Below lg the portrait is hidden rather than stacked. A hero is
+                a promise plus a way to act on it, and pushing the buttons
+                below a phone's fold to make room for a photograph trades the
+                second for the first. Her portrait still opens Sobre Pilar. */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.35, ease: EASE }}
+              className="hidden lg:block"
+            >
+              <HeroPortrait
+                src="/images/pilar-portrait.jpg"
+                alt="Pilar Zambrano B."
+                // Flip to true the day /public/images holds a
+                // background-removed PNG of her. See HeroPortrait.
+                cutout={false}
+                className="mx-auto w-full max-w-[30rem]"
+              />
+            </motion.div>
+          </div>
         </div>
 
         <div className="relative hidden sm:flex items-center gap-3 self-end pb-8 pe-[var(--shell-gutter)] text-[0.65rem] tracking-[0.2em] uppercase text-cream/65">
@@ -457,8 +506,21 @@ export function LandingPage({
       {/* Formación y reconocimiento — authority, immediately after the promise */}
       <Ticker items={CREDENCIALES} tone="dark" />
 
+      {/* Manifiesto — the page marks itself up. Sits between two dark bands
+          on purpose: 02 and 03 were running back to back, and a light,
+          un-numbered interstitial gives the eye somewhere to land before the
+          offer. Un-numbered because it is a breath, not a chapter. */}
+      <AnnotatedStatement
+        tone="paper"
+        lines={["Reescribir", "tu vida"]}
+        circled="Strategic Life Editor"
+        boxed="Las mejores decisiones nunca vienen de la obediencia."
+        arrowed="Identidad, imagen y decisiones: un solo expediente."
+        script="se abre, se documenta y se cierra"
+      />
+
       {/* Cifras — hard proof, before any poetry */}
-      {VISIBLE_PROOF_POINTS.length > 0 && (
+      {/* {VISIBLE_PROOF_POINTS.length > 0 && (
         <section className="py-12 sm:py-16 border-b border-earth-brown/12">
           <motion.dl
             variants={stagger}
@@ -479,10 +541,10 @@ export function LandingPage({
             ))}
           </motion.dl>
         </section>
-      )}
+      )} */}
 
       {/* Quote */}
-      <section className="relative overflow-hidden py-14 sm:py-20 bg-beige-sand/40">
+      {/* <section className="relative overflow-hidden py-14 sm:py-20 bg-beige-sand/40">
         <span
           aria-hidden
           className="absolute -top-4 sm:-top-10 left-4 sm:left-8 font-serif italic text-[9rem] sm:text-[13rem] leading-none text-earth-brown/[0.12] select-none"
@@ -505,11 +567,10 @@ export function LandingPage({
             Strategic Life Editor
           </p>
         </Reveal>
-      </section>
+      </section> */}
 
       {/* Los tres caminos — the segmentation grid */}
       <section className="relative py-16 sm:py-24">
-        <SectionIndex n="01" label="Por dónde empezar" />
         <div className="shell">
           <Reveal className="max-w-2xl">
             <h2 className="text-3xl sm:text-5xl text-earth-brown text-balance">
@@ -593,7 +654,6 @@ export function LandingPage({
       >
         <div className="absolute inset-0 bg-black/80" aria-hidden="true" />
         <Grain opacity={1} />
-        <SectionIndex n="02" label="Qué cambia" tone="cream" />
         <div className="shell relative z-10">
           <Reveal className="max-w-2xl">
             <h2 className="font-serif text-3xl sm:text-5xl leading-[1.05] text-balance">
@@ -642,7 +702,6 @@ export function LandingPage({
       {/* The Alignment Partnership — the flagship offer */}
       <section className="relative py-16 sm:py-24 bg-earth-brown text-cream">
         <Grain opacity={0.07} />
-        <SectionIndex n="03" label="Coaching 1:1" tone="cream" />
         <div className="shell relative">
           <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-start">
             <Reveal>
@@ -744,7 +803,6 @@ export function LandingPage({
       {/* Testimonios — the proof wall */}
       <section className="relative overflow-hidden py-16 sm:py-24 bg-beige-sand/45">
         <Grain opacity={0.05} />
-        <SectionIndex n="04" label="Testimonios" />
         <div className="shell relative">
           <Reveal className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-xl">
@@ -785,200 +843,23 @@ export function LandingPage({
         </div>
       </section>
 
-      {/* Add-Ons — the à-la-carte offer */}
-      <section className="relative py-16 sm:py-24">
-        <SectionIndex n="05" label="Add-Ons" />
-        <div className="shell">
-          <Reveal className="max-w-2xl">
-            <Eyebrow>Add-Ons</Eyebrow>
-            <h2 className="text-3xl sm:text-4xl text-earth-brown mt-5 mb-4 text-balance">
-              Servicios a la carta, cuando los necesitas
-            </h2>
-            <p className="text-charcoal/75 leading-relaxed max-w-lg">
-              Se agregan al programa cuando aparece la necesidad. Pilar propone
-              el correcto en el momento correcto, ajustado a lo que buscas.
-            </p>
-          </Reveal>
-
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.15 }}
-            className="mt-12 grid sm:grid-cols-3 border-t border-l border-earth-brown/20"
-          >
-            {ADDON_DIMENSIONS.map((dimension) => (
-              <motion.div
-                key={dimension.name}
-                variants={fadeUp}
-                className="p-7 border-b border-r border-earth-brown/20 transition-colors hover:bg-beige-sand/35"
-              >
-                <p className="text-xs tracking-[0.16em] text-charcoal/75 mb-2">
-                  {dimension.index}
-                </p>
-                <h3 className="font-serif italic text-3xl text-earth-brown mb-2">
-                  {dimension.name}
-                </h3>
-                <p className="text-sm text-charcoal mb-3">
-                  {dimension.tagline}
-                </p>
-                <p className="measure-tight text-sm text-charcoal/75 leading-relaxed">
-                  {dimension.detail}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          <Reveal className="mt-10 flex flex-col sm:flex-row sm:items-center gap-4">
-            <a
-              href={ADDONS_HREF}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 bg-earth-brown text-cream text-sm font-semibold tracking-wide hover:bg-charcoal transition-colors"
-            >
-              Pedir una cotización
-              <span aria-hidden>→</span>
-            </a>
-            <Link
-              href="/add-ons"
-              className="text-sm text-earth-brown border-b border-earth-brown/40 hover:border-earth-brown transition-colors self-start sm:self-auto"
-            >
-              Ver todos los Add-Ons
-            </Link>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Zere Studio — its own sub-brand moment */}
-      {/* <section className="relative overflow-hidden py-16 sm:py-24 bg-zere-sky">
-        <Grain opacity={0.06} />
-        <SectionIndex n="06" label="Zere Studio" tone="zere" />
-        <div className="shell relative">
-          <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-16 items-center mb-12">
-            <Reveal>
-              <div className="flex items-center gap-4">
-                <ZereMark className="w-9 h-8 text-zere-deep" />
-                <div>
-                  <h2 className="flex items-baseline gap-2 font-serif italic font-light text-4xl sm:text-5xl text-zere-deep">
-                    zere
-                    <span className="font-sans not-italic font-medium text-[0.28em] tracking-[0.22em] uppercase text-zere-deep/80">
-                      Studio
-                    </span>
-                  </h2>
-                  <p className="font-serif italic text-2xl sm:text-3xl text-zere-deep/70 mt-2">
-                    zere<span className="text-zere-deep/40 mx-1">&middot;</span>nidad
-                  </p>
-                </div>
-              </div>
-              <p className="font-serif font-light text-lg sm:text-xl leading-relaxed max-w-lg mt-8 mb-8 text-zere-ink/85">
-                Experiencias con intención para empresas: para equipos de
-                liderazgo, facilitadoras y marcas que buscan crear momentos
-                memorables con propósito.
-              </p>
-              <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
-                <a
-                  href={EMPRESAS_HREF}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 bg-zere-deep text-cream text-sm font-semibold tracking-wide hover:bg-zere-ink transition-colors"
-                >
-                  Cotizar una experiencia
-                  <span aria-hidden>→</span>
-                </a>
-                <Link
-                  href="/zere-studio"
-                  className="inline-flex items-center justify-center rounded-full px-7 py-3.5 border border-zere-deep/35 text-zere-deep text-sm font-medium hover:bg-cream/50 hover:border-zere-deep/60 transition-colors"
-                >
-                  Descubrir Zere Studio
-                </Link>
-              </div>
-            </Reveal>
-            <Reveal className="group relative flex items-center justify-center aspect-square max-w-[16rem] mx-auto lg:max-w-none cursor-default">
-              <span
-                aria-hidden
-                className="zere-ripple-ring absolute inset-0 rounded-full border border-zere-deep/50 opacity-0 group-hover:opacity-100 group-hover:[animation:zere-ripple_3.6s_ease-in-out_infinite]"
-              />
-              <span
-                aria-hidden
-                className="zere-ripple-ring absolute inset-0 rounded-full border border-zere-deep/50 opacity-0 group-hover:opacity-100 group-hover:[animation:zere-ripple_3.6s_ease-in-out_infinite] group-hover:[animation-delay:1.2s]"
-              />
-              <span
-                aria-hidden
-                className="zere-ripple-ring absolute inset-0 rounded-full border border-zere-deep/50 opacity-0 group-hover:opacity-100 group-hover:[animation:zere-ripple_3.6s_ease-in-out_infinite] group-hover:[animation-delay:2.4s]"
-              />
-              <span
-                aria-hidden
-                className="absolute inset-0 rounded-full border border-zere-deep/20 transition-transform duration-1000 ease-in-out group-hover:scale-105"
-              />
-              <span
-                aria-hidden
-                className="absolute inset-[14%] rounded-full border border-zere-deep/20 transition-transform duration-1000 ease-in-out group-hover:scale-105"
-              />
-              <div className="relative w-[52%] aspect-square rounded-full bg-cream flex items-center justify-center shadow-[0_20px_40px_-16px_rgba(21,76,97,0.35)] transition-transform duration-700 ease-in-out group-hover:scale-[0.92]">
-                <ZereMark className="w-[42%] h-[42%] text-zere-deep transition-transform duration-700 ease-in-out group-hover:scale-110" />
-              </div>
-            </Reveal>
-          </div>
-        </div>
-        <div className="relative mb-12">
-          <Ticker
-            items={["Talleres", "Cenas corporativas", "Retiros", "Experiencias"]}
-            tone="zere"
-          />
-        </div>
-        <div className="shell relative">
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            className="grid sm:grid-cols-2 gap-5"
-          >
-            {FORMATOS.map((formato) => (
-              <motion.div
-                key={formato.title}
-                variants={fadeUp}
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.25, ease: EASE }}
-                className="rounded-2xl bg-cream/70 p-6 hover:bg-cream transition-colors"
-              >
-                <h3 className="text-lg text-zere-deep mb-2">{formato.title}</h3>
-                <p className="text-sm text-zere-ink/70 leading-relaxed max-w-sm">
-                  {formato.body}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section> */}
 
       {/* Sobre Pilar — authority */}
       <section className="relative overflow-hidden py-16 sm:py-24">
-        <SectionIndex n="07" label="Sobre Pilar" />
         <div className="shell">
-          <div className="grid gap-4 lg:grid-cols-[1.15fr_1fr]">
-            {/* Retrato sobre bloque de marca: el equivalente nuestro al bloque
-                de color plano de la referencia, sin salir del lenguaje
-                editorial (grano, multiply, filete interior). */}
-            <Reveal className="relative overflow-hidden rounded-3xl bg-earth-brown">
-              <div className="relative aspect-[4/5] sm:aspect-[4/3] lg:aspect-auto lg:h-full lg:min-h-[32rem]">
-                <Image
-                  src="/images/pilar-portrait.jpg"
-                  alt="Pilar Zambrano B."
-                  fill
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                  className="object-cover"
-                />
-                <div
-                  aria-hidden
-                  className="absolute inset-0 bg-earth-brown mix-blend-multiply opacity-[0.12]"
-                />
-                <div
-                  aria-hidden
-                  className="absolute inset-4 rounded-2xl border border-cream/40 pointer-events-none"
-                />
-              </div>
-              <Grain opacity={0.07} />
+          {/* La galería es vertical, así que se lleva la columna angosta y el
+              texto la ancha — al revés de como estaba. Dos celdas, no tres:
+              Formación se mudó adentro de la tarjeta. */}
+          <div className="grid gap-4 lg:grid-cols-[0.8fr_1.2fr]">
+            {/* La galeria sale del flujo desde lg, asi que la fila la mide la
+                tarjeta de texto y la foto se acomoda a ese alto. El min-h es
+                un piso, no un objetivo: evita que en un viewport donde el
+                texto quede corto la foto termine siendo una franja. */}
+            <Reveal className="relative lg:min-h-[26rem]">
+              <PortraitGallery
+                items={PILAR_GALLERY}
+                className="lg:absolute lg:inset-0"
+              />
             </Reveal>
 
             <Reveal className="relative flex flex-col justify-center rounded-3xl bg-beige-sand/45 p-8 sm:p-10">
@@ -993,7 +874,7 @@ export function LandingPage({
                 <h2 className="text-3xl sm:text-4xl text-earth-brown mt-5 mb-6 text-balance">
                   Emprendedora, inversionista y consejera.
                 </h2>
-                <p className="measure text-charcoal/80 leading-relaxed">
+                <p className="text-charcoal/80 leading-relaxed">
                   <span className="float-left font-serif text-5xl leading-[0.8] pr-2 text-earth-brown">
                     S
                   </span>
@@ -1009,27 +890,28 @@ export function LandingPage({
                   Conocer su historia
                   <span aria-hidden>&rarr;</span>
                 </Link>
-              </div>
-            </Reveal>
 
-            {/* Formación, en su propia fila: es la prueba social dura de la
-                sección y merece leerse como bloque, no como pie de página. */}
-            <Reveal className="rounded-3xl border border-earth-brown/20 p-8 sm:p-10 lg:col-span-2">
-              <p className="text-[0.65rem] uppercase tracking-[0.2em] text-charcoal/70">
-                Formación
-              </p>
-              <dl className="mt-6 grid gap-x-10 gap-y-6 sm:grid-cols-3">
-                {CREDENTIALS.map((item) => (
-                  <div key={item.label}>
-                    <dt className="mb-1.5 text-[0.65rem] uppercase tracking-[0.16em] text-charcoal/75">
-                      {item.label}
-                    </dt>
-                    <dd className="text-sm text-charcoal text-balance">
-                      {item.value}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
+                {/* Formación: es la prueba dura de la sección, así que vive
+                    dentro de la misma tarjeta que la biografía en vez de
+                    colgar como pie de página. Una regla la separa, no una caja. */}
+                <div className="mt-10 border-t border-earth-brown/20 pt-8">
+                  <p className="text-[0.65rem] uppercase tracking-[0.2em] text-charcoal/70">
+                    Formación
+                  </p>
+                  <dl className="mt-5 grid gap-x-10 gap-y-5 sm:grid-cols-3">
+                    {CREDENTIALS.map((item) => (
+                      <div key={item.label}>
+                        <dt className="mb-1.5 text-[0.65rem] uppercase tracking-[0.16em] text-charcoal/75">
+                          {item.label}
+                        </dt>
+                        <dd className="text-sm text-charcoal text-balance">
+                          {item.value}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              </div>
             </Reveal>
           </div>
         </div>
@@ -1037,7 +919,6 @@ export function LandingPage({
 
       {/* Comunidad */}
       <section className="relative overflow-hidden px-[var(--shell-gutter)] py-16 sm:py-24 bg-beige-sand/40">
-        <SectionIndex n="08" label="Comunidad" />
         <div className="max-w-3xl mx-auto text-center">
           <Reveal>
             <Eyebrow>Comunidad</Eyebrow>
@@ -1123,7 +1004,6 @@ export function LandingPage({
 
       {/* Eventos — the banner carousel is the whole section now */}
       <section className="relative py-16 sm:py-24">
-        <SectionIndex n="09" label="Eventos" />
         <Reveal className="shell">
           <EventBannerCarousel
             items={eventBanners}
