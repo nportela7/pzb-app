@@ -402,78 +402,70 @@ export function LandingPage({
 
         <div className="shell relative flex flex-1 items-center pt-28 pb-16">
           <div className="grid w-full items-center gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14">
-          <div ref={heroTextRef} className="flex flex-col">
-          <motion.div
-            style={{ opacity: heroOpacity, y: heroY }}
-            initial="hidden"
-            animate="show"
-            variants={{ show: { transition: { staggerChildren: 0.14 } } }}
-            className="flex w-full flex-col"
-          >
-            <h1 className="font-serif font-light text-5xl sm:text-7xl lg:text-8xl leading-[0.95] text-cream text-balance">
-              <span className="block overflow-hidden pb-[0.08em]">
-                <motion.span variants={heroLine} className="block">
-                  Styling your life.
-                </motion.span>
-              </span>
-              <span className="block overflow-hidden pb-[0.08em]">
-                <motion.span
-                  variants={heroLine}
-                  className="block italic font-normal text-beige-sand"
-                >
-                  Your own way.
-                </motion.span>
-              </span>
-            </h1>
-
-            <motion.p
-              variants={fadeUp}
-              className="text-base sm:text-lg text-cream/80 max-w-md leading-relaxed mt-8"
-            >
-              Coaching de identidad, imagen y decisiones con Pilar Zambrano B.
-              Empieza por una conversación: 30 minutos para entender dónde
-              estás y qué te está costando avanzar.
-            </motion.p>
-
-            <motion.div
-              variants={fadeUp}
-              className="mt-10 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4"
-            >
-              <a
-                href={DIAGNOSTICO_HREF}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 bg-cream text-earth-brown text-sm font-semibold tracking-wide hover:bg-beige-sand hover:-translate-y-0.5 transition-all"
+            <div ref={heroTextRef} className="flex flex-col">
+              <motion.div
+                style={{ opacity: heroOpacity, y: heroY }}
+                initial="hidden"
+                animate="show"
+                variants={{ show: { transition: { staggerChildren: 0.14 } } }}
+                className="flex w-full flex-col"
               >
-                Agenda tu sesión diagnóstico
-                <span aria-hidden>→</span>
-              </a>
-              <Show when="signed-out">
-                <SignUpButton forceRedirectUrl="/home">
-                  <button className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-cream/35 text-cream text-sm font-medium tracking-wide hover:bg-cream/10 hover:border-cream/60 transition-colors">
-                    Sé parte de la comunidad
-                  </button>
-                </SignUpButton>
-              </Show>
-              <Show when="signed-in">
-                <Link
-                  href="/home"
-                  className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-cream/35 text-cream text-sm font-medium tracking-wide hover:bg-cream/10 hover:border-cream/60 transition-colors"
-                >
-                  Ir a la comunidad
-                </Link>
-              </Show>
-            </motion.div>
+                <h1 className="font-serif font-light text-5xl sm:text-7xl lg:text-8xl leading-[0.95] text-cream text-balance">
+                  <span className="block overflow-hidden pb-[0.08em]">
+                    <motion.span variants={heroLine} className="block text-4xl sm:text-5xl lg:text-6xl">
+                      Deja de vivir una vida
+                    </motion.span>
+                  </span>
+                  <span className="block overflow-hidden pb-[0.08em]">
+                    <motion.span
+                      variants={heroLine}
+                      className="block italic font-normal text-beige-sand"
+                    >
+                      editada por otros.
+                    </motion.span>
+                  </span>
+                </h1>
 
-            <motion.p
-              variants={fadeUp}
-              className="mt-6 text-[0.78rem] text-cream/70 leading-relaxed"
-            >
-              Te responde Pilar directo por WhatsApp · Lunes a viernes, 10–19h
-              (CDMX)
-            </motion.p>
-          </motion.div>
-          </div>
+                <motion.p
+                  variants={fadeUp}
+                  className="text-base sm:text-lg text-cream/80 max-w-3xl text-pretty leading-relaxed mt-8"
+                >
+                  Coaching de identidad, imagen y decisiones con Pilar Zambrano B.
+                  Empieza por una conversación: 30 minutos para entender dónde
+                  estás y qué te está costando avanzar.
+                </motion.p>
+
+                <motion.div
+                  variants={fadeUp}
+                  className="mt-10 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4"
+                >
+                  <a
+                    href={DIAGNOSTICO_HREF}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 bg-cream text-earth-brown text-sm font-semibold tracking-wide hover:bg-beige-sand hover:-translate-y-0.5 transition-all"
+                  >
+                    Agenda tu sesión diagnóstico
+                    <span aria-hidden>→</span>
+                  </a>
+                  <Show when="signed-out">
+                    <SignUpButton forceRedirectUrl="/home">
+                      <button className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-cream/35 text-cream text-sm font-medium tracking-wide hover:bg-cream/10 hover:border-cream/60 transition-colors">
+                        Sé parte de la comunidad
+                      </button>
+                    </SignUpButton>
+                  </Show>
+                  <Show when="signed-in">
+                    <Link
+                      href="/home"
+                      className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-cream/35 text-cream text-sm font-medium tracking-wide hover:bg-cream/10 hover:border-cream/60 transition-colors"
+                    >
+                      Ir a la comunidad
+                    </Link>
+                  </Show>
+                </motion.div>
+              </motion.div>
+            </div>
 
             {/* Below lg the portrait is hidden rather than stacked. A hero is
                 a promise plus a way to act on it, and pushing the buttons
@@ -495,11 +487,6 @@ export function LandingPage({
               />
             </motion.div>
           </div>
-        </div>
-
-        <div className="relative hidden sm:flex items-center gap-3 self-end pb-8 pe-[var(--shell-gutter)] text-[0.65rem] tracking-[0.2em] uppercase text-cream/65">
-          Scroll
-          <span className="w-px h-9 bg-cream/35" />
         </div>
       </div>
 
