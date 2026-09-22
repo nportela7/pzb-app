@@ -199,6 +199,7 @@ const PATHS = [
     action: "Ver el proceso",
     href: "/coaching",
     image: "/images/pilar-reading.jpg",
+    imagePosition: "50% 28%",
   },
   {
     key: "empresas",
@@ -209,6 +210,7 @@ const PATHS = [
     action: "Conocer Zere Studio",
     href: "/zere-studio",
     image: "/images/pilar-speaking.jpg",
+    imagePosition: "62% 30%",
   },
   {
     key: "comunidad",
@@ -219,6 +221,7 @@ const PATHS = [
     action: "Ver los próximos eventos",
     href: "/eventos",
     image: "/images/community-beach-night.jpg",
+    imagePosition: "50% 50%",
   },
 ];
 
@@ -662,6 +665,7 @@ export function LandingPage({
                         fill
                         sizes="(min-width: 640px) 40vw, 100vw"
                         className="object-cover"
+                        style={{ objectPosition: path.imagePosition }}
                       />
                       <div
                         className={`pointer-events-none absolute inset-0 bg-gradient-to-r ${tone.imageVeil} to-transparent sm:w-2/5`}
