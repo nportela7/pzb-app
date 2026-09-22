@@ -195,27 +195,30 @@ const PATHS = [
     kicker: "Para ti",
     title: "Quiero editar mi vida",
     body: "Seis meses de acompañamiento 1:1 sobre identidad, imagen y decisiones. Un solo expediente que se abre, se documenta y se cierra con un plan que se sostiene solo.",
+    tags: ["6 meses · 1:1", "3 fases", "11 años de método"],
     action: "Ver el proceso",
     href: "/coaching",
-    image: "/images/pilar-portrait.jpg",
+    image: "/images/pilar-reading.jpg",
   },
   {
     key: "empresas",
     kicker: "Para tu empresa",
     title: "Lidero un equipo",
     body: "Talleres, cenas corporativas, retiros y experiencias diseñadas por Zere Studio. Momentos curados que dejan marca en quien asiste y en la cultura que construye.",
+    tags: ["4 formatos", "A medida"],
     action: "Conocer Zere Studio",
     href: "/zere-studio",
-    image: "/images/zere-water-ripple.jpg",
+    image: "/images/pilar-speaking.jpg",
   },
   {
     key: "comunidad",
     kicker: "Para tu red",
     title: "Quiero rodearme mejor",
     body: "Un directorio de socias para encontrarse, colaborar y recomendarse entre sí, más un calendario de eventos para verse fuera de la pantalla.",
+    tags: ["275+ socias", "Eventos cada mes"],
     action: "Ver los próximos eventos",
     href: "/eventos",
-    image: "/images/silhouette-sunset.jpg",
+    image: "/images/community-beach-night.jpg",
   },
 ];
 
@@ -226,7 +229,16 @@ const PATHS = [
  */
 const PATH_TONES: Record<
   string,
-  { card: string; kicker: string; title: string; body: string; cta: string }
+  {
+    card: string;
+    kicker: string;
+    title: string;
+    body: string;
+    cta: string;
+    tag: string;
+    watermark: string;
+    imageVeil: string;
+  }
 > = {
   coaching: {
     card: "bg-earth-brown",
@@ -234,6 +246,9 @@ const PATH_TONES: Record<
     title: "text-cream",
     body: "text-cream/75",
     cta: "bg-cream text-earth-brown hover:bg-beige-sand",
+    tag: "border-cream/30 text-cream/85",
+    watermark: "text-cream/[0.08]",
+    imageVeil: "from-earth-brown/35",
   },
   empresas: {
     card: "bg-zere-sky",
@@ -241,6 +256,9 @@ const PATH_TONES: Record<
     title: "text-zere-ink",
     body: "text-zere-ink/75",
     cta: "bg-zere-deep text-cream hover:bg-zere-ink",
+    tag: "border-zere-deep/30 text-zere-deep",
+    watermark: "text-zere-deep/[0.09]",
+    imageVeil: "from-zere-deep/30",
   },
   comunidad: {
     card: "bg-beige-sand",
@@ -248,6 +266,9 @@ const PATH_TONES: Record<
     title: "text-earth-brown",
     body: "text-charcoal/80",
     cta: "bg-earth-brown text-cream hover:bg-charcoal",
+    tag: "border-earth-brown/30 text-earth-brown",
+    watermark: "text-earth-brown/10",
+    imageVeil: "from-earth-brown/30",
   },
 };
 
@@ -587,9 +608,16 @@ export function LandingPage({
                   style={{ top: `${5.5 + i * 2.75}rem` }}
                 >
                   <article
-                    className={`grid overflow-hidden rounded-3xl shadow-[0_-8px_40px_-24px_rgba(54,54,54,0.45)] sm:min-h-[62vh] sm:grid-cols-[1fr_0.8fr] ${tone.card}`}
+                    className={`relative grid overflow-hidden rounded-3xl shadow-[0_-8px_40px_-24px_rgba(54,54,54,0.45)] sm:min-h-[62vh] sm:grid-cols-[1fr_0.8fr] ${tone.card}`}
                   >
-                    <div className="flex flex-col justify-center p-8 sm:p-12 sm:py-14">
+                    <span
+                      aria-hidden
+                      className={`pointer-events-none absolute left-6 top-2 font-serif text-[7rem] italic leading-none sm:left-10 ${tone.watermark}`}
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+
+                    <div className="relative flex flex-col justify-center p-8 sm:p-12 sm:py-14">
                       <p
                         className={`text-[0.68rem] uppercase tracking-[0.22em] ${tone.kicker}`}
                       >
@@ -603,6 +631,16 @@ export function LandingPage({
                       <p className={`mt-5 max-w-md leading-relaxed ${tone.body}`}>
                         {path.body}
                       </p>
+                      <div className="mt-6 flex flex-wrap gap-2.5">
+                        {path.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className={`rounded-full border px-3.5 py-1.5 text-xs font-medium ${tone.tag}`}
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                       <Link
                         href={path.href}
                         className={`group mt-9 inline-flex items-center gap-2 self-start rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition-colors ${tone.cta}`}
@@ -624,6 +662,9 @@ export function LandingPage({
                         fill
                         sizes="(min-width: 640px) 40vw, 100vw"
                         className="object-cover"
+                      />
+                      <div
+                        className={`pointer-events-none absolute inset-0 bg-gradient-to-r ${tone.imageVeil} to-transparent sm:w-2/5`}
                       />
                     </div>
                   </article>
