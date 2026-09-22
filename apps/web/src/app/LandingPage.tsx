@@ -611,7 +611,7 @@ export function LandingPage({
                   style={{ top: `${5.5 + i * 2.75}rem` }}
                 >
                   <article
-                    className={`relative grid overflow-hidden rounded-3xl shadow-[0_-8px_40px_-24px_rgba(54,54,54,0.45)] sm:min-h-[62vh] sm:grid-cols-[1fr_0.8fr] ${tone.card}`}
+                    className={`relative grid overflow-hidden rounded-3xl shadow-[0_-8px_40px_-24px_rgba(54,54,54,0.45)] sm:min-h-[74vh] sm:grid-cols-[1fr_0.8fr] ${tone.card}`}
                   >
                     <span
                       aria-hidden
