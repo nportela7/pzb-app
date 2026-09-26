@@ -285,18 +285,30 @@ const OUTCOMES = [
     id: "mapa",
     statement: "Tienes un mapa claro de qué conservar y qué soltar.",
     phase: "Fase 1 · Descubrir y Explorar",
+    image: "/images/outcomes-descubrir.jpg",
+    imagePosition: "50% 30%",
+    veil: "linear-gradient(180deg, rgba(20,19,17,.55) 0%, rgba(20,19,17,.35) 45%, rgba(20,19,17,.92) 100%)",
+    eyebrowClass: "text-cream",
   },
   {
     id: "decisiones",
     statement:
       "Tus decisiones dejan de venir de la exigencia y pasan a venir de la elección.",
     phase: "Fase 2 · Editar y Reescribir",
+    image: "/images/outcomes-editar.jpg",
+    imagePosition: "60% 40%",
+    veil: "linear-gradient(180deg, rgba(45,49,39,.55) 0%, rgba(81,85,68,.4) 45%, rgba(35,38,30,.92) 100%)",
+    eyebrowClass: "text-cream",
   },
   {
     id: "imagen",
     statement:
       "Tu imagen deja de ser una sesión aparte y corre en paralelo a quién estás siendo.",
     phase: "Fase 3 · Integrar y Sostener",
+    image: "/images/outcomes-integrar.jpg",
+    imagePosition: "35% 40%",
+    veil: "linear-gradient(180deg, rgba(89,68,52,.45) 0%, rgba(89,68,52,.3) 45%, rgba(60,44,32,.92) 100%)",
+    eyebrowClass: "text-beige-sand",
   },
 ];
 
@@ -679,50 +691,67 @@ export function LandingPage({
         </div>
       </section>
 
-      {/* Qué cambia — the destination, stated plainly */}
-      <section
-        className="relative overflow-hidden py-16 sm:py-24 bg-cover bg-center text-cream"
-        style={{ backgroundImage: "url('/images/close-up-green-jade-texture.jpg')" }}
-      >
-        <div className="absolute inset-0 bg-black/80" aria-hidden="true" />
-        <Grain opacity={1} />
-        <div className="shell relative z-10">
-          <Reveal className="max-w-2xl">
-            <h2 className="font-serif text-3xl sm:text-5xl leading-[1.05] text-balance">
-              A los seis meses,{" "}
+      {/* Qué cambia — the destination, stated plainly, one photo per phase */}
+      <section className="relative overflow-hidden bg-[#242220] text-cream">
+        <div className="text-center px-6 sm:px-10 pt-16 sm:pt-20 pb-10 sm:pb-12">
+          <Reveal>
+            <h2 className="font-serif text-3xl sm:text-5xl leading-[1.15] text-balance max-w-xl mx-auto">
+              A los seis meses, ¿
               <span className="italic font-normal text-beige-sand">
-                qué es distinto
+                qué es distinto?
               </span>
             </h2>
           </Reveal>
-          <motion.ul
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.15 }}
-            className="mt-12 flex flex-col"
-          >
-            {OUTCOMES.map((outcome, i) => (
-              <motion.li
-                key={outcome.id}
-                variants={fadeUp}
-                className={`py-8 ${i === 0 ? "border-t border-cream/15" : ""} border-b border-cream/15`}
+        </div>
+
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.15 }}
+          className="grid sm:grid-cols-3"
+        >
+          {OUTCOMES.map((outcome, i) => (
+            <motion.div
+              key={outcome.id}
+              variants={fadeUp}
+              className="relative flex flex-col justify-between min-h-[45vh] sm:min-h-[68vh] p-8 sm:p-10 overflow-hidden"
+            >
+              <Image
+                src={outcome.image}
+                alt=""
+                fill
+                sizes="(min-width: 640px) 34vw, 100vw"
+                className="object-cover"
+                style={{ objectPosition: outcome.imagePosition }}
+              />
+              <div
+                className="absolute inset-0"
+                style={{ background: outcome.veil }}
+                aria-hidden="true"
+              />
+              <p
+                className={`relative text-[0.88rem] tracking-[0.1em] uppercase font-semibold ${outcome.eyebrowClass}`}
               >
-                <p className="font-serif text-2xl sm:text-[2.1rem] leading-snug text-cream text-balance max-w-3xl">
-                  {outcome.statement}
-                </p>
-                <p className="mt-4 text-[0.7rem] uppercase tracking-[0.2em] text-cream/75">
-                  {outcome.phase}
-                </p>
-              </motion.li>
-            ))}
-          </motion.ul>
-          <Reveal className="mt-12">
+                {outcome.phase}
+              </p>
+              <p className="relative font-serif text-xl sm:text-2xl leading-snug text-balance">
+                {outcome.statement}
+              </p>
+              <span className="relative text-[0.7rem] text-cream/60">
+                {String(i + 1).padStart(2, "0")} / 03
+              </span>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        <div className="bg-earth-brown text-center py-12 sm:py-16">
+          <Reveal>
             <a
               href={DIAGNOSTICO_HREF}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full px-8 py-4 bg-cream text-dark-pine text-sm font-semibold tracking-wide transition-colors hover:bg-beige-sand"
+              className="inline-flex items-center gap-2 rounded-full px-8 py-4 bg-cream text-earth-brown text-sm font-semibold tracking-wide transition-colors hover:bg-beige-sand"
             >
               Quiero llegar ahí
               <span aria-hidden>→</span>
