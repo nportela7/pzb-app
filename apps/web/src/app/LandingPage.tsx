@@ -726,8 +726,12 @@ export function LandingPage({
                 style={{ objectPosition: outcome.imagePosition }}
               />
               <div
-                className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-70"
+                className="absolute inset-0"
                 style={{ background: outcome.veil }}
+                aria-hidden="true"
+              />
+              <div
+                className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/35"
                 aria-hidden="true"
               />
               <p
