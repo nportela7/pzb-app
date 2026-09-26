@@ -313,10 +313,8 @@ const OUTCOMES = [
 ];
 
 const PROGRAM_FACTS = [
-  { label: "Duración", value: "6 meses" },
-  { label: "Formato", value: "8 sesiones · 90 min" },
-  { label: "Canal", value: "WhatsApp, L–V 10–19h" },
-  { label: "Confidencialidad", value: "Total" },
+  { value: "6", label: "Meses" },
+  { value: "8", label: "Sesiones de 90 min" },
 ];
 
 const PHASES = [
@@ -339,6 +337,10 @@ const PHASES = [
     result: "La imagen deja de ser una sesión aparte y corre en paralelo.",
   },
 ];
+
+/** Reused as the pull-quote over the offer photo — same words as the
+ * carousel below, repeated deliberately right at the decision point. */
+const FEATURED_TESTIMONIAL = TESTIMONIALS.find((t) => t.id === "decisiones");
 
 const ADDON_DIMENSIONS = [
   {
@@ -768,7 +770,7 @@ export function LandingPage({
       <section className="relative py-16 sm:py-24 bg-earth-brown text-cream">
         <Grain opacity={0.07} />
         <div className="shell relative">
-          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-start">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <Reveal>
               <Eyebrow>
                 <span className="text-cream/70">Programa principal</span>
@@ -779,24 +781,32 @@ export function LandingPage({
                   Partnership
                 </span>
               </h2>
-              <p className="text-cream/80 text-lg leading-relaxed max-w-lg mb-9">
-                Seis meses trabajando identidad, imagen y decisiones como un
-                solo expediente: se abre, se documenta cada sesión, y se cierra
-                con un plan que se sostiene solo.
+              <p className="text-cream/80 text-lg leading-relaxed max-w-lg mb-8">
+                Identidad, imagen y decisiones como un solo expediente — se
+                abre, se documenta, se cierra con un plan que se sostiene
+                solo.
               </p>
 
-              <dl className="grid grid-cols-2 gap-x-8 gap-y-6 max-w-md mb-10">
-                {PROGRAM_FACTS.map((fact) => (
-                  <div key={fact.label}>
-                    <dt className="text-[0.68rem] tracking-[0.18em] uppercase text-cream/65 mb-1.5">
-                      {fact.label}
-                    </dt>
-                    <dd className="font-serif text-lg text-cream">
-                      {fact.value}
-                    </dd>
+              <div className="flex items-center gap-6 mb-10 pb-9 border-b border-cream/20">
+                {PROGRAM_FACTS.map((fact, i) => (
+                  <div key={fact.label} className="flex items-center gap-6">
+                    {i > 0 && (
+                      <span
+                        aria-hidden
+                        className="w-px h-9 bg-cream/20 shrink-0"
+                      />
+                    )}
+                    <div>
+                      <p className="font-serif text-2xl text-beige-sand leading-none">
+                        {fact.value}
+                      </p>
+                      <p className="text-[0.62rem] tracking-[0.14em] uppercase text-cream/60 mt-1.5">
+                        {fact.label}
+                      </p>
+                    </div>
                   </div>
                 ))}
-              </dl>
+              </div>
 
               <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
                 <a
@@ -817,51 +827,52 @@ export function LandingPage({
               </div>
             </Reveal>
 
-            <motion.ol
-              variants={stagger}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              className="flex flex-col"
-            >
+            <Reveal className="relative aspect-[4/5] rounded-md overflow-hidden shadow-[0_30px_60px_-20px_rgba(20,16,12,0.5)]">
+              <Image
+                src="/images/pilar-reading.jpg"
+                alt=""
+                fill
+                sizes="(min-width: 1024px) 40vw, 90vw"
+                className="object-cover"
+                style={{ objectPosition: "50% 15%" }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/65 to-charcoal/0 to-45%" />
+              {FEATURED_TESTIMONIAL && (
+                <div className="absolute left-6 right-6 bottom-6 bg-cream/95 rounded-md p-6 shadow-[0_20px_40px_-16px_rgba(36,31,26,0.5)]">
+                  <p className="font-serif italic text-lg leading-snug text-earth-brown">
+                    &ldquo;{FEATURED_TESTIMONIAL.quote}&rdquo;
+                  </p>
+                  <p className="text-[0.65rem] tracking-[0.14em] uppercase text-slate mt-3">
+                    Clienta de The Alignment Partnership
+                  </p>
+                </div>
+              )}
+            </Reveal>
+          </div>
+
+          <Reveal className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 mt-14 pt-10 border-t border-cream/15">
+            <div className="flex-1 flex items-center flex-wrap gap-x-0 gap-y-2 text-[0.68rem] tracking-[0.14em] uppercase">
               {PHASES.map((phase, i) => (
-                <motion.li
-                  key={phase.number}
-                  variants={fadeUp}
-                  className={`grid grid-cols-[3.25rem_1fr] sm:grid-cols-[4rem_1fr] gap-4 sm:gap-6 py-6 ${i === 0 ? "border-t border-cream/15" : ""
-                    } border-b border-cream/15`}
-                >
-                  <span className="relative">
+                <span key={phase.number} className="flex items-center">
+                  {i > 0 && (
                     <span
                       aria-hidden
-                      className="absolute left-[0.6rem] top-[0.3em] w-1.5 h-1.5 rounded-full bg-cream"
+                      className="w-8 sm:w-14 h-px bg-cream/25 mx-3"
                     />
-                    {i < PHASES.length - 1 && (
-                      <span
-                        aria-hidden
-                        className="absolute left-[0.85rem] top-[1.15em] bottom-[-1.5rem] w-px bg-cream/15"
-                      />
-                    )}
-                    <span
-                      className="font-serif italic text-4xl leading-none text-transparent"
-                      style={{ WebkitTextStroke: "1.2px rgba(249,247,242,0.42)" }}
-                    >
-                      {phase.number}
-                    </span>
+                  )}
+                  <span className={i === 0 ? "text-beige-sand" : "text-cream/50"}>
+                    {phase.number} {phase.title.split(" y ")[0]}
                   </span>
-                  <div>
-                    <h3 className="text-lg mb-2">{phase.title}</h3>
-                    <p className="text-sm text-cream/75 leading-relaxed mb-3">
-                      {phase.body}
-                    </p>
-                    <p className="text-sm font-serif italic text-beige-sand leading-relaxed">
-                      {phase.result}
-                    </p>
-                  </div>
-                </motion.li>
+                </span>
               ))}
-            </motion.ol>
-          </div>
+            </div>
+            <Link
+              href="/coaching"
+              className="text-sm text-beige-sand border-b border-beige-sand/50 hover:border-beige-sand transition-colors whitespace-nowrap"
+            >
+              Ver el proceso completo →
+            </Link>
+          </Reveal>
         </div>
       </section>
 
