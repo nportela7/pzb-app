@@ -715,30 +715,30 @@ export function LandingPage({
             <motion.div
               key={outcome.id}
               variants={fadeUp}
-              className="relative flex flex-col justify-between min-h-[45vh] sm:min-h-[68vh] p-8 sm:p-10 overflow-hidden"
+              className="group relative flex flex-col justify-between min-h-[45vh] sm:min-h-[68vh] p-8 sm:p-10 overflow-hidden cursor-default"
             >
               <Image
                 src={outcome.image}
                 alt=""
                 fill
                 sizes="(min-width: 640px) 34vw, 100vw"
-                className="object-cover"
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                 style={{ objectPosition: outcome.imagePosition }}
               />
               <div
-                className="absolute inset-0"
+                className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-70"
                 style={{ background: outcome.veil }}
                 aria-hidden="true"
               />
               <p
-                className={`relative text-[0.88rem] tracking-[0.1em] uppercase font-semibold ${outcome.eyebrowClass}`}
+                className={`relative text-[0.88rem] tracking-[0.1em] uppercase font-semibold transition-[letter-spacing] duration-500 group-hover:tracking-[0.18em] ${outcome.eyebrowClass}`}
               >
                 {outcome.phase}
               </p>
-              <p className="relative font-serif text-xl sm:text-2xl leading-snug text-balance">
+              <p className="relative font-serif text-xl sm:text-2xl leading-snug text-balance transition-transform duration-500 group-hover:-translate-y-1">
                 {outcome.statement}
               </p>
-              <span className="relative text-[0.7rem] text-cream/60">
+              <span className="relative text-[0.7rem] text-cream/60 transition-colors duration-500 group-hover:text-cream/90">
                 {String(i + 1).padStart(2, "0")} / 03
               </span>
             </motion.div>
