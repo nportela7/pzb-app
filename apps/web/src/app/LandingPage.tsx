@@ -863,7 +863,7 @@ export function LandingPage({
           ))}
         </motion.div>
 
-        <div className="bg-earth-brown text-center py-12 sm:py-16">
+        <div className="text-center py-12 sm:py-16">
           <Reveal>
             <a
               href={DIAGNOSTICO_HREF}
