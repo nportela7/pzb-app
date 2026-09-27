@@ -693,80 +693,9 @@ export function LandingPage({
         </div>
       </section>
 
-      {/* Qué cambia — the destination, stated plainly, one photo per phase */}
-      <section className="relative overflow-hidden bg-[#242220] text-cream">
-        <div className="text-center px-6 sm:px-10 pt-16 sm:pt-20 pb-10 sm:pb-12">
-          <Reveal>
-            <h2 className="font-serif text-3xl sm:text-5xl leading-[1.15] text-balance max-w-xl mx-auto">
-              A los seis meses, ¿
-              <span className="italic font-normal text-beige-sand">
-                qué es distinto?
-              </span>
-            </h2>
-          </Reveal>
-        </div>
-
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.15 }}
-          className="grid sm:grid-cols-3"
-        >
-          {OUTCOMES.map((outcome, i) => (
-            <motion.div
-              key={outcome.id}
-              variants={fadeUp}
-              className="group relative flex flex-col justify-between min-h-[45vh] sm:min-h-[68vh] p-8 sm:p-10 overflow-hidden cursor-default"
-            >
-              <Image
-                src={outcome.image}
-                alt=""
-                fill
-                sizes="(min-width: 640px) 34vw, 100vw"
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                style={{ objectPosition: outcome.imagePosition }}
-              />
-              <div
-                className="absolute inset-0"
-                style={{ background: outcome.veil }}
-                aria-hidden="true"
-              />
-              <div
-                className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/35"
-                aria-hidden="true"
-              />
-              <p
-                className={`relative text-[0.88rem] tracking-[0.1em] uppercase font-semibold transition-[letter-spacing] duration-500 group-hover:tracking-[0.18em] ${outcome.eyebrowClass}`}
-              >
-                {outcome.phase}
-              </p>
-              <p className="relative font-serif text-xl sm:text-2xl leading-snug text-balance transition-transform duration-500 group-hover:-translate-y-1">
-                {outcome.statement}
-              </p>
-              <span className="relative text-[0.7rem] text-cream/60 transition-colors duration-500 group-hover:text-cream/90">
-                {String(i + 1).padStart(2, "0")} / 03
-              </span>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        <div className="bg-earth-brown text-center py-12 sm:py-16">
-          <Reveal>
-            <a
-              href={DIAGNOSTICO_HREF}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full px-8 py-4 bg-cream text-earth-brown text-sm font-semibold tracking-wide transition-colors hover:bg-beige-sand"
-            >
-              Quiero llegar ahí
-              <span aria-hidden>→</span>
-            </a>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* The Alignment Partnership — the flagship offer */}
+      {/* The Alignment Partnership — the flagship offer, introduced before
+          the "qué cambia" triptych so the phases below have a named
+          program to belong to instead of floating free. */}
       <section className="relative py-16 sm:py-24 bg-earth-brown text-cream">
         <Grain opacity={0.07} />
         <div className="shell relative">
@@ -872,6 +801,79 @@ export function LandingPage({
             >
               Ver el proceso completo →
             </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Qué cambia — the destination, stated plainly, one photo per phase */}
+      <section className="relative overflow-hidden bg-[#242220] text-cream">
+        <div className="text-center px-6 sm:px-10 pt-16 sm:pt-20 pb-10 sm:pb-12">
+          <Reveal>
+            <h2 className="font-serif text-3xl sm:text-5xl leading-[1.15] text-balance max-w-xl mx-auto">
+              A los seis meses, ¿
+              <span className="italic font-normal text-beige-sand">
+                qué es distinto?
+              </span>
+            </h2>
+          </Reveal>
+        </div>
+
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.15 }}
+          className="grid sm:grid-cols-3"
+        >
+          {OUTCOMES.map((outcome, i) => (
+            <motion.div
+              key={outcome.id}
+              variants={fadeUp}
+              className="group relative flex flex-col justify-between min-h-[45vh] sm:min-h-[68vh] p-8 sm:p-10 overflow-hidden cursor-default"
+            >
+              <Image
+                src={outcome.image}
+                alt=""
+                fill
+                sizes="(min-width: 640px) 34vw, 100vw"
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                style={{ objectPosition: outcome.imagePosition }}
+              />
+              <div
+                className="absolute inset-0"
+                style={{ background: outcome.veil }}
+                aria-hidden="true"
+              />
+              <div
+                className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/35"
+                aria-hidden="true"
+              />
+              <p
+                className={`relative text-[0.88rem] tracking-[0.1em] uppercase font-semibold transition-[letter-spacing] duration-500 group-hover:tracking-[0.18em] ${outcome.eyebrowClass}`}
+              >
+                {outcome.phase}
+              </p>
+              <p className="relative font-serif text-xl sm:text-2xl leading-snug text-balance transition-transform duration-500 group-hover:-translate-y-1">
+                {outcome.statement}
+              </p>
+              <span className="relative text-[0.7rem] text-cream/60 transition-colors duration-500 group-hover:text-cream/90">
+                {String(i + 1).padStart(2, "0")} / 03
+              </span>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        <div className="bg-earth-brown text-center py-12 sm:py-16">
+          <Reveal>
+            <a
+              href={DIAGNOSTICO_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full px-8 py-4 bg-cream text-earth-brown text-sm font-semibold tracking-wide transition-colors hover:bg-beige-sand"
+            >
+              Quiero llegar ahí
+              <span aria-hidden>→</span>
+            </a>
           </Reveal>
         </div>
       </section>
