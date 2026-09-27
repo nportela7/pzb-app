@@ -757,7 +757,7 @@ export function LandingPage({
               </div>
             </Reveal>
 
-            <Reveal className="relative aspect-[4/5] rounded-md overflow-hidden shadow-[0_30px_60px_-20px_rgba(20,16,12,0.5)]">
+            <Reveal className="relative aspect-[4/5] max-w-sm mx-auto lg:mx-0 rounded-md overflow-hidden shadow-[0_30px_60px_-20px_rgba(20,16,12,0.5)]">
               <Image
                 src="/images/pilar-reading.jpg"
                 alt=""
