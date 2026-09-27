@@ -25,31 +25,48 @@ export type Testimonial = {
  *   2. Con nombre   → agregar `author` (+ `context` y `photoUrl` si hay).
  *   3. Con video    → agregar `video: { src, poster }`. Máximo impacto.
  *
- * Las citas de abajo son textuales, tal como estaban en /coaching. Solo la
- * primera llegó con permiso para usar el nombre.
+ * Las cinco socias de abajo dieron permiso explícito (confirmado con
+ * Pilar) para publicar su cita con su nombre y foto reales.
  */
 export const TESTIMONIALS: Testimonial[] = [
   {
-    id: "jeanette",
+    id: "alexia",
     quote:
       "Llevo tres años consecutivos haciendo la sesión de Vision Board con Pilar Zambrano y, honestamente, se ha convertido en uno de mis momentos más estratégicos del año.",
-    author: "Jeanette Jossbell",
-    // Both facts come from her own words above, not from us.
-    context: "Vision Board Session · 3 años consecutivos",
+    author: "Alexia O",
+    context: "Vision Board",
+    photoUrl: "/images/testimonio-alexia.jpg",
   },
   {
-    id: "voz-publica",
+    id: "andrea",
     quote:
       "El coaching de Pilar fue más allá de la vestimenta, me ayudó a sentirme segura conmigo misma y a tener las herramientas para hablar en público.",
+    author: "Andrea de la Garza",
+    context: "Alignment Partnership",
+    photoUrl: "/images/testimonio-andrea.jpg",
   },
   {
-    id: "estructura-cercania",
+    id: "antonia",
     quote:
       "Trabajar con Pili fue una experiencia súper valiosa. Tiene ese balance entre estructura y cercanía que hace el proceso muy humano.",
+    author: "Antonia Rojas",
+    context: "AP",
+    photoUrl: "/images/testimonio-antonia.jpg",
   },
   {
-    id: "decisiones",
+    id: "bea",
     quote:
       "Mis sesiones han sido vitales para encontrar respuestas que me ayudaron a tomar importantes decisiones en mi vida.",
+    author: "Bea",
+    context: "VB",
+    photoUrl: "/images/testimonio-bea.png",
+  },
+  {
+    id: "erika",
+    quote:
+      "El haber decidido tener esa primera conversación con Pilar fue lo mejor que pude haber hecho. Hoy, 6 meses después, tengo mucho más claro mi ruta de vida.",
+    author: "Erika Hernández",
+    context: "AP",
+    photoUrl: "/images/testimonio-erika.jpg",
   },
 ];

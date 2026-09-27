@@ -340,7 +340,7 @@ const PHASES = [
 
 /** Reused as the pull-quote over the offer photo — same words as the
  * carousel below, repeated deliberately right at the decision point. */
-const FEATURED_TESTIMONIAL = TESTIMONIALS.find((t) => t.id === "decisiones");
+const FEATURED_TESTIMONIAL = TESTIMONIALS.find((t) => t.id === "bea");
 
 const ADDON_DIMENSIONS = [
   {
@@ -772,7 +772,7 @@ export function LandingPage({
                     &ldquo;{FEATURED_TESTIMONIAL.quote}&rdquo;
                   </p>
                   <p className="text-[0.65rem] tracking-[0.14em] uppercase text-slate mt-3">
-                    Clienta de The Alignment Partnership
+                    {FEATURED_TESTIMONIAL.author} · The Alignment Partnership
                   </p>
                 </div>
               )}
