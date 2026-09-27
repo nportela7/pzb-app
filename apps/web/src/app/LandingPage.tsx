@@ -194,7 +194,7 @@ const PATHS = [
     key: "coaching",
     kicker: "Para ti",
     title: "Quiero editar mi vida",
-    body: "Seis meses de acompañamiento 1:1 sobre identidad, imagen y decisiones. Un solo expediente que se abre, se documenta y se cierra con un plan que se sostiene solo.",
+    body: "Seis meses de acompañamiento 1:1 sobre identidad, imagen y decisiones, para dejar de posponer la vida que quieres vivir.",
     tags: ["6 meses · 1:1", "3 fases", "11 años de método"],
     action: "Ver el proceso",
     href: "/coaching",
