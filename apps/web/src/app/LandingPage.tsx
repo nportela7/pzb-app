@@ -24,6 +24,7 @@ import {
   useReducedMotion,
   useScroll,
   useTransform,
+  type MotionValue,
 } from "motion/react";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -131,6 +132,42 @@ function Ticker({
     </div>
   );
 }
+
+/**
+ * One letter of the manifesto headline, appearing as the page scrolls past
+ * it — like it's being typed. `progress` is the shared scroll motion value;
+ * each letter just claims its own slice of it, so there's one scroll
+ * listener for the whole word instead of one per letter.
+ */
+function RevealLetter({
+  char,
+  index,
+  total,
+  progress,
+  reduce,
+}: {
+  char: string;
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+  reduce: boolean | null;
+}) {
+  const start = index / total;
+  const end = Math.min(1, start + 1 / total / 2);
+  const opacity = useTransform(
+    progress,
+    reduce ? [0, 1] : [start, end],
+    reduce ? [1, 1] : [0, 1],
+  );
+  return (
+    <motion.span aria-hidden style={{ opacity: reduce ? 1 : opacity }}>
+      {char === " " ? " " : char}
+    </motion.span>
+  );
+}
+
+/** "Reescribe" + "tu vida" — kept in sync with the manifesto's own strings. */
+const MANIFESTO_LETTER_COUNT = "Reescribe".length + "tu vida".length;
 
 const DIAGNOSTICO_HREF = whatsappHref(WHATSAPP_MESSAGES.diagnostico);
 const EMPRESAS_HREF = whatsappHref(WHATSAPP_MESSAGES.empresas);
@@ -410,6 +447,12 @@ export function LandingPage({
   );
   const heroLine = shouldReduceMotion ? lineRevealReduced : lineReveal;
 
+  const manifestoRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: manifestoProgress } = useScroll({
+    target: manifestoRef,
+    offset: ["start 0.9", "start 0.4"],
+  });
+
   // Repeated well past what any real screen width needs, so the
   // "-50%" loop point never lands on a visible gap between names.
   const reelFirstHalf = Array(8)
@@ -537,7 +580,10 @@ export function LandingPage({
       {/* Manifiesto — a breath, not a chapter. Just the two-line statement
           and an echo of rings behind it; no supporting text, on purpose. */}
       <section className="relative overflow-hidden bg-cream pt-16 pb-4 sm:pt-20 sm:pb-6">
-        <div className="shell relative flex items-center justify-center">
+        <div
+          ref={manifestoRef}
+          className="shell relative flex items-center justify-center"
+        >
           <span
             aria-hidden
             className="zere-ripple-ring absolute left-[65%] bottom-0 h-80 w-80 -translate-x-1/2 translate-y-1/2 rounded-full border border-redline/50 opacity-70 sm:h-[34rem] sm:w-[34rem] lg:h-[48rem] lg:w-[48rem] [animation:zere-ripple_4.5s_ease-out_infinite]"
@@ -554,9 +600,33 @@ export function LandingPage({
             className="relative font-serif font-bold uppercase leading-[0.8] tracking-[0.015em] text-center text-earth-brown"
             style={{ fontSize: "clamp(3.5rem, 11vw, 9.5rem)" }}
           >
-            Reescribe
+            {"Reescribe".split("").map((char, i) => (
+              <RevealLetter
+                key={`l1-${i}`}
+                char={char}
+                index={i}
+                total={MANIFESTO_LETTER_COUNT}
+                progress={manifestoProgress}
+                reduce={shouldReduceMotion}
+              />
+            ))}
             <br />
-            tu vida
+            {"tu vida".split("").map((char, i) => (
+              <RevealLetter
+                key={`l2-${i}`}
+                char={char}
+                index={"Reescribe".length + i}
+                total={MANIFESTO_LETTER_COUNT}
+                progress={manifestoProgress}
+                reduce={shouldReduceMotion}
+              />
+            ))}
+            <span
+              aria-hidden
+              className="type-cursor ml-[0.02em] inline-block w-[0.06em] bg-redline align-[-0.06em]"
+            >
+              {" "}
+            </span>
           </p>
         </div>
       </section>
