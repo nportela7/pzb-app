@@ -627,6 +627,7 @@ export function LandingPage({
                   <article
                     className={`relative grid overflow-hidden rounded-3xl shadow-[0_-8px_40px_-24px_rgba(54,54,54,0.45)] sm:min-h-[74vh] sm:grid-cols-[1fr_0.8fr] ${tone.card}`}
                   >
+                    <Grain opacity={0.8} />
                     <span
                       aria-hidden
                       className={`pointer-events-none absolute left-6 top-2 font-serif text-[7rem] italic leading-none sm:left-10 ${tone.watermark}`}
