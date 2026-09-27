@@ -33,4 +33,4 @@ export function eventoWhatsappHref(title: string) {
   );
 }
 
-export const INSTAGRAM_URL = "https://www.instagram.com/pilarzambranob/";
+export const INSTAGRAM_URL = "https://www.instagram.com/by.pilarzambranob/";
