@@ -53,7 +53,7 @@ export default async function SobrePilarPage() {
           <div className="relative overflow-hidden rounded-3xl bg-earth-brown">
             <div className="relative aspect-[4/5] sm:aspect-[4/3] lg:aspect-[5/4]">
               <Image
-                src="/images/pilar-portrait.jpg"
+                src="/images/pilar-portrait-2.jpg"
                 alt="Pilar Zambrano B."
                 fill
                 priority

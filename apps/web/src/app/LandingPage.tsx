@@ -166,7 +166,7 @@ const CREDENCIALES = [
  */
 const PILAR_GALLERY: PortraitSlide[] = [
   {
-    src: "/images/pilar-portrait.jpg",
+    src: "/images/pilar-portrait-2.jpg",
     label: "Pilar Zambrano B.",
     alt: "Retrato de Pilar Zambrano B.",
   },
