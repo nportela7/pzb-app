@@ -253,7 +253,7 @@ const PATH_TONES: Record<
     tag: "border-cream/30 text-cream/85",
     watermark: "text-cream/[0.08]",
     imageVeil: "from-earth-brown/35",
-    sheen: "from-cream/[0.08] via-transparent to-charcoal/25",
+    sheen: "from-cream/25 via-transparent to-charcoal/60",
   },
   empresas: {
     card: "bg-zere-sky",
@@ -264,7 +264,7 @@ const PATH_TONES: Record<
     tag: "border-zere-deep/30 text-zere-deep",
     watermark: "text-zere-deep/[0.09]",
     imageVeil: "from-zere-deep/30",
-    sheen: "from-cream/30 via-transparent to-zere-deep/15",
+    sheen: "from-cream/60 via-transparent to-zere-deep/45",
   },
   comunidad: {
     card: "bg-beige-sand",
@@ -275,7 +275,7 @@ const PATH_TONES: Record<
     tag: "border-earth-brown/30 text-earth-brown",
     watermark: "text-earth-brown/10",
     imageVeil: "from-earth-brown/30",
-    sheen: "from-cream/40 via-transparent to-earth-brown/15",
+    sheen: "from-cream/70 via-transparent to-earth-brown/45",
   },
 };
 
