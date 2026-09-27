@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "ui-design-aesthetics": {
+      "source": "nickcrew/claude-cortex",
+      "sourceType": "github",
+      "skillPath": "skills/ui-design-aesthetics/SKILL.md",
+      "computedHash": "c0f50b547dcd4cb969c3787b0e4c4e5fb47396cbf2f4e745aeb4bc8f59b60c68"
+    }
+  }
+}
