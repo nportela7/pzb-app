@@ -733,7 +733,7 @@ export function LandingPage({
                         {path.kicker}
                       </p>
                       <h3
-                        className={`mt-5 font-serif text-3xl leading-tight text-balance sm:text-4xl ${tone.title}`}
+                        className={`mt-5 font-serif font-medium text-4xl leading-tight text-balance sm:text-5xl ${tone.title}`}
                       >
                         {path.title}
                       </h3>
