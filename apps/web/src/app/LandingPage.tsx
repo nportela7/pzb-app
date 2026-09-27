@@ -241,6 +241,7 @@ const PATH_TONES: Record<
     tag: string;
     watermark: string;
     imageVeil: string;
+    sheen: string;
   }
 > = {
   coaching: {
@@ -252,6 +253,7 @@ const PATH_TONES: Record<
     tag: "border-cream/30 text-cream/85",
     watermark: "text-cream/[0.08]",
     imageVeil: "from-earth-brown/35",
+    sheen: "from-cream/[0.08] via-transparent to-charcoal/25",
   },
   empresas: {
     card: "bg-zere-sky",
@@ -262,6 +264,7 @@ const PATH_TONES: Record<
     tag: "border-zere-deep/30 text-zere-deep",
     watermark: "text-zere-deep/[0.09]",
     imageVeil: "from-zere-deep/30",
+    sheen: "from-cream/30 via-transparent to-zere-deep/15",
   },
   comunidad: {
     card: "bg-beige-sand",
@@ -272,6 +275,7 @@ const PATH_TONES: Record<
     tag: "border-earth-brown/30 text-earth-brown",
     watermark: "text-earth-brown/10",
     imageVeil: "from-earth-brown/30",
+    sheen: "from-cream/40 via-transparent to-earth-brown/15",
   },
 };
 
@@ -628,6 +632,10 @@ export function LandingPage({
                     className={`relative grid overflow-hidden rounded-3xl shadow-[0_-8px_40px_-24px_rgba(54,54,54,0.45)] sm:min-h-[74vh] sm:grid-cols-[1fr_0.8fr] ${tone.card}`}
                   >
                     <Grain opacity={0.8} />
+                    <div
+                      aria-hidden
+                      className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${tone.sheen}`}
+                    />
                     <span
                       aria-hidden
                       className={`pointer-events-none absolute left-6 top-2 font-serif text-[7rem] italic leading-none sm:left-10 ${tone.watermark}`}
