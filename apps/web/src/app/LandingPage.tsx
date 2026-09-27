@@ -15,7 +15,6 @@ import { PUBLIC_NAV } from "@/lib/nav";
 import { INSTAGRAM_URL, WHATSAPP_MESSAGES, whatsappHref } from "@/lib/cta";
 import { TestimonialCarousel } from "@/components/TestimonialCarousel";
 import { EventBannerCarousel } from "@/components/EventBannerCarousel";
-import { AnnotatedStatement } from "@/components/AnnotatedStatement";
 import { PortraitGallery, type PortraitSlide } from "@/components/PortraitGallery";
 import type { EventBanner } from "@/lib/event-banner";
 import { TESTIMONIALS } from "@/lib/testimonials";
@@ -535,18 +534,32 @@ export function LandingPage({
       {/* Formación y reconocimiento — authority, immediately after the promise */}
       <Ticker items={CREDENCIALES} tone="dark" />
 
-      {/* Manifiesto — the page marks itself up. Sits between two dark bands
-          on purpose: 02 and 03 were running back to back, and a light,
-          un-numbered interstitial gives the eye somewhere to land before the
-          offer. Un-numbered because it is a breath, not a chapter. */}
-      <AnnotatedStatement
-        tone="paper"
-        lines={["Reescribir", "tu vida"]}
-        circled="Strategic Life Editor"
-        boxed="Las mejores decisiones nunca vienen de la obediencia."
-        arrowed="Identidad, imagen y decisiones: un solo expediente."
-        script="se abre, se documenta y se cierra"
-      />
+      {/* Manifiesto — a breath, not a chapter. Just the two-line statement
+          and an echo of rings behind it; no supporting text, on purpose. */}
+      <section className="relative overflow-hidden bg-cream py-10 sm:py-14">
+        <div className="shell relative flex items-center justify-center">
+          <span
+            aria-hidden
+            className="zere-ripple-ring absolute h-64 w-64 rounded-full border border-redline/50 opacity-70 sm:h-80 sm:w-80 [animation:zere-ripple_4.5s_ease-out_infinite]"
+          />
+          <span
+            aria-hidden
+            className="zere-ripple-ring absolute h-64 w-64 rounded-full border border-redline/50 opacity-70 sm:h-80 sm:w-80 [animation:zere-ripple_4.5s_ease-out_infinite] [animation-delay:1.5s]"
+          />
+          <span
+            aria-hidden
+            className="zere-ripple-ring absolute h-64 w-64 rounded-full border border-redline/50 opacity-70 sm:h-80 sm:w-80 [animation:zere-ripple_4.5s_ease-out_infinite] [animation-delay:3s]"
+          />
+          <p
+            className="relative font-serif font-bold uppercase leading-[0.8] tracking-[-0.03em] text-center text-earth-brown"
+            style={{ fontSize: "clamp(3.5rem, 11vw, 9.5rem)" }}
+          >
+            Reescribe
+            <br />
+            tu vida
+          </p>
+        </div>
+      </section>
 
       {/* Cifras — hard proof, before any poetry */}
       {/* {VISIBLE_PROOF_POINTS.length > 0 && (
