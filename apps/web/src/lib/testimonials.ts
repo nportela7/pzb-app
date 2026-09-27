@@ -46,11 +46,19 @@ export const TESTIMONIALS: Testimonial[] = [
     photoUrl: "/images/testimonio-andrea.jpg",
   },
   {
+    id: "erika",
+    quote:
+      "El haber decidido tener esa primera conversación con Pilar fue lo mejor que pude haber hecho. Hoy, 6 meses después, tengo mucho más claro mi ruta de vida.",
+    author: "Erika Hernández",
+    context: "Alignment Partnership",
+    photoUrl: "/images/testimonio-erika.jpg",
+  },
+  {
     id: "antonia",
     quote:
       "Trabajar con Pili fue una experiencia súper valiosa. Tiene ese balance entre estructura y cercanía que hace el proceso muy humano.",
     author: "Antonia Rojas",
-    context: "AP",
+    context: "Alignment Partnership",
     photoUrl: "/images/testimonio-antonia.jpg",
   },
   {
@@ -58,15 +66,7 @@ export const TESTIMONIALS: Testimonial[] = [
     quote:
       "Mis sesiones han sido vitales para encontrar respuestas que me ayudaron a tomar importantes decisiones en mi vida.",
     author: "Bea",
-    context: "VB",
+    context: "Vision Board",
     photoUrl: "/images/testimonio-bea.png",
-  },
-  {
-    id: "erika",
-    quote:
-      "El haber decidido tener esa primera conversación con Pilar fue lo mejor que pude haber hecho. Hoy, 6 meses después, tengo mucho más claro mi ruta de vida.",
-    author: "Erika Hernández",
-    context: "AP",
-    photoUrl: "/images/testimonio-erika.jpg",
   },
 ];
