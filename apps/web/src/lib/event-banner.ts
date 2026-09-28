@@ -8,7 +8,7 @@ import { EVENT_TYPE_LABELS, type EventDoc, type EventType } from "@/models/event
 export const EVENT_TYPE_COVERS: Record<EventType, string> = {
   taller: "/images/close-up-green-jade-texture.jpg",
   cena: "/images/horse-field-portrait.jpg",
-  retiro: "/images/silhouette-sunset.jpg",
+  retiro: "/images/eventos-retiro-zere.jpg",
   sesion_abierta: "/images/pilar-portrait.jpg",
   zere_studio: "/images/zere-water-ripple.jpg",
 };
