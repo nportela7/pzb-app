@@ -7,12 +7,12 @@ import "./globals.css";
 const fraunces = Fraunces({
   variable: "--font-fraunces",
   subsets: ["latin"],
-  // 700 exists for one job: the giant "Reescribe tu vida" manifesto line on
-  // the landing page. At that scale 500 reads as a caption blown up, not as
-  // a statement. Drop it and the browser fakes the bold by smearing the
-  // 500, which on a serif is obvious.
-  weight: ["300", "400", "500", "700"],
+  // Variable (not a fixed weight list) so the SOFT/WONK axes below are
+  // available — they're used by the giant "Reescribe tu vida" manifesto
+  // line on the landing page for its hand-set, slightly irregular cut.
+  weight: "variable",
   style: ["normal", "italic"],
+  axes: ["opsz", "SOFT", "WONK"],
 });
 
 const sourceSans = Source_Sans_3({

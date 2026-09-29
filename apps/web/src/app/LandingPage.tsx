@@ -597,8 +597,11 @@ export function LandingPage({
             className="zere-ripple-ring absolute left-[65%] bottom-0 h-80 w-80 -translate-x-1/2 translate-y-1/2 rounded-full border border-redline/50 opacity-70 sm:h-[34rem] sm:w-[34rem] lg:h-[48rem] lg:w-[48rem] [animation:zere-ripple_4.5s_ease-out_infinite] [animation-delay:3s]"
           />
           <p
-            className="relative font-serif font-bold uppercase leading-[0.8] tracking-[0.015em] text-center text-earth-brown"
-            style={{ fontSize: "clamp(3.5rem, 11vw, 9.5rem)" }}
+            className="relative font-serif font-semibold uppercase leading-[0.8] tracking-[0.015em] text-center text-earth-brown"
+            style={{
+              fontSize: "clamp(3.5rem, 11vw, 9.5rem)",
+              fontVariationSettings: "'wght' 600, 'SOFT' 100, 'WONK' 1",
+            }}
           >
             {"Reescribe".split("").map((char, i) => (
               <RevealLetter
