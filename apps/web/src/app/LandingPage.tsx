@@ -979,7 +979,7 @@ export function LandingPage({
         <div className="shell relative">
           <Reveal className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-xl">
-              <p className="font-script text-4xl sm:text-5xl text-earth-brown mb-4">
+              <p className="font-script text-5xl sm:text-6xl text-earth-brown mb-4 [-webkit-text-stroke:0.4px_var(--color-earth-brown)]">
                 Client love
               </p>
               <h2 className="text-3xl sm:text-4xl text-charcoal text-balance">
