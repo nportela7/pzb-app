@@ -49,7 +49,7 @@ function Media({
 
   if (video) {
     return (
-      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-earth-brown">
+      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-earth-brown shadow-[0_22px_40px_-18px_rgba(54,44,34,0.4)]">
         {playing ? (
           <video
             src={video.src}
@@ -85,7 +85,7 @@ function Media({
 
   if (photoUrl) {
     return (
-      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-beige-sand">
+      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-beige-sand shadow-[0_22px_40px_-18px_rgba(54,44,34,0.4)]">
         <Image
           src={photoUrl}
           alt={author ?? ""}
@@ -101,7 +101,7 @@ function Media({
   const initial = author?.trim()[0]?.toUpperCase();
 
   return (
-    <div className="relative flex aspect-[4/5] items-center justify-center overflow-hidden rounded-2xl bg-beige-sand/70">
+    <div className="relative flex aspect-[4/5] items-center justify-center overflow-hidden rounded-2xl bg-beige-sand/70 shadow-[0_22px_40px_-18px_rgba(54,44,34,0.4)]">
       <span
         aria-hidden
         className="select-none font-serif italic font-light leading-none text-transparent"
