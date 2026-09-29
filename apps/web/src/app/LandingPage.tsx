@@ -1049,12 +1049,11 @@ export function LandingPage({
                 </h2>
                 <p className="text-charcoal/80 leading-relaxed">
                   <span className="float-left font-serif text-5xl leading-[0.8] pr-2 text-earth-brown">
-                    S
+                    A
                   </span>
-                  e define como Strategic Life Editor: alguien que ayuda a sus
-                  clientas a editar su vida desde adentro hacia afuera,
-                  integrando identidad, imagen y decisiones. Fundó UMA, y en
-                  2024 recibió el Premio Mujeres en las Artes.
+                  compaña a sus clientas a editar su vida desde adentro hacia
+                  afuera: identidad, imagen y decisiones, en un mismo proceso.
+                  Fundó UMA y en 2024 recibió el Premio Mujeres en las Artes.
                 </p>
                 <Link
                   href="/sobre-pilar"
