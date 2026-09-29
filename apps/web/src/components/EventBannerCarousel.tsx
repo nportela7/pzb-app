@@ -92,7 +92,7 @@ export function EventBannerCarousel({
         onScroll={readScroll}
         tabIndex={0}
         aria-label="Próximos eventos"
-        className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto rounded-3xl"
+        className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto rounded-3xl shadow-[0_22px_40px_-18px_rgba(54,44,34,0.4)]"
       >
         {items.map((event) => (
           <li key={event.id} className="w-full shrink-0 snap-start">

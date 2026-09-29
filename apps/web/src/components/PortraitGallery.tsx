@@ -70,7 +70,7 @@ export function PortraitGallery({
     // `auto`; the percentage had nothing to resolve against, every slide
     // collapsed to zero, and all you saw was the brown ground behind them.
     <div
-      className={`relative overflow-hidden rounded-3xl bg-earth-brown ${className}`}
+      className={`relative overflow-hidden rounded-3xl bg-earth-brown shadow-[0_22px_40px_-18px_rgba(54,44,34,0.4)] ${className}`}
     >
       <ul
         ref={trackRef}
