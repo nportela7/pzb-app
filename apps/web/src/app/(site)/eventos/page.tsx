@@ -72,7 +72,7 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
 
   return (
     <div className="flex-1 bg-cream">
-      <section className="relative overflow-hidden px-6 sm:px-10 pt-6 sm:pt-12 pb-0 sm:pb-1">
+      <section className="relative overflow-hidden px-6 sm:px-10 pt-6 sm:pt-12 pb-5">
         <Grain opacity={0.1} />
         <div className="relative flex items-center gap-4 mb-10">
           <span aria-hidden className="h-px flex-1 bg-slate/30" />
