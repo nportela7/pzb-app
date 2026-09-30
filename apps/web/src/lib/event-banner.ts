@@ -13,6 +13,20 @@ export const EVENT_TYPE_COVERS: Record<EventType, string> = {
   zere_studio: "/images/zere-water-ripple.jpg",
 };
 
+/**
+ * One accent color per event type, used to tint the card's photo veil, its
+ * type pill and its hover accent — not just its label text. "sesion_abierta"
+ * gets its own color (redline) instead of reusing taller's earth-brown: the
+ * two used to be visually identical in the events list.
+ */
+export const EVENT_TYPE_ACCENT: Record<EventType, { hex: string; rgb: string }> = {
+  taller: { hex: "#594434", rgb: "89,68,52" },
+  cena: { hex: "#515544", rgb: "81,85,68" },
+  retiro: { hex: "#64747d", rgb: "100,116,125" },
+  sesion_abierta: { hex: "#9b3a26", rgb: "155,58,38" },
+  zere_studio: { hex: "#154c61", rgb: "21,76,97" },
+};
+
 /** The site sells in MXN from CDMX, so dates are read in that zone. Pinning it
  *  also keeps server and client output identical — an unpinned Intl format
  *  renders with the server's zone on the server and the visitor's in the
@@ -40,6 +54,45 @@ const dayKey = new Intl.DateTimeFormat("es-MX", {
   dateStyle: "short",
   timeZone: TIME_ZONE,
 });
+const badgeDay = new Intl.DateTimeFormat("es-MX", { day: "2-digit", timeZone: TIME_ZONE });
+const badgeMonth = new Intl.DateTimeFormat("es-MX", { month: "short", timeZone: TIME_ZONE });
+const hourFormatter = new Intl.DateTimeFormat("es-MX", {
+  hour: "numeric",
+  minute: "2-digit",
+  timeZone: TIME_ZONE,
+});
+
+const currencyFormatters: Record<string, Intl.NumberFormat> = {};
+export function formatEventPrice(cents: number, currency: string) {
+  if (cents === 0) return "Sin costo";
+  const key = currency.toUpperCase();
+  currencyFormatters[key] ??= new Intl.NumberFormat("es-MX", {
+    style: "currency",
+    currency: key,
+    maximumFractionDigits: 0,
+  });
+  return currencyFormatters[key].format(cents / 100);
+}
+
+/** Day + month for the big serif badge on a card, e.g. {day:"04", month:"OCT"}. */
+export function formatEventBadge(startsAt: Date) {
+  return {
+    day: badgeDay.format(startsAt),
+    month: badgeMonth.format(startsAt).toUpperCase().replace(".", ""),
+  };
+}
+
+/** "5:00 – 7:00 pm" for a same-day event, just the start time with no end,
+ *  or "Varios días" once the event spans more than one calendar day — a
+ *  hour range would be meaningless for something like a weekend retreat. */
+export function formatEventTimeLabel(startsAt: Date, endsAt?: Date) {
+  const start = hourFormatter.format(startsAt);
+  if (!endsAt) return start;
+  if (dayKey.format(startsAt) === dayKey.format(endsAt)) {
+    return `${start} – ${hourFormatter.format(endsAt)}`;
+  }
+  return "Varios días";
+}
 
 /**
  * "9 de diciembre de 2026" for a single day, "Del 4 al 9 de diciembre de 2026"
@@ -82,5 +135,29 @@ export function toEventBanner(event: EventDoc): EventBanner {
         ? "Presencial y en línea"
         : "En línea"
       : "Presencial",
+  };
+}
+
+/** Everything the stacked event cards on /eventos render, banner fields plus
+ *  the bits a card/detail view needs that a banner never did. */
+export type EventCard = EventBanner & {
+  type: EventType;
+  day: string;
+  month: string;
+  timeLabel: string;
+  priceLabel: string;
+  capacityLabel: string | null;
+};
+
+export function toEventCard(event: EventDoc): EventCard {
+  const badge = formatEventBadge(event.startsAt);
+  return {
+    ...toEventBanner(event),
+    type: event.type,
+    day: badge.day,
+    month: badge.month,
+    timeLabel: formatEventTimeLabel(event.startsAt, event.endsAt),
+    priceLabel: formatEventPrice(event.priceCents, event.currency),
+    capacityLabel: event.capacity ? `${event.capacity} personas` : null,
   };
 }

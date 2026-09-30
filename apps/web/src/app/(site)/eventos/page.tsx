@@ -2,6 +2,8 @@ import Link from "next/link";
 import { listUpcomingEvents } from "@/lib/events";
 import { EVENT_TYPE_LABELS, EventType } from "@/models/event";
 import { Grain } from "@/components/Grain";
+import { EventCardStack } from "@/components/EventCardStack";
+import { toEventCard } from "@/lib/event-banner";
 import { WHATSAPP_MESSAGES, whatsappHref } from "@/lib/cta";
 
 const FILTERS: { value?: EventType; label: string }[] = [
@@ -12,44 +14,6 @@ const FILTERS: { value?: EventType; label: string }[] = [
   { value: "sesion_abierta", label: "Sesiones abiertas" },
   { value: "zere_studio", label: "Zere Studio" },
 ];
-
-const ACCENT_TEXT: Record<EventType, string> = {
-  taller: "text-earth-brown",
-  cena: "text-dark-pine",
-  retiro: "text-slate",
-  sesion_abierta: "text-earth-brown",
-  zere_studio: "text-zere-deep",
-};
-
-const ACCENT_BG: Record<EventType, string> = {
-  taller: "bg-earth-brown",
-  cena: "bg-dark-pine",
-  retiro: "bg-slate",
-  sesion_abierta: "bg-earth-brown",
-  zere_studio: "bg-zere-deep",
-};
-
-const dateFormatter = new Intl.DateTimeFormat("es-MX", {
-  day: "2-digit",
-  month: "short",
-});
-
-const timeFormatter = new Intl.DateTimeFormat("es-MX", {
-  hour: "numeric",
-  minute: "2-digit",
-});
-
-const currencyFormatters: Record<string, Intl.NumberFormat> = {};
-function formatPrice(cents: number, currency: string) {
-  if (cents === 0) return "Sin costo";
-  const key = currency.toUpperCase();
-  currencyFormatters[key] ??= new Intl.NumberFormat("es-MX", {
-    style: "currency",
-    currency: key,
-    maximumFractionDigits: 0,
-  });
-  return currencyFormatters[key].format(cents / 100);
-}
 
 const WHATSAPP_HREF = whatsappHref(WHATSAPP_MESSAGES.eventos);
 
@@ -125,7 +89,7 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
         </div>
       </div>
 
-      <section className="px-6 sm:px-10 max-w-3xl mx-auto">
+      <section className="px-6 sm:px-10 max-w-5xl mx-auto">
         {events.length === 0 ? (
           <div className="rounded-2xl border border-beige-sand p-8 mt-10 text-center">
             <p className="text-charcoal/80 mb-4">
@@ -142,66 +106,9 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
             </a>
           </div>
         ) : (
-          <ul className="flex flex-col">
-            {events.map((event) => {
-              const [day, month] = dateFormatter.format(event.startsAt).split(" ");
-              const accentText = ACCENT_TEXT[event.type];
-              const accentBg = ACCENT_BG[event.type];
-              return (
-                <li key={event._id.toString()} className="group relative">
-                  <span
-                    aria-hidden
-                    className={`absolute -left-4 top-6 bottom-6 w-1 origin-center scale-y-0 transition-transform duration-300 group-hover:scale-y-100 ${accentBg}`}
-                  />
-                  <a
-                    href={WHATSAPP_HREF}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="grid grid-cols-[4.5rem_1fr] sm:grid-cols-[7rem_1fr_auto] items-center gap-4 sm:gap-8 py-6 sm:py-8 border-b border-earth-brown/10 transition-[padding] duration-300 group-hover:pl-3"
-                  >
-                    <span
-                      className={`font-serif text-4xl sm:text-6xl leading-[0.85] tracking-tight ${accentText}`}
-                    >
-                      {day}
-                      <sup className="ml-1 align-super text-[0.62rem] font-sans font-semibold uppercase tracking-wider text-slate">
-                        {month}
-                      </sup>
-                    </span>
-
-                    <div className="min-w-0">
-                      <p
-                        className={`text-[0.68rem] tracking-[0.22em] uppercase mb-1.5 ${accentText}`}
-                      >
-                        {EVENT_TYPE_LABELS[event.type]}
-                      </p>
-                      <h2 className="font-serif text-xl sm:text-2xl text-charcoal leading-tight mb-1">
-                        {event.title}
-                      </h2>
-                      <p className="text-sm text-slate">
-                        {timeFormatter.format(event.startsAt)}
-                        {event.location ? ` · ${event.location}` : ""}
-                        {event.isOnline ? " · En línea" : ""}
-                      </p>
-                    </div>
-
-                    <div className="col-span-2 sm:col-span-1 flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-2 mt-2 sm:mt-0">
-                      <span className="font-serif text-charcoal">
-                        {formatPrice(event.priceCents, event.currency)}
-                      </span>
-                      <span
-                        className={`text-sm font-medium inline-flex items-center gap-1 ${accentText}`}
-                      >
-                        Registrarme
-                        <span className="inline-block transition-transform duration-200 group-hover:translate-x-1">
-                          →
-                        </span>
-                      </span>
-                    </div>
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
+          <div className="mt-10">
+            <EventCardStack items={events.map(toEventCard)} whatsappHref={WHATSAPP_HREF} />
+          </div>
         )}
       </section>
 
