@@ -27,6 +27,7 @@ export function EventCardStack({
   whatsappHref: string;
 }) {
   const [selected, setSelected] = useState<EventCard | null>(null);
+  const lastIndex = items.length - 1;
 
   return (
     <>
@@ -34,100 +35,46 @@ export function EventCardStack({
           next one scrolls up and covers it, leaving a spine (badge + pill)
           showing — same mechanism as "¿En qué momento estás hoy?" on the
           landing. No entrance transform on the sticky element itself: a
-          live transform fights position:sticky. */}
+          live transform fights position:sticky.
+
+          The LAST card is deliberately NOT sticky. Nothing arrives after it
+          to reveal, so it doesn't need to hold its position — and a sticky
+          element that's the last thing in its container never actually
+          sticks anyway, since it needs a real trailing sibling with real
+          height to have room to be pinned in. That used to be patched with
+          an artificial spacer sized to the viewport, which meant the CTA
+          below always sat a fixed distance from the TOP of the screen
+          rather than from the last card — with few events the gap between
+          them read as broken. Letting the last card flow normally fixes
+          both: the second-to-last card gets a real trailing sibling to
+          stick against (the last card's own height), and the CTA section
+          now sits right after the last card however many events there
+          are. */}
       <div className="flex flex-col">
-        {items.map((event, i) => {
-          const accent = EVENT_TYPE_ACCENT[event.type];
-          return (
+        {items.map((event, i) =>
+          i === lastIndex ? (
+            <EventCardFace
+              key={event.id}
+              event={event}
+              index={i}
+              total={items.length}
+              onSelect={() => setSelected(event)}
+            />
+          ) : (
             <div
               key={event.id}
               className="sticky"
               style={{ top: `${STACK_BASE_REM + i * STACK_SPINE_REM}rem` }}
             >
-              <button
-                type="button"
-                onClick={() => setSelected(event)}
-                className="group relative block aspect-[4/5] w-full overflow-hidden rounded-[10px] text-left shadow-[0_-6px_30px_-18px_rgba(0,0,0,0.4)] transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_-10px_40px_-20px_rgba(0,0,0,0.55)] sm:aspect-[16/9] lg:aspect-[21/8]"
-              >
-                <Image
-                  src={event.coverUrl}
-                  alt=""
-                  fill
-                  sizes="(min-width: 1024px) 1000px, 100vw"
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
-                />
-                <div
-                  aria-hidden
-                  className="absolute inset-0"
-                  style={{ background: veilFor(accent.rgb) }}
-                />
-                <div
-                  aria-hidden
-                  className="absolute inset-0 opacity-0 transition-opacity duration-500 mix-blend-overlay group-hover:opacity-100"
-                  style={{ background: sheenFor(accent.rgb) }}
-                />
-                <span
-                  aria-hidden
-                  className="absolute inset-y-0 left-0 w-[5px] origin-bottom scale-y-0 transition-transform duration-500 group-hover:scale-y-100"
-                  style={{ background: accent.hex }}
-                />
-
-                <div className="absolute left-[26px] top-[14px] flex items-baseline gap-2 font-serif leading-none text-cream">
-                  <b className="text-[30px] font-medium">{event.day}</b>
-                  <span className="-translate-y-px font-sans text-[11px] font-bold tracking-[0.1em] uppercase">
-                    {event.month}
-                  </span>
-                </div>
-                <span className="absolute right-[26px] top-[18px] text-[11px] tracking-[0.08em] text-cream/55">
-                  {String(i + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
-                </span>
-
-                <div className="absolute left-[26px] right-[26px] bottom-[22px] max-w-[32rem]">
-                  <div className="mb-3 flex items-center gap-2.5">
-                    <span
-                      className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[10.5px] font-bold uppercase tracking-[0.14em] text-cream"
-                      style={{ background: accent.hex }}
-                    >
-                      <span className="h-1.5 w-1.5 rounded-full bg-cream/85" />
-                      {event.typeLabel}
-                    </span>
-                    <span className="text-xs text-cream/75">{event.timeLabel}</span>
-                  </div>
-                  <h3 className="mb-2.5 font-serif text-[clamp(22px,3vw,32px)] leading-[1.08] text-cream">
-                    {event.title}
-                  </h3>
-                  <p className="text-[13px] text-cream/80">
-                    {event.placeLabel ? `${event.placeLabel} · ` : ""}
-                    {event.priceLabel}
-                  </p>
-                  {event.description && (
-                    <p className="mt-2.5 hidden max-w-[28rem] text-[13.5px] leading-relaxed text-cream/75 lg:block">
-                      {event.description}
-                    </p>
-                  )}
-                </div>
-
-                <span className="absolute bottom-6 right-[26px] hidden items-center gap-1.5 text-[12.5px] font-semibold text-cream opacity-0 transition-opacity duration-300 group-hover:opacity-100 sm:flex">
-                  Ver detalle
-                  <span aria-hidden>→</span>
-                </span>
-              </button>
+              <EventCardFace
+                event={event}
+                index={i}
+                total={items.length}
+                onSelect={() => setSelected(event)}
+              />
             </div>
-          );
-        })}
-
-        {/* Without a trailing sibling here, the last card never sticks at
-            all: it just sits mid-scroll, partially covering the one before
-            it. A sticky element needs room in ITS OWN container to be
-            pushed into — padding on this div wouldn't count, it has to be
-            a real sibling box.
-            The room it needs scales with viewport height, not card count,
-            so this has to stay a fraction of 100vh rather than a fixed px
-            value — a tall monitor needs more of it than a phone does. 60vh
-            comfortably covers real browser windows up to ~1400px tall
-            (well past a maximized laptop screen) while reading as a much
-            shorter, more deliberate gap than the 100vh this started as. */}
-        <div aria-hidden className="h-[60vh]" />
+          ),
+        )}
       </div>
 
       {selected && (
@@ -138,6 +85,86 @@ export function EventCardStack({
         />
       )}
     </>
+  );
+}
+
+function EventCardFace({
+  event,
+  index,
+  total,
+  onSelect,
+}: {
+  event: EventCard;
+  index: number;
+  total: number;
+  onSelect: () => void;
+}) {
+  const accent = EVENT_TYPE_ACCENT[event.type];
+  return (
+    <button
+      type="button"
+      onClick={onSelect}
+      className="group relative block aspect-[4/5] w-full overflow-hidden rounded-[10px] text-left shadow-[0_-6px_30px_-18px_rgba(0,0,0,0.4)] transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_-10px_40px_-20px_rgba(0,0,0,0.55)] sm:aspect-[16/9] lg:aspect-[21/8]"
+    >
+      <Image
+        src={event.coverUrl}
+        alt=""
+        fill
+        sizes="(min-width: 1024px) 1000px, 100vw"
+        className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+      />
+      <div aria-hidden className="absolute inset-0" style={{ background: veilFor(accent.rgb) }} />
+      <div
+        aria-hidden
+        className="absolute inset-0 opacity-0 transition-opacity duration-500 mix-blend-overlay group-hover:opacity-100"
+        style={{ background: sheenFor(accent.rgb) }}
+      />
+      <span
+        aria-hidden
+        className="absolute inset-y-0 left-0 w-[5px] origin-bottom scale-y-0 transition-transform duration-500 group-hover:scale-y-100"
+        style={{ background: accent.hex }}
+      />
+
+      <div className="absolute left-[26px] top-[14px] flex items-baseline gap-2 font-serif leading-none text-cream">
+        <b className="text-[30px] font-medium">{event.day}</b>
+        <span className="-translate-y-px font-sans text-[11px] font-bold tracking-[0.1em] uppercase">
+          {event.month}
+        </span>
+      </div>
+      <span className="absolute right-[26px] top-[18px] text-[11px] tracking-[0.08em] text-cream/55">
+        {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+      </span>
+
+      <div className="absolute left-[26px] right-[26px] bottom-[22px] max-w-[32rem]">
+        <div className="mb-3 flex items-center gap-2.5">
+          <span
+            className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[10.5px] font-bold uppercase tracking-[0.14em] text-cream"
+            style={{ background: accent.hex }}
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-cream/85" />
+            {event.typeLabel}
+          </span>
+          <span className="text-xs text-cream/75">{event.timeLabel}</span>
+        </div>
+        <h3 className="mb-2.5 font-serif text-[clamp(22px,3vw,32px)] leading-[1.08] text-cream">
+          {event.title}
+        </h3>
+        <p className="text-[13px] text-cream/80">
+          {event.placeLabel ? `${event.placeLabel} · ` : ""}
+          {event.priceLabel}
+        </p>
+        {event.description && (
+          <p className="mt-2.5 hidden max-w-[28rem] text-[13.5px] leading-relaxed text-cream/75 lg:block">
+            {event.description}
+          </p>
+        )}
+      </div>
+
+      <span className="absolute bottom-6 right-[26px] hidden items-center gap-1.5 text-[12.5px] font-semibold text-cream opacity-0 transition-opacity duration-300 group-hover:opacity-100 sm:flex">
+        Ver detalle
+        <span aria-hidden>→</span>
+      </span>
+    </button>
   );
 }
 
