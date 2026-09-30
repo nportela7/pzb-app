@@ -141,15 +141,6 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
           </a>
         </section>
       )}
-
-      {/* The sticky filters bar only releases once there's enough page left
-          BELOW the stack for the browser to actually scroll that far — the
-          CTA section above plus the footer usually aren't tall enough on
-          their own, especially on a tall monitor, so filters would stay
-          pinned no matter how far down you scroll (there's nowhere left to
-          scroll to). This guarantees that room exists without relying on
-          the footer's own height, which this page doesn't control. */}
-      {events.length > 0 && <div aria-hidden className="h-[40vh]" />}
     </div>
   );
 }

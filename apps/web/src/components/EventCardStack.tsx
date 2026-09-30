@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { EVENT_TYPE_ACCENT, type EventCard } from "@/lib/event-banner";
 
@@ -34,7 +34,50 @@ export function EventCardStack({
   ticker?: React.ReactNode;
 }) {
   const [selected, setSelected] = useState<EventCard | null>(null);
+  // Whether the last card has reached the point where it starts covering
+  // the card before it — i.e. we've reached the last card and kept
+  // scrolling. Drives releasing the filters bar; see the effect below for
+  // why this couldn't stay a pure-CSS trick.
+  const [pastStack, setPastStack] = useState(false);
+  // A 1px marker sitting exactly at the last card's top edge (rendered
+  // right before it, flush — the flex column has no gap). Watching a
+  // hairline like this instead of the whole (tall) card is what makes the
+  // crossing reliably observable: IntersectionObserver only fires when an
+  // element's visibility ratio crosses a threshold, and a full-height
+  // card's ratio barely budges as its top clips off-screen, so a
+  // threshold:0 observer on the card itself would rarely fire again once
+  // it's already partly visible. A hairline's ratio jumps cleanly between
+  // ~0 and ~1 at the exact instant it crosses the line we care about.
+  const sentinelRef = useRef<HTMLDivElement>(null);
   const lastIndex = items.length - 1;
+  // Where the card just before the last one is pinned (0 if there's only
+  // one card total, i.e. nothing stacks). The last card visually "arrives"
+  // once its top reaches that line and starts painting over it — waiting
+  // for it to reach the TOP of the viewport instead would mean waiting for
+  // it to have scrolled almost all the way past, which on a page with
+  // several events barely leaves any scroll room left before the bottom.
+  const precedingTopRem =
+    lastIndex > 0 ? STACK_BASE_REM + (lastIndex - 1) * STACK_SPINE_REM : 0;
+
+  useEffect(() => {
+    const el = sentinelRef.current;
+    if (!el) return;
+    // rem -> px assuming the default 16px root, same assumption baked into
+    // every other STACK_BASE_REM/STACK_SPINE_REM offset in this file.
+    const lineOffsetPx = precedingTopRem * 16;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Not intersecting AND above the line means the marker left through
+        // the top of the region we're watching — i.e. we scrolled past
+        // where the last card starts covering the one before it, not that
+        // it just hasn't arrived yet from below.
+        setPastStack(!entry.isIntersecting && entry.boundingClientRect.top < lineOffsetPx);
+      },
+      { threshold: 0, rootMargin: `-${lineOffsetPx}px 0px 0px 0px` },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [precedingTopRem]);
 
   return (
     <>
@@ -54,30 +97,42 @@ export function EventCardStack({
           second-to-last one would be the last child in here instead and
           hit that exact same "never sticks" problem one card earlier.
 
-          `filters` lives INSIDE this div too, sticky at the top of it, for
-          the same reason: bounding it to filters + ticker + the whole
-          stack means it releases and scrolls away once you've scrolled
-          past the stack, instead of staying pinned all the way through the
-          CTA/footer below. It releases slightly after the last card is
-          fully visible rather than at the exact instant — this is a CSS
-          containment trick, not a scroll listener, so it can't watch for
-          that moment precisely — but that's a few hundred px at most, not
-          the unbounded stick this replaced. */}
+          `filters` ALSO wants to release once you're past the stack, but
+          bounding it to this div the same way doesn't actually work: that
+          only lets it release once you've scrolled far enough for this
+          div's bottom to clear the pin line, which needs MORE scrollable
+          page below than there usually is (the CTA + footer aren't tall
+          enough, especially on a tall monitor) — the browser has nowhere
+          left to scroll to, so filters just stays pinned no matter how far
+          down you go. Padding a spacer in to guarantee that room reads as
+          a dead, empty gap before the footer. So this one piece isn't pure
+          CSS: the sentinel + IntersectionObserver above watch for the
+          exact scroll position instead, and filters' sticky class comes
+          off right then — precise, and doesn't need extra page height to
+          work. */}
       <div>
-        <div className="sticky top-[5.5rem] z-30 bg-cream/95 backdrop-blur-sm">
+        <div
+          className={
+            pastStack
+              ? "bg-cream/95 backdrop-blur-sm"
+              : "sticky top-[5.5rem] z-30 bg-cream/95 backdrop-blur-sm"
+          }
+        >
           {filters}
         </div>
         {ticker}
         <div className="flex flex-col px-6 sm:px-10 max-w-5xl mx-auto mt-10">
           {items.map((event, i) =>
             i === lastIndex ? (
-              <EventCardFace
-                key={event.id}
-                event={event}
-                index={i}
-                total={items.length}
-                onSelect={() => setSelected(event)}
-              />
+              <Fragment key={event.id}>
+                <div ref={sentinelRef} aria-hidden className="h-px" />
+                <EventCardFace
+                  event={event}
+                  index={i}
+                  total={items.length}
+                  onSelect={() => setSelected(event)}
+                />
+              </Fragment>
             ) : (
               <div
                 key={event.id}
