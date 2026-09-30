@@ -54,27 +54,35 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
         </div>
       </section>
 
-      <nav className="flex flex-wrap items-baseline gap-x-3 gap-y-1 px-6 sm:px-10 pb-6 sm:pb-8 max-w-3xl mx-auto border-b border-earth-brown/15 font-serif">
-        {FILTERS.map((filter, i) => {
-          const isActive = filter.value === activeType;
-          const href = filter.value ? `/eventos?type=${filter.value}` : "/eventos";
-          return (
-            <span key={filter.label} className="flex items-baseline gap-3">
-              {i > 0 && <span className="italic text-charcoal/20">·</span>}
-              <Link
-                href={href}
-                className={
-                  isActive
-                    ? "text-lg sm:text-xl text-earth-brown font-medium underline underline-offset-4"
-                    : "text-lg sm:text-xl italic text-charcoal/40 hover:text-charcoal transition-colors"
-                }
-              >
-                {filter.label}
-              </Link>
-            </span>
-          );
-        })}
-      </nav>
+      {/* Sticky, right under the floating header (5.5rem clears it — same
+          offset the landing's card stack uses), with its own background
+          since content scrolls underneath it once it locks in place. The
+          event card stack below has to start clear of THIS bar's height
+          too, not just the header's — see STACK_BASE_REM in
+          EventCardStack. */}
+      <div className="sticky top-[5.5rem] z-30 bg-cream/95 backdrop-blur-sm">
+        <nav className="flex flex-wrap items-baseline gap-x-3 gap-y-1 px-6 sm:px-10 py-5 max-w-3xl mx-auto border-b border-earth-brown/15 font-serif">
+          {FILTERS.map((filter, i) => {
+            const isActive = filter.value === activeType;
+            const href = filter.value ? `/eventos?type=${filter.value}` : "/eventos";
+            return (
+              <span key={filter.label} className="flex items-baseline gap-3">
+                {i > 0 && <span className="italic text-charcoal/20">·</span>}
+                <Link
+                  href={href}
+                  className={
+                    isActive
+                      ? "text-lg sm:text-xl text-earth-brown font-medium underline underline-offset-4"
+                      : "text-lg sm:text-xl italic text-charcoal/40 hover:text-charcoal transition-colors"
+                  }
+                >
+                  {filter.label}
+                </Link>
+              </span>
+            );
+          })}
+        </nav>
+      </div>
 
       <div className="overflow-hidden bg-dark-pine py-2.5 whitespace-nowrap">
         <div className="inline-flex marquee-track" style={{ animationDuration: "208s" }}>

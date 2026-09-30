@@ -4,7 +4,12 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { EVENT_TYPE_ACCENT, type EventCard } from "@/lib/event-banner";
 
-const STACK_BASE_REM = 1.5;
+// 5.5rem clears the floating header (same offset the landing's own card
+// stack uses); the filters bar right above this component is ALSO sticky
+// at that same 5.5rem and has its own height on top of that (padding +
+// one line of text + its border), so the first card has to start lower
+// still or it renders half-hidden behind the filters bar.
+const STACK_BASE_REM = 10.5;
 const STACK_SPINE_REM = 3.25;
 
 function veilFor(rgb: string) {
@@ -115,8 +120,14 @@ export function EventCardStack({
             all: it just sits mid-scroll, partially covering the one before
             it. A sticky element needs room in ITS OWN container to be
             pushed into — padding on this div wouldn't count, it has to be
-            a real sibling box. */}
-        <div aria-hidden className="h-screen" />
+            a real sibling box.
+            The room it needs scales with viewport height, not card count,
+            so this has to stay a fraction of 100vh rather than a fixed px
+            value — a tall monitor needs more of it than a phone does. 60vh
+            comfortably covers real browser windows up to ~1400px tall
+            (well past a maximized laptop screen) while reading as a much
+            shorter, more deliberate gap than the 100vh this started as. */}
+        <div aria-hidden className="h-[60vh]" />
       </div>
 
       {selected && (
