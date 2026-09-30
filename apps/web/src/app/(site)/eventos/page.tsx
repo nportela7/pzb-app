@@ -74,11 +74,14 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
     <div className="flex-1 bg-cream">
       <section className="relative overflow-hidden px-6 sm:px-10 pt-6 sm:pt-12 pb-8 sm:pb-14">
         <Grain opacity={0.1} />
-        <div className="relative max-w-3xl mx-auto">
-          <p className="flex items-center gap-3 text-xs tracking-[0.32em] uppercase text-slate mb-6">
-            <span className="w-8 h-px bg-slate" />
+        <div className="relative flex items-center gap-4 mb-10">
+          <span aria-hidden className="h-px flex-1 bg-slate/30" />
+          <p className="shrink-0 text-xs tracking-[0.32em] uppercase text-slate">
             Calendario en vivo
           </p>
+          <span aria-hidden className="h-px flex-1 bg-slate/30" />
+        </div>
+        <div className="relative max-w-3xl mx-auto">
           <h1 className="font-serif italic text-5xl sm:text-7xl leading-[0.92] text-earth-brown text-balance">
             Eventos
             <br />
@@ -95,11 +98,11 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
 
       {events.length === 0 ? (
         <div>
+          {ticker}
           {/* No stack to bound the sticky range against here, so it's just
               a plain sticky bar — same offset EventCardStack's version
               uses when there IS a stack. */}
           <div className="sticky top-[5.5rem] z-30 bg-cream/95 backdrop-blur-sm">{filtersNav}</div>
-          {ticker}
           <section className="px-6 sm:px-10 max-w-5xl mx-auto">
             <div className="rounded-2xl border border-beige-sand p-8 mt-10 text-center">
               <p className="text-charcoal/80 mb-4">

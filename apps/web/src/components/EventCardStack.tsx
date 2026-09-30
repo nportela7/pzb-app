@@ -111,6 +111,7 @@ export function EventCardStack({
           off right then — precise, and doesn't need extra page height to
           work. */}
       <div>
+        {ticker}
         <div
           className={
             pastStack
@@ -120,7 +121,6 @@ export function EventCardStack({
         >
           {filters}
         </div>
-        {ticker}
         <div className="flex flex-col px-6 sm:px-10 max-w-5xl mx-auto mt-10">
           {items.map((event, i) =>
             i === lastIndex ? (
