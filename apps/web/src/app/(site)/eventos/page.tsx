@@ -31,6 +31,45 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
 
   const events = await listUpcomingEvents(activeType);
 
+  const filtersNav = (
+    <nav className="flex flex-wrap items-baseline gap-x-3 gap-y-1 px-6 sm:px-10 py-5 max-w-3xl mx-auto border-b border-earth-brown/15 font-serif">
+      {FILTERS.map((filter, i) => {
+        const isActive = filter.value === activeType;
+        const href = filter.value ? `/eventos?type=${filter.value}` : "/eventos";
+        return (
+          <span key={filter.label} className="flex items-baseline gap-3">
+            {i > 0 && <span className="italic text-charcoal/20">·</span>}
+            <Link
+              href={href}
+              className={
+                isActive
+                  ? "text-lg sm:text-xl text-earth-brown font-medium underline underline-offset-4"
+                  : "text-lg sm:text-xl italic text-charcoal/40 hover:text-charcoal transition-colors"
+              }
+            >
+              {filter.label}
+            </Link>
+          </span>
+        );
+      })}
+    </nav>
+  );
+
+  const ticker = (
+    <div className="overflow-hidden bg-dark-pine py-2.5 whitespace-nowrap">
+      <div className="inline-flex marquee-track" style={{ animationDuration: "208s" }}>
+        {[...TICKER_ITEMS_FILLED, ...TICKER_ITEMS_FILLED].map((item, i) => (
+          <span
+            key={i}
+            className="text-[0.68rem] tracking-[0.24em] uppercase text-cream/85 px-6 flex items-center gap-6 after:content-['·'] after:text-cream/35"
+          >
+            {item}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+
   return (
     <div className="flex-1 bg-cream">
       <section className="relative overflow-hidden px-6 sm:px-10 pt-6 sm:pt-12 pb-8 sm:pb-14">
@@ -54,71 +93,40 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
         </div>
       </section>
 
-      {/* Sticky, right under the floating header (5.5rem clears it — same
-          offset the landing's card stack uses), with its own background
-          since content scrolls underneath it once it locks in place. The
-          event card stack below has to start clear of THIS bar's height
-          too, not just the header's — see STACK_BASE_REM in
-          EventCardStack. */}
-      <div className="sticky top-[5.5rem] z-30 bg-cream/95 backdrop-blur-sm">
-        <nav className="flex flex-wrap items-baseline gap-x-3 gap-y-1 px-6 sm:px-10 py-5 max-w-3xl mx-auto border-b border-earth-brown/15 font-serif">
-          {FILTERS.map((filter, i) => {
-            const isActive = filter.value === activeType;
-            const href = filter.value ? `/eventos?type=${filter.value}` : "/eventos";
-            return (
-              <span key={filter.label} className="flex items-baseline gap-3">
-                {i > 0 && <span className="italic text-charcoal/20">·</span>}
-                <Link
-                  href={href}
-                  className={
-                    isActive
-                      ? "text-lg sm:text-xl text-earth-brown font-medium underline underline-offset-4"
-                      : "text-lg sm:text-xl italic text-charcoal/40 hover:text-charcoal transition-colors"
-                  }
-                >
-                  {filter.label}
-                </Link>
-              </span>
-            );
-          })}
-        </nav>
-      </div>
-
-      <div className="overflow-hidden bg-dark-pine py-2.5 whitespace-nowrap">
-        <div className="inline-flex marquee-track" style={{ animationDuration: "208s" }}>
-          {[...TICKER_ITEMS_FILLED, ...TICKER_ITEMS_FILLED].map((item, i) => (
-            <span
-              key={i}
-              className="text-[0.68rem] tracking-[0.24em] uppercase text-cream/85 px-6 flex items-center gap-6 after:content-['·'] after:text-cream/35"
-            >
-              {item}
-            </span>
-          ))}
+      {events.length === 0 ? (
+        <div>
+          {/* No stack to bound the sticky range against here, so it's just
+              a plain sticky bar — same offset EventCardStack's version
+              uses when there IS a stack. */}
+          <div className="sticky top-[5.5rem] z-30 bg-cream/95 backdrop-blur-sm">{filtersNav}</div>
+          {ticker}
+          <section className="px-6 sm:px-10 max-w-5xl mx-auto">
+            <div className="rounded-2xl border border-beige-sand p-8 mt-10 text-center">
+              <p className="text-charcoal/80 mb-4">
+                Todavía no hay eventos publicados
+                {activeType ? ` en "${EVENT_TYPE_LABELS[activeType]}"` : ""}.
+              </p>
+              <a
+                href={WHATSAPP_HREF}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block rounded-full bg-earth-brown text-cream px-6 py-2.5 text-sm font-medium hover:bg-charcoal transition-colors"
+              >
+                Preguntarle a Pilar
+              </a>
+            </div>
+          </section>
         </div>
-      </div>
-
-      <section className="px-6 sm:px-10 max-w-5xl mx-auto">
-        {events.length === 0 ? (
-          <div className="rounded-2xl border border-beige-sand p-8 mt-10 text-center">
-            <p className="text-charcoal/80 mb-4">
-              Todavía no hay eventos publicados
-              {activeType ? ` en "${EVENT_TYPE_LABELS[activeType]}"` : ""}.
-            </p>
-            <a
-              href={WHATSAPP_HREF}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block rounded-full bg-earth-brown text-cream px-6 py-2.5 text-sm font-medium hover:bg-charcoal transition-colors"
-            >
-              Preguntarle a Pilar
-            </a>
-          </div>
-        ) : (
-          <div className="mt-10">
-            <EventCardStack items={events.map(toEventCard)} whatsappHref={WHATSAPP_HREF} />
-          </div>
-        )}
-      </section>
+      ) : (
+        <section className="px-6 sm:px-10 max-w-5xl mx-auto mt-10">
+          <EventCardStack
+            items={events.map(toEventCard)}
+            whatsappHref={WHATSAPP_HREF}
+            filters={filtersNav}
+            ticker={ticker}
+          />
+        </section>
+      )}
 
       {events.length > 0 && (
         <section className="px-6 sm:px-10 py-16 sm:py-20 max-w-3xl mx-auto flex flex-wrap items-baseline justify-between gap-4">

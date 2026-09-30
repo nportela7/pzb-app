@@ -22,9 +22,16 @@ function sheenFor(rgb: string) {
 export function EventCardStack({
   items,
   whatsappHref,
+  filters,
+  ticker,
 }: {
   items: EventCard[];
   whatsappHref: string;
+  /** Sticky, shares its stuck lifetime with the stack below — see the
+   *  comment further down for why it has to live in here. */
+  filters: React.ReactNode;
+  /** Non-sticky, just rendered between the filters bar and the stack. */
+  ticker?: React.ReactNode;
 }) {
   const [selected, setSelected] = useState<EventCard | null>(null);
   const lastIndex = items.length - 1;
@@ -38,43 +45,55 @@ export function EventCardStack({
           live transform fights position:sticky.
 
           The LAST card is deliberately NOT sticky. Nothing arrives after it
-          to reveal, so it doesn't need to hold its position — and a sticky
-          element that's the last thing in its container never actually
-          sticks anyway, since it needs a real trailing sibling with real
-          height to have room to be pinned in. That used to be patched with
-          an artificial spacer sized to the viewport, which meant the CTA
-          below always sat a fixed distance from the TOP of the screen
-          rather than from the last card — with few events the gap between
-          them read as broken. Letting the last card flow normally fixes
-          both: the second-to-last card gets a real trailing sibling to
-          stick against (the last card's own height), and the CTA section
-          now sits right after the last card however many events there
-          are. */}
-      <div className="flex flex-col">
-        {items.map((event, i) =>
-          i === lastIndex ? (
-            <EventCardFace
-              key={event.id}
-              event={event}
-              index={i}
-              total={items.length}
-              onSelect={() => setSelected(event)}
-            />
-          ) : (
-            <div
-              key={event.id}
-              className="sticky"
-              style={{ top: `${STACK_BASE_REM + i * STACK_SPINE_REM}rem` }}
-            >
+          to reveal, so it doesn't need to hold its position. It still has
+          to stay INSIDE this same div, though (not split out as a sibling):
+          the second-to-last card needs a real trailing sibling with real
+          height to have room to fully stick against, and this div's own
+          bottom is what bounds it — a sticky element is capped by its own
+          containing block, so if the last card lived outside, the
+          second-to-last one would be the last child in here instead and
+          hit that exact same "never sticks" problem one card earlier.
+
+          `filters` lives INSIDE this div too, sticky at the top of it, for
+          the same reason: bounding it to filters + ticker + the whole
+          stack means it releases and scrolls away once you've scrolled
+          past the stack, instead of staying pinned all the way through the
+          CTA/footer below. It releases slightly after the last card is
+          fully visible rather than at the exact instant — this is a CSS
+          containment trick, not a scroll listener, so it can't watch for
+          that moment precisely — but that's a few hundred px at most, not
+          the unbounded stick this replaced. */}
+      <div>
+        <div className="sticky top-[5.5rem] z-30 bg-cream/95 backdrop-blur-sm">
+          {filters}
+        </div>
+        {ticker}
+        <div className="flex flex-col">
+          {items.map((event, i) =>
+            i === lastIndex ? (
               <EventCardFace
+                key={event.id}
                 event={event}
                 index={i}
                 total={items.length}
                 onSelect={() => setSelected(event)}
               />
-            </div>
-          ),
-        )}
+            ) : (
+              <div
+                key={event.id}
+                className="sticky"
+                style={{ top: `${STACK_BASE_REM + i * STACK_SPINE_REM}rem` }}
+              >
+                <EventCardFace
+                  event={event}
+                  index={i}
+                  total={items.length}
+                  onSelect={() => setSelected(event)}
+                />
+              </div>
+            ),
+          )}
+        </div>
       </div>
 
       {selected && (
