@@ -118,14 +118,12 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
           </section>
         </div>
       ) : (
-        <section className="px-6 sm:px-10 max-w-5xl mx-auto mt-10">
-          <EventCardStack
-            items={events.map(toEventCard)}
-            whatsappHref={WHATSAPP_HREF}
-            filters={filtersNav}
-            ticker={ticker}
-          />
-        </section>
+        <EventCardStack
+          items={events.map(toEventCard)}
+          whatsappHref={WHATSAPP_HREF}
+          filters={filtersNav}
+          ticker={ticker}
+        />
       )}
 
       {events.length > 0 && (
