@@ -7,7 +7,7 @@ import { useRef } from "react";
 import { ZereMark } from "@/components/ZereMark";
 import { Grain } from "@/components/Grain";
 import { PaintedBackdrop } from "@/components/PaintedBackdrop";
-import { HeroPortrait } from "@/components/HeroPortrait";
+import { MirrorPortrait } from "@/components/MirrorPortrait";
 import { ScrollProgressRail } from "@/components/ScrollProgressRail";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -561,14 +561,7 @@ export function LandingPage({
               transition={{ duration: 1, delay: 0.35, ease: EASE }}
               className="hidden lg:block"
             >
-              <HeroPortrait
-                src="/images/pilar-portrait.jpg"
-                alt="Pilar Zambrano B."
-                // Flip to true the day /public/images holds a
-                // background-removed PNG of her. See HeroPortrait.
-                cutout={false}
-                className="mx-auto w-full max-w-[30rem]"
-              />
+              <MirrorPortrait className="mx-auto w-full max-w-[22rem]" />
             </motion.div>
           </div>
         </div>
