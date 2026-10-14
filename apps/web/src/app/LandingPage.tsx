@@ -58,6 +58,30 @@ const lineRevealReduced = {
   show: { opacity: 1, transition: { duration: 0.4, ease: EASE } },
 };
 
+/** One piece of the hero collage: a hard-edged rectangle that fades in. */
+function HeroTile({
+  className,
+  delay,
+  reduce,
+  children,
+}: {
+  className: string;
+  delay: number;
+  reduce: boolean | null;
+  children?: React.ReactNode;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: reduce ? 0 : 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: reduce ? 0.4 : 0.9, delay: reduce ? 0 : delay, ease: EASE }}
+      className={`absolute overflow-hidden ${className}`}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 function Reveal({
   children,
   className,
@@ -427,18 +451,33 @@ export function LandingPage({
         }}
       />
 
-      {/* Hero — brand deck slide 3: a flat Cielo field with the copy on the
-          left, a full-bleed photograph on the right. No gradients, no paint:
-          the colour is a plain field and the photo meets it on a hard edge.
-          The halves bleed to the viewport edges, so there is no shell
-          max-width out here — only the copy column keeps the shell gutter. */}
-      <div className="relative w-full min-h-[100svh] grid lg:grid-cols-2">
-        <div className="relative bg-cielo flex flex-col justify-center pt-28 pb-16 px-[var(--shell-gutter)]">
-          <p className="font-sans font-light text-sm text-medianoche/80">
-            Coaching · Pilar Zambrano B.
-          </p>
+      {/* Hero — brand "Look & Feel" moodboard. Warm photographs sit as hard-
+          edged rectangles of different sizes, overlapping in a loose collage
+          on an Arena ground, with flat Coral and Butter palette fields among
+          them. Nothing is rounded, rotated or feathered: the collage reads as
+          printed pieces laid on paper. The type mixes a light serif with an
+          italic Coral accent line, a small bold-caps beat inside the
+          paragraph, and editorial corner labels like the deck's slides. Below
+          lg the collage shrinks to four tiles and follows the copy so the
+          buttons stay in the first viewport. */}
+      <div className="relative w-full min-h-[100svh] overflow-hidden bg-arena">
+        <Grain opacity={0.05} />
 
-          <div ref={heroTextRef} className="flex flex-col mt-6 lg:mt-10">
+        <p className="absolute top-24 left-[var(--shell-gutter)] z-10 font-sans font-light text-xs sm:text-sm text-medianoche/70">
+          Coaching
+        </p>
+        <p className="absolute top-24 right-[var(--shell-gutter)] z-10 font-sans font-light text-xs sm:text-sm text-medianoche/70">
+          Pilar Zambrano B.
+        </p>
+        <p className="absolute bottom-6 left-[var(--shell-gutter)] z-10 hidden lg:block font-sans font-light text-sm text-medianoche/70">
+          Identidad · Imagen · Decisiones
+        </p>
+        <p className="absolute bottom-6 right-[var(--shell-gutter)] z-10 hidden lg:block font-sans font-light text-sm text-medianoche/70">
+          Desde el SER
+        </p>
+
+        <div className="relative grid min-h-[100svh] items-center gap-8 px-[var(--shell-gutter)] pt-32 pb-14 lg:grid-cols-12 lg:gap-12 lg:pt-28 lg:pb-16">
+          <div ref={heroTextRef} className="flex flex-col lg:col-span-6">
             <motion.div
               style={{ opacity: heroOpacity, y: heroY }}
               initial="hidden"
@@ -446,16 +485,23 @@ export function LandingPage({
               variants={{ show: { transition: { staggerChildren: 0.14 } } }}
               className="flex w-full flex-col"
             >
-              <h1 className="font-serif font-light text-5xl sm:text-7xl lg:text-8xl leading-[0.95] text-medianoche text-balance">
+              <motion.p
+                variants={fadeUp}
+                className="font-sans font-extrabold uppercase tracking-[0.18em] text-xs text-coral mb-4"
+              >
+                STRATEGIC LIFE EDITOR
+              </motion.p>
+
+              <h1 className="font-serif font-light text-medianoche text-balance leading-[0.95]">
                 <span className="block overflow-hidden pb-[0.08em]">
-                  <motion.span variants={heroLine} className="block text-4xl sm:text-5xl lg:text-6xl">
+                  <motion.span variants={heroLine} className="block text-3xl sm:text-5xl lg:text-6xl">
                     Deja de vivir una vida
                   </motion.span>
                 </span>
-                <span className="block overflow-hidden pb-[0.08em]">
+                <span className="block overflow-hidden pb-[0.12em]">
                   <motion.span
                     variants={heroLine}
-                    className="block italic font-normal"
+                    className="block italic font-normal text-coral text-6xl sm:text-8xl lg:text-[8.5rem] leading-[0.9]"
                   >
                     editada por otros.
                   </motion.span>
@@ -464,29 +510,30 @@ export function LandingPage({
 
               <motion.p
                 variants={fadeUp}
-                className="font-sans text-base sm:text-lg text-medianoche/85 max-w-xl text-pretty leading-relaxed mt-8"
+                className="font-sans text-base sm:text-lg text-medianoche/85 max-w-xl text-pretty leading-relaxed mt-5 lg:mt-8"
               >
                 Coaching de identidad, imagen y decisiones con Pilar Zambrano B.
-                Empieza por una conversación: 30 minutos para entender dónde
-                estás y qué te está costando avanzar.
+                Empieza por una conversación:{" "}
+                <span className="font-bold uppercase text-medianoche">30 minutos</span>{" "}
+                para entender dónde estás y qué te está costando avanzar.
               </motion.p>
 
               <motion.div
                 variants={fadeUp}
-                className="mt-10 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4"
+                className="mt-6 lg:mt-10 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4"
               >
                 <a
                   href={DIAGNOSTICO_HREF}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 bg-medianoche text-arena text-sm font-semibold tracking-wide hover:bg-medianoche/90 hover:-translate-y-0.5 transition-all"
+                  className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 bg-medianoche text-arena text-sm font-semibold tracking-wide hover:bg-coral hover:-translate-y-0.5 transition-all"
                 >
                   Agenda tu sesión diagnóstico
                   <span aria-hidden>→</span>
                 </a>
                 <Show when="signed-out">
                   <SignUpButton forceRedirectUrl="/home">
-                    <button className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-medianoche/40 text-medianoche text-sm font-medium tracking-wide hover:bg-medianoche/5 transition-colors">
+                    <button className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-medianoche/40 text-medianoche text-sm font-medium tracking-wide hover:bg-butter/40 transition-colors">
                       Sé parte de la comunidad
                     </button>
                   </SignUpButton>
@@ -494,7 +541,7 @@ export function LandingPage({
                 <Show when="signed-in">
                   <Link
                     href="/home"
-                    className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-medianoche/40 text-medianoche text-sm font-medium tracking-wide hover:bg-medianoche/5 transition-colors"
+                    className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-medianoche/40 text-medianoche text-sm font-medium tracking-wide hover:bg-butter/40 transition-colors"
                   >
                     Ir a la comunidad
                   </Link>
@@ -502,28 +549,72 @@ export function LandingPage({
               </motion.div>
             </motion.div>
           </div>
-        </div>
 
-        {/* Below lg the copy panel comes first and the photo follows as a
-            band, so the promise and the buttons stay in the first viewport
-            and the photograph is what you scroll into. From lg up the two
-            sit side by side and the photo fills its half to the edges. */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.35, ease: EASE }}
-          className="relative aspect-[4/5] lg:aspect-auto lg:min-h-full overflow-hidden"
-        >
-          <Image
-            src="/images/pilar-reading.jpg"
-            alt="Pilar Zambrano B. leyendo junto a la ventana"
-            fill
-            priority
-            sizes="(min-width:1024px) 50vw, 100vw"
-            className="object-cover object-[50%_30%]"
-          />
-          <Grain opacity={0.06} />
-        </motion.div>
+          {/* Collage. Tiles are placed by percentage inside a fixed-height
+              box; later siblings paint over earlier ones, which is the
+              overlap. */}
+          <div className="relative h-[26rem] lg:col-span-6 lg:h-[38rem]">
+            <HeroTile
+              delay={0.2}
+              reduce={shouldReduceMotion}
+              className="right-0 top-[4%] h-[55%] w-[45%] bg-coral"
+            />
+            <HeroTile
+              delay={0.3}
+              reduce={shouldReduceMotion}
+              className="bottom-[2%] left-[2%] h-[20%] w-[22%] bg-butter"
+            />
+            <HeroTile
+              delay={0.35}
+              reduce={shouldReduceMotion}
+              className="left-[14%] top-[9%] h-[82%] w-[58%] shadow-[0_18px_40px_-20px_rgba(14,98,127,0.45)]"
+            >
+              <Image
+                src="/images/pilar-reading.jpg"
+                alt="Pilar Zambrano B. leyendo junto a la ventana"
+                fill
+                priority
+                sizes="(min-width:1024px) 28vw, 60vw"
+                className="object-cover object-[50%_30%]"
+              />
+              <Grain opacity={0.06} />
+            </HeroTile>
+            <HeroTile
+              delay={0.5}
+              reduce={shouldReduceMotion}
+              className="left-0 top-0 hidden h-[38%] w-[30%] shadow-[0_18px_40px_-20px_rgba(14,98,127,0.45)] lg:block"
+            >
+              <Image
+                src="/images/silhouette-sunset.jpg"
+                alt="Silueta al atardecer"
+                fill
+                sizes="15vw"
+                className="object-cover"
+              />
+              <Grain opacity={0.06} />
+            </HeroTile>
+            <HeroTile
+              delay={0.65}
+              reduce={shouldReduceMotion}
+              className="bottom-[4%] right-[2%] h-[30%] w-[38%] shadow-[0_18px_40px_-20px_rgba(14,98,127,0.45)] lg:w-[34%]"
+            >
+              <Image
+                src="/images/outcomes-editar.jpg"
+                alt="Una mano escribiendo en un cuaderno"
+                fill
+                sizes="(min-width:1024px) 17vw, 38vw"
+                className="object-cover"
+              />
+              <Grain opacity={0.06} />
+            </HeroTile>
+            <p
+              aria-hidden
+              className="absolute bottom-[0%] right-[4%] z-10 font-script text-lg text-medianoche lg:bottom-[1%] lg:right-[38%] lg:text-2xl"
+            >
+              aprender a escucharte
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* Formación y reconocimiento — authority, immediately after the promise */}
