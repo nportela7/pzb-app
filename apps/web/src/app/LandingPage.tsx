@@ -6,6 +6,8 @@ import Image from "next/image";
 import { useRef } from "react";
 import { ZereMark } from "@/components/ZereMark";
 import { Grain } from "@/components/Grain";
+import { PaintedBackdrop } from "@/components/PaintedBackdrop";
+import { HeroPortrait } from "@/components/HeroPortrait";
 import { ScrollProgressRail } from "@/components/ScrollProgressRail";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -57,30 +59,6 @@ const lineRevealReduced = {
   hidden: { opacity: 0 },
   show: { opacity: 1, transition: { duration: 0.4, ease: EASE } },
 };
-
-/** One piece of the hero collage: a hard-edged rectangle that fades in. */
-function HeroTile({
-  className,
-  delay,
-  reduce,
-  children,
-}: {
-  className: string;
-  delay: number;
-  reduce: boolean | null;
-  children?: React.ReactNode;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: reduce ? 0 : 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: reduce ? 0.4 : 0.9, delay: reduce ? 0 : delay, ease: EASE }}
-      className={`absolute overflow-hidden ${className}`}
-    >
-      {children}
-    </motion.div>
-  );
-}
 
 function Reveal({
   children,
@@ -451,168 +429,101 @@ export function LandingPage({
         }}
       />
 
-      {/* Hero — brand "Look & Feel" moodboard. Warm photographs sit as hard-
-          edged rectangles of different sizes, overlapping in a loose collage
-          on an Arena ground, with flat Coral and Butter palette fields among
-          them. Nothing is rounded, rotated or feathered: the collage reads as
-          printed pieces laid on paper. The type mixes a light serif with an
-          italic Coral accent line, a small bold-caps beat inside the
-          paragraph, and editorial corner labels like the deck's slides. Below
-          lg the collage shrinks to four tiles and follows the copy so the
-          buttons stay in the first viewport. */}
-      <div className="relative w-full min-h-[100svh] overflow-hidden bg-arena">
+      {/* Hero — painted brown ground, copy left, Pilar right.
+          The outlined PZB monogram that used to sit behind this is gone: the
+          paint is the texture now, and two background treatments competing
+          for the same space just muddied each other. Restoring it is one
+          <span>, if the mark is missed. */}
+      <div className="relative w-full min-h-[100svh] overflow-hidden bg-medianoche flex flex-col">
+        <PaintedBackdrop />
         <Grain opacity={0.05} />
 
-        <p className="absolute top-24 left-[var(--shell-gutter)] z-10 font-sans font-light text-xs sm:text-sm text-medianoche/70">
-          Coaching
-        </p>
-        <p className="absolute top-24 right-[var(--shell-gutter)] z-10 font-sans font-light text-xs sm:text-sm text-medianoche/70">
-          Pilar Zambrano B.
-        </p>
-        <p className="absolute bottom-6 left-[var(--shell-gutter)] z-10 hidden lg:block font-sans font-light text-sm text-medianoche/70">
-          Identidad · Imagen · Decisiones
-        </p>
-        <p className="absolute bottom-6 right-[var(--shell-gutter)] z-10 hidden lg:block font-sans font-light text-sm text-medianoche/70">
-          Desde el SER
-        </p>
-
-        <div className="relative grid min-h-[100svh] items-center gap-8 px-[var(--shell-gutter)] pt-32 pb-14 lg:grid-cols-12 lg:gap-12 lg:pt-28 lg:pb-16">
-          <div ref={heroTextRef} className="flex flex-col lg:col-span-6">
-            <motion.div
-              style={{ opacity: heroOpacity, y: heroY }}
-              initial="hidden"
-              animate="show"
-              variants={{ show: { transition: { staggerChildren: 0.14 } } }}
-              className="flex w-full flex-col"
-            >
-              <motion.p
-                variants={fadeUp}
-                className="font-sans font-extrabold uppercase tracking-[0.18em] text-xs text-coral mb-4"
-              >
-                STRATEGIC LIFE EDITOR
-              </motion.p>
-
-              <h1 className="font-serif font-light text-medianoche text-balance leading-[0.95]">
-                <span className="block overflow-hidden pb-[0.08em]">
-                  <motion.span variants={heroLine} className="block text-3xl sm:text-5xl lg:text-6xl">
-                    Deja de vivir una vida
-                  </motion.span>
-                </span>
-                <span className="block overflow-hidden pb-[0.12em]">
-                  <motion.span
-                    variants={heroLine}
-                    className="block italic font-normal text-coral text-6xl sm:text-8xl lg:text-[8.5rem] leading-[0.9]"
-                  >
-                    editada por otros.
-                  </motion.span>
-                </span>
-              </h1>
-
-              <motion.p
-                variants={fadeUp}
-                className="font-sans text-base sm:text-lg text-medianoche/85 max-w-xl text-pretty leading-relaxed mt-5 lg:mt-8"
-              >
-                Coaching de identidad, imagen y decisiones con Pilar Zambrano B.
-                Empieza por una conversación:{" "}
-                <span className="font-bold uppercase text-medianoche">30 minutos</span>{" "}
-                para entender dónde estás y qué te está costando avanzar.
-              </motion.p>
-
+        <div className="shell relative flex flex-1 items-center pt-28 pb-16">
+          <div className="grid w-full items-center gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14">
+            <div ref={heroTextRef} className="flex flex-col">
               <motion.div
-                variants={fadeUp}
-                className="mt-6 lg:mt-10 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4"
+                style={{ opacity: heroOpacity, y: heroY }}
+                initial="hidden"
+                animate="show"
+                variants={{ show: { transition: { staggerChildren: 0.14 } } }}
+                className="flex w-full flex-col"
               >
-                <a
-                  href={DIAGNOSTICO_HREF}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 bg-medianoche text-arena text-sm font-semibold tracking-wide hover:bg-coral hover:-translate-y-0.5 transition-all"
-                >
-                  Agenda tu sesión diagnóstico
-                  <span aria-hidden>→</span>
-                </a>
-                <Show when="signed-out">
-                  <SignUpButton forceRedirectUrl="/home">
-                    <button className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-medianoche/40 text-medianoche text-sm font-medium tracking-wide hover:bg-butter/40 transition-colors">
-                      Sé parte de la comunidad
-                    </button>
-                  </SignUpButton>
-                </Show>
-                <Show when="signed-in">
-                  <Link
-                    href="/home"
-                    className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-medianoche/40 text-medianoche text-sm font-medium tracking-wide hover:bg-butter/40 transition-colors"
-                  >
-                    Ir a la comunidad
-                  </Link>
-                </Show>
-              </motion.div>
-            </motion.div>
-          </div>
+                <h1 className="font-serif font-light text-5xl sm:text-7xl lg:text-8xl leading-[0.95] text-arena text-balance">
+                  <span className="block overflow-hidden pb-[0.08em]">
+                    <motion.span variants={heroLine} className="block text-4xl sm:text-5xl lg:text-6xl">
+                      Deja de vivir una vida
+                    </motion.span>
+                  </span>
+                  <span className="block overflow-hidden pb-[0.08em]">
+                    <motion.span
+                      variants={heroLine}
+                      className="block italic font-normal text-cielo"
+                    >
+                      editada por otros.
+                    </motion.span>
+                  </span>
+                </h1>
 
-          {/* Collage. Tiles are placed by percentage inside a fixed-height
-              box; later siblings paint over earlier ones, which is the
-              overlap. */}
-          <div className="relative h-[26rem] lg:col-span-6 lg:h-[38rem]">
-            <HeroTile
-              delay={0.2}
-              reduce={shouldReduceMotion}
-              className="right-0 top-[4%] h-[55%] w-[45%] bg-coral"
-            />
-            <HeroTile
-              delay={0.3}
-              reduce={shouldReduceMotion}
-              className="bottom-[2%] left-[2%] h-[20%] w-[22%] bg-butter"
-            />
-            <HeroTile
-              delay={0.35}
-              reduce={shouldReduceMotion}
-              className="left-[14%] top-[9%] h-[82%] w-[58%] shadow-[0_18px_40px_-20px_rgba(14,98,127,0.45)]"
+                <motion.p
+                  variants={fadeUp}
+                  className="text-base sm:text-lg text-arena/80 max-w-3xl text-pretty leading-relaxed mt-8"
+                >
+                  Coaching de identidad, imagen y decisiones con Pilar Zambrano B.
+                  Empieza por una conversación: 30 minutos para entender dónde
+                  estás y qué te está costando avanzar.
+                </motion.p>
+
+                <motion.div
+                  variants={fadeUp}
+                  className="mt-10 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4"
+                >
+                  <a
+                    href={DIAGNOSTICO_HREF}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 bg-arena text-medianoche text-sm font-semibold tracking-wide hover:bg-cielo hover:-translate-y-0.5 transition-all"
+                  >
+                    Agenda tu sesión diagnóstico
+                    <span aria-hidden>→</span>
+                  </a>
+                  <Show when="signed-out">
+                    <SignUpButton forceRedirectUrl="/home">
+                      <button className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-arena/35 text-arena text-sm font-medium tracking-wide hover:bg-arena/10 hover:border-arena/60 transition-colors">
+                        Sé parte de la comunidad
+                      </button>
+                    </SignUpButton>
+                  </Show>
+                  <Show when="signed-in">
+                    <Link
+                      href="/home"
+                      className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-arena/35 text-arena text-sm font-medium tracking-wide hover:bg-arena/10 hover:border-arena/60 transition-colors"
+                    >
+                      Ir a la comunidad
+                    </Link>
+                  </Show>
+                </motion.div>
+              </motion.div>
+            </div>
+
+            {/* Below lg the portrait is hidden rather than stacked. A hero is
+                a promise plus a way to act on it, and pushing the buttons
+                below a phone's fold to make room for a photograph trades the
+                second for the first. Her portrait still opens Sobre Pilar. */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.35, ease: EASE }}
+              className="hidden lg:block"
             >
-              <Image
-                src="/images/pilar-reading.jpg"
-                alt="Pilar Zambrano B. leyendo junto a la ventana"
-                fill
-                priority
-                sizes="(min-width:1024px) 28vw, 60vw"
-                className="object-cover object-[50%_30%]"
+              <HeroPortrait
+                src="/images/pilar-portrait.jpg"
+                alt="Pilar Zambrano B."
+                // Flip to true the day /public/images holds a
+                // background-removed PNG of her. See HeroPortrait.
+                cutout={false}
+                className="mx-auto w-full max-w-[30rem]"
               />
-              <Grain opacity={0.06} />
-            </HeroTile>
-            <HeroTile
-              delay={0.5}
-              reduce={shouldReduceMotion}
-              className="left-0 top-0 hidden h-[38%] w-[30%] shadow-[0_18px_40px_-20px_rgba(14,98,127,0.45)] lg:block"
-            >
-              <Image
-                src="/images/silhouette-sunset.jpg"
-                alt="Silueta al atardecer"
-                fill
-                sizes="15vw"
-                className="object-cover"
-              />
-              <Grain opacity={0.06} />
-            </HeroTile>
-            <HeroTile
-              delay={0.65}
-              reduce={shouldReduceMotion}
-              className="bottom-[4%] right-[2%] h-[30%] w-[38%] shadow-[0_18px_40px_-20px_rgba(14,98,127,0.45)] lg:w-[34%]"
-            >
-              <Image
-                src="/images/outcomes-editar.jpg"
-                alt="Una mano escribiendo en un cuaderno"
-                fill
-                sizes="(min-width:1024px) 17vw, 38vw"
-                className="object-cover"
-              />
-              <Grain opacity={0.06} />
-            </HeroTile>
-            <p
-              aria-hidden
-              className="absolute bottom-[0%] right-[4%] z-10 font-script text-lg text-medianoche lg:bottom-[1%] lg:right-[38%] lg:text-2xl"
-            >
-              aprender a escucharte
-            </p>
+            </motion.div>
           </div>
         </div>
       </div>
