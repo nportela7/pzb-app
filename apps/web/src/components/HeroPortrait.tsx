@@ -2,34 +2,27 @@ import Image from "next/image";
 import type { CSSProperties } from "react";
 
 /**
- * A painted arch, not a rectangle.
+ * An arch, not a rectangle.
  *
- * The ground behind her is a painting, so a photograph with straight edges
- * reads as something pasted on top of it. The mask is an arch -- the one
- * shape a portrait can take that still feels composed rather than cut out --
- * whose edge has been pushed around by the same kind of stretched noise the
- * backdrop uses, so the rim is ragged like the end of a brushstroke instead
- * of drawn with a compass. The bottom still dissolves into the ground, which
- * is what keeps her from standing on a cut line.
+ * Straight edges read as a photograph pasted onto the painting. An arch is
+ * the one shape a portrait can take that still feels composed rather than
+ * cut out, and it echoes the serif of the headline beside it. The outline is
+ * kept clean on purpose: a ragged, brush-displaced rim was tried and read as
+ * torn paper, not paint. Only the bottom dissolves into the ground, so she
+ * never stands on a cut line.
  *
  * It is an SVG in a data URI rather than `clip-path` because clip-path is
- * binary: it can give the outline but not the soft, uneven alpha of paint.
- * The filter region is padded so the displaced edge is not clipped square.
+ * binary: it can give the outline but not the soft fade at the foot.
  */
 const ARCH_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" preserveAspectRatio="none">
   <defs>
     <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#fff"/>
-      <stop offset="0.72" stop-color="#fff"/>
+      <stop offset="0.74" stop-color="#fff"/>
       <stop offset="1" stop-color="#fff" stop-opacity="0"/>
     </linearGradient>
-    <filter id="brush" x="-10%" y="-10%" width="120%" height="120%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.06" numOctaves="3" seed="7"/>
-      <feDisplacementMap in="SourceGraphic" scale="26" xChannelSelector="R" yChannelSelector="G"/>
-      <feGaussianBlur stdDeviation="1.6"/>
-    </filter>
   </defs>
-  <path filter="url(#brush)" fill="url(#fade)" d="M34 500 L34 196 C34 98 108 26 200 26 C292 26 366 98 366 196 L366 500 Z"/>
+  <path fill="url(#fade)" d="M0 500 L0 200 A200 200 0 0 1 400 200 L400 500 Z"/>
 </svg>`;
 
 const ARCH_URL = `url("data:image/svg+xml,${encodeURIComponent(ARCH_SVG)}")`;
@@ -53,7 +46,7 @@ const ARCH_MASK: CSSProperties = {
  * dutifully traces the rectangle, and it looks like a mistake.
  *
  * So until a cut-out file exists the component takes the other honest route:
- * a painted arch mask that dissolves the photograph's edges into the
+ * an arch mask whose foot dissolves the photograph's edges into the
  * painted ground. It reads as deliberate rather than broken, and the day the
  * transparent file lands, `cutout` flips to true and the halo appears.
  */
