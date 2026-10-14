@@ -35,7 +35,7 @@ function Chevron({ direction }: { direction: "prev" | "next" }) {
  * One image says "here is what she looks like". A set of them says "here is
  * where she actually works" — on stage, in a session, at a table — which is
  * the claim the section is trying to make. The brand treatment stays exactly
- * as the single portrait had it: brown ground, multiply wash, inset cream
+ * as the single portrait had it: brown ground, multiply wash, inset arena
  * rule, grain. Only the number of photographs changes.
  *
  * Built on the same scroll-snap track as EventBannerCarousel: the browser
@@ -70,7 +70,7 @@ export function PortraitGallery({
     // `auto`; the percentage had nothing to resolve against, every slide
     // collapsed to zero, and all you saw was the brown ground behind them.
     <div
-      className={`relative overflow-hidden rounded-3xl bg-earth-brown ${className}`}
+      className={`relative overflow-hidden rounded-3xl bg-medianoche ${className}`}
     >
       <ul
         ref={trackRef}
@@ -93,13 +93,13 @@ export function PortraitGallery({
             />
             <div
               aria-hidden
-              className="absolute inset-0 bg-earth-brown opacity-[0.12] mix-blend-multiply"
+              className="absolute inset-0 bg-medianoche opacity-[0.12] mix-blend-multiply"
             />
             {/* The caption sits on the photograph, so it needs its own floor
                 to stand on — a bright frame would otherwise swallow it. */}
             <div
               aria-hidden
-              className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-charcoal/75 via-charcoal/25 to-transparent"
+              className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-medianoche/75 via-medianoche/25 to-transparent"
             />
           </li>
         ))}
@@ -107,10 +107,10 @@ export function PortraitGallery({
 
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-4 rounded-2xl border border-cream/40"
+        className="pointer-events-none absolute inset-4 rounded-2xl border border-arena/40"
       />
 
-      <p className="pointer-events-none absolute bottom-8 left-9 text-[0.62rem] uppercase tracking-[0.22em] text-cream">
+      <p className="pointer-events-none absolute bottom-8 left-9 text-[0.62rem] uppercase tracking-[0.22em] text-arena">
         {items[active]?.label}
       </p>
 
@@ -120,7 +120,7 @@ export function PortraitGallery({
             type="button"
             onClick={() => goTo(active - 1)}
             aria-label="Foto anterior"
-            className="absolute left-7 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-cream/90 text-earth-brown shadow-[0_10px_24px_-12px_rgba(54,54,54,0.7)] backdrop-blur-sm transition-colors hover:bg-cream"
+            className="absolute left-7 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-arena/90 text-medianoche shadow-[0_10px_24px_-12px_rgba(54,54,54,0.7)] backdrop-blur-sm transition-colors hover:bg-arena"
           >
             <Chevron direction="prev" />
           </button>
@@ -128,7 +128,7 @@ export function PortraitGallery({
             type="button"
             onClick={() => goTo(active + 1)}
             aria-label="Foto siguiente"
-            className="absolute right-7 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-cream/90 text-earth-brown shadow-[0_10px_24px_-12px_rgba(54,54,54,0.7)] backdrop-blur-sm transition-colors hover:bg-cream"
+            className="absolute right-7 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-arena/90 text-medianoche shadow-[0_10px_24px_-12px_rgba(54,54,54,0.7)] backdrop-blur-sm transition-colors hover:bg-arena"
           >
             <Chevron direction="next" />
           </button>
@@ -142,7 +142,7 @@ export function PortraitGallery({
                 aria-label={`Ver ${slide.label}`}
                 aria-current={i === active}
                 className={`h-1.5 rounded-full transition-all ${
-                  i === active ? "w-6 bg-cream" : "w-1.5 bg-cream/45 hover:bg-cream/75"
+                  i === active ? "w-6 bg-arena" : "w-1.5 bg-arena/45 hover:bg-arena/75"
                 }`}
               />
             ))}

@@ -21,7 +21,7 @@ export function MonogramCard({
   return (
     <Link href={href} className="min-w-0">
       <div
-        className="relative aspect-[3/4] rounded-xl sm:rounded-2xl bg-beige-sand overflow-hidden flex items-end p-1.5 sm:p-3"
+        className="relative aspect-[3/4] rounded-xl sm:rounded-2xl bg-cielo overflow-hidden flex items-end p-1.5 sm:p-3"
         style={{ boxShadow: "-6px 8px 14px -4px rgba(89, 68, 52, 0.38)" }}
       >
         {photoUrl ? (
@@ -43,20 +43,20 @@ export function MonogramCard({
         )}
       </div>
       <p
-        className={`font-serif text-sm sm:text-base mt-1.5 sm:mt-2 leading-tight truncate ${tone === "onDark" ? "text-cream" : "text-charcoal"}`}
+        className={`font-serif text-sm sm:text-base mt-1.5 sm:mt-2 leading-tight truncate ${tone === "onDark" ? "text-arena" : "text-medianoche"}`}
       >
         {first}
       </p>
       {last && (
         <p
-          className={`font-serif text-sm sm:text-base leading-tight truncate ${tone === "onDark" ? "text-cream" : "text-charcoal"}`}
+          className={`font-serif text-sm sm:text-base leading-tight truncate ${tone === "onDark" ? "text-arena" : "text-medianoche"}`}
         >
           {last}
         </p>
       )}
       {profession && (
         <p
-          className={`text-[0.65rem] sm:text-xs mt-0.5 truncate ${tone === "onDark" ? "text-cream/60" : "text-slate"}`}
+          className={`text-[0.65rem] sm:text-xs mt-0.5 truncate ${tone === "onDark" ? "text-arena/60" : "text-gris"}`}
         >
           {profession}
         </p>

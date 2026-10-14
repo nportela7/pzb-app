@@ -13,11 +13,11 @@ export default async function EditarEventoPage(
   return (
     <div className="px-6 sm:px-10 pb-20 max-w-4xl mx-auto w-full">
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl text-earth-brown">Editar evento</h1>
+        <h1 className="text-3xl text-medianoche">Editar evento</h1>
         <form action={deleteEventAction.bind(null, id)}>
           <button
             type="submit"
-            className="text-sm text-slate hover:text-red-700 transition-colors"
+            className="text-sm text-gris hover:text-red-700 transition-colors"
           >
             Eliminar
           </button>

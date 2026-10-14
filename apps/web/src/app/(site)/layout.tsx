@@ -14,7 +14,7 @@ export default function SiteLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-1 flex-col bg-cream">
+    <div className="flex flex-1 flex-col bg-arena">
       <SiteHeader
         items={PUBLIC_NAV}
         cta={{

@@ -20,9 +20,9 @@ export type HeaderCta = {
  * the flow, so every surface below it needs its own top padding.
  *
  * Two visual states:
- *  - "lifted" (default, and the only state on light pages): a blurred cream
+ *  - "lifted" (default, and the only state on light pages): a blurred arena
  *    pill, so copy scrolling underneath stays readable through it.
- *  - "flush": transparent with cream type, used while the header sits over a
+ *  - "flush": transparent with arena type, used while the header sits over a
  *    dark full-bleed hero — the pill would only cut a hole in it.
  */
 export function SiteHeader({
@@ -58,19 +58,19 @@ export function SiteHeader({
   }
 
   const shell = lifted
-    ? "bg-cream/72 backdrop-blur-xl backdrop-saturate-150 border-earth-brown/12 shadow-[0_10px_30px_-16px_rgba(89,68,52,0.45)]"
+    ? "bg-arena/72 backdrop-blur-xl backdrop-saturate-150 border-medianoche/12 shadow-[0_10px_30px_-16px_rgba(89,68,52,0.45)]"
     : "bg-transparent border-transparent";
-  const wordmark = lifted ? "text-earth-brown" : "text-cream";
+  const wordmark = lifted ? "text-medianoche" : "text-arena";
   const navLink = lifted
-    ? "text-charcoal/80 hover:text-earth-brown"
-    : "text-cream/75 hover:text-cream";
+    ? "text-medianoche/80 hover:text-medianoche"
+    : "text-arena/75 hover:text-arena";
   const quietLink = lifted
-    ? "text-charcoal/75 hover:text-earth-brown"
-    : "text-cream/70 hover:text-cream";
+    ? "text-medianoche/75 hover:text-medianoche"
+    : "text-arena/70 hover:text-arena";
   const ctaButton = lifted
-    ? "bg-earth-brown text-cream hover:bg-charcoal"
-    : "bg-cream text-earth-brown hover:bg-beige-sand";
-  const bar = lifted ? "bg-earth-brown" : "bg-cream";
+    ? "bg-medianoche text-arena hover:bg-medianoche"
+    : "bg-arena text-medianoche hover:bg-cielo";
+  const bar = lifted ? "bg-medianoche" : "bg-arena";
 
   return (
     <motion.header
@@ -169,28 +169,28 @@ export function SiteHeader({
       {open && (
         <nav
           id="site-menu"
-          className="lg:hidden mx-auto mt-2 max-w-6xl rounded-3xl border border-earth-brown/12 bg-cream/88 backdrop-blur-xl backdrop-saturate-150 shadow-[0_18px_40px_-22px_rgba(89,68,52,0.5)] p-3"
+          className="lg:hidden mx-auto mt-2 max-w-6xl rounded-3xl border border-medianoche/12 bg-arena/88 backdrop-blur-xl backdrop-saturate-150 shadow-[0_18px_40px_-22px_rgba(89,68,52,0.5)] p-3"
         >
           {items.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
-              className="block rounded-2xl px-4 py-3 font-serif text-lg text-charcoal/80 hover:bg-beige-sand/50 hover:text-earth-brown transition-colors"
+              className="block rounded-2xl px-4 py-3 font-serif text-lg text-medianoche/80 hover:bg-cielo/50 hover:text-medianoche transition-colors"
             >
               {item.label}
             </Link>
           ))}
           {showAuthActions && (
             <Show when="signed-out">
-              <div className="mt-2 flex flex-col gap-2 border-t border-earth-brown/12 pt-3">
+              <div className="mt-2 flex flex-col gap-2 border-t border-medianoche/12 pt-3">
                 <SignInButton forceRedirectUrl="/home">
-                  <button className="rounded-2xl px-4 py-3 text-left text-sm text-charcoal/70 hover:bg-beige-sand/50 transition-colors">
+                  <button className="rounded-2xl px-4 py-3 text-left text-sm text-medianoche/70 hover:bg-cielo/50 transition-colors">
                     Iniciar sesión
                   </button>
                 </SignInButton>
                 <SignUpButton forceRedirectUrl="/home">
-                  <button className="rounded-2xl bg-beige-sand/60 px-4 py-3 text-left text-sm font-medium text-earth-brown hover:bg-beige-sand transition-colors">
+                  <button className="rounded-2xl bg-cielo/60 px-4 py-3 text-left text-sm font-medium text-medianoche hover:bg-cielo transition-colors">
                     Sé parte de la comunidad
                   </button>
                 </SignUpButton>

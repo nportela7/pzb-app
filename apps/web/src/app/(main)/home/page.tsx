@@ -61,8 +61,8 @@ export default async function HomePage() {
   ).slice(0, 4);
 
   return (
-    <div className="flex-1 bg-cream">
-      <section className="relative overflow-hidden bg-dark-pine py-10 sm:py-12">
+    <div className="flex-1 bg-arena">
+      <section className="relative overflow-hidden bg-capuccino py-10 sm:py-12">
         <Grain opacity={0.12} />
         <span
           aria-hidden
@@ -78,14 +78,14 @@ export default async function HomePage() {
             className="w-[4.6rem] h-[4.6rem] text-2xl shrink-0"
           />
           <div>
-            <p className="flex items-center gap-3 text-xs tracking-[0.26em] uppercase text-cream/60 mb-1.5">
-              <span className="w-6 h-px bg-cream/45" />
+            <p className="flex items-center gap-3 text-xs tracking-[0.26em] uppercase text-arena/60 mb-1.5">
+              <span className="w-6 h-px bg-arena/45" />
               {capitalize(todayFormatter.format(new Date()))}
             </p>
-            <h1 className="font-serif italic font-light text-3xl sm:text-4xl text-cream leading-tight">
+            <h1 className="font-serif italic font-light text-3xl sm:text-4xl text-arena leading-tight">
               Hola, {member.name.split(" ")[0]}.
             </h1>
-            <p className="text-sm text-cream/70 mt-1">
+            <p className="text-sm text-arena/70 mt-1">
               {member.accountType === "empresa"
                 ? "Esto es lo que se mueve hoy en la comunidad de Pilar."
                 : "Esto es lo que se mueve hoy en tu comunidad."}
@@ -96,43 +96,43 @@ export default async function HomePage() {
 
       <div className="relative">
         {/* decorative flourishes flanking the content column, wide screens only */}
-        <Flourish className="hidden lg:block absolute left-10 top-0 bottom-0 w-16 text-earth-brown/20 pointer-events-none" />
-        <Flourish className="hidden lg:block absolute right-10 top-0 bottom-0 w-16 text-earth-brown/20 pointer-events-none -scale-x-100" />
+        <Flourish className="hidden lg:block absolute left-10 top-0 bottom-0 w-16 text-medianoche/20 pointer-events-none" />
+        <Flourish className="hidden lg:block absolute right-10 top-0 bottom-0 w-16 text-medianoche/20 pointer-events-none -scale-x-100" />
 
         <div className="relative flex flex-col gap-10 px-6 sm:px-10 py-12 max-w-3xl mx-auto w-full">
           {nextEvents.length > 0 && (
             <section className="flex flex-col gap-3">
               <div className="flex items-center justify-between">
-                <h2 className="text-xs tracking-[0.3em] uppercase text-slate">
+                <h2 className="text-xs tracking-[0.3em] uppercase text-gris">
                   Próximos eventos
                 </h2>
                 <Link
                   href="/eventos"
-                  className="text-sm text-earth-brown hover:text-charcoal transition-colors"
+                  className="text-sm text-medianoche hover:text-medianoche transition-colors"
                 >
                   Ver calendario →
                 </Link>
               </div>
-              <ul className="rounded-2xl border border-beige-sand divide-y divide-beige-sand overflow-hidden">
+              <ul className="rounded-2xl border border-cielo divide-y divide-cielo overflow-hidden">
                 {nextEvents.map((event) => (
                   <li key={event._id.toString()}>
                     <Link
                       href="/eventos"
-                      className="flex items-center gap-4 p-4 hover:bg-beige-sand/30 transition-colors"
+                      className="flex items-center gap-4 p-4 hover:bg-cielo/30 transition-colors"
                     >
                       <div className="text-center w-12 shrink-0">
-                        <p className="font-serif text-xl text-earth-brown leading-none">
+                        <p className="font-serif text-xl text-medianoche leading-none">
                           {dateFormatter.format(event.startsAt).split(" ")[0]}
                         </p>
-                        <p className="text-[10px] uppercase tracking-wide text-slate mt-1">
+                        <p className="text-[10px] uppercase tracking-wide text-gris mt-1">
                           {dateFormatter.format(event.startsAt).split(" ")[1]}
                         </p>
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="text-xs uppercase tracking-wide text-slate mb-0.5">
+                        <p className="text-xs uppercase tracking-wide text-gris mb-0.5">
                           {EVENT_TYPE_LABELS[event.type]}
                         </p>
-                        <p className="text-charcoal truncate">{event.title}</p>
+                        <p className="text-medianoche truncate">{event.title}</p>
                       </div>
                     </Link>
                   </li>
@@ -142,11 +142,11 @@ export default async function HomePage() {
           )}
 
           <section className="flex flex-col gap-3">
-            <h2 className="text-xs tracking-[0.3em] uppercase text-slate">
+            <h2 className="text-xs tracking-[0.3em] uppercase text-gris">
               Comunidad
             </h2>
-            <div className="rounded-2xl border border-earth-brown/20 p-6 sm:p-8">
-              <h3 className="font-serif italic text-2xl sm:text-3xl text-earth-brown mb-5">
+            <div className="rounded-2xl border border-medianoche/20 p-6 sm:p-8">
+              <h3 className="font-serif italic text-2xl sm:text-3xl text-medianoche mb-5">
                 Encuentra a tu socia.
               </h3>
               <form action="/directorio" method="get">
@@ -154,7 +154,7 @@ export default async function HomePage() {
                   type="text"
                   name="q"
                   placeholder="Psicóloga, Guadalajara, diseño…"
-                  className="w-full font-serif italic text-lg text-charcoal bg-transparent border-b-2 border-earth-brown pb-2.5 outline-none placeholder:text-charcoal/35"
+                  className="w-full font-serif italic text-lg text-medianoche bg-transparent border-b-2 border-medianoche pb-2.5 outline-none placeholder:text-medianoche/35"
                 />
               </form>
               {topProfessions.length > 0 && (
@@ -163,7 +163,7 @@ export default async function HomePage() {
                     <Link
                       key={profession}
                       href={`/directorio?q=${encodeURIComponent(profession)}`}
-                      className="text-sm text-earth-brown border border-earth-brown/25 rounded-full px-3.5 py-1.5 hover:border-earth-brown/50 transition-colors"
+                      className="text-sm text-medianoche border border-medianoche/25 rounded-full px-3.5 py-1.5 hover:border-medianoche/50 transition-colors"
                     >
                       {profession}
                     </Link>
@@ -171,12 +171,12 @@ export default async function HomePage() {
                 </div>
               )}
               <div className="flex items-baseline justify-between mt-6 text-sm">
-                <span className="text-slate">
+                <span className="text-gris">
                   {memberCount} {memberCount === 1 ? "socia" : "socias"} en la red
                 </span>
                 <Link
                   href="/directorio"
-                  className="text-earth-brown border-b border-earth-brown/40 hover:border-earth-brown transition-colors"
+                  className="text-medianoche border-b border-medianoche/40 hover:border-medianoche transition-colors"
                 >
                   Ver directorio completo →
                 </Link>
@@ -185,7 +185,7 @@ export default async function HomePage() {
           </section>
 
           <section className="flex flex-col gap-3">
-            <h2 className="text-xs tracking-[0.3em] uppercase text-slate">
+            <h2 className="text-xs tracking-[0.3em] uppercase text-gris">
               Explora
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -193,17 +193,17 @@ export default async function HomePage() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="group rounded-2xl border border-beige-sand p-5 hover:border-earth-brown transition-colors"
+                  className="group rounded-2xl border border-cielo p-5 hover:border-medianoche transition-colors"
                 >
                   <span className="flex items-center justify-between">
-                    <span className="font-serif text-lg text-charcoal">
+                    <span className="font-serif text-lg text-medianoche">
                       {link.title}
                     </span>
-                    <span className="text-earth-brown/40 group-hover:text-earth-brown group-hover:translate-x-0.5 transition-all">
+                    <span className="text-medianoche/40 group-hover:text-medianoche group-hover:translate-x-0.5 transition-all">
                       →
                     </span>
                   </span>
-                  <span className="block text-sm text-slate mt-1">
+                  <span className="block text-sm text-gris mt-1">
                     {link.subtitle}
                   </span>
                 </Link>

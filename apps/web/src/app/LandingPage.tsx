@@ -82,8 +82,8 @@ function Reveal({
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <p className="inline-flex items-center gap-3 text-xs tracking-[0.3em] uppercase text-charcoal/75">
-      <span className="w-8 h-px bg-slate" />
+    <p className="inline-flex items-center gap-3 text-xs tracking-[0.3em] uppercase text-medianoche/75">
+      <span className="w-8 h-px bg-gris" />
       {children}
     </p>
   );
@@ -98,22 +98,22 @@ function Ticker({
 }) {
   const bg =
     tone === "dark"
-      ? "bg-dark-pine"
+      ? "bg-capuccino"
       : tone === "zere"
-        ? "bg-cream/90"
-        : "bg-cream/10";
+        ? "bg-arena/90"
+        : "bg-arena/10";
   const text =
     tone === "dark"
-      ? "text-cream/85"
+      ? "text-arena/85"
       : tone === "zere"
         ? "text-zere-deep"
-        : "text-cream/70";
+        : "text-arena/70";
   const dot =
     tone === "dark"
-      ? "after:text-cream/35"
+      ? "after:text-arena/35"
       : tone === "zere"
         ? "after:text-zere-deep/40"
-        : "after:text-cream/25";
+        : "after:text-arena/25";
   // Repeated well past what any real screen width needs, so the
   // "-50%" loop point never lands on a visible gap between words.
   const filled = Array(8).fill(items).flat();
@@ -226,7 +226,7 @@ const PATHS = [
 ];
 
 /**
- * Each path already owns a colour further down the page (03 is earth-brown,
+ * Each path already owns a colour further down the page (03 is medianoche,
  * 06 is zere-sky), so the stack reuses them instead of inventing a palette.
  * Backgrounds must be opaque: a stacked card covers the one behind it.
  */
@@ -244,34 +244,34 @@ const PATH_TONES: Record<
   }
 > = {
   coaching: {
-    card: "bg-earth-brown",
-    kicker: "text-cream/65",
-    title: "text-cream",
-    body: "text-cream/75",
-    cta: "bg-cream text-earth-brown hover:bg-beige-sand",
-    tag: "border-cream/30 text-cream/85",
-    watermark: "text-cream/[0.08]",
-    imageVeil: "from-earth-brown/35",
+    card: "bg-medianoche",
+    kicker: "text-arena/65",
+    title: "text-arena",
+    body: "text-arena/75",
+    cta: "bg-arena text-medianoche hover:bg-cielo",
+    tag: "border-arena/30 text-arena/85",
+    watermark: "text-arena/[0.08]",
+    imageVeil: "from-medianoche/35",
   },
   empresas: {
     card: "bg-zere-sky",
     kicker: "text-zere-ink/60",
     title: "text-zere-ink",
     body: "text-zere-ink/75",
-    cta: "bg-zere-deep text-cream hover:bg-zere-ink",
+    cta: "bg-zere-deep text-arena hover:bg-zere-ink",
     tag: "border-zere-deep/30 text-zere-deep",
     watermark: "text-zere-deep/[0.09]",
     imageVeil: "from-zere-deep/30",
   },
   comunidad: {
-    card: "bg-beige-sand",
-    kicker: "text-charcoal/70",
-    title: "text-earth-brown",
-    body: "text-charcoal/80",
-    cta: "bg-earth-brown text-cream hover:bg-charcoal",
-    tag: "border-earth-brown/30 text-earth-brown",
-    watermark: "text-earth-brown/10",
-    imageVeil: "from-earth-brown/30",
+    card: "bg-cielo",
+    kicker: "text-medianoche/70",
+    title: "text-medianoche",
+    body: "text-medianoche/80",
+    cta: "bg-medianoche text-arena hover:bg-medianoche",
+    tag: "border-medianoche/30 text-medianoche",
+    watermark: "text-medianoche/10",
+    imageVeil: "from-medianoche/30",
   },
 };
 
@@ -288,7 +288,7 @@ const OUTCOMES = [
     image: "/images/outcomes-descubrir.jpg",
     imagePosition: "50% 30%",
     veil: "linear-gradient(180deg, rgba(20,19,17,.55) 0%, rgba(20,19,17,.35) 45%, rgba(20,19,17,.92) 100%)",
-    eyebrowClass: "text-cream",
+    eyebrowClass: "text-arena",
   },
   {
     id: "decisiones",
@@ -298,7 +298,7 @@ const OUTCOMES = [
     image: "/images/outcomes-editar.jpg",
     imagePosition: "60% 40%",
     veil: "linear-gradient(180deg, rgba(45,49,39,.55) 0%, rgba(81,85,68,.4) 45%, rgba(35,38,30,.92) 100%)",
-    eyebrowClass: "text-cream",
+    eyebrowClass: "text-arena",
   },
   {
     id: "imagen",
@@ -308,7 +308,7 @@ const OUTCOMES = [
     image: "/images/outcomes-integrar.jpg",
     imagePosition: "35% 40%",
     veil: "linear-gradient(180deg, rgba(89,68,52,.45) 0%, rgba(89,68,52,.3) 45%, rgba(60,44,32,.92) 100%)",
-    eyebrowClass: "text-beige-sand",
+    eyebrowClass: "text-cielo",
   },
 ];
 
@@ -417,7 +417,7 @@ export function LandingPage({
     .flat();
 
   return (
-    <div className="flex flex-1 flex-col bg-cream">
+    <div className="flex flex-1 flex-col bg-arena">
       <ScrollProgressRail />
       <SiteHeader
         items={PUBLIC_NAV}
@@ -434,7 +434,7 @@ export function LandingPage({
           paint is the texture now, and two background treatments competing
           for the same space just muddied each other. Restoring it is one
           <span>, if the mark is missed. */}
-      <div className="relative w-full min-h-[100svh] overflow-hidden bg-earth-brown flex flex-col">
+      <div className="relative w-full min-h-[100svh] overflow-hidden bg-medianoche flex flex-col">
         <PaintedBackdrop />
         <Grain opacity={0.05} />
 
@@ -448,7 +448,7 @@ export function LandingPage({
                 variants={{ show: { transition: { staggerChildren: 0.14 } } }}
                 className="flex w-full flex-col"
               >
-                <h1 className="font-serif font-light text-5xl sm:text-7xl lg:text-8xl leading-[0.95] text-cream text-balance">
+                <h1 className="font-serif font-light text-5xl sm:text-7xl lg:text-8xl leading-[0.95] text-arena text-balance">
                   <span className="block overflow-hidden pb-[0.08em]">
                     <motion.span variants={heroLine} className="block text-4xl sm:text-5xl lg:text-6xl">
                       Deja de vivir una vida
@@ -457,7 +457,7 @@ export function LandingPage({
                   <span className="block overflow-hidden pb-[0.08em]">
                     <motion.span
                       variants={heroLine}
-                      className="block italic font-normal text-beige-sand"
+                      className="block italic font-normal text-cielo"
                     >
                       editada por otros.
                     </motion.span>
@@ -466,7 +466,7 @@ export function LandingPage({
 
                 <motion.p
                   variants={fadeUp}
-                  className="text-base sm:text-lg text-cream/80 max-w-3xl text-pretty leading-relaxed mt-8"
+                  className="text-base sm:text-lg text-arena/80 max-w-3xl text-pretty leading-relaxed mt-8"
                 >
                   Coaching de identidad, imagen y decisiones con Pilar Zambrano B.
                   Empieza por una conversación: 30 minutos para entender dónde
@@ -481,14 +481,14 @@ export function LandingPage({
                     href={DIAGNOSTICO_HREF}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 bg-cream text-earth-brown text-sm font-semibold tracking-wide hover:bg-beige-sand hover:-translate-y-0.5 transition-all"
+                    className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 bg-arena text-medianoche text-sm font-semibold tracking-wide hover:bg-cielo hover:-translate-y-0.5 transition-all"
                   >
                     Agenda tu sesión diagnóstico
                     <span aria-hidden>→</span>
                   </a>
                   <Show when="signed-out">
                     <SignUpButton forceRedirectUrl="/home">
-                      <button className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-cream/35 text-cream text-sm font-medium tracking-wide hover:bg-cream/10 hover:border-cream/60 transition-colors">
+                      <button className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-arena/35 text-arena text-sm font-medium tracking-wide hover:bg-arena/10 hover:border-arena/60 transition-colors">
                         Sé parte de la comunidad
                       </button>
                     </SignUpButton>
@@ -496,7 +496,7 @@ export function LandingPage({
                   <Show when="signed-in">
                     <Link
                       href="/home"
-                      className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-cream/35 text-cream text-sm font-medium tracking-wide hover:bg-cream/10 hover:border-cream/60 transition-colors"
+                      className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-arena/35 text-arena text-sm font-medium tracking-wide hover:bg-arena/10 hover:border-arena/60 transition-colors"
                     >
                       Ir a la comunidad
                     </Link>
@@ -546,7 +546,7 @@ export function LandingPage({
 
       {/* Cifras — hard proof, before any poetry */}
       {/* {VISIBLE_PROOF_POINTS.length > 0 && (
-        <section className="py-12 sm:py-16 border-b border-earth-brown/12">
+        <section className="py-12 sm:py-16 border-b border-medianoche/12">
           <motion.dl
             variants={stagger}
             initial="hidden"
@@ -556,10 +556,10 @@ export function LandingPage({
           >
             {VISIBLE_PROOF_POINTS.map((point) => (
               <motion.div key={point.label} variants={fadeUp} className="text-center">
-                <dt className="font-serif text-4xl sm:text-5xl leading-none text-earth-brown">
+                <dt className="font-serif text-4xl sm:text-5xl leading-none text-medianoche">
                   {point.value}
                 </dt>
-                <dd className="mt-2.5 text-[0.7rem] uppercase tracking-[0.2em] text-charcoal/75">
+                <dd className="mt-2.5 text-[0.7rem] uppercase tracking-[0.2em] text-medianoche/75">
                   {point.label}
                 </dd>
               </motion.div>
@@ -569,15 +569,15 @@ export function LandingPage({
       )} */}
 
       {/* Quote */}
-      {/* <section className="relative overflow-hidden py-14 sm:py-20 bg-beige-sand/40">
+      {/* <section className="relative overflow-hidden py-14 sm:py-20 bg-cielo/40">
         <span
           aria-hidden
-          className="absolute -top-4 sm:-top-10 left-4 sm:left-8 font-serif italic text-[9rem] sm:text-[13rem] leading-none text-earth-brown/[0.12] select-none"
+          className="absolute -top-4 sm:-top-10 left-4 sm:left-8 font-serif italic text-[9rem] sm:text-[13rem] leading-none text-medianoche/[0.12] select-none"
         >
           &ldquo;
         </span>
         <Reveal className="shell relative">
-          <p className="measure font-serif italic text-2xl sm:text-3xl text-earth-brown leading-tight text-balance">
+          <p className="measure font-serif italic text-2xl sm:text-3xl text-medianoche leading-tight text-balance">
             <span className="font-semibold not-italic">
               La vida se vive, no se mide.
             </span>{" "}
@@ -585,10 +585,10 @@ export function LandingPage({
             escucharte realmente para entender quién eres y lo que tienes que
             soltar.
           </p>
-          <p className="mt-6 font-script text-2xl text-charcoal">
+          <p className="mt-6 font-script text-2xl text-medianoche">
             Pilar Zambrano B.
           </p>
-          <p className="text-xs tracking-[0.3em] uppercase text-charcoal/75 mt-1">
+          <p className="text-xs tracking-[0.3em] uppercase text-medianoche/75 mt-1">
             Strategic Life Editor
           </p>
         </Reveal>
@@ -598,11 +598,11 @@ export function LandingPage({
       <section className="relative py-16 sm:py-24">
         <div className="shell">
           <Reveal className="max-w-2xl">
-            <h2 className="text-3xl sm:text-5xl text-earth-brown text-balance">
+            <h2 className="text-3xl sm:text-5xl text-medianoche text-balance">
               ¿En qué momento{" "}
               <span className="italic font-normal">estás hoy?</span>
             </h2>
-            <p className="text-charcoal/75 leading-relaxed mt-5 max-w-lg">
+            <p className="text-medianoche/75 leading-relaxed mt-5 max-w-lg">
               Tres maneras de trabajar con Pilar. Elige la que te describe y
               empieza por ahí.
             </p>
@@ -697,40 +697,40 @@ export function LandingPage({
       {/* The Alignment Partnership — the flagship offer, introduced before
           the "qué cambia" triptych so the phases below have a named
           program to belong to instead of floating free. */}
-      <section className="relative py-16 sm:py-24 bg-earth-brown text-cream">
+      <section className="relative py-16 sm:py-24 bg-medianoche text-arena">
         <Grain opacity={0.07} />
         <div className="shell relative">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <Reveal>
               <Eyebrow>
-                <span className="text-cream/70">Programa principal</span>
+                <span className="text-arena/70">Programa principal</span>
               </Eyebrow>
               <h2 className="font-serif text-4xl sm:text-5xl leading-[1.03] mt-5 mb-6 text-balance">
                 The Alignment{" "}
-                <span className="italic font-normal text-beige-sand">
+                <span className="italic font-normal text-cielo">
                   Partnership
                 </span>
               </h2>
-              <p className="text-cream/80 text-lg leading-relaxed max-w-lg mb-8">
+              <p className="text-arena/80 text-lg leading-relaxed max-w-lg mb-8">
                 Identidad, imagen y decisiones como un solo expediente — se
                 abre, se documenta, se cierra con un plan que se sostiene
                 solo.
               </p>
 
-              <div className="flex items-center gap-6 mb-10 pb-9 border-b border-cream/20">
+              <div className="flex items-center gap-6 mb-10 pb-9 border-b border-arena/20">
                 {PROGRAM_FACTS.map((fact, i) => (
                   <div key={fact.label} className="flex items-center gap-6">
                     {i > 0 && (
                       <span
                         aria-hidden
-                        className="w-px h-9 bg-cream/20 shrink-0"
+                        className="w-px h-9 bg-arena/20 shrink-0"
                       />
                     )}
                     <div>
-                      <p className="font-serif text-2xl text-beige-sand leading-none">
+                      <p className="font-serif text-2xl text-cielo leading-none">
                         {fact.value}
                       </p>
-                      <p className="text-[0.62rem] tracking-[0.14em] uppercase text-cream/60 mt-1.5">
+                      <p className="text-[0.62rem] tracking-[0.14em] uppercase text-arena/60 mt-1.5">
                         {fact.label}
                       </p>
                     </div>
@@ -743,14 +743,14 @@ export function LandingPage({
                   href={DIAGNOSTICO_HREF}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 bg-cream text-earth-brown text-sm font-semibold tracking-wide hover:bg-beige-sand transition-colors"
+                  className="inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 bg-arena text-medianoche text-sm font-semibold tracking-wide hover:bg-cielo transition-colors"
                 >
                   Agenda tu sesión diagnóstico
                   <span aria-hidden>→</span>
                 </a>
                 <Link
                   href="/coaching"
-                  className="inline-flex items-center justify-center rounded-full px-7 py-3.5 border border-cream/35 text-cream text-sm font-medium hover:bg-cream/10 hover:border-cream/60 transition-colors"
+                  className="inline-flex items-center justify-center rounded-full px-7 py-3.5 border border-arena/35 text-arena text-sm font-medium hover:bg-arena/10 hover:border-arena/60 transition-colors"
                 >
                   Ver el proceso completo
                 </Link>
@@ -766,13 +766,13 @@ export function LandingPage({
                 className="object-cover"
                 style={{ objectPosition: "50% 15%" }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/65 to-charcoal/0 to-45%" />
+              <div className="absolute inset-0 bg-gradient-to-t from-medianoche/65 to-medianoche/0 to-45%" />
               {FEATURED_TESTIMONIAL && (
-                <div className="absolute left-6 right-6 bottom-6 bg-cream/95 rounded-md p-6 shadow-[0_20px_40px_-16px_rgba(36,31,26,0.5)]">
-                  <p className="font-serif italic text-lg leading-snug text-earth-brown">
+                <div className="absolute left-6 right-6 bottom-6 bg-arena/95 rounded-md p-6 shadow-[0_20px_40px_-16px_rgba(36,31,26,0.5)]">
+                  <p className="font-serif italic text-lg leading-snug text-medianoche">
                     &ldquo;{FEATURED_TESTIMONIAL.quote}&rdquo;
                   </p>
-                  <p className="text-[0.65rem] tracking-[0.14em] uppercase text-slate mt-3">
+                  <p className="text-[0.65rem] tracking-[0.14em] uppercase text-gris mt-3">
                     Clienta de The Alignment Partnership
                   </p>
                 </div>
@@ -780,17 +780,17 @@ export function LandingPage({
             </Reveal>
           </div>
 
-          <Reveal className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 mt-14 pt-10 border-t border-cream/15">
+          <Reveal className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 mt-14 pt-10 border-t border-arena/15">
             <div className="flex-1 flex items-center flex-wrap gap-x-0 gap-y-2 text-[0.68rem] tracking-[0.14em] uppercase">
               {PHASES.map((phase, i) => (
                 <span key={phase.number} className="flex items-center">
                   {i > 0 && (
                     <span
                       aria-hidden
-                      className="w-8 sm:w-14 h-px bg-cream/25 mx-3"
+                      className="w-8 sm:w-14 h-px bg-arena/25 mx-3"
                     />
                   )}
-                  <span className={i === 0 ? "text-beige-sand" : "text-cream/50"}>
+                  <span className={i === 0 ? "text-cielo" : "text-arena/50"}>
                     {phase.number} {phase.title.split(" y ")[0]}
                   </span>
                 </span>
@@ -798,7 +798,7 @@ export function LandingPage({
             </div>
             <Link
               href="/coaching"
-              className="text-sm text-beige-sand border-b border-beige-sand/50 hover:border-beige-sand transition-colors whitespace-nowrap"
+              className="text-sm text-cielo border-b border-cielo/50 hover:border-cielo transition-colors whitespace-nowrap"
             >
               Ver el proceso completo →
             </Link>
@@ -807,12 +807,12 @@ export function LandingPage({
       </section>
 
       {/* Qué cambia — the destination, stated plainly, one photo per phase */}
-      <section className="relative overflow-hidden bg-[#242220] text-cream">
+      <section className="relative overflow-hidden bg-[#242220] text-arena">
         <div className="text-center px-6 sm:px-10 pt-16 sm:pt-20 pb-10 sm:pb-12">
           <Reveal>
             <h2 className="font-serif text-3xl sm:text-5xl leading-[1.15] text-balance max-w-xl mx-auto">
               A los seis meses, ¿
-              <span className="italic font-normal text-beige-sand">
+              <span className="italic font-normal text-cielo">
                 qué es distinto?
               </span>
             </h2>
@@ -857,7 +857,7 @@ export function LandingPage({
               <p className="relative font-serif text-xl sm:text-2xl leading-snug text-balance transition-transform duration-500 group-hover:-translate-y-1">
                 {outcome.statement}
               </p>
-              <span className="relative text-[0.7rem] text-cream/60 transition-colors duration-500 group-hover:text-cream/90">
+              <span className="relative text-[0.7rem] text-arena/60 transition-colors duration-500 group-hover:text-arena/90">
                 {String(i + 1).padStart(2, "0")} / 03
               </span>
             </motion.div>
@@ -870,7 +870,7 @@ export function LandingPage({
               href={DIAGNOSTICO_HREF}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full px-8 py-4 bg-cream text-earth-brown text-sm font-semibold tracking-wide transition-colors hover:bg-beige-sand"
+              className="inline-flex items-center gap-2 rounded-full px-8 py-4 bg-arena text-medianoche text-sm font-semibold tracking-wide transition-colors hover:bg-cielo"
             >
               Quiero llegar ahí
               <span aria-hidden>→</span>
@@ -880,15 +880,15 @@ export function LandingPage({
       </section>
 
       {/* Testimonios — the proof wall */}
-      <section className="relative overflow-hidden py-16 sm:py-24 bg-beige-sand/45">
+      <section className="relative overflow-hidden py-16 sm:py-24 bg-cielo/45">
         <Grain opacity={0.05} />
         <div className="shell relative">
           <Reveal className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-xl">
-              <p className="font-script text-4xl sm:text-5xl text-earth-brown mb-4">
+              <p className="font-script text-4xl sm:text-5xl text-medianoche mb-4">
                 Client love
               </p>
-              <h2 className="text-3xl sm:text-4xl text-charcoal text-balance">
+              <h2 className="text-3xl sm:text-4xl text-medianoche text-balance">
                 Lo que dicen las mujeres que ya hicieron el proceso
               </h2>
             </div>
@@ -896,7 +896,7 @@ export function LandingPage({
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex shrink-0 items-center justify-center gap-2 self-start rounded-full border border-earth-brown/40 px-6 py-3 text-sm font-medium text-earth-brown transition-colors hover:bg-earth-brown hover:text-cream lg:self-auto"
+              className="inline-flex shrink-0 items-center justify-center gap-2 self-start rounded-full border border-medianoche/40 px-6 py-3 text-sm font-medium text-medianoche transition-colors hover:bg-medianoche hover:text-arena lg:self-auto"
             >
               Ver más en Instagram
               <span aria-hidden>→</span>
@@ -910,12 +910,12 @@ export function LandingPage({
               href={DIAGNOSTICO_HREF}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 bg-earth-brown text-cream text-sm font-semibold tracking-wide hover:bg-charcoal transition-colors"
+              className="inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 bg-medianoche text-arena text-sm font-semibold tracking-wide hover:bg-medianoche transition-colors"
             >
               Quiero empezar mi proceso
               <span aria-hidden>→</span>
             </a>
-            <p className="text-sm text-charcoal/75">
+            <p className="text-sm text-medianoche/75">
               Una conversación de 30 minutos, sin guion.
             </p>
           </Reveal>
@@ -941,20 +941,20 @@ export function LandingPage({
               />
             </Reveal>
 
-            <Reveal className="relative flex flex-col justify-center rounded-3xl bg-beige-sand/45 p-8 sm:p-10">
+            <Reveal className="relative flex flex-col justify-center rounded-3xl bg-cielo/45 p-8 sm:p-10">
               <span
                 aria-hidden
-                className="absolute -top-8 right-4 font-serif italic font-light text-[9rem] leading-none text-earth-brown/[0.07] select-none pointer-events-none"
+                className="absolute -top-8 right-4 font-serif italic font-light text-[9rem] leading-none text-medianoche/[0.07] select-none pointer-events-none"
               >
                 P
               </span>
               <div className="relative">
                 <Eyebrow>Sobre Pilar</Eyebrow>
-                <h2 className="text-3xl sm:text-4xl text-earth-brown mt-5 mb-6 text-balance">
+                <h2 className="text-3xl sm:text-4xl text-medianoche mt-5 mb-6 text-balance">
                   Emprendedora, inversionista y consejera.
                 </h2>
-                <p className="text-charcoal/80 leading-relaxed">
-                  <span className="float-left font-serif text-5xl leading-[0.8] pr-2 text-earth-brown">
+                <p className="text-medianoche/80 leading-relaxed">
+                  <span className="float-left font-serif text-5xl leading-[0.8] pr-2 text-medianoche">
                     S
                   </span>
                   e define como Strategic Life Editor: alguien que ayuda a sus
@@ -964,7 +964,7 @@ export function LandingPage({
                 </p>
                 <Link
                   href="/sobre-pilar"
-                  className="mt-8 inline-flex items-center gap-2 self-start rounded-full bg-earth-brown px-7 py-3.5 text-sm font-semibold tracking-wide text-cream transition-colors hover:bg-charcoal"
+                  className="mt-8 inline-flex items-center gap-2 self-start rounded-full bg-medianoche px-7 py-3.5 text-sm font-semibold tracking-wide text-arena transition-colors hover:bg-medianoche"
                 >
                   Conocer su historia
                   <span aria-hidden>&rarr;</span>
@@ -973,17 +973,17 @@ export function LandingPage({
                 {/* Formación: es la prueba dura de la sección, así que vive
                     dentro de la misma tarjeta que la biografía en vez de
                     colgar como pie de página. Una regla la separa, no una caja. */}
-                <div className="mt-10 border-t border-earth-brown/20 pt-8">
-                  <p className="text-[0.65rem] uppercase tracking-[0.2em] text-charcoal/70">
+                <div className="mt-10 border-t border-medianoche/20 pt-8">
+                  <p className="text-[0.65rem] uppercase tracking-[0.2em] text-medianoche/70">
                     Formación
                   </p>
                   <dl className="mt-5 grid gap-x-10 gap-y-5 sm:grid-cols-3">
                     {CREDENTIALS.map((item) => (
                       <div key={item.label}>
-                        <dt className="mb-1.5 text-[0.65rem] uppercase tracking-[0.16em] text-charcoal/75">
+                        <dt className="mb-1.5 text-[0.65rem] uppercase tracking-[0.16em] text-medianoche/75">
                           {item.label}
                         </dt>
-                        <dd className="text-sm text-charcoal text-balance">
+                        <dd className="text-sm text-medianoche text-balance">
                           {item.value}
                         </dd>
                       </div>
@@ -997,14 +997,14 @@ export function LandingPage({
       </section>
 
       {/* Comunidad */}
-      <section className="relative overflow-hidden px-[var(--shell-gutter)] py-16 sm:py-24 bg-beige-sand/40">
+      <section className="relative overflow-hidden px-[var(--shell-gutter)] py-16 sm:py-24 bg-cielo/40">
         <div className="max-w-3xl mx-auto text-center">
           <Reveal>
             <Eyebrow>Comunidad</Eyebrow>
-            <h2 className="text-3xl sm:text-4xl text-earth-brown mt-5 mb-6 text-balance">
+            <h2 className="text-3xl sm:text-4xl text-medianoche mt-5 mb-6 text-balance">
               Una red que se sostiene entre mujeres
             </h2>
-            <p className="text-charcoal/75 max-w-xl mx-auto leading-relaxed">
+            <p className="text-medianoche/75 max-w-xl mx-auto leading-relaxed">
               Un directorio de socias para encontrarse, colaborar y
               recomendarse entre sí — estas son algunas de las que ya forman
               parte.
@@ -1019,12 +1019,12 @@ export function LandingPage({
                 {[...reelFirstHalf, ...reelFirstHalf].map((m, i) => (
                   <span
                     key={i}
-                    className="font-serif text-2xl sm:text-3xl text-earth-brown/30 px-6 flex items-baseline gap-2 after:content-['—'] after:ml-4 after:text-earth-brown/20"
+                    className="font-serif text-2xl sm:text-3xl text-medianoche/30 px-6 flex items-baseline gap-2 after:content-['—'] after:ml-4 after:text-medianoche/20"
                   >
-                    <span className="italic font-normal text-earth-brown">
+                    <span className="italic font-normal text-medianoche">
                       {m.name}
                     </span>
-                    <span className="text-xs font-sans tracking-wide text-charcoal/75">
+                    <span className="text-xs font-sans tracking-wide text-medianoche/75">
                       {m.profession}
                     </span>
                   </span>
@@ -1040,12 +1040,12 @@ export function LandingPage({
                   {[...reelSecondHalf, ...reelSecondHalf].map((m, i) => (
                     <span
                       key={i}
-                      className="font-serif text-2xl sm:text-3xl text-earth-brown/30 px-6 flex items-baseline gap-2 after:content-['—'] after:ml-4 after:text-earth-brown/20"
+                      className="font-serif text-2xl sm:text-3xl text-medianoche/30 px-6 flex items-baseline gap-2 after:content-['—'] after:ml-4 after:text-medianoche/20"
                     >
-                      <span className="italic font-normal text-earth-brown">
+                      <span className="italic font-normal text-medianoche">
                         {m.name}
                       </span>
-                      <span className="text-xs font-sans tracking-wide text-charcoal/75">
+                      <span className="text-xs font-sans tracking-wide text-medianoche/75">
                         {m.profession}
                       </span>
                     </span>
@@ -1059,7 +1059,7 @@ export function LandingPage({
         <Reveal className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
           <Show when="signed-out">
             <SignUpButton forceRedirectUrl="/home">
-              <button className="rounded-full px-8 py-3.5 bg-earth-brown text-cream text-sm font-semibold tracking-wide hover:bg-charcoal transition-colors">
+              <button className="rounded-full px-8 py-3.5 bg-medianoche text-arena text-sm font-semibold tracking-wide hover:bg-medianoche transition-colors">
                 Únete a la comunidad
               </button>
             </SignUpButton>
@@ -1067,14 +1067,14 @@ export function LandingPage({
           <Show when="signed-in">
             <Link
               href="/directorio"
-              className="rounded-full px-8 py-3.5 bg-earth-brown text-cream text-sm font-semibold tracking-wide hover:bg-charcoal transition-colors"
+              className="rounded-full px-8 py-3.5 bg-medianoche text-arena text-sm font-semibold tracking-wide hover:bg-medianoche transition-colors"
             >
               Ver el directorio
             </Link>
           </Show>
           <Link
             href="/eventos"
-            className="text-sm text-earth-brown border-b border-earth-brown/40 hover:border-earth-brown transition-colors"
+            className="text-sm text-medianoche border-b border-medianoche/40 hover:border-medianoche transition-colors"
           >
             Ver el calendario de eventos
           </Link>
@@ -1094,14 +1094,14 @@ export function LandingPage({
       </section>
 
       {/* CTA final */}
-      <section className="relative overflow-hidden px-[var(--shell-gutter)] py-20 sm:py-28 bg-charcoal">
+      <section className="relative overflow-hidden px-[var(--shell-gutter)] py-20 sm:py-28 bg-medianoche">
         <Grain opacity={0.06} />
         <Reveal className="relative max-w-2xl mx-auto text-center flex flex-col items-center gap-8">
-          <h2 className="font-serif italic font-light text-4xl sm:text-6xl leading-[1.05] text-cream text-balance">
+          <h2 className="font-serif italic font-light text-4xl sm:text-6xl leading-[1.05] text-arena text-balance">
             ¿Lista para editar tu vida{" "}
             <span className="not-italic font-light">desde adentro?</span>
           </h2>
-          <p className="text-cream/70 leading-relaxed max-w-md">
+          <p className="text-arena/70 leading-relaxed max-w-md">
             Empieza con una conversación de 30 minutos. Sin guion, sin
             presentación: solo dónde estás hoy y qué te gustaría que fuera
             distinto.
@@ -1111,14 +1111,14 @@ export function LandingPage({
               href={DIAGNOSTICO_HREF}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 bg-cream text-charcoal text-sm font-semibold tracking-wide hover:bg-beige-sand transition-colors"
+              className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 bg-arena text-medianoche text-sm font-semibold tracking-wide hover:bg-cielo transition-colors"
             >
               Agenda tu sesión diagnóstico
               <span aria-hidden>→</span>
             </a>
             <Show when="signed-out">
               <SignUpButton forceRedirectUrl="/home">
-                <button className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-cream/30 text-cream text-sm font-medium hover:bg-cream/10 hover:border-cream/55 transition-colors">
+                <button className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-arena/30 text-arena text-sm font-medium hover:bg-arena/10 hover:border-arena/55 transition-colors">
                   Sé parte de la comunidad
                 </button>
               </SignUpButton>
@@ -1126,13 +1126,13 @@ export function LandingPage({
             <Show when="signed-in">
               <Link
                 href="/home"
-                className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-cream/30 text-cream text-sm font-medium hover:bg-cream/10 hover:border-cream/55 transition-colors"
+                className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-arena/30 text-arena text-sm font-medium hover:bg-arena/10 hover:border-arena/55 transition-colors"
               >
                 Ir a la comunidad
               </Link>
             </Show>
           </div>
-          <p className="text-[0.78rem] text-cream/60">
+          <p className="text-[0.78rem] text-arena/60">
             Te responde Pilar directo por WhatsApp · L–V 10–19h (CDMX)
           </p>
         </Reveal>

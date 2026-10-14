@@ -50,9 +50,9 @@ const WHATSAPP_HREF = whatsappHref(WHATSAPP_MESSAGES.coaching);
 
 export default function CoachingPage() {
   return (
-    <div className="flex-1 bg-cream">
+    <div className="flex-1 bg-arena">
       <section
-        className="relative overflow-hidden px-6 sm:px-10 pt-10 pb-16 bg-beige-sand"
+        className="relative overflow-hidden px-6 sm:px-10 pt-10 pb-16 bg-cielo"
         style={{
           backgroundImage:
             "radial-gradient(rgba(54,54,54,.14) 1px, transparent 1px)",
@@ -60,13 +60,13 @@ export default function CoachingPage() {
         }}
       >
         <div className="relative max-w-3xl mx-auto">
-          <span className="inline-flex items-center gap-2 border-2 border-dark-pine text-dark-pine font-semibold text-xs tracking-[0.18em] uppercase px-4 py-1.5 -rotate-3 rounded-sm opacity-85 mb-7">
+          <span className="inline-flex items-center gap-2 border-2 border-capuccino text-capuccino font-semibold text-xs tracking-[0.18em] uppercase px-4 py-1.5 -rotate-3 rounded-sm opacity-85 mb-7">
             Expediente activo
           </span>
-          <h1 className="text-4xl sm:text-5xl text-charcoal mb-6 max-w-lg">
+          <h1 className="text-4xl sm:text-5xl text-medianoche mb-6 max-w-lg">
             The Alignment Partnership
           </h1>
-          <p className="text-lg text-charcoal/75 leading-relaxed max-w-xl mb-12">
+          <p className="text-lg text-medianoche/75 leading-relaxed max-w-xl mb-12">
             Seis meses trabajando identidad, imagen y decisiones como un
             solo expediente: se abre, se documenta cada sesión, y se cierra
             con un plan que se sostiene solo.
@@ -74,20 +74,20 @@ export default function CoachingPage() {
 
           <dl className="grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-6 text-sm max-w-xl">
             <div>
-              <dt className="text-slate mb-1">Duración</dt>
-              <dd className="text-charcoal">6 meses</dd>
+              <dt className="text-gris mb-1">Duración</dt>
+              <dd className="text-medianoche">6 meses</dd>
             </div>
             <div>
-              <dt className="text-slate mb-1">Formato</dt>
-              <dd className="text-charcoal">8 sesiones · 90 min</dd>
+              <dt className="text-gris mb-1">Formato</dt>
+              <dd className="text-medianoche">8 sesiones · 90 min</dd>
             </div>
             <div>
-              <dt className="text-slate mb-1">Canal</dt>
-              <dd className="text-charcoal">WhatsApp, L–V 10–19h</dd>
+              <dt className="text-gris mb-1">Canal</dt>
+              <dd className="text-medianoche">WhatsApp, L–V 10–19h</dd>
             </div>
             <div>
-              <dt className="text-slate mb-1">Confidencialidad</dt>
-              <dd className="text-charcoal">Total</dd>
+              <dt className="text-gris mb-1">Confidencialidad</dt>
+              <dd className="text-medianoche">Total</dd>
             </div>
           </dl>
         </div>
@@ -95,17 +95,17 @@ export default function CoachingPage() {
 
       <section className="px-6 sm:px-10 py-20">
         <div className="max-w-3xl mx-auto">
-          <p className="text-xs font-semibold tracking-[0.22em] uppercase text-slate mb-3">
+          <p className="text-xs font-semibold tracking-[0.22em] uppercase text-gris mb-3">
             El proceso
           </p>
-          <h2 className="text-2xl text-earth-brown mb-10">
+          <h2 className="text-2xl text-medianoche mb-10">
             Tres fases, un solo expediente
           </h2>
           <CoachingPhaseTabs phases={PHASES} whatsappHref={WHATSAPP_HREF} />
         </div>
       </section>
 
-      <section className="relative overflow-hidden px-6 sm:px-10 py-20 bg-earth-brown text-cream">
+      <section className="relative overflow-hidden px-6 sm:px-10 py-20 bg-medianoche text-arena">
         <Grain opacity={0.12} />
         <div className="relative max-w-3xl mx-auto">
           <p className="font-script text-4xl mb-14">Client love</p>
@@ -113,11 +113,11 @@ export default function CoachingPage() {
             {TESTIMONIALS.map((t, i) => (
               <blockquote
                 key={i}
-                className="border-t border-cream/20 pt-6 text-cream/90 leading-relaxed"
+                className="border-t border-arena/20 pt-6 text-arena/90 leading-relaxed"
               >
                 <p className="font-serif italic text-lg">&ldquo;{t.quote}&rdquo;</p>
                 {t.author && (
-                  <cite className="block not-italic text-sm text-cream/60 mt-3">
+                  <cite className="block not-italic text-sm text-arena/60 mt-3">
                     — {t.author}
                   </cite>
                 )}
@@ -129,8 +129,8 @@ export default function CoachingPage() {
 
       <section className="px-6 sm:px-10 py-20">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-2xl text-earth-brown mb-4">Quién te acompaña</h2>
-          <p className="text-charcoal/80 leading-relaxed max-w-xl mb-6">
+          <h2 className="text-2xl text-medianoche mb-4">Quién te acompaña</h2>
+          <p className="text-medianoche/80 leading-relaxed max-w-xl mb-6">
             Pilar Zambrano B. es emprendedora, inversionista y consejera. Se
             define a sí misma como Strategic Life Editor: alguien que ayuda a
             sus clientas a editar su vida desde adentro hacia afuera,
@@ -138,24 +138,24 @@ export default function CoachingPage() {
           </p>
           <dl className="grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-5 text-sm max-w-xl">
             <div>
-              <dt className="text-slate mb-1">Coaching</dt>
-              <dd className="text-charcoal">iPEC · Escuela Domingo Delgado</dd>
+              <dt className="text-gris mb-1">Coaching</dt>
+              <dd className="text-medianoche">iPEC · Escuela Domingo Delgado</dd>
             </div>
             <div>
-              <dt className="text-slate mb-1">Académica</dt>
-              <dd className="text-charcoal">Boston University · IE Business School</dd>
+              <dt className="text-gris mb-1">Académica</dt>
+              <dd className="text-medianoche">Boston University · IE Business School</dd>
             </div>
             <div>
-              <dt className="text-slate mb-1">Certificaciones</dt>
-              <dd className="text-charcoal">Hogan · Kellogg · Constelaciones Familiares</dd>
+              <dt className="text-gris mb-1">Certificaciones</dt>
+              <dd className="text-medianoche">Hogan · Kellogg · Constelaciones Familiares</dd>
             </div>
           </dl>
         </div>
 
-        <div className="max-w-3xl mx-auto mt-16 rounded-2xl bg-dark-pine text-cream px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="max-w-3xl mx-auto mt-16 rounded-2xl bg-capuccino text-arena px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div>
             <h3 className="text-xl mb-1">¿Lista para empezar?</h3>
-            <p className="text-cream/80 text-sm">
+            <p className="text-arena/80 text-sm">
               Agenda tu sesión diagnóstico y conversemos de tu proceso.
             </p>
           </div>
@@ -163,7 +163,7 @@ export default function CoachingPage() {
             href={WHATSAPP_HREF}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full bg-cream text-dark-pine px-6 py-3 text-sm font-medium whitespace-nowrap hover:bg-beige-sand transition-colors"
+            className="rounded-full bg-arena text-capuccino px-6 py-3 text-sm font-medium whitespace-nowrap hover:bg-cielo transition-colors"
           >
             Escribir por WhatsApp
           </a>

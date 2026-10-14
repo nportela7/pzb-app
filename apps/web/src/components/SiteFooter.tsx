@@ -15,11 +15,11 @@ const COMUNIDAD = [
 
 export function SiteFooter() {
   return (
-    <footer className="bg-charcoal text-cream/65">
+    <footer className="bg-medianoche text-arena/65">
       <div className="mx-auto grid max-w-6xl gap-12 px-6 sm:px-10 py-16 md:grid-cols-[1.3fr_1fr_1fr]">
         <div>
-          <span className="font-script text-3xl text-cream">PZB.</span>
-          <p className="mt-4 max-w-xs leading-relaxed text-cream/70">
+          <span className="font-script text-3xl text-arena">PZB.</span>
+          <p className="mt-4 max-w-xs leading-relaxed text-arena/70">
             Coaching de identidad, imagen y decisiones. Y experiencias con
             intención para empresas.
           </p>
@@ -27,7 +27,7 @@ export function SiteFooter() {
             href={whatsappHref(WHATSAPP_MESSAGES.diagnostico)}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center gap-2 rounded-full bg-cream px-6 py-3 text-sm font-semibold text-charcoal transition-colors hover:bg-beige-sand"
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-arena px-6 py-3 text-sm font-semibold text-medianoche transition-colors hover:bg-cielo"
           >
             Agenda tu sesión diagnóstico
             <span aria-hidden>→</span>
@@ -35,7 +35,7 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <p className="text-[0.68rem] uppercase tracking-[0.22em] text-cream/60">
+          <p className="text-[0.68rem] uppercase tracking-[0.22em] text-arena/60">
             Explorar
           </p>
           <nav className="mt-5 flex flex-col gap-3 text-sm">
@@ -43,7 +43,7 @@ export function SiteFooter() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="transition-colors hover:text-cream"
+                className="transition-colors hover:text-arena"
               >
                 {item.label}
               </Link>
@@ -52,7 +52,7 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <p className="text-[0.68rem] uppercase tracking-[0.22em] text-cream/60">
+          <p className="text-[0.68rem] uppercase tracking-[0.22em] text-arena/60">
             Comunidad
           </p>
           <nav className="mt-5 flex flex-col gap-3 text-sm">
@@ -60,7 +60,7 @@ export function SiteFooter() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="transition-colors hover:text-cream"
+                className="transition-colors hover:text-arena"
               >
                 {item.label}
               </Link>
@@ -69,7 +69,7 @@ export function SiteFooter() {
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-colors hover:text-cream"
+              className="transition-colors hover:text-arena"
             >
               Instagram
             </a>
@@ -77,9 +77,9 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 border-t border-cream/12 px-6 sm:px-10 py-6 text-xs sm:flex-row">
+      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 border-t border-arena/12 px-6 sm:px-10 py-6 text-xs sm:flex-row">
         <span>© {new Date().getFullYear()} Pilar Zambrano B.</span>
-        <span className="text-cream/60">
+        <span className="text-arena/60">
           Ciudad de México · Strategic Life Editor
         </span>
       </div>

@@ -67,7 +67,7 @@ export function HeroPortrait({
                   // Three passes: two tight ones build a solid rim, the wide
                   // one throws the glow. One pass alone reads as a stroke.
                   filter:
-                    "drop-shadow(0 0 1px var(--pzb-beige-sand)) drop-shadow(0 0 3px var(--pzb-beige-sand)) drop-shadow(0 0 26px rgba(218,210,193,0.45))",
+                    "drop-shadow(0 0 1px var(--pzb-cielo)) drop-shadow(0 0 3px var(--pzb-cielo)) drop-shadow(0 0 26px rgba(218,210,193,0.45))",
                   objectFit: "contain",
                 }
               : {
@@ -82,7 +82,7 @@ export function HeroPortrait({
           // behind it, so the two do not read as separate pictures.
           <div
             aria-hidden
-            className="absolute inset-0 bg-earth-brown/35 mix-blend-multiply"
+            className="absolute inset-0 bg-medianoche/35 mix-blend-multiply"
             style={FEATHER}
           />
         )}

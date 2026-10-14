@@ -13,15 +13,15 @@ export default async function SeedDemoPage() {
   if (member.email !== OWNER_EMAIL) redirect("/home");
 
   return (
-    <div className="flex-1 bg-cream">
+    <div className="flex-1 bg-arena">
       <section className="px-6 sm:px-10 py-16 max-w-xl mx-auto">
-        <p className="text-xs tracking-[0.3em] uppercase text-slate mb-4">
+        <p className="text-xs tracking-[0.3em] uppercase text-gris mb-4">
           Herramienta temporal
         </p>
-        <h1 className="text-3xl text-earth-brown mb-3">
+        <h1 className="text-3xl text-medianoche mb-3">
           Comunidad de demo
         </h1>
-        <p className="text-charcoal/70 leading-relaxed mb-8">
+        <p className="text-medianoche/70 leading-relaxed mb-8">
           Siembra 7 socias y 5 eventos de ejemplo directamente en esta base
           de datos, o quítalos cuando termines. Solo visible para tu cuenta.
         </p>

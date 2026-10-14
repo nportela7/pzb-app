@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { splitName } from "@/lib/name";
 
-// A small hand-drawn pine sprig — dark-pine is a brand color by name,
+// A small hand-drawn pine sprig — capuccino is a brand color,
 // so this is the literal thing. Rotation is hashed from the name so
 // it's deterministic (same card always looks the same) but varies
 // across a row instead of repeating identically five times.
@@ -33,11 +33,11 @@ export function PortraitCard({
   return (
     <Link
       href={href}
-      className="relative overflow-hidden min-w-0 flex flex-col items-start rounded-xl sm:rounded-2xl border border-earth-brown/20 bg-cream p-2.5 sm:p-4 transition-all hover:border-earth-brown/55 hover:-translate-y-1"
+      className="relative overflow-hidden min-w-0 flex flex-col items-start rounded-xl sm:rounded-2xl border border-medianoche/20 bg-arena p-2.5 sm:p-4 transition-all hover:border-medianoche/55 hover:-translate-y-1"
     >
       <span
         aria-hidden
-        className="absolute -bottom-2 -right-3 w-20 h-20 sm:w-24 sm:h-24 text-dark-pine opacity-[0.08] pointer-events-none"
+        className="absolute -bottom-2 -right-3 w-20 h-20 sm:w-24 sm:h-24 text-capuccino opacity-[0.08] pointer-events-none"
         style={{ transform: `rotate(${rotationFor(name)}deg)` }}
       >
         <svg viewBox="0 0 100 100" className="w-full h-full">
@@ -60,21 +60,21 @@ export function PortraitCard({
           <Image src={photoUrl} alt="" fill sizes="44px" className="object-cover" />
         </div>
       ) : (
-        <span className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-full flex items-center justify-center font-serif italic text-sm sm:text-base text-cream bg-earth-brown mb-2 sm:mb-2.5 shrink-0">
+        <span className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-full flex items-center justify-center font-serif italic text-sm sm:text-base text-arena bg-medianoche mb-2 sm:mb-2.5 shrink-0">
           {initials(name)}
         </span>
       )}
 
-      <p className="relative font-serif text-sm sm:text-base text-charcoal leading-tight truncate w-full">
+      <p className="relative font-serif text-sm sm:text-base text-medianoche leading-tight truncate w-full">
         {first}
       </p>
       {last && (
-        <p className="relative font-serif text-sm sm:text-base text-charcoal leading-tight truncate w-full">
+        <p className="relative font-serif text-sm sm:text-base text-medianoche leading-tight truncate w-full">
           {last}
         </p>
       )}
       {profession && (
-        <p className="relative text-[0.62rem] sm:text-xs text-slate mt-0.5 truncate w-full">
+        <p className="relative text-[0.62rem] sm:text-xs text-gris mt-0.5 truncate w-full">
           {profession}
         </p>
       )}

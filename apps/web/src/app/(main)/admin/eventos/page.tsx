@@ -23,21 +23,21 @@ export default async function AdminEventosPage() {
   return (
     <div className="px-6 sm:px-10 pb-20 max-w-4xl mx-auto w-full">
       <div className="flex items-center justify-between mb-10">
-        <h1 className="text-3xl text-earth-brown">Eventos</h1>
+        <h1 className="text-3xl text-medianoche">Eventos</h1>
         <Link
           href="/admin/eventos/nuevo"
-          className="rounded-full bg-earth-brown text-cream px-5 py-2.5 text-sm font-medium hover:bg-charcoal transition-colors"
+          className="rounded-full bg-medianoche text-arena px-5 py-2.5 text-sm font-medium hover:bg-medianoche transition-colors"
         >
           + Nuevo evento
         </Link>
       </div>
 
       {events.length === 0 ? (
-        <p className="text-charcoal/70">
+        <p className="text-medianoche/70">
           Todavía no has creado ningún evento.
         </p>
       ) : (
-        <ul className="flex flex-col divide-y divide-beige-sand">
+        <ul className="flex flex-col divide-y divide-cielo">
           {events.map((event) => {
             const id = event._id.toString();
             const nextStatus = event.status === "published" ? "draft" : "published";
@@ -48,20 +48,20 @@ export default async function AdminEventosPage() {
                     <span
                       className={`text-xs px-2 py-0.5 rounded-full ${
                         event.status === "published"
-                          ? "bg-dark-pine/15 text-dark-pine"
+                          ? "bg-capuccino/15 text-capuccino"
                           : event.status === "cancelled"
-                            ? "bg-charcoal/10 text-charcoal/60"
-                            : "bg-beige-sand text-charcoal/70"
+                            ? "bg-medianoche/10 text-medianoche/60"
+                            : "bg-cielo text-medianoche/70"
                       }`}
                     >
                       {STATUS_LABELS[event.status]}
                     </span>
-                    <span className="text-xs uppercase tracking-wide text-slate">
+                    <span className="text-xs uppercase tracking-wide text-gris">
                       {EVENT_TYPE_LABELS[event.type]}
                     </span>
                   </div>
-                  <p className="text-charcoal font-medium">{event.title}</p>
-                  <p className="text-sm text-slate mt-0.5">
+                  <p className="text-medianoche font-medium">{event.title}</p>
+                  <p className="text-sm text-gris mt-0.5">
                     {dateFormatter.format(event.startsAt)}
                     {event.location ? ` · ${event.location}` : ""}
                   </p>
@@ -69,17 +69,17 @@ export default async function AdminEventosPage() {
                 <div className="flex items-center gap-4 text-sm">
                   <Link
                     href={`/admin/eventos/${id}`}
-                    className="text-earth-brown hover:text-charcoal transition-colors"
+                    className="text-medianoche hover:text-medianoche transition-colors"
                   >
                     Editar
                   </Link>
                   <form action={toggleStatusAction.bind(null, id, nextStatus)}>
-                    <button type="submit" className="text-slate hover:text-earth-brown transition-colors">
+                    <button type="submit" className="text-gris hover:text-medianoche transition-colors">
                       {event.status === "published" ? "Pasar a borrador" : "Publicar"}
                     </button>
                   </form>
                   <form action={deleteEventAction.bind(null, id)}>
-                    <button type="submit" className="text-slate hover:text-red-700 transition-colors">
+                    <button type="submit" className="text-gris hover:text-red-700 transition-colors">
                       Eliminar
                     </button>
                   </form>

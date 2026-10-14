@@ -21,7 +21,7 @@
  *      down to the left where the headline sits. One source, like a painting.
  *
  * Every tone stays in the dark half of the palette on purpose. The lightest
- * is #6f5743, which still holds cream at about 5.9:1 -- the copy on top has
+ * is #6f5743, which still holds arena at about 5.9:1 -- the copy on top has
  * to keep clearing AA wherever the paint happens to fall behind it.
  */
 export function PaintedBackdrop({ className = "" }: { className?: string }) {

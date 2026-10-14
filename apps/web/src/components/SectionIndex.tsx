@@ -3,8 +3,8 @@
 import { motion } from "motion/react";
 
 const TONES = {
-  earth: { color: "text-earth-brown/40", line: "bg-earth-brown/20" },
-  cream: { color: "text-cream/50", line: "bg-cream/25" },
+  earth: { color: "text-medianoche/40", line: "bg-medianoche/20" },
+  cream: { color: "text-arena/50", line: "bg-arena/25" },
   zere: { color: "text-zere-deep/40", line: "bg-zere-deep/25" },
 };
 

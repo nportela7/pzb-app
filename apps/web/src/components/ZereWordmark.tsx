@@ -5,7 +5,7 @@ export function ZereWordmark({
   className?: string;
   tone?: "deep" | "cream";
 }) {
-  const color = tone === "deep" ? "text-zere-deep" : "text-cream";
+  const color = tone === "deep" ? "text-zere-deep" : "text-arena";
   return (
     <span className={`inline-flex items-baseline gap-2 ${color} ${className}`}>
       <span className="font-serif italic">zere</span>

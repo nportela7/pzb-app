@@ -14,18 +14,18 @@ const FILTERS: { value?: EventType; label: string }[] = [
 ];
 
 const ACCENT_TEXT: Record<EventType, string> = {
-  taller: "text-earth-brown",
-  cena: "text-dark-pine",
-  retiro: "text-slate",
-  sesion_abierta: "text-earth-brown",
+  taller: "text-medianoche",
+  cena: "text-capuccino",
+  retiro: "text-gris",
+  sesion_abierta: "text-medianoche",
   zere_studio: "text-zere-deep",
 };
 
 const ACCENT_BG: Record<EventType, string> = {
-  taller: "bg-earth-brown",
-  cena: "bg-dark-pine",
-  retiro: "bg-slate",
-  sesion_abierta: "bg-earth-brown",
+  taller: "bg-medianoche",
+  cena: "bg-capuccino",
+  retiro: "bg-gris",
+  sesion_abierta: "bg-medianoche",
   zere_studio: "bg-zere-deep",
 };
 
@@ -68,41 +68,41 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
   const events = await listUpcomingEvents(activeType);
 
   return (
-    <div className="flex-1 bg-cream">
+    <div className="flex-1 bg-arena">
       <section className="relative overflow-hidden px-6 sm:px-10 pt-6 sm:pt-12 pb-8 sm:pb-14">
         <Grain opacity={0.1} />
         <div className="relative max-w-3xl mx-auto">
-          <p className="flex items-center gap-3 text-xs tracking-[0.32em] uppercase text-slate mb-6">
-            <span className="w-8 h-px bg-slate" />
+          <p className="flex items-center gap-3 text-xs tracking-[0.32em] uppercase text-gris mb-6">
+            <span className="w-8 h-px bg-gris" />
             Calendario en vivo
           </p>
-          <h1 className="font-serif italic text-5xl sm:text-7xl leading-[0.92] text-earth-brown text-balance">
+          <h1 className="font-serif italic text-5xl sm:text-7xl leading-[0.92] text-medianoche text-balance">
             Eventos
             <br />
-            <span className="not-italic font-light text-charcoal">
+            <span className="not-italic font-light text-medianoche">
               de la comunidad.
             </span>
           </h1>
-          <p className="mt-6 font-serif font-light text-lg sm:text-xl leading-relaxed text-charcoal max-w-lg">
+          <p className="mt-6 font-serif font-light text-lg sm:text-xl leading-relaxed text-medianoche max-w-lg">
             Talleres, cenas, retiros y sesiones de Zere Studio — cinco maneras
             de encontrarse fuera de la pantalla, en un solo lugar.
           </p>
         </div>
       </section>
 
-      <nav className="flex flex-wrap items-baseline gap-x-3 gap-y-1 px-6 sm:px-10 pb-6 sm:pb-8 max-w-3xl mx-auto border-b border-earth-brown/15 font-serif">
+      <nav className="flex flex-wrap items-baseline gap-x-3 gap-y-1 px-6 sm:px-10 pb-6 sm:pb-8 max-w-3xl mx-auto border-b border-medianoche/15 font-serif">
         {FILTERS.map((filter, i) => {
           const isActive = filter.value === activeType;
           const href = filter.value ? `/eventos?type=${filter.value}` : "/eventos";
           return (
             <span key={filter.label} className="flex items-baseline gap-3">
-              {i > 0 && <span className="italic text-charcoal/20">·</span>}
+              {i > 0 && <span className="italic text-medianoche/20">·</span>}
               <Link
                 href={href}
                 className={
                   isActive
-                    ? "text-lg sm:text-xl text-earth-brown font-medium underline underline-offset-4"
-                    : "text-lg sm:text-xl italic text-charcoal/40 hover:text-charcoal transition-colors"
+                    ? "text-lg sm:text-xl text-medianoche font-medium underline underline-offset-4"
+                    : "text-lg sm:text-xl italic text-medianoche/40 hover:text-medianoche transition-colors"
                 }
               >
                 {filter.label}
@@ -112,12 +112,12 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
         })}
       </nav>
 
-      <div className="overflow-hidden bg-dark-pine py-2.5 whitespace-nowrap">
+      <div className="overflow-hidden bg-capuccino py-2.5 whitespace-nowrap">
         <div className="inline-flex marquee-track" style={{ animationDuration: "208s" }}>
           {[...TICKER_ITEMS_FILLED, ...TICKER_ITEMS_FILLED].map((item, i) => (
             <span
               key={i}
-              className="text-[0.68rem] tracking-[0.24em] uppercase text-cream/85 px-6 flex items-center gap-6 after:content-['·'] after:text-cream/35"
+              className="text-[0.68rem] tracking-[0.24em] uppercase text-arena/85 px-6 flex items-center gap-6 after:content-['·'] after:text-arena/35"
             >
               {item}
             </span>
@@ -127,8 +127,8 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
 
       <section className="px-6 sm:px-10 max-w-3xl mx-auto">
         {events.length === 0 ? (
-          <div className="rounded-2xl border border-beige-sand p-8 mt-10 text-center">
-            <p className="text-charcoal/80 mb-4">
+          <div className="rounded-2xl border border-cielo p-8 mt-10 text-center">
+            <p className="text-medianoche/80 mb-4">
               Todavía no hay eventos publicados
               {activeType ? ` en "${EVENT_TYPE_LABELS[activeType]}"` : ""}.
             </p>
@@ -136,7 +136,7 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
               href={WHATSAPP_HREF}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block rounded-full bg-earth-brown text-cream px-6 py-2.5 text-sm font-medium hover:bg-charcoal transition-colors"
+              className="inline-block rounded-full bg-medianoche text-arena px-6 py-2.5 text-sm font-medium hover:bg-medianoche transition-colors"
             >
               Preguntarle a Pilar
             </a>
@@ -157,13 +157,13 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
                     href={WHATSAPP_HREF}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="grid grid-cols-[4.5rem_1fr] sm:grid-cols-[7rem_1fr_auto] items-center gap-4 sm:gap-8 py-6 sm:py-8 border-b border-earth-brown/10 transition-[padding] duration-300 group-hover:pl-3"
+                    className="grid grid-cols-[4.5rem_1fr] sm:grid-cols-[7rem_1fr_auto] items-center gap-4 sm:gap-8 py-6 sm:py-8 border-b border-medianoche/10 transition-[padding] duration-300 group-hover:pl-3"
                   >
                     <span
                       className={`font-serif text-4xl sm:text-6xl leading-[0.85] tracking-tight ${accentText}`}
                     >
                       {day}
-                      <sup className="ml-1 align-super text-[0.62rem] font-sans font-semibold uppercase tracking-wider text-slate">
+                      <sup className="ml-1 align-super text-[0.62rem] font-sans font-semibold uppercase tracking-wider text-gris">
                         {month}
                       </sup>
                     </span>
@@ -174,10 +174,10 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
                       >
                         {EVENT_TYPE_LABELS[event.type]}
                       </p>
-                      <h2 className="font-serif text-xl sm:text-2xl text-charcoal leading-tight mb-1">
+                      <h2 className="font-serif text-xl sm:text-2xl text-medianoche leading-tight mb-1">
                         {event.title}
                       </h2>
-                      <p className="text-sm text-slate">
+                      <p className="text-sm text-gris">
                         {timeFormatter.format(event.startsAt)}
                         {event.location ? ` · ${event.location}` : ""}
                         {event.isOnline ? " · En línea" : ""}
@@ -185,7 +185,7 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
                     </div>
 
                     <div className="col-span-2 sm:col-span-1 flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-2 mt-2 sm:mt-0">
-                      <span className="font-serif text-charcoal">
+                      <span className="font-serif text-medianoche">
                         {formatPrice(event.priceCents, event.currency)}
                       </span>
                       <span
@@ -207,14 +207,14 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
 
       {events.length > 0 && (
         <section className="px-6 sm:px-10 py-16 sm:py-20 max-w-3xl mx-auto flex flex-wrap items-baseline justify-between gap-4">
-          <p className="font-serif italic text-lg text-slate">
+          <p className="font-serif italic text-lg text-gris">
             ¿No encuentras fecha que te acomode?
           </p>
           <a
             href={WHATSAPP_HREF}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full bg-earth-brown text-cream px-6 py-2.5 text-sm font-medium hover:bg-charcoal transition-colors"
+            className="rounded-full bg-medianoche text-arena px-6 py-2.5 text-sm font-medium hover:bg-medianoche transition-colors"
           >
             Preguntarle a Pilar
           </a>

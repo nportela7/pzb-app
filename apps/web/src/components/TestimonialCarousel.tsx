@@ -49,7 +49,7 @@ function Media({
 
   if (video) {
     return (
-      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-earth-brown">
+      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-medianoche">
         {playing ? (
           <video
             src={video.src}
@@ -73,8 +73,8 @@ function Media({
               sizes="(min-width: 1024px) 30vw, 85vw"
               className="object-cover"
             />
-            <span className="absolute inset-0 bg-charcoal/25 transition-colors group-hover:bg-charcoal/15" />
-            <span className="absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-cream text-earth-brown shadow-[0_12px_28px_-10px_rgba(54,54,54,0.6)] transition-transform duration-300 group-hover:scale-110">
+            <span className="absolute inset-0 bg-medianoche/25 transition-colors group-hover:bg-medianoche/15" />
+            <span className="absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-arena text-medianoche shadow-[0_12px_28px_-10px_rgba(54,54,54,0.6)] transition-transform duration-300 group-hover:scale-110">
               <PlayMark />
             </span>
           </button>
@@ -85,7 +85,7 @@ function Media({
 
   if (photoUrl) {
     return (
-      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-beige-sand">
+      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-cielo">
         <Image
           src={photoUrl}
           alt={author ?? ""}
@@ -93,7 +93,7 @@ function Media({
           sizes="(min-width: 1024px) 30vw, 85vw"
           className="object-cover"
         />
-        <span className="absolute inset-0 bg-earth-brown mix-blend-multiply opacity-[0.1]" />
+        <span className="absolute inset-0 bg-medianoche mix-blend-multiply opacity-[0.1]" />
       </div>
     );
   }
@@ -101,7 +101,7 @@ function Media({
   const initial = author?.trim()[0]?.toUpperCase();
 
   return (
-    <div className="relative flex aspect-[4/5] items-center justify-center overflow-hidden rounded-2xl bg-beige-sand/70">
+    <div className="relative flex aspect-[4/5] items-center justify-center overflow-hidden rounded-2xl bg-cielo/70">
       <span
         aria-hidden
         className="select-none font-serif italic font-light leading-none text-transparent"
@@ -170,24 +170,24 @@ export function TestimonialCarousel({ items }: { items: Testimonial[] }) {
                 onPlay={() => setPlayingId(testimonial.id)}
               />
               <blockquote className="mt-6 flex-1">
-                <p className="font-serif italic text-lg leading-snug text-earth-brown text-balance">
+                <p className="font-serif italic text-lg leading-snug text-medianoche text-balance">
                   &ldquo;{testimonial.quote}&rdquo;
                 </p>
               </blockquote>
-              <figcaption className="mt-5 border-t border-earth-brown/20 pt-4">
+              <figcaption className="mt-5 border-t border-medianoche/20 pt-4">
                 {testimonial.author ? (
                   <>
-                    <p className="font-serif text-lg text-charcoal">
+                    <p className="font-serif text-lg text-medianoche">
                       {testimonial.author}
                     </p>
                     {testimonial.context && (
-                      <p className="mt-1 text-[0.72rem] uppercase tracking-[0.16em] text-charcoal/75">
+                      <p className="mt-1 text-[0.72rem] uppercase tracking-[0.16em] text-medianoche/75">
                         {testimonial.context}
                       </p>
                     )}
                   </>
                 ) : (
-                  <p className="text-[0.72rem] uppercase tracking-[0.16em] text-charcoal/75">
+                  <p className="text-[0.72rem] uppercase tracking-[0.16em] text-medianoche/75">
                     Clienta de Pilar
                   </p>
                 )}
@@ -204,7 +204,7 @@ export function TestimonialCarousel({ items }: { items: Testimonial[] }) {
             onClick={() => scrollByCard(-1)}
             disabled={atStart}
             aria-label="Testimonio anterior"
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-earth-brown/30 text-earth-brown transition-colors hover:border-earth-brown hover:bg-earth-brown hover:text-cream disabled:pointer-events-none disabled:opacity-30"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-medianoche/30 text-medianoche transition-colors hover:border-medianoche hover:bg-medianoche hover:text-arena disabled:pointer-events-none disabled:opacity-30"
           >
             <Chevron direction="prev" />
           </button>
@@ -213,15 +213,15 @@ export function TestimonialCarousel({ items }: { items: Testimonial[] }) {
             onClick={() => scrollByCard(1)}
             disabled={atEnd}
             aria-label="Testimonio siguiente"
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-earth-brown/30 text-earth-brown transition-colors hover:border-earth-brown hover:bg-earth-brown hover:text-cream disabled:pointer-events-none disabled:opacity-30"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-medianoche/30 text-medianoche transition-colors hover:border-medianoche hover:bg-medianoche hover:text-arena disabled:pointer-events-none disabled:opacity-30"
           >
             <Chevron direction="next" />
           </button>
         </div>
 
-        <div aria-hidden className="relative h-px flex-1 bg-earth-brown/20">
+        <div aria-hidden className="relative h-px flex-1 bg-medianoche/20">
           <span
-            className="absolute inset-y-0 left-0 bg-earth-brown transition-[width] duration-200"
+            className="absolute inset-y-0 left-0 bg-medianoche transition-[width] duration-200"
             style={{ width: `${Math.max(progress * 100, 4)}%` }}
           />
         </div>

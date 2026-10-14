@@ -17,9 +17,9 @@ import {
  *
  * Two rules make this work, and breaking either one makes it unreadable:
  *
- * 1. ONE LOUD LAYER. The display type is a watermark — beige-sand on cream
+ * 1. ONE LOUD LAYER. The display type is a watermark — cielo on arena
  *    is about 1.35:1, deliberately almost-not-there. The notes on top are
- *    charcoal and redline at full strength. Two high-contrast layers in the
+ *    medianoche and coral at full strength. Two high-contrast layers in the
  *    same space cancel each other out; a quiet one and a loud one read as
  *    depth. Charcoal still clears 7:1 over the watermark, so a note is just
  *    as legible where it crosses a letter as where it doesn't.
@@ -36,22 +36,22 @@ import {
 
 const TONES = {
   paper: {
-    ground: "bg-cream",
+    ground: "bg-arena",
     grain: 0.05,
-    watermark: "text-beige-sand",
-    mark: "text-redline",
-    note: "text-charcoal",
-    noteMuted: "text-charcoal",
-    script: "text-charcoal",
+    watermark: "text-cielo",
+    mark: "text-coral",
+    note: "text-medianoche",
+    noteMuted: "text-medianoche",
+    script: "text-medianoche",
   },
   ink: {
-    ground: "bg-earth-brown",
+    ground: "bg-medianoche",
     grain: 0.07,
-    watermark: "text-cream/[0.09]",
-    mark: "text-beige-sand",
-    note: "text-cream",
-    noteMuted: "text-cream",
-    script: "text-cream",
+    watermark: "text-arena/[0.09]",
+    mark: "text-cielo",
+    note: "text-arena",
+    noteMuted: "text-arena",
+    script: "text-arena",
   },
 } as const;
 

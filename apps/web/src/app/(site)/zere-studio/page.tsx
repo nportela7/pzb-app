@@ -30,7 +30,7 @@ const CLIENTES = [
 const CLIENT_ACCENTS = [
   "bg-zere-sky text-zere-deep",
   "bg-zere-deep/15 text-zere-deep",
-  "bg-earth-brown/15 text-earth-brown",
+  "bg-medianoche/15 text-medianoche",
   "bg-zere-sky text-zere-deep",
   "bg-zere-deep/15 text-zere-deep",
 ];
@@ -65,7 +65,7 @@ const CONTACT_HREF = whatsappHref(WHATSAPP_MESSAGES.empresas);
 
 export default function ZereStudioPage() {
   return (
-    <div className="flex-1 bg-cream">
+    <div className="flex-1 bg-arena">
       <section className="relative overflow-hidden px-6 sm:px-10 pt-10 pb-16 bg-zere-sky">
         <Image
           src="/images/zere-water-ripple.jpg"
@@ -152,8 +152,8 @@ export default function ZereStudioPage() {
                 {String(i + 1).padStart(2, "0")}
               </span>
               <div>
-                <p className="text-charcoal font-medium mb-1">{item.role}</p>
-                <p className="text-sm text-charcoal/70 leading-relaxed">
+                <p className="text-medianoche font-medium mb-1">{item.role}</p>
+                <p className="text-sm text-medianoche/70 leading-relaxed">
                   {item.detail}
                 </p>
               </div>
@@ -170,7 +170,7 @@ export default function ZereStudioPage() {
             {FORMATOS.map((formato) => (
               <div
                 key={formato.title}
-                className="rounded-2xl bg-cream/70 p-6 hover:bg-cream transition-colors"
+                className="rounded-2xl bg-arena/70 p-6 hover:bg-arena transition-colors"
               >
                 <h3 className="text-lg text-zere-deep mb-2">{formato.title}</h3>
                 <p className="text-sm text-zere-ink/70 leading-relaxed">
@@ -191,8 +191,8 @@ export default function ZereStudioPage() {
                 {paso.number}
               </span>
               <div>
-                <h3 className="text-lg text-charcoal mb-1">{paso.title}</h3>
-                <p className="text-sm text-charcoal/70 leading-relaxed max-w-md">
+                <h3 className="text-lg text-medianoche mb-1">{paso.title}</h3>
+                <p className="text-sm text-medianoche/70 leading-relaxed max-w-md">
                   {paso.body}
                 </p>
               </div>
@@ -202,10 +202,10 @@ export default function ZereStudioPage() {
       </section>
 
       <section className="px-6 sm:px-10 pb-20">
-        <div className="max-w-3xl mx-auto rounded-2xl bg-zere-deep text-cream px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="max-w-3xl mx-auto rounded-2xl bg-zere-deep text-arena px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div>
             <h3 className="text-xl mb-1">¿Tienen un equipo o comunidad?</h3>
-            <p className="text-cream/80 text-sm">
+            <p className="text-arena/80 text-sm">
               Cuéntanos qué buscan y exploramos si Zere Studio encaja.
             </p>
           </div>
@@ -213,7 +213,7 @@ export default function ZereStudioPage() {
             href={CONTACT_HREF}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full bg-cream text-zere-deep px-6 py-3 text-sm font-medium whitespace-nowrap hover:bg-zere-sky transition-colors"
+            className="rounded-full bg-arena text-zere-deep px-6 py-3 text-sm font-medium whitespace-nowrap hover:bg-zere-sky transition-colors"
           >
             Cotizar experiencia
           </a>

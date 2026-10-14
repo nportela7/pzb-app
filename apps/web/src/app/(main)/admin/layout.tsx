@@ -16,14 +16,14 @@ export default async function AdminLayout({
   if (!member.isAdmin) redirect("/home");
 
   return (
-    <div className="flex-1 bg-cream">
+    <div className="flex-1 bg-arena">
       <div className="px-6 sm:px-10 pt-8 max-w-4xl mx-auto w-full">
-        <nav className="flex items-center gap-5 text-sm text-slate mb-8">
-          <Link href="/admin/eventos" className="hover:text-earth-brown transition-colors">
+        <nav className="flex items-center gap-5 text-sm text-gris mb-8">
+          <Link href="/admin/eventos" className="hover:text-medianoche transition-colors">
             Eventos
           </Link>
-          <span className="text-beige-sand">·</span>
-          <Link href="/home" className="hover:text-earth-brown transition-colors">
+          <span className="text-cielo">·</span>
+          <Link href="/home" className="hover:text-medianoche transition-colors">
             Salir del panel
           </Link>
         </nav>

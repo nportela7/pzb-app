@@ -60,22 +60,22 @@ export default async function DirectorioPage(props: PageProps<"/directorio">) {
   ).length;
 
   return (
-    <div className="flex-1 bg-cream">
+    <div className="flex-1 bg-arena">
       <section className="px-6 sm:px-10 pt-14 sm:pt-16 pb-6 max-w-3xl mx-auto">
-        <p className="flex items-center gap-3 text-xs tracking-[0.3em] uppercase text-slate mb-4">
-          <span className="w-8 h-px bg-slate" />
+        <p className="flex items-center gap-3 text-xs tracking-[0.3em] uppercase text-gris mb-4">
+          <span className="w-8 h-px bg-gris" />
           Comunidad
         </p>
-        <h1 className="font-serif italic font-medium text-5xl sm:text-6xl text-earth-brown">
+        <h1 className="font-serif italic font-medium text-5xl sm:text-6xl text-medianoche">
           Directorio
         </h1>
       </section>
 
       {isBrowsing && mostActive.length > 0 && (
-        <div className="bg-earth-brown mb-10">
+        <div className="bg-medianoche mb-10">
           <div className="px-6 sm:px-10 py-8 max-w-3xl mx-auto">
-            <p className="flex items-center gap-3 text-xs tracking-[0.3em] uppercase text-cream/65 mb-4">
-              <span className="w-8 h-px bg-cream/45" />
+            <p className="flex items-center gap-3 text-xs tracking-[0.3em] uppercase text-arena/65 mb-4">
+              <span className="w-8 h-px bg-arena/45" />
               Socias más activas
             </p>
             <div className="grid grid-cols-5 gap-2 sm:gap-4">
@@ -96,8 +96,8 @@ export default async function DirectorioPage(props: PageProps<"/directorio">) {
 
       {isBrowsing && newest.length > 0 && (
         <div className="px-6 sm:px-10 max-w-3xl mx-auto mb-10">
-          <p className="flex items-center gap-3 text-xs tracking-[0.3em] uppercase text-slate mb-4">
-            <span className="w-8 h-px bg-slate" />
+          <p className="flex items-center gap-3 text-xs tracking-[0.3em] uppercase text-gris mb-4">
+            <span className="w-8 h-px bg-gris" />
             Nuevas socias
           </p>
           <div className="grid grid-cols-5 gap-2 sm:gap-4">
@@ -115,7 +115,7 @@ export default async function DirectorioPage(props: PageProps<"/directorio">) {
       )}
 
       <form className="px-6 sm:px-10 max-w-3xl mx-auto" action="/directorio" method="get">
-        <div className="flex items-center gap-3 bg-cream border-[1.5px] border-earth-brown rounded-full px-5 py-3">
+        <div className="flex items-center gap-3 bg-arena border-[1.5px] border-medianoche rounded-full px-5 py-3">
           <svg
             width="18"
             height="18"
@@ -123,7 +123,7 @@ export default async function DirectorioPage(props: PageProps<"/directorio">) {
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
-            className="text-earth-brown/60 shrink-0"
+            className="text-medianoche/60 shrink-0"
           >
             <circle cx="11" cy="11" r="7" />
             <path d="M21 21l-4.3-4.3" />
@@ -133,7 +133,7 @@ export default async function DirectorioPage(props: PageProps<"/directorio">) {
             name="q"
             defaultValue={q}
             placeholder="Buscar por nombre, profesión, ciudad…"
-            className="flex-1 font-serif italic text-lg text-charcoal bg-transparent outline-none placeholder:text-charcoal/40"
+            className="flex-1 font-serif italic text-lg text-medianoche bg-transparent outline-none placeholder:text-medianoche/40"
           />
         </div>
 
@@ -159,7 +159,7 @@ export default async function DirectorioPage(props: PageProps<"/directorio">) {
           {activeFilterCount > 0 && (
             <Link
               href={q ? `/directorio?q=${encodeURIComponent(q)}` : "/directorio"}
-              className="text-sm text-slate hover:text-charcoal transition-colors ml-1"
+              className="text-sm text-gris hover:text-medianoche transition-colors ml-1"
             >
               {activeFilterCount} {activeFilterCount === 1 ? "filtro activo" : "filtros activos"} · Limpiar
             </Link>
@@ -167,7 +167,7 @@ export default async function DirectorioPage(props: PageProps<"/directorio">) {
         </div>
       </form>
 
-      <nav className="flex flex-wrap gap-x-1 gap-y-1 px-6 sm:px-10 max-w-3xl mx-auto mt-6 pt-3 pb-3 border-y border-earth-brown/15">
+      <nav className="flex flex-wrap gap-x-1 gap-y-1 px-6 sm:px-10 max-w-3xl mx-auto mt-6 pt-3 pb-3 border-y border-medianoche/15">
         {ALPHABET.map((l) => {
           const active = availableLetters.has(l);
           const isSelected = letter === l;
@@ -184,14 +184,14 @@ export default async function DirectorioPage(props: PageProps<"/directorio">) {
               href={href}
               className={`text-sm px-1.5 py-0.5 rounded transition-colors ${
                 isSelected
-                  ? "bg-earth-brown text-cream"
-                  : "text-slate hover:text-earth-brown"
+                  ? "bg-medianoche text-arena"
+                  : "text-gris hover:text-medianoche"
               }`}
             >
               {l}
             </Link>
           ) : (
-            <span key={l} className="text-sm px-1.5 py-0.5 text-earth-brown/20">
+            <span key={l} className="text-sm px-1.5 py-0.5 text-medianoche/20">
               {l}
             </span>
           );
@@ -200,13 +200,13 @@ export default async function DirectorioPage(props: PageProps<"/directorio">) {
 
       <section className="px-6 sm:px-10 max-w-3xl mx-auto pb-20">
         {shown.length === 0 ? (
-          <p className="text-charcoal/70 leading-relaxed mt-10">
+          <p className="text-medianoche/70 leading-relaxed mt-10">
             No encontramos socias que coincidan con estos criterios.
           </p>
         ) : (
           sortedGroups.map(([letterKey, members]) => (
             <div key={letterKey} className="mt-9 first:mt-8">
-              <p className="font-serif italic text-3xl text-earth-brown/25 mb-2 leading-none">
+              <p className="font-serif italic text-3xl text-medianoche/25 mb-2 leading-none">
                 {letterKey}
               </p>
               <ul className="flex flex-col">
@@ -214,23 +214,23 @@ export default async function DirectorioPage(props: PageProps<"/directorio">) {
                   <li key={member._id.toString()} className="group relative">
                     <span
                       aria-hidden
-                      className="absolute -left-3 top-3 bottom-3 w-[3px] origin-center scale-y-0 bg-earth-brown transition-transform duration-200 group-hover:scale-y-100"
+                      className="absolute -left-3 top-3 bottom-3 w-[3px] origin-center scale-y-0 bg-medianoche transition-transform duration-200 group-hover:scale-y-100"
                     />
                     <Link
                       href={`/directorio/${member._id.toString()}`}
-                      className="grid grid-cols-[1fr_auto] items-baseline gap-4 py-3 border-b border-earth-brown/10 transition-[padding] duration-200 group-hover:pl-3"
+                      className="grid grid-cols-[1fr_auto] items-baseline gap-4 py-3 border-b border-medianoche/10 transition-[padding] duration-200 group-hover:pl-3"
                     >
                       <div className="min-w-0">
-                        <p className="font-serif text-lg text-charcoal truncate">
+                        <p className="font-serif text-lg text-medianoche truncate">
                           {member.name}
                         </p>
-                        <p className="text-sm text-slate truncate">
+                        <p className="text-sm text-gris truncate">
                           {[member.profession, member.location]
                             .filter(Boolean)
                             .join(" · ")}
                         </p>
                       </div>
-                      <span className="text-xs uppercase tracking-wide text-slate shrink-0">
+                      <span className="text-xs uppercase tracking-wide text-gris shrink-0">
                         {ACCOUNT_LABELS[member.accountType] ?? member.accountType}
                       </span>
                     </Link>

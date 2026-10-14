@@ -26,10 +26,10 @@ function Chevron({ direction }: { direction: "prev" | "next" }) {
 function Meta({ label, value }: { label: string; value: string }) {
   return (
     <div className="min-w-0">
-      <dt className="text-[0.62rem] uppercase tracking-[0.2em] text-cream/60">
+      <dt className="text-[0.62rem] uppercase tracking-[0.2em] text-arena/60">
         {label}
       </dt>
-      <dd className="mt-1 text-sm font-medium text-cream text-balance">{value}</dd>
+      <dd className="mt-1 text-sm font-medium text-arena text-balance">{value}</dd>
     </div>
   );
 }
@@ -52,12 +52,12 @@ export function EventBannerCarousel({
   return (
     <div>
       <div className="mb-7 flex flex-wrap items-center gap-x-8 gap-y-4">
-        <h2 className="font-serif text-2xl text-earth-brown sm:text-3xl">
+        <h2 className="font-serif text-2xl text-medianoche sm:text-3xl">
           {heading}
         </h2>
         <Link
           href={moreHref}
-          className="group inline-flex items-center gap-2 text-sm text-charcoal/70 transition-colors hover:text-earth-brown"
+          className="group inline-flex items-center gap-2 text-sm text-medianoche/70 transition-colors hover:text-medianoche"
         >
           {moreLabel}
           <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
@@ -71,7 +71,7 @@ export function EventBannerCarousel({
               type="button"
               onClick={() => goTo(active - 1)}
               aria-label="Evento anterior"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-earth-brown/30 text-earth-brown transition-colors hover:border-earth-brown hover:bg-earth-brown hover:text-cream"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-medianoche/30 text-medianoche transition-colors hover:border-medianoche hover:bg-medianoche hover:text-arena"
             >
               <Chevron direction="prev" />
             </button>
@@ -79,7 +79,7 @@ export function EventBannerCarousel({
               type="button"
               onClick={() => goTo(active + 1)}
               aria-label="Evento siguiente"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-earth-brown/30 text-earth-brown transition-colors hover:border-earth-brown hover:bg-earth-brown hover:text-cream"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-medianoche/30 text-medianoche transition-colors hover:border-medianoche hover:bg-medianoche hover:text-arena"
             >
               <Chevron direction="next" />
             </button>
@@ -110,25 +110,25 @@ export function EventBannerCarousel({
                   where the text actually sits. Never reaches transparent. */}
               <div
                 aria-hidden
-                className="absolute inset-0 bg-charcoal/30"
+                className="absolute inset-0 bg-medianoche/30"
               />
               <div
                 aria-hidden
-                className="absolute inset-0 bg-gradient-to-tr from-charcoal/90 via-charcoal/55 to-charcoal/10"
+                className="absolute inset-0 bg-gradient-to-tr from-medianoche/90 via-medianoche/55 to-medianoche/10"
               />
 
               <div className="absolute inset-0 flex flex-col justify-end p-7 sm:p-10 lg:p-14">
-                <p className="flex items-center gap-2.5 text-[0.62rem] uppercase tracking-[0.2em] text-cream/85">
-                  <span className="h-1.5 w-1.5 rounded-full bg-cream" />
+                <p className="flex items-center gap-2.5 text-[0.62rem] uppercase tracking-[0.2em] text-arena/85">
+                  <span className="h-1.5 w-1.5 rounded-full bg-arena" />
                   {event.typeLabel} · {event.modeLabel}
                 </p>
 
-                <h3 className="mt-4 max-w-2xl font-serif text-3xl leading-[1.05] text-cream text-balance sm:text-5xl lg:text-6xl">
+                <h3 className="mt-4 max-w-2xl font-serif text-3xl leading-[1.05] text-arena text-balance sm:text-5xl lg:text-6xl">
                   {event.title}
                 </h3>
 
                 {event.description && (
-                  <p className="mt-4 hidden max-w-md text-sm leading-relaxed text-cream/80 sm:block">
+                  <p className="mt-4 hidden max-w-md text-sm leading-relaxed text-arena/80 sm:block">
                     {event.description}
                   </p>
                 )}
@@ -138,7 +138,7 @@ export function EventBannerCarousel({
                     href={eventoWhatsappHref(event.title)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex shrink-0 items-center justify-center self-start rounded-full bg-cream px-8 py-3.5 text-sm font-semibold tracking-wide text-charcoal transition-colors hover:bg-beige-sand"
+                    className="inline-flex shrink-0 items-center justify-center self-start rounded-full bg-arena px-8 py-3.5 text-sm font-semibold tracking-wide text-medianoche transition-colors hover:bg-cielo"
                   >
                     Más información
                   </a>
@@ -167,8 +167,8 @@ export function EventBannerCarousel({
               aria-current={i === active}
               className={`h-2 rounded-full transition-all ${
                 i === active
-                  ? "w-6 bg-earth-brown"
-                  : "w-2 bg-earth-brown/25 hover:bg-earth-brown/50"
+                  ? "w-6 bg-medianoche"
+                  : "w-2 bg-medianoche/25 hover:bg-medianoche/50"
               }`}
             />
           ))}

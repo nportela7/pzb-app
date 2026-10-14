@@ -1,7 +1,7 @@
 const PALETTE = [
-  "bg-earth-brown/15 text-earth-brown",
-  "bg-dark-pine/15 text-dark-pine",
-  "bg-slate/15 text-slate",
+  "bg-medianoche/15 text-medianoche",
+  "bg-capuccino/15 text-capuccino",
+  "bg-gris/15 text-gris",
 ];
 
 function initials(name: string) {
@@ -27,7 +27,7 @@ export function MemberAvatar({
   tone?: "auto" | "onDark";
 }) {
   const colors =
-    tone === "onDark" ? "bg-cream text-dark-pine" : PALETTE[paletteIndex(name)];
+    tone === "onDark" ? "bg-arena text-capuccino" : PALETTE[paletteIndex(name)];
   return (
     <div
       className={`flex items-center justify-center rounded-full font-serif text-lg shrink-0 ${colors} ${className}`}
