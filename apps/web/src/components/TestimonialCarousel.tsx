@@ -74,7 +74,7 @@ function Media({
               className="object-cover"
             />
             <span className="absolute inset-0 bg-medianoche/25 transition-colors group-hover:bg-medianoche/15" />
-            <span className="absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-arena text-medianoche shadow-[0_12px_28px_-10px_rgba(54,54,54,0.6)] transition-transform duration-300 group-hover:scale-110">
+            <span className="absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-arena text-medianoche shadow-[0_12px_28px_-10px_rgba(14,98,127,0.6)] transition-transform duration-300 group-hover:scale-110">
               <PlayMark />
             </span>
           </button>
@@ -107,7 +107,7 @@ function Media({
         className="select-none font-serif italic font-light leading-none text-transparent"
         style={{
           fontSize: initial ? "11rem" : "14rem",
-          WebkitTextStroke: "1.5px rgba(89,68,52,0.4)",
+          WebkitTextStroke: "1.5px rgba(14,98,127,0.4)",
         }}
       >
         {initial ?? "“"}

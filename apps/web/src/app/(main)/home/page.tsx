@@ -67,7 +67,7 @@ export default async function HomePage() {
         <span
           aria-hidden
           className="absolute right-0 top-1/2 -translate-y-1/2 font-serif italic font-light text-[7rem] sm:text-[10rem] leading-none text-transparent select-none pointer-events-none"
-          style={{ WebkitTextStroke: "1.5px rgba(249,247,242,0.14)" }}
+          style={{ WebkitTextStroke: "1.5px rgba(247,240,229,0.14)" }}
         >
           {member.name.trim()[0]?.toUpperCase()}
         </span>

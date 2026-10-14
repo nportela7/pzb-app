@@ -55,7 +55,7 @@ export default function CoachingPage() {
         className="relative overflow-hidden px-6 sm:px-10 pt-10 pb-16 bg-cielo"
         style={{
           backgroundImage:
-            "radial-gradient(rgba(54,54,54,.14) 1px, transparent 1px)",
+            "radial-gradient(rgba(14,98,127,.14) 1px, transparent 1px)",
           backgroundSize: "15px 15px",
         }}
       >

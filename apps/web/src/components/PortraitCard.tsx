@@ -2,8 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { splitName } from "@/lib/name";
 
-// A small hand-drawn pine sprig — capuccino is a brand color,
-// so this is the literal thing. Rotation is hashed from the name so
+// A small hand-drawn pine sprig, painted in capuccino. Rotation is hashed from the name so
 // it's deterministic (same card always looks the same) but varies
 // across a row instead of repeating identically five times.
 const SPRIG_ROTATIONS = [8, -12, 16, -6, 22, -18, 10];

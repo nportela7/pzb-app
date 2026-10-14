@@ -67,7 +67,7 @@ export function HeroPortrait({
                   // Three passes: two tight ones build a solid rim, the wide
                   // one throws the glow. One pass alone reads as a stroke.
                   filter:
-                    "drop-shadow(0 0 1px var(--pzb-cielo)) drop-shadow(0 0 3px var(--pzb-cielo)) drop-shadow(0 0 26px rgba(218,210,193,0.45))",
+                    "drop-shadow(0 0 1px var(--pzb-cielo)) drop-shadow(0 0 3px var(--pzb-cielo)) drop-shadow(0 0 26px rgba(155,199,236,0.45))",
                   objectFit: "contain",
                 }
               : {

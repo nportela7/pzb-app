@@ -29,7 +29,7 @@ export function CoachingPhaseTabs({
             onClick={() => setActive(i)}
             className={`text-sm font-medium px-5 py-3.5 rounded-t-lg mt-1.5 transition-all cursor-pointer ${
               active === i
-                ? "bg-arena opacity-100 !mt-0 !pt-4 font-semibold text-medianoche shadow-[0_-2px_6px_rgba(54,54,54,.06)]"
+                ? "bg-arena opacity-100 !mt-0 !pt-4 font-semibold text-medianoche shadow-[0_-2px_6px_rgba(14,98,127,.06)]"
                 : "bg-cielo/70 opacity-60 hover:opacity-85 text-medianoche"
             }`}
           >
@@ -40,7 +40,7 @@ export function CoachingPhaseTabs({
           onClick={() => setActive(lastIndex)}
           className={`text-sm font-medium px-5 py-3.5 rounded-t-lg mt-1.5 transition-all cursor-pointer ${
             active === lastIndex
-              ? "bg-arena opacity-100 !mt-0 !pt-4 font-semibold text-medianoche shadow-[0_-2px_6px_rgba(54,54,54,.06)]"
+              ? "bg-arena opacity-100 !mt-0 !pt-4 font-semibold text-medianoche shadow-[0_-2px_6px_rgba(14,98,127,.06)]"
               : "bg-cielo/70 opacity-60 hover:opacity-85 text-medianoche"
           }`}
         >
@@ -48,7 +48,7 @@ export function CoachingPhaseTabs({
         </button>
       </div>
 
-      <div className="bg-arena px-8 sm:px-11 pt-9 pb-7 shadow-[0_8px_20px_rgba(54,54,54,.06)]">
+      <div className="bg-arena px-8 sm:px-11 pt-9 pb-7 shadow-[0_8px_20px_rgba(14,98,127,.06)]">
         {phases.map(
           (phase, i) =>
             active === i && (

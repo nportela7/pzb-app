@@ -58,7 +58,7 @@ export function SiteHeader({
   }
 
   const shell = lifted
-    ? "bg-arena/72 backdrop-blur-xl backdrop-saturate-150 border-medianoche/12 shadow-[0_10px_30px_-16px_rgba(89,68,52,0.45)]"
+    ? "bg-arena/72 backdrop-blur-xl backdrop-saturate-150 border-medianoche/12 shadow-[0_10px_30px_-16px_rgba(14,98,127,0.45)]"
     : "bg-transparent border-transparent";
   const wordmark = lifted ? "text-medianoche" : "text-arena";
   const navLink = lifted
@@ -169,7 +169,7 @@ export function SiteHeader({
       {open && (
         <nav
           id="site-menu"
-          className="lg:hidden mx-auto mt-2 max-w-6xl rounded-3xl border border-medianoche/12 bg-arena/88 backdrop-blur-xl backdrop-saturate-150 shadow-[0_18px_40px_-22px_rgba(89,68,52,0.5)] p-3"
+          className="lg:hidden mx-auto mt-2 max-w-6xl rounded-3xl border border-medianoche/12 bg-arena/88 backdrop-blur-xl backdrop-saturate-150 shadow-[0_18px_40px_-22px_rgba(14,98,127,0.5)] p-3"
         >
           {items.map((item) => (
             <Link

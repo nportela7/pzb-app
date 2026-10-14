@@ -120,7 +120,7 @@ export function PortraitGallery({
             type="button"
             onClick={() => goTo(active - 1)}
             aria-label="Foto anterior"
-            className="absolute left-7 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-arena/90 text-medianoche shadow-[0_10px_24px_-12px_rgba(54,54,54,0.7)] backdrop-blur-sm transition-colors hover:bg-arena"
+            className="absolute left-7 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-arena/90 text-medianoche shadow-[0_10px_24px_-12px_rgba(14,98,127,0.7)] backdrop-blur-sm transition-colors hover:bg-arena"
           >
             <Chevron direction="prev" />
           </button>
@@ -128,7 +128,7 @@ export function PortraitGallery({
             type="button"
             onClick={() => goTo(active + 1)}
             aria-label="Foto siguiente"
-            className="absolute right-7 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-arena/90 text-medianoche shadow-[0_10px_24px_-12px_rgba(54,54,54,0.7)] backdrop-blur-sm transition-colors hover:bg-arena"
+            className="absolute right-7 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-arena/90 text-medianoche shadow-[0_10px_24px_-12px_rgba(14,98,127,0.7)] backdrop-blur-sm transition-colors hover:bg-arena"
           >
             <Chevron direction="next" />
           </button>

@@ -297,7 +297,7 @@ const OUTCOMES = [
     phase: "Fase 2 · Editar y Reescribir",
     image: "/images/outcomes-editar.jpg",
     imagePosition: "60% 40%",
-    veil: "linear-gradient(180deg, rgba(45,49,39,.55) 0%, rgba(81,85,68,.4) 45%, rgba(35,38,30,.92) 100%)",
+    veil: "linear-gradient(180deg, rgba(9,61,79,.55) 0%, rgba(155,80,60,.4) 45%, rgba(7,47,61,.92) 100%)",
     eyebrowClass: "text-arena",
   },
   {
@@ -307,7 +307,7 @@ const OUTCOMES = [
     phase: "Fase 3 · Integrar y Sostener",
     image: "/images/outcomes-integrar.jpg",
     imagePosition: "35% 40%",
-    veil: "linear-gradient(180deg, rgba(89,68,52,.45) 0%, rgba(89,68,52,.3) 45%, rgba(60,44,32,.92) 100%)",
+    veil: "linear-gradient(180deg, rgba(14,98,127,.45) 0%, rgba(14,98,127,.3) 45%, rgba(9,64,83,.92) 100%)",
     eyebrowClass: "text-cielo",
   },
 ];
@@ -625,7 +625,7 @@ export function LandingPage({
                   style={{ top: `${5.5 + i * 2.75}rem` }}
                 >
                   <article
-                    className={`relative grid overflow-hidden rounded-3xl shadow-[0_-8px_40px_-24px_rgba(54,54,54,0.45)] sm:min-h-[74vh] sm:grid-cols-[1fr_0.8fr] ${tone.card}`}
+                    className={`relative grid overflow-hidden rounded-3xl shadow-[0_-8px_40px_-24px_rgba(14,98,127,0.45)] sm:min-h-[74vh] sm:grid-cols-[1fr_0.8fr] ${tone.card}`}
                   >
                     <Grain opacity={0.8} />
                     <span
@@ -757,7 +757,7 @@ export function LandingPage({
               </div>
             </Reveal>
 
-            <Reveal className="relative aspect-[4/5] rounded-md overflow-hidden shadow-[0_30px_60px_-20px_rgba(20,16,12,0.5)]">
+            <Reveal className="relative aspect-[4/5] rounded-md overflow-hidden shadow-[0_30px_60px_-20px_rgba(3,22,29,0.5)]">
               <Image
                 src="/images/pilar-reading.jpg"
                 alt=""
@@ -768,7 +768,7 @@ export function LandingPage({
               />
               <div className="absolute inset-0 bg-gradient-to-t from-medianoche/65 to-medianoche/0 to-45%" />
               {FEATURED_TESTIMONIAL && (
-                <div className="absolute left-6 right-6 bottom-6 bg-arena/95 rounded-md p-6 shadow-[0_20px_40px_-16px_rgba(36,31,26,0.5)]">
+                <div className="absolute left-6 right-6 bottom-6 bg-arena/95 rounded-md p-6 shadow-[0_20px_40px_-16px_rgba(6,43,56,0.5)]">
                   <p className="font-serif italic text-lg leading-snug text-medianoche">
                     &ldquo;{FEATURED_TESTIMONIAL.quote}&rdquo;
                   </p>

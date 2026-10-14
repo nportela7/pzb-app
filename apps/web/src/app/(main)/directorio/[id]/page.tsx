@@ -37,7 +37,7 @@ export default async function MemberProfilePage(
           <span
             aria-hidden
             className="absolute -right-2 top-1/2 -translate-y-1/2 font-serif italic font-light text-[13rem] leading-none text-transparent select-none pointer-events-none"
-            style={{ WebkitTextStroke: "1.5px rgba(249,247,242,0.1)" }}
+            style={{ WebkitTextStroke: "1.5px rgba(247,240,229,0.1)" }}
           >
             {initial}
           </span>
@@ -58,7 +58,7 @@ export default async function MemberProfilePage(
               <span
                 aria-hidden
                 className="absolute -top-2 left-1 font-serif italic text-8xl leading-none text-transparent select-none"
-                style={{ WebkitTextStroke: "1.2px rgba(89,68,52,0.42)" }}
+                style={{ WebkitTextStroke: "1.2px rgba(14,98,127,0.42)" }}
               >
                 {initial}
               </span>

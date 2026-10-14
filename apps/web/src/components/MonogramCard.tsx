@@ -22,7 +22,7 @@ export function MonogramCard({
     <Link href={href} className="min-w-0">
       <div
         className="relative aspect-[3/4] rounded-xl sm:rounded-2xl bg-cielo overflow-hidden flex items-end p-1.5 sm:p-3"
-        style={{ boxShadow: "-6px 8px 14px -4px rgba(89, 68, 52, 0.38)" }}
+        style={{ boxShadow: "-6px 8px 14px -4px rgba(14, 98, 127, 0.38)" }}
       >
         {photoUrl ? (
           <Image
@@ -36,7 +36,7 @@ export function MonogramCard({
           <span
             aria-hidden
             className="absolute -top-1 sm:-top-2 left-0.5 sm:left-1 font-serif italic text-5xl sm:text-8xl leading-none text-transparent select-none"
-            style={{ WebkitTextStroke: "1.3px rgba(89,68,52,0.4)" }}
+            style={{ WebkitTextStroke: "1.3px rgba(14,98,127,0.4)" }}
           >
             {initial}
           </span>

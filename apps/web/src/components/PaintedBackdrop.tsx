@@ -21,8 +21,8 @@
  *      down to the left where the headline sits. One source, like a painting.
  *
  * Every tone stays in the dark half of the palette on purpose. The lightest
- * is #6f5743, which still holds arena at about 5.9:1 -- the copy on top has
- * to keep clearing AA wherever the paint happens to fall behind it.
+ * stop is #1388b1, which holds arena at only about 3.6:1 -- large display
+ * copy clears AA there, small copy does not, so keep it off the lit corner.
  */
 export function PaintedBackdrop({ className = "" }: { className?: string }) {
   return (
@@ -37,21 +37,21 @@ export function PaintedBackdrop({ className = "" }: { className?: string }) {
       >
         <defs>
           <linearGradient id="pb-strokes" x1="0.04" y1="0" x2="0.92" y2="1">
-            <stop offset="0" stopColor="#7b6049" />
-            <stop offset="0.19" stopColor="#46352790" />
-            <stop offset="0.38" stopColor="#634c39" />
-            <stop offset="0.57" stopColor="#32261c" />
-            <stop offset="0.74" stopColor="#5c4636" />
-            <stop offset="0.88" stopColor="#372a1f" />
-            <stop offset="1" stopColor="#68503d" />
+            <stop offset="0" stopColor="#1388b1" />
+            <stop offset="0.19" stopColor="#0b4c6290" />
+            <stop offset="0.38" stopColor="#0f6c8d" />
+            <stop offset="0.57" stopColor="#083646" />
+            <stop offset="0.74" stopColor="#0e6584" />
+            <stop offset="0.88" stopColor="#093c4d" />
+            <stop offset="1" stopColor="#107395" />
           </linearGradient>
 
           <linearGradient id="pb-strokes-2" x1="1" y1="0.1" x2="0" y2="0.95">
-            <stop offset="0" stopColor="#7a6149" />
-            <stop offset="0.3" stopColor="#332620" />
-            <stop offset="0.55" stopColor="#6a523e" />
-            <stop offset="0.8" stopColor="#2c211a" />
-            <stop offset="1" stopColor="#5e4835" />
+            <stop offset="0" stopColor="#1388b0" />
+            <stop offset="0.3" stopColor="#083a4b" />
+            <stop offset="0.55" stopColor="#117597" />
+            <stop offset="0.8" stopColor="#07313f" />
+            <stop offset="1" stopColor="#0f6684" />
           </linearGradient>
 
           {/* scale is high because a small displacement on a smooth ramp just
@@ -106,15 +106,15 @@ export function PaintedBackdrop({ className = "" }: { className?: string }) {
           </filter>
 
           <radialGradient id="pb-light" cx="0.74" cy="0.34" r="0.62">
-            <stop offset="0" stopColor="#9a7658" stopOpacity="0.42" />
-            <stop offset="0.6" stopColor="#9a7658" stopOpacity="0.1" />
-            <stop offset="1" stopColor="#9a7658" stopOpacity="0" />
+            <stop offset="0" stopColor="#18a8da" stopOpacity="0.42" />
+            <stop offset="0.6" stopColor="#18a8da" stopOpacity="0.1" />
+            <stop offset="1" stopColor="#18a8da" stopOpacity="0" />
           </radialGradient>
 
           <linearGradient id="pb-shade" x1="0" y1="0.2" x2="1" y2="0.9">
-            <stop offset="0" stopColor="#241a14" stopOpacity="0.62" />
-            <stop offset="0.5" stopColor="#241a14" stopOpacity="0.16" />
-            <stop offset="1" stopColor="#241a14" stopOpacity="0" />
+            <stop offset="0" stopColor="#062732" stopOpacity="0.62" />
+            <stop offset="0.5" stopColor="#062732" stopOpacity="0.16" />
+            <stop offset="1" stopColor="#062732" stopOpacity="0" />
           </linearGradient>
         </defs>
 
