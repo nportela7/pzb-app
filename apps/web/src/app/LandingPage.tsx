@@ -616,22 +616,28 @@ export function LandingPage({
       {/* Manifiesto — a breath, not a chapter. Just the two-line statement
           and an echo of rings behind it; no supporting text, on purpose. */}
       <section className="relative overflow-hidden bg-arena pt-16 pb-4 sm:pt-20 sm:pb-6">
+        {/* Rings live in a section-sized layer so the mask can dissolve them
+            before any edge instead of the section clipping them mid-ring. */}
+        <div aria-hidden className="ripple-fade pointer-events-none absolute inset-0">
+          <div className="shell relative h-full">
+            <span
+              aria-hidden
+              className="zere-ripple-ring absolute left-[65%] bottom-4 sm:bottom-6 h-80 w-80 -translate-x-1/2 translate-y-1/2 rounded-full border border-coral/50 opacity-70 sm:h-[34rem] sm:w-[34rem] lg:h-[48rem] lg:w-[48rem] [animation:zere-ripple_4.5s_ease-out_infinite]"
+            />
+            <span
+              aria-hidden
+              className="zere-ripple-ring absolute left-[65%] bottom-4 sm:bottom-6 h-80 w-80 -translate-x-1/2 translate-y-1/2 rounded-full border border-coral/50 opacity-70 sm:h-[34rem] sm:w-[34rem] lg:h-[48rem] lg:w-[48rem] [animation:zere-ripple_4.5s_ease-out_infinite] [animation-delay:1.5s]"
+            />
+            <span
+              aria-hidden
+              className="zere-ripple-ring absolute left-[65%] bottom-4 sm:bottom-6 h-80 w-80 -translate-x-1/2 translate-y-1/2 rounded-full border border-coral/50 opacity-70 sm:h-[34rem] sm:w-[34rem] lg:h-[48rem] lg:w-[48rem] [animation:zere-ripple_4.5s_ease-out_infinite] [animation-delay:3s]"
+            />
+          </div>
+        </div>
         <div
           ref={manifestoRef}
           className="shell relative flex items-center justify-center"
         >
-          <span
-            aria-hidden
-            className="zere-ripple-ring absolute left-[65%] bottom-0 h-80 w-80 -translate-x-1/2 translate-y-1/2 rounded-full border border-coral/50 opacity-70 sm:h-[34rem] sm:w-[34rem] lg:h-[48rem] lg:w-[48rem] [animation:zere-ripple_4.5s_ease-out_infinite]"
-          />
-          <span
-            aria-hidden
-            className="zere-ripple-ring absolute left-[65%] bottom-0 h-80 w-80 -translate-x-1/2 translate-y-1/2 rounded-full border border-coral/50 opacity-70 sm:h-[34rem] sm:w-[34rem] lg:h-[48rem] lg:w-[48rem] [animation:zere-ripple_4.5s_ease-out_infinite] [animation-delay:1.5s]"
-          />
-          <span
-            aria-hidden
-            className="zere-ripple-ring absolute left-[65%] bottom-0 h-80 w-80 -translate-x-1/2 translate-y-1/2 rounded-full border border-coral/50 opacity-70 sm:h-[34rem] sm:w-[34rem] lg:h-[48rem] lg:w-[48rem] [animation:zere-ripple_4.5s_ease-out_infinite] [animation-delay:3s]"
-          />
           <p
             className="relative font-serif font-semibold uppercase leading-[0.8] tracking-[0.015em] text-center text-medianoche"
             style={{
