@@ -429,14 +429,18 @@ export function LandingPage({
         }}
       />
 
-      {/* Hero — painted brown ground, copy left, Pilar right.
-          The outlined PZB monogram that used to sit behind this is gone: the
+      {/* Hero — painted afternoon-light ground, copy left, Pilar right.
+          Light sand and butter with a washed cielo edge on top, so the copy is
+          medianoche; bg-arena underneath is what shows for the instant before
+          the SVG paints, so there is no dark flash. The outlined PZB monogram that used to sit behind this is gone: the
           paint is the texture now, and two background treatments competing
           for the same space just muddied each other. Restoring it is one
           <span>, if the mark is missed. */}
-      <div className="relative w-full min-h-[100svh] overflow-hidden bg-medianoche flex flex-col">
+      <div className="relative w-full min-h-[100svh] overflow-hidden bg-arena flex flex-col">
         <PaintedBackdrop />
-        <Grain opacity={0.05} />
+        {/* Heavier than elsewhere: the film grain is part of the afternoon
+            mood, and light grounds hide it more than dark ones. */}
+        <Grain opacity={0.08} />
 
         <div className="shell relative flex flex-1 items-center pt-28 pb-16">
           <div className="grid w-full items-center gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14">
@@ -448,7 +452,7 @@ export function LandingPage({
                 variants={{ show: { transition: { staggerChildren: 0.14 } } }}
                 className="flex w-full flex-col"
               >
-                <h1 className="font-serif font-light text-5xl sm:text-7xl lg:text-8xl leading-[0.95] text-arena text-balance">
+                <h1 className="font-serif font-light text-5xl sm:text-7xl lg:text-8xl leading-[0.95] text-medianoche text-balance">
                   <span className="block overflow-hidden pb-[0.08em]">
                     <motion.span variants={heroLine} className="block text-4xl sm:text-5xl lg:text-6xl">
                       Deja de vivir una vida
@@ -457,7 +461,7 @@ export function LandingPage({
                   <span className="block overflow-hidden pb-[0.08em]">
                     <motion.span
                       variants={heroLine}
-                      className="block italic font-normal text-cielo"
+                      className="block italic font-normal text-medianoche"
                     >
                       editada por otros.
                     </motion.span>
@@ -466,7 +470,7 @@ export function LandingPage({
 
                 <motion.p
                   variants={fadeUp}
-                  className="text-base sm:text-lg text-arena/80 max-w-3xl text-pretty leading-relaxed mt-8"
+                  className="text-base sm:text-lg text-medianoche max-w-3xl text-pretty leading-relaxed mt-8"
                 >
                   Coaching de identidad, imagen y decisiones con Pilar Zambrano B.
                   Empieza por una conversación: 30 minutos para entender dónde
@@ -481,14 +485,14 @@ export function LandingPage({
                     href={DIAGNOSTICO_HREF}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 bg-arena text-medianoche text-sm font-semibold tracking-wide hover:bg-cielo hover:-translate-y-0.5 transition-all"
+                    className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 bg-medianoche text-arena text-sm font-semibold tracking-wide hover:bg-capuccino hover:-translate-y-0.5 transition-all"
                   >
                     Agenda tu sesión diagnóstico
                     <span aria-hidden>→</span>
                   </a>
                   <Show when="signed-out">
                     <SignUpButton forceRedirectUrl="/home">
-                      <button className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-arena/35 text-arena text-sm font-medium tracking-wide hover:bg-arena/10 hover:border-arena/60 transition-colors">
+                      <button className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-medianoche/35 text-medianoche text-sm font-medium tracking-wide hover:bg-medianoche/5 hover:border-medianoche/60 transition-colors">
                         Sé parte de la comunidad
                       </button>
                     </SignUpButton>
@@ -496,7 +500,7 @@ export function LandingPage({
                   <Show when="signed-in">
                     <Link
                       href="/home"
-                      className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-arena/35 text-arena text-sm font-medium tracking-wide hover:bg-arena/10 hover:border-arena/60 transition-colors"
+                      className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-medianoche/35 text-medianoche text-sm font-medium tracking-wide hover:bg-medianoche/5 hover:border-medianoche/60 transition-colors"
                     >
                       Ir a la comunidad
                     </Link>

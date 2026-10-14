@@ -72,18 +72,28 @@ export function HeroPortrait({
                 }
               : {
                   ...FEATHER,
+                  // A light film grade: a touch of sepia and lifted blacks so
+                  // the portrait shares the painting's slightly washed colour.
+                  // Kept gentle -- same world as the ground, not a filter.
+                  filter:
+                    "sepia(0.18) saturate(0.92) contrast(0.94) brightness(1.04)",
                 }
           }
         />
 
         {!cutout && (
-          // The photograph was lit for its own room, not for this one. A wash
-          // of the brand brown pulls it into the same light as the paint
-          // behind it, so the two do not read as separate pictures.
+          // The photograph was lit for its own room, not for this one. A
+          // light leak from the upper right -- the same low sun the painting
+          // is lit by -- pulls it into the same afternoon. Screen can only
+          // brighten, so it warms the highlights without muddying the skin.
           <div
             aria-hidden
-            className="absolute inset-0 bg-medianoche/35 mix-blend-multiply"
-            style={FEATHER}
+            className="absolute inset-0 mix-blend-screen"
+            style={{
+              ...FEATHER,
+              background:
+                "radial-gradient(ellipse at 92% 6%, rgba(252,194,72,0.42) 0%, rgba(246,70,72,0.14) 38%, transparent 70%)",
+            }}
           />
         )}
       </div>
