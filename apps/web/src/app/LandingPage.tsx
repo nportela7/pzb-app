@@ -520,8 +520,8 @@ export function LandingPage({
               className="hidden lg:block"
             >
               <HeroPortrait
-                src="/images/pilar-portrait.jpg"
-                alt="Pilar Zambrano B."
+                src="/images/pilar-reading.jpg"
+                alt="Pilar Zambrano B. leyendo junto a la ventana"
                 // Flip to true the day /public/images holds a
                 // background-removed PNG of her. See HeroPortrait.
                 cutout={false}
