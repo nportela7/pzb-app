@@ -1,24 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  /* PZB brand palette */
-  --pzb-beige-sand: #dad2c1;
-  --pzb-earth-brown: #594434;
-  --pzb-dark-pine: #515544;
-  --pzb-slate: #64747d;
-  --pzb-charcoal: #363636;
-  --pzb-cream: #f9f7f2;
+  /* PZB brand palette (Papel Maché). Medianoche is the ink: all brand text
+     is set in it. */
+  --pzb-coral: #f64648;
+  --pzb-butter: #fcc248;
+  --pzb-cielo: #9bc7ec;
+  --pzb-medianoche: #0e627f;
+  --pzb-capuccino: #9b503c;
+  --pzb-arena: #f7f0e5;
+  --pzb-gris: #5b5b5b;
+  --pzb-blanco: #ffffff;
 
   /* Zere Studio sub-brand palette */
   --zere-sky: #a9cde3;
   --zere-deep: #154c61;
   --zere-ink: #3b434c;
 
-  /* Coaching "expediente" accent — editorial redline */
-  --redline: #9b3a26;
-
-  --background: var(--pzb-cream);
-  --foreground: var(--pzb-charcoal);
+  --background: var(--pzb-arena);
+  --foreground: var(--pzb-medianoche);
 
   /* Page shell. One cap and one gutter for every band on the page, so the
      header, the content and the footer all sit on the same vertical axis
@@ -32,18 +32,19 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-beige-sand: var(--pzb-beige-sand);
-  --color-earth-brown: var(--pzb-earth-brown);
-  --color-dark-pine: var(--pzb-dark-pine);
-  --color-slate: var(--pzb-slate);
-  --color-charcoal: var(--pzb-charcoal);
-  --color-cream: var(--pzb-cream);
+  --color-coral: var(--pzb-coral);
+  --color-butter: var(--pzb-butter);
+  --color-cielo: var(--pzb-cielo);
+  --color-medianoche: var(--pzb-medianoche);
+  --color-capuccino: var(--pzb-capuccino);
+  --color-arena: var(--pzb-arena);
+  --color-gris: var(--pzb-gris);
+  --color-blanco: var(--pzb-blanco);
   --color-zere-sky: var(--zere-sky);
   --color-zere-deep: var(--zere-deep);
   --color-zere-ink: var(--zere-ink);
-  --color-redline: var(--redline);
-  --font-sans: var(--font-source-sans);
-  --font-serif: var(--font-fraunces);
+  --font-sans: var(--font-jost);
+  --font-serif: var(--font-cormorant);
   --font-script: var(--font-cedarville);
 }
 
@@ -78,14 +79,14 @@ body {
    selection, caret, focus ring and scrollbar all ship in system colours
    otherwise, and read as someone else's design inside ours. */
 ::selection {
-  background: var(--pzb-beige-sand);
-  color: var(--pzb-earth-brown);
+  background: var(--pzb-cielo);
+  color: var(--pzb-medianoche);
 }
 
 html {
   scroll-behavior: smooth;
-  caret-color: var(--pzb-earth-brown);
-  scrollbar-color: rgba(89, 68, 52, 0.35) transparent;
+  caret-color: var(--pzb-medianoche);
+  scrollbar-color: rgba(14, 98, 127, 0.35) transparent;
   scrollbar-width: thin;
   /* The header floats above the page, so anchored sections must stop
      below it instead of underneath. */
@@ -99,16 +100,16 @@ html {
 }
 
 :focus-visible {
-  outline: 2px solid var(--pzb-earth-brown);
+  outline: 2px solid var(--pzb-medianoche);
   outline-offset: 3px;
   border-radius: 2px;
 }
 
-/* On the dark surfaces the brown ring disappears into the background. */
-.bg-earth-brown :focus-visible,
-.bg-charcoal :focus-visible,
-.bg-dark-pine :focus-visible {
-  outline-color: var(--pzb-cream);
+/* On the dark surfaces the medianoche ring disappears into the background. */
+.bg-medianoche :focus-visible,
+.bg-capuccino :focus-visible,
+.bg-gris :focus-visible {
+  outline-color: var(--pzb-arena);
 }
 
 a {
@@ -141,12 +142,12 @@ a {
     letter-spacing: -0.01em;
   }
 
-  /* Body copy reads in the same serif as the headings, at a lighter
-     weight — one typographic voice instead of a generic sans mixed in.
-     Labels (uppercase eyebrows, tags) stay in the sans for contrast. */
+  /* Brand hierarchy: titles in the serif, paragraphs in the sans
+     (Futura Regular, currently Jost). Uppercase labels (eyebrows, tags)
+     are excluded so they can set their own face. */
   p:not(.uppercase) {
-    font-family: var(--font-serif), Georgia, serif;
-    font-weight: 300;
+    font-family: var(--font-sans), ui-sans-serif, sans-serif;
+    font-weight: 400;
   }
 }
 

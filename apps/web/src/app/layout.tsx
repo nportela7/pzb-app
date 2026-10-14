@@ -1,23 +1,25 @@
 import type { Metadata } from "next";
-import { Fraunces, Source_Sans_3, Cedarville_Cursive } from "next/font/google";
+import { Jost, Cormorant, Cedarville_Cursive } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { esMX } from "@clerk/localizations";
 import "./globals.css";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+// Jost stands in for Futura (paragraphs, subtitles) and Cormorant for The
+// Seasons / Ivy Ora (titles) until the commercial fonts are licensed.
+const cormorant = Cormorant({
+  variable: "--font-cormorant",
   subsets: ["latin"],
   // 700 exists for one job: the display block in AnnotatedStatement. At that
   // scale 500 reads as a caption blown up, not as a statement. Drop it and the
   // browser fakes the bold by smearing the 500, which on a serif is obvious.
-  weight: ["300", "400", "500", "700"],
+  weight: ["300", "400", "500", "600", "700"],
   style: ["normal", "italic"],
 });
 
-const sourceSans = Source_Sans_3({
-  variable: "--font-source-sans",
+const jost = Jost({
+  variable: "--font-jost",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 const cedarville = Cedarville_Cursive({
@@ -33,52 +35,52 @@ export const metadata: Metadata = {
 
 const clerkAppearance = {
   variables: {
-    colorPrimary: "#594434",
-    colorBackground: "#F9F7F2",
-    colorForeground: "#363636",
-    colorMutedForeground: "#64747D",
-    colorInput: "#FFFFFF",
-    colorInputForeground: "#363636",
-    colorNeutral: "#363636",
+    colorPrimary: "#0e627f",
+    colorBackground: "#f7f0e5",
+    colorForeground: "#0e627f",
+    colorMutedForeground: "#5b5b5b",
+    colorInput: "#ffffff",
+    colorInputForeground: "#0e627f",
+    colorNeutral: "#0e627f",
     borderRadius: "0.75rem",
-    fontFamily: "var(--font-source-sans), ui-sans-serif, sans-serif",
+    fontFamily: "var(--font-jost), ui-sans-serif, sans-serif",
   },
   elements: {
     cardBox: {
       boxShadow: "none",
-      border: "1px solid #DAD2C1",
+      border: "1px solid #9bc7ec",
     },
     card: {
-      backgroundColor: "#F9F7F2",
+      backgroundColor: "#f7f0e5",
     },
     headerTitle: {
-      fontFamily: "var(--font-fraunces), Georgia, serif",
+      fontFamily: "var(--font-cormorant), Georgia, serif",
       fontWeight: 400,
-      color: "#594434",
+      color: "#0e627f",
     },
     headerSubtitle: {
-      color: "#64747D",
+      color: "#5b5b5b",
     },
     formButtonPrimary: {
-      fontFamily: "var(--font-source-sans), ui-sans-serif, sans-serif",
+      fontFamily: "var(--font-jost), ui-sans-serif, sans-serif",
       textTransform: "none",
       fontSize: "0.875rem",
       boxShadow: "none",
       "&:hover": {
-        backgroundColor: "#363636",
+        backgroundColor: "#0e627f",
       },
     },
     footer: {
-      backgroundColor: "#F9F7F2",
+      backgroundColor: "#f7f0e5",
     },
     footerActionLink: {
-      color: "#594434",
+      color: "#0e627f",
     },
     dividerLine: {
-      backgroundColor: "#DAD2C1",
+      backgroundColor: "#9bc7ec",
     },
     formFieldInput: {
-      borderColor: "#DAD2C1",
+      borderColor: "#9bc7ec",
     },
   },
 };
@@ -88,7 +90,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <ClerkProvider appearance={clerkAppearance} localization={esMX}>
       <html
         lang="es"
-        className={`${fraunces.variable} ${sourceSans.variable} ${cedarville.variable} h-full antialiased`}
+        className={`${cormorant.variable} ${jost.variable} ${cedarville.variable} h-full antialiased`}
       >
         <body className="min-h-full flex flex-col">{children}</body>
       </html>
