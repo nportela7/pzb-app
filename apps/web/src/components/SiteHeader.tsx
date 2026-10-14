@@ -22,13 +22,13 @@ export type HeaderCta = {
  * Two visual states:
  *  - "lifted" (default, and the only state on light pages): a blurred arena
  *    pill, so copy scrolling underneath stays readable through it.
- *  - "flush": transparent with arena type, used while the header sits over a
- *    dark full-bleed hero — the pill would only cut a hole in it.
+ *  - "flush": transparent with medianoche type, used while the header sits
+ *    over a full-bleed Cielo hero — the pill would only cut a hole in it.
  */
 export function SiteHeader({
   items,
   cta,
-  /** "dark" starts flush over a dark hero; "light" starts as the pill. */
+  /** "dark" starts flush over a full-bleed hero; "light" starts as the pill. */
   tone = "light",
   showAuthActions = true,
 }: {
@@ -60,17 +60,17 @@ export function SiteHeader({
   const shell = lifted
     ? "bg-arena/72 backdrop-blur-xl backdrop-saturate-150 border-medianoche/12 shadow-[0_10px_30px_-16px_rgba(14,98,127,0.45)]"
     : "bg-transparent border-transparent";
-  const wordmark = lifted ? "text-medianoche" : "text-arena";
+  const wordmark = "text-medianoche";
   const navLink = lifted
     ? "text-medianoche/80 hover:text-medianoche"
-    : "text-arena/75 hover:text-arena";
+    : "text-medianoche/80 hover:text-medianoche";
   const quietLink = lifted
     ? "text-medianoche/75 hover:text-medianoche"
-    : "text-arena/70 hover:text-arena";
+    : "text-medianoche/75 hover:text-medianoche";
   const ctaButton = lifted
     ? "bg-medianoche text-arena hover:bg-medianoche"
-    : "bg-arena text-medianoche hover:bg-cielo";
-  const bar = lifted ? "bg-medianoche" : "bg-arena";
+    : "bg-medianoche text-arena hover:bg-medianoche/90";
+  const bar = "bg-medianoche";
 
   return (
     <motion.header
