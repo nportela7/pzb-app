@@ -153,16 +153,48 @@ function RevealLetter({
   reduce: boolean | null;
 }) {
   const start = index / total;
+  const nextStart = (index + 1) / total;
   const end = Math.min(1, start + 1 / total / 2);
+  const isLast = index === total - 1;
   const opacity = useTransform(
     progress,
     reduce ? [0, 1] : [start, end],
     reduce ? [1, 1] : [0, 1],
   );
+  // The caret lives on the letter it follows, so it can never drift from the
+  // typed text. Every letter keeps its place in the flow (only its opacity
+  // changes), which means the headline never reflows while typing. The caret
+  // is absolutely positioned, so it adds no width either.
+  const caretOpacity = useTransform(progress, (p) => {
+    if (reduce) return isLast ? 1 : 0;
+    if (index === 0 && p <= 0) return 0;
+    return p >= start && (isLast || p < nextStart) ? 1 : 0;
+  });
+  // Before the first letter appears, the caret waits at the left edge of it.
+  const idleCaretOpacity = useTransform(progress, (p) =>
+    index === 0 && p <= 0 && !reduce ? 1 : 0,
+  );
+  const caretClass =
+    "pointer-events-none absolute top-1/2 h-[0.85em] w-[0.06em] -translate-y-1/2";
   return (
-    <motion.span aria-hidden style={{ opacity: reduce ? 1 : opacity }}>
-      {char === " " ? " " : char}
-    </motion.span>
+    <span aria-hidden className="relative">
+      <motion.span style={{ opacity: reduce ? 1 : opacity }}>
+        {char === " " ? " " : char}
+      </motion.span>
+      {index === 0 && (
+        <motion.span
+          className={`${caretClass} -left-[0.04em] bg-coral`}
+          style={{ opacity: idleCaretOpacity }}
+        />
+      )}
+      <motion.span
+        className={`${caretClass} left-full ml-[0.02em]`}
+        style={{ opacity: caretOpacity }}
+      >
+        {/* Only the finished caret blinks; while typing it stays solid. */}
+        <span className={`block h-full w-full bg-coral ${isLast ? "type-cursor" : ""}`} />
+      </motion.span>
+    </span>
   );
 }
 
@@ -627,12 +659,6 @@ export function LandingPage({
                 reduce={shouldReduceMotion}
               />
             ))}
-            <span
-              aria-hidden
-              className="type-cursor ml-[0.02em] inline-block w-[0.06em] bg-coral align-[-0.06em]"
-            >
-              {" "}
-            </span>
           </p>
         </div>
       </section>
