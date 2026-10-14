@@ -35,7 +35,7 @@ function Chevron({ direction }: { direction: "prev" | "next" }) {
  * One image says "here is what she looks like". A set of them says "here is
  * where she actually works" — on stage, in a session, at a table — which is
  * the claim the section is trying to make. The brand treatment stays exactly
- * as the single portrait had it: brown ground, multiply wash, inset arena
+ * as the single portrait had it: medianoche ground, multiply wash, inset arena
  * rule, grain. Only the number of photographs changes.
  *
  * Built on the same scroll-snap track as EventBannerCarousel: the browser
@@ -70,7 +70,7 @@ export function PortraitGallery({
     // `auto`; the percentage had nothing to resolve against, every slide
     // collapsed to zero, and all you saw was the brown ground behind them.
     <div
-      className={`relative overflow-hidden rounded-3xl bg-medianoche ${className}`}
+      className={`relative overflow-hidden rounded-3xl bg-medianoche shadow-[0_22px_40px_-18px_rgba(14,98,127,0.4)] ${className}`}
     >
       <ul
         ref={trackRef}

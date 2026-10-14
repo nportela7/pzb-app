@@ -15,7 +15,6 @@ import { PUBLIC_NAV } from "@/lib/nav";
 import { INSTAGRAM_URL, WHATSAPP_MESSAGES, whatsappHref } from "@/lib/cta";
 import { TestimonialCarousel } from "@/components/TestimonialCarousel";
 import { EventBannerCarousel } from "@/components/EventBannerCarousel";
-import { AnnotatedStatement } from "@/components/AnnotatedStatement";
 import { PortraitGallery, type PortraitSlide } from "@/components/PortraitGallery";
 import type { EventBanner } from "@/lib/event-banner";
 import { TESTIMONIALS } from "@/lib/testimonials";
@@ -25,6 +24,7 @@ import {
   useReducedMotion,
   useScroll,
   useTransform,
+  type MotionValue,
 } from "motion/react";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -133,6 +133,42 @@ function Ticker({
   );
 }
 
+/**
+ * One letter of the manifesto headline, appearing as the page scrolls past
+ * it — like it's being typed. `progress` is the shared scroll motion value;
+ * each letter just claims its own slice of it, so there's one scroll
+ * listener for the whole word instead of one per letter.
+ */
+function RevealLetter({
+  char,
+  index,
+  total,
+  progress,
+  reduce,
+}: {
+  char: string;
+  index: number;
+  total: number;
+  progress: MotionValue<number>;
+  reduce: boolean | null;
+}) {
+  const start = index / total;
+  const end = Math.min(1, start + 1 / total / 2);
+  const opacity = useTransform(
+    progress,
+    reduce ? [0, 1] : [start, end],
+    reduce ? [1, 1] : [0, 1],
+  );
+  return (
+    <motion.span aria-hidden style={{ opacity: reduce ? 1 : opacity }}>
+      {char === " " ? " " : char}
+    </motion.span>
+  );
+}
+
+/** "Reescribe" + "tu vida" — kept in sync with the manifesto's own strings. */
+const MANIFESTO_LETTER_COUNT = "Reescribe".length + "tu vida".length;
+
 const DIAGNOSTICO_HREF = whatsappHref(WHATSAPP_MESSAGES.diagnostico);
 const EMPRESAS_HREF = whatsappHref(WHATSAPP_MESSAGES.empresas);
 const ADDONS_HREF = whatsappHref(WHATSAPP_MESSAGES.addOns);
@@ -166,7 +202,7 @@ const CREDENCIALES = [
  */
 const PILAR_GALLERY: PortraitSlide[] = [
   {
-    src: "/images/pilar-portrait.jpg",
+    src: "/images/pilar-portrait-2.jpg",
     label: "Pilar Zambrano B.",
     alt: "Retrato de Pilar Zambrano B.",
   },
@@ -241,6 +277,7 @@ const PATH_TONES: Record<
     tag: string;
     watermark: string;
     imageVeil: string;
+    sheen: string;
   }
 > = {
   coaching: {
@@ -252,6 +289,7 @@ const PATH_TONES: Record<
     tag: "border-arena/30 text-arena/85",
     watermark: "text-arena/[0.08]",
     imageVeil: "from-medianoche/35",
+    sheen: "from-arena/25 via-transparent to-medianoche/60",
   },
   empresas: {
     card: "bg-zere-sky",
@@ -262,6 +300,7 @@ const PATH_TONES: Record<
     tag: "border-zere-deep/30 text-zere-deep",
     watermark: "text-zere-deep/[0.09]",
     imageVeil: "from-zere-deep/30",
+    sheen: "from-arena/60 via-transparent to-zere-deep/45",
   },
   comunidad: {
     card: "bg-cielo",
@@ -272,6 +311,7 @@ const PATH_TONES: Record<
     tag: "border-medianoche/30 text-medianoche",
     watermark: "text-medianoche/10",
     imageVeil: "from-medianoche/30",
+    sheen: "from-arena/70 via-transparent to-medianoche/45",
   },
 };
 
@@ -340,7 +380,7 @@ const PHASES = [
 
 /** Reused as the pull-quote over the offer photo — same words as the
  * carousel below, repeated deliberately right at the decision point. */
-const FEATURED_TESTIMONIAL = TESTIMONIALS.find((t) => t.id === "decisiones");
+const FEATURED_TESTIMONIAL = TESTIMONIALS.find((t) => t.id === "bea");
 
 const ADDON_DIMENSIONS = [
   {
@@ -406,6 +446,12 @@ export function LandingPage({
     shouldReduceMotion ? [0, 0] : [0, -50],
   );
   const heroLine = shouldReduceMotion ? lineRevealReduced : lineReveal;
+
+  const manifestoRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: manifestoProgress } = useScroll({
+    target: manifestoRef,
+    offset: ["start 0.9", "start 0.4"],
+  });
 
   // Repeated well past what any real screen width needs, so the
   // "-50%" loop point never lands on a visible gap between names.
@@ -535,18 +581,61 @@ export function LandingPage({
       {/* Formación y reconocimiento — authority, immediately after the promise */}
       <Ticker items={CREDENCIALES} tone="dark" />
 
-      {/* Manifiesto — the page marks itself up. Sits between two dark bands
-          on purpose: 02 and 03 were running back to back, and a light,
-          un-numbered interstitial gives the eye somewhere to land before the
-          offer. Un-numbered because it is a breath, not a chapter. */}
-      <AnnotatedStatement
-        tone="paper"
-        lines={["Reescribir", "tu vida"]}
-        circled="Strategic Life Editor"
-        boxed="Las mejores decisiones nunca vienen de la obediencia."
-        arrowed="Identidad, imagen y decisiones: un solo expediente."
-        script="se abre, se documenta y se cierra"
-      />
+      {/* Manifiesto — a breath, not a chapter. Just the two-line statement
+          and an echo of rings behind it; no supporting text, on purpose. */}
+      <section className="relative overflow-hidden bg-arena pt-16 pb-4 sm:pt-20 sm:pb-6">
+        <div
+          ref={manifestoRef}
+          className="shell relative flex items-center justify-center"
+        >
+          <span
+            aria-hidden
+            className="zere-ripple-ring absolute left-[65%] bottom-0 h-80 w-80 -translate-x-1/2 translate-y-1/2 rounded-full border border-coral/50 opacity-70 sm:h-[34rem] sm:w-[34rem] lg:h-[48rem] lg:w-[48rem] [animation:zere-ripple_4.5s_ease-out_infinite]"
+          />
+          <span
+            aria-hidden
+            className="zere-ripple-ring absolute left-[65%] bottom-0 h-80 w-80 -translate-x-1/2 translate-y-1/2 rounded-full border border-coral/50 opacity-70 sm:h-[34rem] sm:w-[34rem] lg:h-[48rem] lg:w-[48rem] [animation:zere-ripple_4.5s_ease-out_infinite] [animation-delay:1.5s]"
+          />
+          <span
+            aria-hidden
+            className="zere-ripple-ring absolute left-[65%] bottom-0 h-80 w-80 -translate-x-1/2 translate-y-1/2 rounded-full border border-coral/50 opacity-70 sm:h-[34rem] sm:w-[34rem] lg:h-[48rem] lg:w-[48rem] [animation:zere-ripple_4.5s_ease-out_infinite] [animation-delay:3s]"
+          />
+          <p
+            className="relative font-serif font-semibold uppercase leading-[0.8] tracking-[0.015em] text-center text-medianoche"
+            style={{
+              fontSize: "clamp(3.5rem, 11vw, 9.5rem)",
+            }}
+          >
+            {"Reescribe".split("").map((char, i) => (
+              <RevealLetter
+                key={`l1-${i}`}
+                char={char}
+                index={i}
+                total={MANIFESTO_LETTER_COUNT}
+                progress={manifestoProgress}
+                reduce={shouldReduceMotion}
+              />
+            ))}
+            <br />
+            {"tu vida".split("").map((char, i) => (
+              <RevealLetter
+                key={`l2-${i}`}
+                char={char}
+                index={"Reescribe".length + i}
+                total={MANIFESTO_LETTER_COUNT}
+                progress={manifestoProgress}
+                reduce={shouldReduceMotion}
+              />
+            ))}
+            <span
+              aria-hidden
+              className="type-cursor ml-[0.02em] inline-block w-[0.06em] bg-coral align-[-0.06em]"
+            >
+              {" "}
+            </span>
+          </p>
+        </div>
+      </section>
 
       {/* Cifras — hard proof, before any poetry */}
       {/* {VISIBLE_PROOF_POINTS.length > 0 && (
@@ -632,6 +721,10 @@ export function LandingPage({
                     className={`relative grid overflow-hidden rounded-3xl shadow-[0_-8px_40px_-24px_rgba(14,98,127,0.45)] sm:min-h-[74vh] sm:grid-cols-[1fr_0.8fr] ${tone.card}`}
                   >
                     <Grain opacity={0.8} />
+                    <div
+                      aria-hidden
+                      className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${tone.sheen}`}
+                    />
                     <span
                       aria-hidden
                       className={`pointer-events-none absolute left-6 top-2 font-serif text-[7rem] italic leading-none sm:left-10 ${tone.watermark}`}
@@ -646,7 +739,7 @@ export function LandingPage({
                         {path.kicker}
                       </p>
                       <h3
-                        className={`mt-5 font-serif text-3xl leading-tight text-balance sm:text-4xl ${tone.title}`}
+                        className={`mt-5 font-serif font-medium text-4xl leading-tight text-balance sm:text-5xl ${tone.title}`}
                       >
                         {path.title}
                       </h3>
@@ -761,7 +854,7 @@ export function LandingPage({
               </div>
             </Reveal>
 
-            <Reveal className="relative aspect-[4/5] rounded-md overflow-hidden shadow-[0_30px_60px_-20px_rgba(3,22,29,0.5)]">
+            <Reveal className="relative aspect-[4/5] max-w-sm mx-auto lg:mx-0 rounded-md overflow-hidden shadow-[0_30px_60px_-20px_rgba(3,22,29,0.5)]">
               <Image
                 src="/images/pilar-reading.jpg"
                 alt=""
@@ -777,7 +870,7 @@ export function LandingPage({
                     &ldquo;{FEATURED_TESTIMONIAL.quote}&rdquo;
                   </p>
                   <p className="text-[0.65rem] tracking-[0.14em] uppercase text-gris mt-3">
-                    Clienta de The Alignment Partnership
+                    {FEATURED_TESTIMONIAL.author} · The Alignment Partnership
                   </p>
                 </div>
               )}
@@ -889,7 +982,7 @@ export function LandingPage({
         <div className="shell relative">
           <Reveal className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-xl">
-              <p className="font-script text-4xl sm:text-5xl text-medianoche mb-4">
+              <p className="font-script text-5xl sm:text-6xl text-medianoche mb-4 [-webkit-text-stroke:0.4px_var(--color-medianoche)]">
                 Client love
               </p>
               <h2 className="text-3xl sm:text-4xl text-medianoche text-balance">
@@ -959,12 +1052,11 @@ export function LandingPage({
                 </h2>
                 <p className="text-medianoche/80 leading-relaxed">
                   <span className="float-left font-serif text-5xl leading-[0.8] pr-2 text-medianoche">
-                    S
+                    A
                   </span>
-                  e define como Strategic Life Editor: alguien que ayuda a sus
-                  clientas a editar su vida desde adentro hacia afuera,
-                  integrando identidad, imagen y decisiones. Fundó UMA, y en
-                  2024 recibió el Premio Mujeres en las Artes.
+                  compaña a sus clientas a editar su vida desde adentro hacia
+                  afuera: identidad, imagen y decisiones, en un mismo proceso.
+                  Fundó UMA y en 2024 recibió el Premio Mujeres en las Artes.
                 </p>
                 <Link
                   href="/sobre-pilar"

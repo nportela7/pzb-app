@@ -9,9 +9,7 @@ import "./globals.css";
 const cormorant = Cormorant({
   variable: "--font-cormorant",
   subsets: ["latin"],
-  // 700 exists for one job: the display block in AnnotatedStatement. At that
-  // scale 500 reads as a caption blown up, not as a statement. Drop it and the
-  // browser fakes the bold by smearing the 500, which on a serif is obvious.
+  // 700 is kept for large display text; without it the browser fakes the bold.
   weight: ["300", "400", "500", "600", "700"],
   style: ["normal", "italic"],
 });

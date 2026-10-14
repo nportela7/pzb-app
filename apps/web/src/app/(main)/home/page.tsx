@@ -26,7 +26,6 @@ function capitalize(s: string) {
 const PERSONA_LINKS = [
   { href: "/eventos", title: "Eventos", subtitle: "Talleres y retiros" },
   { href: "/coaching", title: "Coaching", subtitle: "The Alignment Partnership" },
-  { href: "/add-ons", title: "Add-Ons", subtitle: "Experiencias complementarias" },
   { href: "/zere-studio", title: "Zere Studio", subtitle: "Ver experiencias" },
 ];
 

@@ -3,7 +3,6 @@ import { INSTAGRAM_URL, WHATSAPP_MESSAGES, whatsappHref } from "@/lib/cta";
 
 const EXPLORAR = [
   { href: "/coaching", label: "Coaching 1:1" },
-  { href: "/add-ons", label: "Add-Ons" },
   { href: "/zere-studio", label: "Zere Studio" },
 ];
 
