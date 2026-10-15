@@ -983,7 +983,7 @@ export function LandingPage({
               >
                 {outcome.phase}
               </p>
-              <p className="relative font-serif text-xl sm:text-2xl leading-snug text-balance transition-transform duration-500 group-hover:-translate-y-1">
+              <p className="relative font-serif text-2xl sm:text-[1.9rem] font-semibold leading-snug text-balance transition-transform duration-500 group-hover:-translate-y-1">
                 {outcome.statement}
               </p>
               <span className="relative text-[0.7rem] text-arena/60 transition-colors duration-500 group-hover:text-arena/90">
