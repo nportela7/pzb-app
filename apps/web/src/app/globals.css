@@ -224,7 +224,7 @@ a {
 
 /* Zere Studio's capsule in the top bar: a ring that expands and fades,
    the same idea as the manifesto ripples. */
-@keyframes zere-ripple {
+@keyframes zere-capsule-ring {
   0% {
     transform: scale(0.55);
     opacity: 0.9;

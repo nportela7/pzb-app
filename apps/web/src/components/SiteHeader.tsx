@@ -165,7 +165,7 @@ export function SiteHeader({
               >
                 <span
                   aria-hidden
-                  className="relative h-3 w-3 shrink-0 rounded-full border-[1.5px] border-zere-deep after:absolute after:-inset-[5px] after:rounded-full after:border after:border-zere-deep/45 after:animate-[zere-ripple_2.4s_ease-out_infinite] motion-reduce:after:animate-none"
+                  className="relative h-3 w-3 shrink-0 rounded-full border-[1.5px] border-zere-deep after:absolute after:-inset-[5px] after:rounded-full after:border after:border-zere-deep/45 after:animate-[zere-capsule-ring_2.4s_ease-out_infinite] motion-reduce:after:animate-none"
                 />
                 <ZereWordmark className="text-[1.05rem] leading-none" />
               </Link>
