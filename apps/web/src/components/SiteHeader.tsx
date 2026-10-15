@@ -5,6 +5,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
+import { ZereWordmark } from "@/components/ZereWordmark";
+
+const ZERE_HREF = "/zere-studio";
 
 export type NavItem = { href: string; label: string };
 
@@ -58,8 +61,17 @@ export function SiteHeader({
     setOpen(false);
   }
 
+  // Zere Studio is its own space, so it always closes the menu and gets its
+  // own treatment; the other links keep their order. Inside /zere-studio the
+  // whole bar turns Zere's blue so the visitor knows where they are.
+  const zereItem = items.find((i) => i.href === ZERE_HREF);
+  const mainItems = items.filter((i) => i.href !== ZERE_HREF);
+  const onZere = pathname.startsWith(ZERE_HREF);
+
   const shell = lifted
-    ? "bg-arena/72 backdrop-blur-xl backdrop-saturate-150 border-medianoche/12 shadow-[0_10px_30px_-16px_rgba(14,98,127,0.45)]"
+    ? onZere
+      ? "bg-[#f0f7fb]/80 backdrop-blur-xl backdrop-saturate-150 border-zere-deep/18 shadow-[0_10px_30px_-16px_rgba(21,76,97,0.5)]"
+      : "bg-arena/72 backdrop-blur-xl backdrop-saturate-150 border-medianoche/12 shadow-[0_10px_30px_-16px_rgba(14,98,127,0.45)]"
     : "bg-transparent border-transparent";
   const wordmark = "text-medianoche";
   const navLink = lifted
@@ -68,9 +80,11 @@ export function SiteHeader({
   const quietLink = lifted
     ? "text-medianoche/75 hover:text-medianoche"
     : "text-medianoche/75 hover:text-medianoche";
-  const ctaButton = lifted
-    ? "bg-medianoche text-arena hover:bg-medianoche"
-    : "bg-medianoche text-arena hover:bg-medianoche/90";
+  const ctaButton = onZere
+    ? "bg-zere-deep text-arena hover:bg-zere-deep/90"
+    : lifted
+      ? "bg-medianoche text-arena hover:bg-medianoche"
+      : "bg-medianoche text-arena hover:bg-medianoche/90";
   const bar = "bg-medianoche";
 
   return (
@@ -83,12 +97,18 @@ export function SiteHeader({
       <div
         className={`mx-auto flex max-w-6xl items-center justify-between gap-4 rounded-full border px-4 sm:px-6 py-2.5 transition-[background-color,border-color,box-shadow] duration-500 ${shell}`}
       >
-        <Link
-          href="/"
-          className={`font-script text-2xl sm:text-[1.7rem] leading-none transition-colors ${wordmark}`}
-        >
-          PZB.
-        </Link>
+        {onZere ? (
+          <Link href={ZERE_HREF} aria-label="Zere Studio" className="text-xl sm:text-2xl leading-none">
+            <ZereWordmark />
+          </Link>
+        ) : (
+          <Link
+            href="/"
+            className={`font-script text-2xl sm:text-[1.7rem] leading-none transition-colors ${wordmark}`}
+          >
+            PZB.
+          </Link>
+        )}
 
         {/* One pill glides between links instead of restyling the hovered
             word. The old hover swapped to italic, which is narrower than the
@@ -107,7 +127,7 @@ export function SiteHeader({
               opacity: glide.visible ? 1 : 0,
             }}
           />
-          {items.map((item) => (
+          {mainItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -133,9 +153,35 @@ export function SiteHeader({
               {item.label}
             </Link>
           ))}
+          {zereItem && (
+            <>
+              <span aria-hidden className="mx-2 h-5 w-px bg-medianoche/25" />
+              {/* A rippling ring, echoing the water in Zere's brand and the
+                  rings in the manifesto. It stops for reduced-motion users. */}
+              <Link
+                href={zereItem.href}
+                aria-current={onZere ? "page" : undefined}
+                className="group inline-flex items-center gap-2.5 rounded-full border border-zere-deep/25 bg-gradient-to-br from-zere-sky/80 to-zere-sky/35 py-1.5 pl-3 pr-4 text-zere-deep transition-shadow hover:shadow-[0_0_0_3px_rgba(169,205,227,0.55)]"
+              >
+                <span
+                  aria-hidden
+                  className="relative h-3 w-3 shrink-0 rounded-full border-[1.5px] border-zere-deep after:absolute after:-inset-[5px] after:rounded-full after:border after:border-zere-deep/45 after:animate-[zere-ripple_2.4s_ease-out_infinite] motion-reduce:after:animate-none"
+                />
+                <ZereWordmark className="text-[1.05rem] leading-none" />
+              </Link>
+            </>
+          )}
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
+          {onZere && (
+            <Link
+              href="/"
+              className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-zere-deep/25 px-3 py-1 text-sm text-zere-deep transition-colors hover:bg-zere-sky/55"
+            >
+              <span aria-hidden>←</span> PZB
+            </Link>
+          )}
           {showAuthActions && (
             <Show when="signed-out">
               <SignInButton forceRedirectUrl="/home">
@@ -205,7 +251,7 @@ export function SiteHeader({
           id="site-menu"
           className="lg:hidden mx-auto mt-2 max-w-6xl rounded-3xl border border-medianoche/12 bg-arena/88 backdrop-blur-xl backdrop-saturate-150 shadow-[0_18px_40px_-22px_rgba(14,98,127,0.5)] p-3"
         >
-          {items.map((item) => (
+          {mainItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -215,6 +261,16 @@ export function SiteHeader({
               {item.label}
             </Link>
           ))}
+          {zereItem && (
+            <Link
+              href={zereItem.href}
+              onClick={() => setOpen(false)}
+              className="mt-2 flex items-center gap-3 rounded-2xl bg-gradient-to-br from-zere-sky/70 to-zere-sky/35 px-4 py-3 text-lg text-zere-deep transition-colors hover:from-zere-sky"
+            >
+              <span aria-hidden className="h-3 w-3 shrink-0 rounded-full border-[1.5px] border-zere-deep" />
+              <ZereWordmark />
+            </Link>
+          )}
           {showAuthActions && (
             <Show when="signed-out">
               <div className="mt-2 flex flex-col gap-2 border-t border-medianoche/12 pt-3">
