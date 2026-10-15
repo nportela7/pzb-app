@@ -39,6 +39,7 @@ export function SiteHeader({
 }) {
   const [lifted, setLifted] = useState(tone === "light");
   const [open, setOpen] = useState(false);
+  const [glide, setGlide] = useState({ left: 0, width: 0, visible: false });
   const pathname = usePathname();
   const { scrollY } = useScroll();
 
@@ -89,12 +90,45 @@ export function SiteHeader({
           PZB.
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-6 font-serif text-[0.98rem]">
+        {/* One pill glides between links instead of restyling the hovered
+            word. The old hover swapped to italic, which is narrower than the
+            roman face, so the label shrank and its neighbours shifted. The
+            text never changes shape here, so nothing around it moves. */}
+        <nav
+          className="relative hidden lg:flex items-center gap-1 font-serif text-[0.98rem]"
+          onMouseLeave={() => setGlide((g) => ({ ...g, visible: false }))}
+        >
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-y-0 left-0 rounded-full bg-cielo/55 transition-[transform,width,opacity] duration-[380ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
+            style={{
+              width: glide.width,
+              transform: `translateX(${glide.left}px)`,
+              opacity: glide.visible ? 1 : 0,
+            }}
+          />
           {items.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={`transition-colors hover:italic ${navLink}`}
+              onMouseEnter={(e) => {
+                const el = e.currentTarget;
+                setGlide({
+                  left: el.offsetLeft,
+                  width: el.offsetWidth,
+                  visible: true,
+                });
+              }}
+              onFocus={(e) => {
+                const el = e.currentTarget;
+                setGlide({
+                  left: el.offsetLeft,
+                  width: el.offsetWidth,
+                  visible: true,
+                });
+              }}
+              onBlur={() => setGlide((g) => ({ ...g, visible: false }))}
+              className={`relative z-10 rounded-full px-3.5 py-1.5 transition-colors ${navLink}`}
             >
               {item.label}
             </Link>

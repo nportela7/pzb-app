@@ -64,7 +64,18 @@ export function HeroPortrait({
 }) {
   return (
     <div className={`relative ${className}`}>
-      <div className="relative aspect-[4/5] w-full">
+      <div
+        className="relative aspect-[4/5] w-full"
+        // On the wrapper, not the <Image>: the arch mask would clip a shadow
+        // set on the image itself. A filter here traces the masked result, so
+        // the shadow follows the arch and fades with its foot. Offset left to
+        // lift her off the painted ground.
+        style={
+          cutout
+            ? undefined
+            : { filter: "drop-shadow(-14px 8px 16px rgba(14,98,127,0.32))" }
+        }
+      >
         <Image
           src={src}
           alt={alt}
