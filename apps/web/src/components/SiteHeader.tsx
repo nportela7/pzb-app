@@ -74,9 +74,10 @@ export function SiteHeader({
       : "bg-arena/72 backdrop-blur-xl backdrop-saturate-150 border-medianoche/12 shadow-[0_10px_30px_-16px_rgba(14,98,127,0.45)]"
     : "bg-transparent border-transparent";
   const wordmark = "text-medianoche";
-  const navLink = lifted
-    ? "text-medianoche/80 hover:text-medianoche"
-    : "text-medianoche/80 hover:text-medianoche";
+  // Full-strength medianoche at semibold: at 400 and 80% opacity the links
+  // read thin next to the semibold CTA. Cormorant ships 600, so it's a real
+  // weight, not a synthesized bold.
+  const navLink = "text-medianoche";
   const quietLink = lifted
     ? "text-medianoche/75 hover:text-medianoche"
     : "text-medianoche/75 hover:text-medianoche";
@@ -115,7 +116,7 @@ export function SiteHeader({
             roman face, so the label shrank and its neighbours shifted. The
             text never changes shape here, so nothing around it moves. */}
         <nav
-          className="relative hidden lg:flex items-center gap-1 font-serif text-[0.98rem]"
+          className="relative hidden lg:flex items-center gap-1 font-serif text-[1.08rem] font-semibold"
           onMouseLeave={() => setGlide((g) => ({ ...g, visible: false }))}
         >
           <span
