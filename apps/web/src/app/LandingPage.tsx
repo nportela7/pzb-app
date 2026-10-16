@@ -83,7 +83,7 @@ function Reveal({
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
     <p className="inline-flex items-center gap-3 text-xs tracking-[0.3em] uppercase text-medianoche/75">
-      <span className="w-8 h-px bg-gris" />
+      <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-coral" />
       {children}
     </p>
   );
@@ -899,7 +899,7 @@ export function LandingPage({
               {FEATURED_TESTIMONIAL && (
                 <div className="absolute left-6 right-6 bottom-6 bg-arena/95 rounded-md p-6 shadow-[0_20px_40px_-16px_rgba(6,43,56,0.5)]">
                   <p className="font-serif italic text-lg leading-snug text-medianoche">
-                    &ldquo;{FEATURED_TESTIMONIAL.quote}&rdquo;
+                    <span className="text-coral">&ldquo;</span>{FEATURED_TESTIMONIAL.quote}<span className="text-coral">&rdquo;</span>
                   </p>
                   <p className="text-[0.65rem] tracking-[0.14em] uppercase text-gris mt-3">
                     {FEATURED_TESTIMONIAL.author} · The Alignment Partnership
@@ -927,9 +927,15 @@ export function LandingPage({
             </div>
             <Link
               href="/coaching"
-              className="text-sm text-cielo border-b border-cielo/50 hover:border-cielo transition-colors whitespace-nowrap"
+              className="group text-sm text-cielo border-b border-cielo/50 hover:border-coral transition-colors whitespace-nowrap"
             >
-              Ver el proceso completo →
+              Ver el proceso completo{" "}
+              <span
+                aria-hidden
+                className="inline-block transition-[transform,color] group-hover:translate-x-0.5 group-hover:text-coral"
+              >
+                →
+              </span>
             </Link>
           </Reveal>
         </div>
@@ -1014,7 +1020,7 @@ export function LandingPage({
         <div className="shell relative">
           <Reveal className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-xl">
-              <p className="font-script text-5xl sm:text-6xl text-medianoche mb-4 [-webkit-text-stroke:0.4px_var(--color-medianoche)]">
+              <p className="font-script text-5xl sm:text-6xl text-coral mb-4 [-webkit-text-stroke:0.4px_var(--color-coral)]">
                 Client love
               </p>
               <h2 className="text-3xl sm:text-4xl text-medianoche text-balance">

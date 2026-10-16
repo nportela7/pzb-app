@@ -57,10 +57,10 @@ export function EventBannerCarousel({
         </h2>
         <Link
           href={moreHref}
-          className="group inline-flex items-center gap-2 text-sm text-medianoche/70 transition-colors hover:text-medianoche"
+          className="group inline-flex items-center gap-2 border-b border-transparent pb-0.5 text-sm text-medianoche/70 transition-colors hover:border-coral hover:text-medianoche"
         >
           {moreLabel}
-          <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
+          <span aria-hidden className="transition-[transform,color] group-hover:translate-x-0.5 group-hover:text-coral">
             &rarr;
           </span>
         </Link>
