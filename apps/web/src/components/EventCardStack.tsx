@@ -121,17 +121,28 @@ export function EventCardStack({
         >
           {filters}
         </div>
-        <div className="flex flex-col px-6 sm:px-10 max-w-5xl mx-auto mt-10">
+        <div className="relative flex flex-col px-6 sm:px-10 max-w-5xl mx-auto mt-10">
+          {/* Hairline the dates hang from. Only drawn where the page margin is
+              wide enough to hold them; see DateRail. */}
+          <span
+            aria-hidden
+            className="pointer-events-none absolute bottom-0 left-[calc(2.5rem-12px)] top-0 hidden w-px bg-medianoche/25 min-[1200px]:block"
+          />
           {items.map((event, i) =>
             i === lastIndex ? (
               <Fragment key={event.id}>
                 <div ref={sentinelRef} aria-hidden className="h-px" />
-                <EventCardFace
-                  event={event}
-                  index={i}
-                  total={items.length}
-                  onSelect={() => setSelected(event)}
-                />
+                {/* Not sticky, but still needs to be a positioned box so its
+                    date can hang off its own top edge. */}
+                <div className="relative">
+                  <DateRail event={event} />
+                  <EventCardFace
+                    event={event}
+                    index={i}
+                    total={items.length}
+                    onSelect={() => setSelected(event)}
+                  />
+                </div>
               </Fragment>
             ) : (
               <div
@@ -139,6 +150,7 @@ export function EventCardStack({
                 className="sticky"
                 style={{ top: `${STACK_BASE_REM + i * STACK_SPINE_REM}rem` }}
               >
+                <DateRail event={event} />
                 <EventCardFace
                   event={event}
                   index={i}
@@ -159,6 +171,31 @@ export function EventCardStack({
         />
       )}
     </>
+  );
+}
+
+/**
+ * The date, hung in the page margin to the left of its card so the list reads
+ * as a calendar. It lives inside the card's own (sticky) wrapper, so it pins
+ * with the card: when later cards slide over this one and leave only its top
+ * edge showing, the date stays visible beside it, and the pinned dates read
+ * down the margin like an agenda.
+ *
+ * Needs ~130px of margin, which a centred max-w-5xl column only has from
+ * 1200px up. Below that the date stays inside the card (see the
+ * `min-[1200px]:hidden` on the in-card one), so nothing is ever shown twice.
+ */
+function DateRail({ event }: { event: EventCard }) {
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none absolute right-full top-[6px] mr-[18px] hidden items-baseline gap-2 font-serif leading-none text-medianoche after:absolute after:left-full after:top-1/2 after:h-px after:w-[18px] after:bg-medianoche/35 min-[1200px]:flex"
+    >
+      <b className="text-[40px] font-medium tracking-[-0.02em]">{event.day}</b>
+      <span className="font-sans text-[11px] font-bold uppercase tracking-[0.12em]">
+        {event.month}
+      </span>
+    </div>
   );
 }
 
@@ -199,7 +236,7 @@ function EventCardFace({
         style={{ background: accent.hex }}
       />
 
-      <div className="absolute left-[26px] top-[14px] flex items-baseline gap-2 font-serif leading-none text-arena">
+      <div className="absolute left-[26px] top-[14px] flex items-baseline gap-2 font-serif leading-none text-arena min-[1200px]:hidden">
         <b className="text-[30px] font-medium">{event.day}</b>
         <span className="-translate-y-px font-sans text-[11px] font-bold tracking-[0.1em] uppercase">
           {event.month}
