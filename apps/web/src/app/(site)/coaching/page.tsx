@@ -78,7 +78,7 @@ export default function CoachingPage() {
           takes the right half instead of running edge to edge. It starts under
           the floating header (negative margin) rather than below it. */}
       <section className="relative -mt-20 overflow-hidden bg-[#0b4f66] text-arena sm:-mt-24">
-        <div className="shell relative z-10 pb-10 pt-28 sm:pt-32 lg:pb-24 lg:pt-36">
+        <div className="shell relative z-10 pb-10 pt-28 sm:pt-32 lg:pb-14 lg:pt-32">
           <div className="max-w-[31rem]">
             <Eyebrow className="text-arena/85">Coaching 1:1</Eyebrow>
             <h1 className="mb-5 mt-4 text-[2.9rem] font-medium leading-[0.96] text-balance sm:text-6xl lg:text-[4.6rem]">
@@ -121,7 +121,7 @@ export default function CoachingPage() {
             fill
             priority
             sizes="(min-width: 1024px) 56vw, 100vw"
-            className="object-cover object-[50%_22%] [mask-image:linear-gradient(180deg,transparent_0,#000_30%)] [-webkit-mask-image:linear-gradient(180deg,transparent_0,#000_30%)] lg:[mask-image:linear-gradient(90deg,transparent_0,#000_42%)] lg:[-webkit-mask-image:linear-gradient(90deg,transparent_0,#000_42%)]"
+            className="object-cover object-[50%_0%] [mask-image:linear-gradient(180deg,transparent_0,#000_30%)] [-webkit-mask-image:linear-gradient(180deg,transparent_0,#000_30%)] lg:[mask-image:linear-gradient(90deg,transparent_0,#000_42%)] lg:[-webkit-mask-image:linear-gradient(90deg,transparent_0,#000_42%)]"
           />
           <div
             aria-hidden
@@ -131,7 +131,7 @@ export default function CoachingPage() {
       </section>
 
       {/* El proceso — three phases laid over the six months they span. */}
-      <section className="shell py-16 sm:py-24">
+      <section className="shell pb-16 pt-12 sm:pb-24 sm:pt-14">
         <Eyebrow>El proceso</Eyebrow>
         <h2 className="mt-3 max-w-[20ch] text-4xl leading-[1.05] text-medianoche text-balance sm:text-5xl">
           Seis meses, tres fases, un resultado en cada una
