@@ -133,8 +133,20 @@ export default function CoachingPage() {
       {/* El proceso — three phases laid over the six months they span. */}
       <section className="shell pb-16 pt-12 sm:pb-24 sm:pt-14">
         <Eyebrow>El proceso</Eyebrow>
+        {/* A marker stroke behind each of the title's three ideas, in the same
+            colours as the phase bars below (cielo, butter, medianoche), so
+            each idea is tied to the colour it comes back in. `clone` repeats
+            the padding on every line if a span has to wrap. */}
         <h2 className="mt-3 text-4xl leading-[1.05] text-medianoche text-balance sm:text-5xl">
-          Seis meses, tres fases, un resultado en cada una
+          <span className="-mx-[0.04em] whitespace-nowrap bg-[linear-gradient(transparent_52%,rgba(155,199,236,0.85)_52%_90%,transparent_90%)] px-[0.12em] [-webkit-box-decoration-break:clone] [box-decoration-break:clone]">
+            Seis meses,
+          </span>{" "}
+          <span className="-mx-[0.04em] whitespace-nowrap bg-[linear-gradient(transparent_52%,rgba(252,194,72,0.8)_52%_90%,transparent_90%)] px-[0.12em] [-webkit-box-decoration-break:clone] [box-decoration-break:clone]">
+            tres fases,
+          </span>{" "}
+          <span className="-mx-[0.04em] bg-[linear-gradient(transparent_52%,rgba(14,98,127,0.22)_52%_90%,transparent_90%)] px-[0.12em] [-webkit-box-decoration-break:clone] [box-decoration-break:clone]">
+            un resultado en cada una
+          </span>
         </h2>
         <p className="mt-4 leading-relaxed text-[#27495a]">
           La imagen no es una sesión aparte: corre en paralelo durante todo el
