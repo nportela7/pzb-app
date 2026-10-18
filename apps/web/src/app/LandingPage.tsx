@@ -80,10 +80,17 @@ function Reveal({
   );
 }
 
-function Eyebrow({ children }: { children: React.ReactNode }) {
+/** The dot is coral only on arena; on any other ground it takes that ground's ink. */
+function Eyebrow({
+  children,
+  dot = "bg-coral",
+}: {
+  children: React.ReactNode;
+  dot?: string;
+}) {
   return (
     <p className="inline-flex items-center gap-3 text-xs tracking-[0.3em] uppercase text-medianoche/75">
-      <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-coral" />
+      <span aria-hidden className={`h-1.5 w-1.5 shrink-0 rounded-full ${dot}`} />
       {children}
     </p>
   );
@@ -98,7 +105,7 @@ function Ticker({
 }) {
   const bg =
     tone === "dark"
-      ? "bg-capuccino"
+      ? "bg-medianoche"
       : tone === "zere"
         ? "bg-arena/90"
         : "bg-arena/10";
@@ -294,8 +301,8 @@ const PATHS = [
 ];
 
 /**
- * Each path already owns a colour further down the page (03 is medianoche,
- * 06 is zere-sky), so the stack reuses them instead of inventing a palette.
+ * Each card is one of the brand's approved background/ink pairs (medianoche,
+ * butter, cielo), never a colour outside the palette.
  * Backgrounds must be opaque: a stacked card covers the one behind it.
  */
 const PATH_TONES: Record<
@@ -324,15 +331,15 @@ const PATH_TONES: Record<
     sheen: "from-arena/25 via-transparent to-medianoche/60",
   },
   empresas: {
-    card: "bg-zere-sky",
-    kicker: "text-zere-ink/60",
-    title: "text-zere-ink",
-    body: "text-zere-ink/75",
-    cta: "bg-zere-deep text-arena hover:bg-zere-ink",
-    tag: "border-zere-deep/30 text-zere-deep",
-    watermark: "text-zere-deep/[0.09]",
-    imageVeil: "from-zere-deep/30",
-    sheen: "from-arena/60 via-transparent to-zere-deep/45",
+    card: "bg-butter",
+    kicker: "text-medianoche/70",
+    title: "text-medianoche",
+    body: "text-medianoche/80",
+    cta: "bg-medianoche text-arena hover:bg-medianoche",
+    tag: "border-medianoche/30 text-medianoche",
+    watermark: "text-medianoche/10",
+    imageVeil: "from-medianoche/30",
+    sheen: "from-arena/60 via-transparent to-medianoche/45",
   },
   comunidad: {
     card: "bg-cielo",
@@ -359,7 +366,7 @@ const OUTCOMES = [
     phase: "Fase 1 · Descubrir y Explorar",
     image: "/images/outcomes-descubrir.jpg",
     imagePosition: "50% 30%",
-    veil: "linear-gradient(180deg, rgba(20,19,17,.55) 0%, rgba(20,19,17,.35) 45%, rgba(20,19,17,.92) 100%)",
+    veil: "linear-gradient(180deg, rgba(14,98,127,.5) 0%, rgba(14,98,127,.3) 45%, rgba(6,44,58,.92) 100%)",
     eyebrowClass: "text-arena",
   },
   {
@@ -369,7 +376,7 @@ const OUTCOMES = [
     phase: "Fase 2 · Editar y Reescribir",
     image: "/images/outcomes-editar.jpg",
     imagePosition: "60% 40%",
-    veil: "linear-gradient(180deg, rgba(9,61,79,.55) 0%, rgba(155,80,60,.4) 45%, rgba(7,47,61,.92) 100%)",
+    veil: "linear-gradient(180deg, rgba(14,98,127,.5) 0%, rgba(14,98,127,.3) 45%, rgba(6,44,58,.92) 100%)",
     eyebrowClass: "text-arena",
   },
   {
@@ -379,8 +386,8 @@ const OUTCOMES = [
     phase: "Fase 3 · Integrar y Sostener",
     image: "/images/outcomes-integrar.jpg",
     imagePosition: "35% 40%",
-    veil: "linear-gradient(180deg, rgba(14,98,127,.45) 0%, rgba(14,98,127,.3) 45%, rgba(9,64,83,.92) 100%)",
-    eyebrowClass: "text-cielo",
+    veil: "linear-gradient(180deg, rgba(14,98,127,.5) 0%, rgba(14,98,127,.3) 45%, rgba(6,44,58,.92) 100%)",
+    eyebrowClass: "text-arena",
   },
 ];
 
@@ -831,12 +838,12 @@ export function LandingPage({
         <div className="shell relative">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <Reveal>
-              <Eyebrow>
+              <Eyebrow dot="bg-arena">
                 <span className="text-arena/70">Programa principal</span>
               </Eyebrow>
               <h2 className="font-serif text-4xl sm:text-5xl leading-[1.03] mt-5 mb-6 text-balance">
                 The Alignment{" "}
-                <span className="italic font-normal text-cielo">
+                <span className="italic font-normal text-arena">
                   Partnership
                 </span>
               </h2>
@@ -856,7 +863,7 @@ export function LandingPage({
                       />
                     )}
                     <div>
-                      <p className="font-serif text-2xl text-cielo leading-none">
+                      <p className="font-serif text-2xl text-arena leading-none">
                         {fact.value}
                       </p>
                       <p className="text-[0.62rem] tracking-[0.14em] uppercase text-arena/60 mt-1.5">
@@ -919,7 +926,7 @@ export function LandingPage({
                       className="w-8 sm:w-14 h-px bg-arena/25 mx-3"
                     />
                   )}
-                  <span className={i === 0 ? "text-cielo" : "text-arena/50"}>
+                  <span className={i === 0 ? "text-arena" : "text-arena/50"}>
                     {phase.number} {phase.title.split(" y ")[0]}
                   </span>
                 </span>
@@ -927,12 +934,12 @@ export function LandingPage({
             </div>
             <Link
               href="/coaching"
-              className="group text-sm text-cielo border-b border-cielo/50 hover:border-coral transition-colors whitespace-nowrap"
+              className="group text-sm text-arena border-b border-arena/50 hover:border-arena transition-colors whitespace-nowrap"
             >
               Ver el proceso completo{" "}
               <span
                 aria-hidden
-                className="inline-block transition-[transform,color] group-hover:translate-x-0.5 group-hover:text-coral"
+                className="inline-block transition-transform group-hover:translate-x-0.5"
               >
                 →
               </span>
@@ -942,12 +949,12 @@ export function LandingPage({
       </section>
 
       {/* Qué cambia — the destination, stated plainly, one photo per phase */}
-      <section className="relative overflow-hidden bg-[#242220] text-arena">
+      <section className="relative overflow-hidden bg-medianoche text-arena">
         <div className="text-center px-6 sm:px-10 pt-16 sm:pt-20 pb-10 sm:pb-12">
           <Reveal>
             <h2 className="font-serif text-3xl sm:text-5xl leading-[1.15] text-balance max-w-xl mx-auto">
               A los seis meses, ¿
-              <span className="italic font-normal text-cielo">
+              <span className="italic font-normal text-arena">
                 qué es distinto?
               </span>
             </h2>
@@ -1020,7 +1027,7 @@ export function LandingPage({
         <div className="shell relative">
           <Reveal className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-xl">
-              <p className="font-script text-5xl sm:text-6xl text-coral mb-4 [-webkit-text-stroke:0.4px_var(--color-coral)]">
+              <p className="font-script text-5xl sm:text-6xl text-medianoche mb-4 [-webkit-text-stroke:0.4px_var(--color-medianoche)]">
                 Client love
               </p>
               <h2 className="text-3xl sm:text-4xl text-medianoche text-balance">
@@ -1134,7 +1141,7 @@ export function LandingPage({
       <section className="relative overflow-hidden px-[var(--shell-gutter)] py-16 sm:py-24 bg-cielo/40">
         <div className="max-w-3xl mx-auto text-center">
           <Reveal>
-            <Eyebrow>Comunidad</Eyebrow>
+            <Eyebrow dot="bg-medianoche">Comunidad</Eyebrow>
             <h2 className="text-3xl sm:text-4xl text-medianoche mt-5 mb-6 text-balance">
               Una red que se sostiene entre mujeres
             </h2>

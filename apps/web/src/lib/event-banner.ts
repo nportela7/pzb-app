@@ -14,17 +14,19 @@ export const EVENT_TYPE_COVERS: Record<EventType, string> = {
 };
 
 /**
- * One accent color per event type, used to tint the card's photo veil, its
- * type pill and its hover accent — not just its label text. "sesion_abierta"
- * gets its own color (coral) instead of reusing taller's medianoche: the
- * two used to be visually identical in the events list.
+ * The accent of an event card. Every type shares medianoche: the brand allows
+ * one background colour per surface, and five veils in five colours on one
+ * page broke that. The type is told apart by its label (the pill), not by the
+ * colour of the card. Kept as a per-type record so a type can get its own
+ * accent again without touching the components.
  */
+const MEDIANOCHE = { hex: "#0e627f", rgb: "14,98,127" };
 export const EVENT_TYPE_ACCENT: Record<EventType, { hex: string; rgb: string }> = {
-  taller: { hex: "#0e627f", rgb: "14,98,127" },
-  cena: { hex: "#9b503c", rgb: "155,80,60" },
-  retiro: { hex: "#5b5b5b", rgb: "91,91,91" },
-  sesion_abierta: { hex: "#f64648", rgb: "246,70,72" },
-  zere_studio: { hex: "#154c61", rgb: "21,76,97" },
+  taller: MEDIANOCHE,
+  cena: MEDIANOCHE,
+  retiro: MEDIANOCHE,
+  sesion_abierta: MEDIANOCHE,
+  zere_studio: MEDIANOCHE,
 };
 
 /** The site sells in MXN from CDMX, so dates are read in that zone. Pinning it

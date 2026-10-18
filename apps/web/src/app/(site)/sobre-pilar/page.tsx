@@ -211,7 +211,7 @@ export default async function SobrePilarPage() {
       )}
 
       <section className="px-6 sm:px-10 pb-20">
-        <div className="max-w-3xl mx-auto rounded-2xl bg-capuccino text-arena px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="max-w-3xl mx-auto rounded-2xl bg-medianoche text-arena px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div>
             <h3 className="text-xl mb-1">¿Quieres conocerla mejor?</h3>
             <p className="text-arena/80 text-sm">
@@ -231,7 +231,7 @@ export default async function SobrePilarPage() {
               href={WHATSAPP_HREF}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full bg-arena text-capuccino px-6 py-3 text-sm font-medium whitespace-nowrap hover:bg-cielo transition-colors"
+              className="rounded-full bg-arena text-medianoche px-6 py-3 text-sm font-medium whitespace-nowrap hover:bg-cielo transition-colors"
             >
               Escribir por WhatsApp
             </a>

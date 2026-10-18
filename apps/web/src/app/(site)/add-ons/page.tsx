@@ -15,7 +15,7 @@ const DIMENSIONS = [
   {
     name: "Image",
     tagline: "Cómo te muestras",
-    accent: "bg-capuccino",
+    accent: "bg-medianoche",
     items: [
       { title: "Closet Detox", detail: "3–4 horas · Editamos qué ya no te representa" },
       { title: "Closet Styling", detail: "2–3 horas · 8–12 looks nuevos con lo que ya tienes" },
@@ -138,7 +138,7 @@ export default function AddOnsPage() {
           </p>
         </div>
 
-        <div className="max-w-3xl mx-auto mt-16 rounded-2xl bg-capuccino text-arena px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="max-w-3xl mx-auto mt-16 rounded-2xl bg-medianoche text-arena px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div>
             <h3 className="text-xl mb-1">¿No sabes cuál elegir?</h3>
             <p className="text-arena/80 text-sm">
@@ -149,7 +149,7 @@ export default function AddOnsPage() {
             href={WHATSAPP_HREF}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full bg-arena text-capuccino px-6 py-3 text-sm font-medium whitespace-nowrap hover:bg-cielo transition-colors"
+            className="rounded-full bg-arena text-medianoche px-6 py-3 text-sm font-medium whitespace-nowrap hover:bg-cielo transition-colors"
           >
             Escribir por WhatsApp
           </a>

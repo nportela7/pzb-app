@@ -56,7 +56,7 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
   );
 
   const ticker = (
-    <div className="overflow-hidden bg-capuccino py-2.5 whitespace-nowrap">
+    <div className="overflow-hidden bg-medianoche py-2.5 whitespace-nowrap">
       <div className="inline-flex marquee-track" style={{ animationDuration: "208s" }}>
         {[...TICKER_ITEMS_FILLED, ...TICKER_ITEMS_FILLED].map((item, i) => (
           <span

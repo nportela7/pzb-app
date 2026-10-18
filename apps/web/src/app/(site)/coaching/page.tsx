@@ -12,31 +12,29 @@ const FACTS = [
 /**
  * The three phases laid out over the six months they take. `sessions` are the
  * session numbers each phase covers, so the timeline and the copy can't drift
- * apart. `bar` is the phase colour; coral stays out of it on purpose, it is a
- * detail colour and only appears on the result dots below.
+ * apart. `bar` is one colour (cielo) at rising strength, so the phases read as
+ * progress without a second colour entering the section; coral stays out of
+ * it too, it is a detail colour and only appears on the result dots below.
  */
 const PHASES = [
   {
     title: "Descubrir y Explorar",
     sessions: [1, 2, 3],
-    bar: "bg-cielo text-[#0b3d4f]",
-    chip: "bg-white/55",
+    bar: "bg-cielo/50 text-medianoche",
     body: "Ver con claridad dónde estás hoy, qué está funcionando y qué ya no termina de reflejarte. Se trabajan roles sostenidos por costumbre y narrativas que ya no encajan.",
     result: "Un mapa claro de qué conservar y qué soltar.",
   },
   {
     title: "Editar y Reescribir",
     sessions: [4, 5],
-    bar: "bg-butter text-[#4a3205]",
-    chip: "bg-white/55",
+    bar: "bg-cielo/80 text-medianoche",
     body: "Editar lo que ya no encaja y reescribir la narrativa con la que apareces frente al mundo. Se ajusta el lenguaje interno, el discurso profesional y la manera de presentarse.",
     result: "Las decisiones pasan de venir de la exigencia a venir de la elección.",
   },
   {
     title: "Integrar y Sostener",
     sessions: [6, 7, 8],
-    bar: "bg-medianoche text-arena",
-    chip: "bg-white/20",
+    bar: "bg-cielo text-medianoche",
     body: "Integrar todo en una manera de estar y aparecer que se sostiene sola. Se cierra con las decisiones y siguientes pasos desde el nuevo lugar.",
     result: "La imagen corre en paralelo a quién estás siendo.",
   },
@@ -52,19 +50,22 @@ const byId = (id: string) => TESTIMONIALS.find((t) => t.id === id);
 const FEATURED = byId("andrea");
 const SECONDARY = [byId("erika"), byId("antonia")];
 
-/** Section label: the coral dot is the page's one recurring detail. */
+/** Section label. The dot is coral only on arena; on a dark ground it takes
+ *  that ground's ink. */
 function Eyebrow({
   children,
   className = "text-medianoche/85",
+  dot = "bg-coral",
 }: {
   children: React.ReactNode;
   className?: string;
+  dot?: string;
 }) {
   return (
     <p
       className={`inline-flex items-center gap-2.5 text-[0.7rem] font-semibold uppercase tracking-[0.22em] ${className}`}
     >
-      <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-coral" />
+      <span aria-hidden className={`h-1.5 w-1.5 shrink-0 rounded-full ${dot}`} />
       {children}
     </p>
   );
@@ -77,10 +78,12 @@ export default function CoachingPage() {
           the left stays on a clean ground. The portrait is vertical, so it
           takes the right half instead of running edge to edge. It starts under
           the floating header (negative margin) rather than below it. */}
-      <section className="relative -mt-20 overflow-hidden bg-[#0b4f66] text-arena sm:-mt-24">
+      <section className="relative -mt-20 overflow-hidden bg-medianoche text-arena sm:-mt-24">
         <div className="shell relative z-10 pb-10 pt-28 sm:pt-32 lg:pb-14 lg:pt-32">
           <div className="max-w-[31rem]">
-            <Eyebrow className="text-arena/85">Coaching 1:1</Eyebrow>
+            <Eyebrow className="text-arena/85" dot="bg-arena">
+              Coaching 1:1
+            </Eyebrow>
             <h1 className="mb-5 mt-4 text-[2.9rem] font-medium leading-[0.96] text-balance sm:text-6xl lg:text-[4.6rem]">
               The Alignment <em className="font-normal">Partnership</em>
             </h1>
@@ -107,7 +110,7 @@ export default function CoachingPage() {
               href={WHATSAPP_HREF}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-7 inline-flex items-center rounded-full bg-butter px-7 py-3.5 text-sm font-semibold tracking-wide text-[#17323c] transition-colors hover:bg-arena"
+              className="mt-7 inline-flex items-center rounded-full bg-arena px-7 py-3.5 text-sm font-semibold tracking-wide text-medianoche transition-colors hover:bg-cielo"
             >
               Agenda tu sesión diagnóstico
             </a>
@@ -125,7 +128,7 @@ export default function CoachingPage() {
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#0b4f66]/35 via-transparent via-[22%] to-[#0b4f66]/50 to-100%"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-medianoche/35 via-transparent via-[22%] to-medianoche/50 to-100%"
           />
         </div>
       </section>
@@ -133,22 +136,20 @@ export default function CoachingPage() {
       {/* El proceso — three phases laid over the six months they span. */}
       <section className="shell pb-16 pt-12 sm:pb-24 sm:pt-14">
         <Eyebrow>El proceso</Eyebrow>
-        {/* A marker stroke behind each of the title's three ideas, in the same
-            colours as the phase bars below (cielo, butter, medianoche), so
-            each idea is tied to the colour it comes back in. `clone` repeats
-            the padding on every line if a span has to wrap. */}
+        {/* Each of the title's three ideas gets its own scale and style, and no
+            colour: the section is one ground, so the emphasis is typographic.
+            The two short phrases never break across lines. */}
         <h2 className="mt-3 text-4xl leading-[1.05] text-medianoche text-balance sm:text-5xl">
-          <span className="-mx-[0.04em] whitespace-nowrap bg-[linear-gradient(transparent_52%,rgba(155,199,236,0.85)_52%_90%,transparent_90%)] px-[0.12em] [-webkit-box-decoration-break:clone] [box-decoration-break:clone]">
+          <span className="whitespace-nowrap text-[1.2em] font-semibold">
             Seis meses,
           </span>{" "}
-          <span className="-mx-[0.04em] whitespace-nowrap bg-[linear-gradient(transparent_52%,rgba(252,194,72,0.8)_52%_90%,transparent_90%)] px-[0.12em] [-webkit-box-decoration-break:clone] [box-decoration-break:clone]">
-            tres fases,
-          </span>{" "}
-          <span className="-mx-[0.04em] bg-[linear-gradient(transparent_52%,rgba(14,98,127,0.22)_52%_90%,transparent_90%)] px-[0.12em] [-webkit-box-decoration-break:clone] [box-decoration-break:clone]">
-            un resultado en cada una
+          <span className="whitespace-nowrap italic">tres fases,</span> un
+          resultado en cada una
+          <span aria-hidden className="text-coral">
+            .
           </span>
         </h2>
-        <p className="mt-4 leading-relaxed text-[#27495a]">
+        <p className="mt-4 leading-relaxed text-medianoche/85">
           La imagen no es una sesión aparte: corre en paralelo durante todo el
           trabajo.
         </p>
@@ -177,7 +178,7 @@ export default function CoachingPage() {
                       <i
                         key={n}
                         aria-hidden
-                        className={`flex h-5 w-5 items-center justify-center rounded-full text-[0.66rem] not-italic tracking-normal ${phase.chip}`}
+                        className="flex h-5 w-5 items-center justify-center rounded-full bg-arena/70 text-[0.66rem] not-italic tracking-normal"
                       >
                         {n}
                       </i>
@@ -189,7 +190,7 @@ export default function CoachingPage() {
                   <h3 className="mb-2.5 text-3xl leading-[1.1] text-medianoche">
                     {phase.title}
                   </h3>
-                  <p className="text-[0.97rem] leading-relaxed text-[#27495a]">
+                  <p className="text-[0.97rem] leading-relaxed text-medianoche/85">
                     {phase.body}
                   </p>
                   <p className="mt-4 flex items-baseline gap-2.5 font-serif text-[1.15rem] italic leading-snug text-medianoche">
@@ -224,9 +225,9 @@ export default function CoachingPage() {
       </section>
 
       {/* Client love */}
-      <section className="bg-[#0b4f66] py-16 text-arena sm:py-24">
+      <section className="bg-medianoche py-16 text-arena sm:py-24">
         <div className="shell">
-          <p className="font-script text-5xl leading-none text-coral sm:text-6xl">
+          <p className="font-script text-5xl leading-none text-arena sm:text-6xl">
             Client love
           </p>
           <h2 className="mb-9 mt-3.5 max-w-[22ch] text-3xl text-arena text-balance sm:text-4xl">
@@ -249,9 +250,7 @@ export default function CoachingPage() {
                 )}
                 <blockquote className="m-0 flex flex-col justify-between gap-5">
                   <p className="font-serif text-2xl italic leading-snug sm:text-[1.7rem]">
-                    <span className="text-coral">&ldquo;</span>
-                    {FEATURED.quote}
-                    <span className="text-coral">&rdquo;</span>
+                    &ldquo;{FEATURED.quote}&rdquo;
                   </p>
                   <figcaption>
                     <b className="block font-serif text-lg font-semibold">
@@ -285,9 +284,7 @@ export default function CoachingPage() {
                     )}
                     <blockquote className="m-0 flex flex-col gap-3">
                       <p className="font-serif text-[1.1rem] italic leading-snug">
-                        <span className="text-coral">&ldquo;</span>
-                        {t.quote}
-                        <span className="text-coral">&rdquo;</span>
+                        &ldquo;{t.quote}&rdquo;
                       </p>
                       <figcaption>
                         <b className="block font-serif text-lg font-semibold">
@@ -321,7 +318,7 @@ export default function CoachingPage() {
           <h2 className="my-4 text-4xl leading-[1.04] text-medianoche sm:text-5xl">
             Pilar Zambrano B.
           </h2>
-          <p className="max-w-[54ch] leading-[1.7] text-[#27495a]">
+          <p className="max-w-[54ch] leading-[1.7] text-medianoche/85">
             Emprendedora, inversionista y consejera. Se define como Strategic
             Life Editor: alguien que ayuda a sus clientas a editar su vida desde
             adentro hacia afuera, integrando identidad, imagen y decisiones.
@@ -342,7 +339,7 @@ export default function CoachingPage() {
       </section>
 
       {/* Cierre */}
-      <section className="bg-butter py-14 text-[#17323c] sm:py-20">
+      <section className="bg-butter py-14 text-medianoche sm:py-20">
         <div className="shell flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
           <h2 className="max-w-[13ch] text-5xl leading-none text-balance sm:text-6xl">
             ¿Lista para empezar?
@@ -351,7 +348,7 @@ export default function CoachingPage() {
             href={WHATSAPP_HREF}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full bg-[#17323c] px-8 py-4 text-sm font-semibold tracking-wide text-butter transition-colors hover:bg-medianoche"
+            className="rounded-full bg-medianoche px-8 py-4 text-sm font-semibold tracking-wide text-arena transition-colors hover:bg-medianoche/90"
           >
             Escribir por WhatsApp →
           </a>

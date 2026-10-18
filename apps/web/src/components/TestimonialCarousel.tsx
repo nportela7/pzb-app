@@ -107,9 +107,7 @@ function Media({
         className="select-none font-serif italic font-light leading-none text-transparent"
         style={{
           fontSize: initial ? "11rem" : "14rem",
-          WebkitTextStroke: initial
-            ? "1.5px rgba(14,98,127,0.4)"
-            : "1.5px rgba(246,70,72,0.7)",
+          WebkitTextStroke: "1.5px rgba(14,98,127,0.4)",
         }}
       >
         {initial ?? "“"}
@@ -173,7 +171,7 @@ export function TestimonialCarousel({ items }: { items: Testimonial[] }) {
               />
               <blockquote className="mt-6 flex-1">
                 <p className="font-serif italic text-lg leading-snug text-medianoche text-balance">
-                  <span className="text-coral">&ldquo;</span>{testimonial.quote}<span className="text-coral">&rdquo;</span>
+                  &ldquo;{testimonial.quote}&rdquo;
                 </p>
               </blockquote>
               <figcaption className="mt-5 border-t border-medianoche/20 pt-4">

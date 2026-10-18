@@ -240,8 +240,7 @@ function EventCardFace({
       />
       <span
         aria-hidden
-        className="absolute inset-y-0 left-0 w-[5px] origin-bottom scale-y-0 transition-transform duration-500 group-hover:scale-y-100"
-        style={{ background: accent.hex }}
+        className="absolute inset-y-0 left-0 w-[5px] origin-bottom scale-y-0 bg-arena transition-transform duration-500 group-hover:scale-y-100"
       />
 
       <div className="absolute left-[26px] top-[14px] flex items-baseline gap-2 font-serif leading-none text-arena min-[1200px]:hidden">
@@ -256,11 +255,8 @@ function EventCardFace({
 
       <div className="absolute left-[26px] right-[26px] bottom-[22px] max-w-[32rem]">
         <div className="mb-3 flex items-center gap-2.5">
-          <span
-            className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[10.5px] font-bold uppercase tracking-[0.14em] text-arena"
-            style={{ background: accent.hex }}
-          >
-            <span className="h-1.5 w-1.5 rounded-full bg-arena/85" />
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-arena px-3.5 py-1.5 text-[10.5px] font-bold uppercase tracking-[0.14em] text-medianoche">
+            <span className="h-1.5 w-1.5 rounded-full bg-medianoche" />
             {event.typeLabel}
           </span>
           <span className="text-xs text-arena/75">{event.timeLabel}</span>
