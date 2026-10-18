@@ -184,12 +184,20 @@ export function EventCardStack({
  * Needs ~130px of margin, which a centred max-w-5xl column only has from
  * 1200px up. Below that the date stays inside the card (see the
  * `min-[1200px]:hidden` on the in-card one), so nothing is ever shown twice.
+ *
+ * Opaque and fixed-width on purpose. Once the last card arrives, every
+ * pinned wrapper above it is pushed up by the end of the stack until they all
+ * sit on the same line, and the cards cover each other there. The dates are
+ * outside the cards, so nothing covers them: with a transparent, content-wide
+ * date they piled up into an unreadable smear. A solid, identical box makes
+ * each later date paint over the earlier ones like the cards do (DOM order is
+ * paint order), so the last one hides the rest as they pass under it.
  */
 function DateRail({ event }: { event: EventCard }) {
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute right-full top-[6px] mr-[18px] hidden items-baseline gap-2 font-serif leading-none text-medianoche after:absolute after:left-full after:top-1/2 after:h-px after:w-[18px] after:bg-medianoche/35 min-[1200px]:flex"
+      className="pointer-events-none absolute right-full top-[4px] mr-[18px] hidden w-[6.5rem] items-baseline justify-end gap-2 bg-arena py-0.5 pr-1 font-serif leading-none text-medianoche after:absolute after:left-full after:top-1/2 after:h-px after:w-[18px] after:bg-medianoche/35 min-[1200px]:flex"
     >
       <b className="text-[40px] font-medium tracking-[-0.02em]">{event.day}</b>
       <span className="font-sans text-[11px] font-bold uppercase tracking-[0.12em]">
