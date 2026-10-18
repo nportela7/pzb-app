@@ -726,8 +726,10 @@ export function LandingPage({
         </Reveal>
       </section> */}
 
-      {/* Los tres caminos — the segmentation grid */}
-      <section className="relative py-16 sm:py-24">
+      {/* Los tres caminos — the segmentation grid. Cielo, not arena: the
+          manifesto right above is arena, and two arena sections in a row
+          read as one. */}
+      <section className="relative bg-cielo/35 py-16 sm:py-24">
         <div className="shell">
           <Reveal className="max-w-2xl">
             <h2 className="text-3xl sm:text-5xl text-medianoche text-balance">
@@ -949,12 +951,12 @@ export function LandingPage({
       </section>
 
       {/* Qué cambia — the destination, stated plainly, one photo per phase */}
-      <section className="relative overflow-hidden bg-medianoche text-arena">
+      <section className="relative overflow-hidden bg-butter text-medianoche">
         <div className="text-center px-6 sm:px-10 pt-16 sm:pt-20 pb-10 sm:pb-12">
           <Reveal>
             <h2 className="font-serif text-3xl sm:text-5xl leading-[1.15] text-balance max-w-xl mx-auto">
               A los seis meses, ¿
-              <span className="italic font-normal text-arena">
+              <span className="italic font-normal">
                 qué es distinto?
               </span>
             </h2>
@@ -1012,7 +1014,7 @@ export function LandingPage({
               href={DIAGNOSTICO_HREF}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full px-8 py-4 bg-arena text-medianoche text-sm font-semibold tracking-wide transition-colors hover:bg-cielo"
+              className="inline-flex items-center gap-2 rounded-full px-8 py-4 bg-medianoche text-arena text-sm font-semibold tracking-wide transition-colors hover:bg-medianoche/90"
             >
               Quiero llegar ahí
               <span aria-hidden>→</span>
@@ -1235,14 +1237,14 @@ export function LandingPage({
       </section>
 
       {/* CTA final */}
-      <section className="relative overflow-hidden px-[var(--shell-gutter)] py-20 sm:py-28 bg-medianoche">
+      <section className="relative overflow-hidden px-[var(--shell-gutter)] py-20 sm:py-28 bg-butter">
         <Grain opacity={0.06} />
         <Reveal className="relative max-w-2xl mx-auto text-center flex flex-col items-center gap-8">
-          <h2 className="font-serif italic font-light text-4xl sm:text-6xl leading-[1.05] text-arena text-balance">
+          <h2 className="font-serif italic font-light text-4xl sm:text-6xl leading-[1.05] text-medianoche text-balance">
             ¿Lista para editar tu vida{" "}
             <span className="not-italic font-light">desde adentro?</span>
           </h2>
-          <p className="text-arena/70 leading-relaxed max-w-md">
+          <p className="text-medianoche/80 leading-relaxed max-w-md">
             Empieza con una conversación de 30 minutos. Sin guion, sin
             presentación: solo dónde estás hoy y qué te gustaría que fuera
             distinto.
@@ -1252,14 +1254,14 @@ export function LandingPage({
               href={DIAGNOSTICO_HREF}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 bg-arena text-medianoche text-sm font-semibold tracking-wide hover:bg-cielo transition-colors"
+              className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 bg-medianoche text-arena text-sm font-semibold tracking-wide hover:bg-medianoche/90 transition-colors"
             >
               Agenda tu sesión diagnóstico
               <span aria-hidden>→</span>
             </a>
             <Show when="signed-out">
               <SignUpButton forceRedirectUrl="/home">
-                <button className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-arena/30 text-arena text-sm font-medium hover:bg-arena/10 hover:border-arena/55 transition-colors">
+                <button className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-medianoche/35 text-medianoche text-sm font-medium hover:bg-medianoche/10 hover:border-medianoche/60 transition-colors">
                   Sé parte de la comunidad
                 </button>
               </SignUpButton>
@@ -1267,13 +1269,13 @@ export function LandingPage({
             <Show when="signed-in">
               <Link
                 href="/home"
-                className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-arena/30 text-arena text-sm font-medium hover:bg-arena/10 hover:border-arena/55 transition-colors"
+                className="inline-flex items-center justify-center rounded-full px-8 py-4 border border-medianoche/35 text-medianoche text-sm font-medium hover:bg-medianoche/10 hover:border-medianoche/60 transition-colors"
               >
                 Ir a la comunidad
               </Link>
             </Show>
           </div>
-          <p className="text-[0.78rem] text-arena/60">
+          <p className="text-[0.78rem] text-medianoche/75">
             Te responde Pilar directo por WhatsApp · L–V 10–19h (CDMX)
           </p>
         </Reveal>
