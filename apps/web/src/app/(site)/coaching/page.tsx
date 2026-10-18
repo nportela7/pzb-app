@@ -133,10 +133,10 @@ export default function CoachingPage() {
       {/* El proceso — three phases laid over the six months they span. */}
       <section className="shell pb-16 pt-12 sm:pb-24 sm:pt-14">
         <Eyebrow>El proceso</Eyebrow>
-        <h2 className="mt-3 max-w-[20ch] text-4xl leading-[1.05] text-medianoche text-balance sm:text-5xl">
+        <h2 className="mt-3 text-4xl leading-[1.05] text-medianoche text-balance sm:text-5xl">
           Seis meses, tres fases, un resultado en cada una
         </h2>
-        <p className="mt-4 max-w-[52ch] leading-relaxed text-[#27495a]">
+        <p className="mt-4 leading-relaxed text-[#27495a]">
           La imagen no es una sesión aparte: corre en paralelo durante todo el
           trabajo.
         </p>
