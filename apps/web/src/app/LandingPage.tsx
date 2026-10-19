@@ -729,7 +729,8 @@ export function LandingPage({
       {/* Los tres caminos — the segmentation grid. Cielo, not arena: the
           manifesto right above is arena, and two arena sections in a row
           read as one. */}
-      <section className="relative bg-cielo/35 py-16 sm:py-24">
+      <section className="relative isolate bg-cielo/35 py-16 sm:py-24">
+        <span aria-hidden className="tx tx-glow" />
         <div className="shell">
           <Reveal className="max-w-2xl">
             <h2 className="text-3xl sm:text-5xl text-medianoche text-balance">
@@ -952,7 +953,8 @@ export function LandingPage({
 
       {/* Qué cambia — the destination, stated plainly, one photo per phase */}
       <section className="relative overflow-hidden bg-arena text-medianoche">
-        <div className="text-center px-6 sm:px-10 pt-16 sm:pt-20 pb-10 sm:pb-12">
+        <div className="relative isolate text-center px-6 sm:px-10 pt-16 sm:pt-20 pb-10 sm:pb-12">
+          <span aria-hidden className="tx tx-rings-arena" />
           <Reveal>
             <h2 className="font-serif text-3xl sm:text-5xl leading-[1.15] text-balance max-w-xl mx-auto">
               A los seis meses, ¿
@@ -1024,8 +1026,8 @@ export function LandingPage({
       </section>
 
       {/* Testimonios — the proof wall */}
-      <section className="relative overflow-hidden py-16 sm:py-24 bg-cielo/45">
-        <Grain opacity={0.05} />
+      <section className="relative isolate overflow-hidden py-16 sm:py-24 bg-cielo/45">
+        <span aria-hidden className="tx tx-grain" />
         <div className="shell relative">
           <Reveal className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-xl">
@@ -1140,7 +1142,8 @@ export function LandingPage({
       </section>
 
       {/* Comunidad */}
-      <section className="relative overflow-hidden px-[var(--shell-gutter)] py-16 sm:py-24 bg-cielo/40">
+      <section className="relative overflow-hidden px-[var(--shell-gutter)] py-16 sm:py-24 bg-cielo/40 isolate">
+        <span aria-hidden className="tx tx-rings-cielo" />
         <div className="max-w-3xl mx-auto text-center">
           <Reveal>
             <Eyebrow dot="bg-medianoche">Comunidad</Eyebrow>
@@ -1237,7 +1240,8 @@ export function LandingPage({
       </section>
 
       {/* CTA final */}
-      <section className="relative overflow-hidden px-[var(--shell-gutter)] py-20 sm:py-28 bg-cielo">
+      <section className="relative overflow-hidden px-[var(--shell-gutter)] py-20 sm:py-28 bg-cielo isolate">
+        <span aria-hidden className="tx tx-glow" />
         <Grain opacity={0.06} />
         <Reveal className="relative max-w-2xl mx-auto text-center flex flex-col items-center gap-8">
           <h2 className="font-serif italic font-light text-4xl sm:text-6xl leading-[1.05] text-medianoche text-balance">
