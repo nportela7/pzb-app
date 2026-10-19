@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import { ZereWordmark } from "@/components/ZereWordmark";
+import { PilarLogo } from "@/components/PilarLogo";
 
 const ZERE_HREF = "/zere-studio";
 
@@ -73,7 +74,6 @@ export function SiteHeader({
       ? "bg-[#f0f7fb]/80 backdrop-blur-xl backdrop-saturate-150 border-zere-deep/18 shadow-[0_10px_30px_-16px_rgba(21,76,97,0.5)]"
       : "bg-arena/72 backdrop-blur-xl backdrop-saturate-150 border-medianoche/12 shadow-[0_10px_30px_-16px_rgba(14,98,127,0.45)]"
     : "bg-transparent border-transparent";
-  const wordmark = "text-medianoche";
   // Full-strength medianoche at semibold: at 400 and 80% opacity the links
   // read thin next to the semibold CTA. Cormorant ships 600, so it's a real
   // weight, not a synthesized bold.
@@ -103,11 +103,8 @@ export function SiteHeader({
             <ZereWordmark />
           </Link>
         ) : (
-          <Link
-            href="/"
-            className={`font-script text-2xl sm:text-[1.7rem] leading-none transition-colors ${wordmark}`}
-          >
-            PZB.
+          <Link href="/" aria-label="Pilar Zambrano B. — inicio" className="block shrink-0">
+            <PilarLogo className="h-9 sm:h-10" priority />
           </Link>
         )}
 

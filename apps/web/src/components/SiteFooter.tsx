@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PilarLogo } from "@/components/PilarLogo";
 import { INSTAGRAM_URL, WHATSAPP_MESSAGES, whatsappHref } from "@/lib/cta";
 
 const EXPLORAR = [
@@ -19,7 +20,6 @@ const COMUNIDAD = [
  */
 export function SiteFooter({ tone = "medianoche" }: { tone?: "medianoche" | "arena" }) {
   const cielo = tone === "arena";
-  const ink = cielo ? "text-medianoche" : "text-arena";
   const inkSoft = cielo ? "text-medianoche/80" : "text-arena/70";
   const label = cielo ? "text-medianoche/70" : "text-arena/60";
   const hover = cielo ? "hover:text-medianoche" : "hover:text-arena";
@@ -34,7 +34,7 @@ export function SiteFooter({ tone = "medianoche" }: { tone?: "medianoche" | "are
       {cielo && <span aria-hidden className="tx tx-blobs" />}
       <div className="mx-auto grid max-w-6xl gap-12 px-6 sm:px-10 py-16 md:grid-cols-[1.3fr_1fr_1fr]">
         <div>
-          <span className={`font-script text-3xl ${ink}`}>PZB.</span>
+          <PilarLogo tone={cielo ? "medianoche" : "arena"} className="h-14" />
           <p className={`mt-4 max-w-xs leading-relaxed ${inkSoft}`}>
             Coaching de identidad, imagen y decisiones. Y experiencias con
             intención para empresas.
