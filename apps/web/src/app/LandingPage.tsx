@@ -759,8 +759,11 @@ export function LandingPage({
                   // lower, which is exactly the spine the kicker needs.
                   style={{ top: `${5.5 + i * 2.75}rem` }}
                 >
+                  {/* One height for all three: the content differs a little per card, so the
+                      minimum is set per breakpoint just above the tallest card at that
+                      width, and the shorter ones stretch to match. */}
                   <article
-                    className={`relative grid overflow-hidden rounded-3xl shadow-[0_-8px_40px_-24px_rgba(14,98,127,0.45)] sm:min-h-[26rem] sm:grid-cols-[1fr_0.8fr] ${tone.card}`}
+                    className={`relative grid overflow-hidden rounded-3xl shadow-[0_-8px_40px_-24px_rgba(14,98,127,0.45)] sm:min-h-[44rem] md:min-h-[38rem] lg:min-h-[32rem] xl:min-h-[28rem] sm:grid-cols-[1fr_0.8fr] ${tone.card}`}
                   >
                     <Grain opacity={0.8} />
                     <div
