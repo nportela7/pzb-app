@@ -729,7 +729,7 @@ export function LandingPage({
       {/* Los tres caminos — the segmentation grid. Cielo, not arena: the
           manifesto right above is arena, and two arena sections in a row
           read as one. */}
-      <section className="relative isolate bg-cielo/35 py-16 sm:py-20">
+      <section className="relative isolate bg-cielo/35 py-16 sm:py-[70px]">
         <span aria-hidden className="tx tx-glow" />
         <div className="shell">
           <Reveal className="max-w-2xl">
@@ -846,7 +846,7 @@ export function LandingPage({
       {/* The Alignment Partnership — the flagship offer, introduced before
           the "qué cambia" triptych so the phases below have a named
           program to belong to instead of floating free. */}
-      <section className="relative py-16 sm:py-20 bg-medianoche text-arena">
+      <section className="relative py-16 sm:py-[70px] bg-medianoche text-arena">
         <Grain opacity={0.07} />
         <div className="shell relative">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -967,7 +967,7 @@ export function LandingPage({
             they show as arcs above and below them. */}
         <span aria-hidden className="tx tx-rings-arena" />
         <span aria-hidden className="tx tx-grain" />
-        <div className="text-center px-6 sm:px-10 pt-16 sm:pt-20 pb-10 sm:pb-12">
+        <div className="text-center px-6 sm:px-10 py-16 sm:py-[70px]">
           <Reveal>
             <h2 className="font-serif text-3xl font-semibold sm:text-[3.4rem] leading-[1.12] text-balance max-w-2xl mx-auto">
               A los seis meses, ¿
@@ -1023,7 +1023,7 @@ export function LandingPage({
           ))}
         </motion.div>
 
-        <div className="text-center py-12 sm:py-20">
+        <div className="text-center py-16 sm:py-[70px]">
           <Reveal>
             <a
               href={DIAGNOSTICO_HREF}
@@ -1039,7 +1039,7 @@ export function LandingPage({
       </section>
 
       {/* Testimonios — the proof wall */}
-      <section className="relative isolate overflow-hidden py-16 sm:py-20 bg-cielo/45">
+      <section className="relative isolate overflow-hidden py-16 sm:py-[70px] bg-cielo/45">
         <span aria-hidden className="tx tx-grain tx-grain-strong" />
         <div className="shell relative">
           <Reveal className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
@@ -1083,7 +1083,7 @@ export function LandingPage({
 
 
       {/* Sobre Pilar — authority */}
-      <section className="relative overflow-hidden py-16 sm:py-20">
+      <section className="relative overflow-hidden py-16 sm:py-[70px]">
         <div className="shell">
           {/* La galería es vertical, así que se lleva la columna angosta y el
               texto la ancha — al revés de como estaba. Dos celdas, no tres:
@@ -1155,7 +1155,7 @@ export function LandingPage({
       </section>
 
       {/* Comunidad */}
-      <section className="relative overflow-hidden px-[var(--shell-gutter)] py-16 sm:py-20 bg-cielo/40 isolate">
+      <section className="relative overflow-hidden px-[var(--shell-gutter)] py-16 sm:py-[70px] bg-cielo/40 isolate">
         <span aria-hidden className="tx tx-rings-cielo" />
         <div className="max-w-3xl mx-auto text-center">
           <Reveal>
@@ -1242,7 +1242,7 @@ export function LandingPage({
       </section>
 
       {/* Eventos — the banner carousel is the whole section now */}
-      <section className="relative py-16 sm:py-20">
+      <section className="relative py-16 sm:py-[70px]">
         <Reveal className="shell">
           <EventBannerCarousel
             items={eventBanners}
@@ -1254,7 +1254,7 @@ export function LandingPage({
       </section>
 
       {/* CTA final */}
-      <section className="relative overflow-hidden px-[var(--shell-gutter)] py-20 sm:py-24 bg-cielo isolate">
+      <section className="relative overflow-hidden px-[var(--shell-gutter)] py-16 sm:py-[70px] bg-cielo isolate">
         <span aria-hidden className="tx tx-glow" />
         <Grain opacity={0.06} />
         <Reveal className="relative max-w-2xl mx-auto text-center flex flex-col items-center gap-8">
