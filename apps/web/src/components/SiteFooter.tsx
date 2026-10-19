@@ -26,7 +26,7 @@ export function SiteFooter() {
             href={whatsappHref(WHATSAPP_MESSAGES.diagnostico)}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center gap-2 rounded-full bg-arena px-6 py-3 text-sm font-semibold text-medianoche transition-colors hover:bg-cielo"
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-butter px-6 py-3 text-sm font-semibold text-medianoche transition-colors hover:bg-arena"
           >
             Agenda tu sesión diagnóstico
             <span aria-hidden>→</span>

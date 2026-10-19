@@ -56,7 +56,7 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
   );
 
   const ticker = (
-    <div className="overflow-hidden bg-medianoche py-2.5 whitespace-nowrap">
+    <div className="overflow-hidden bg-coral py-2.5 whitespace-nowrap">
       <div className="inline-flex marquee-track" style={{ animationDuration: "208s" }}>
         {[...TICKER_ITEMS_FILLED, ...TICKER_ITEMS_FILLED].map((item, i) => (
           <span
@@ -130,18 +130,20 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
       )}
 
       {events.length > 0 && (
-        <section className="px-6 sm:px-10 py-16 sm:py-20 max-w-3xl mx-auto flex flex-wrap items-baseline justify-between gap-4">
-          <p className="font-serif italic text-lg text-gris">
-            ¿No encuentras fecha que te acomode?
-          </p>
-          <a
-            href={WHATSAPP_HREF}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full bg-medianoche text-arena px-6 py-2.5 text-sm font-medium hover:bg-medianoche transition-colors"
-          >
-            Preguntarle a Pilar
-          </a>
+        <section className="bg-coral text-arena">
+          <div className="px-6 sm:px-10 py-16 sm:py-20 max-w-3xl mx-auto flex flex-wrap items-baseline justify-between gap-4">
+            <p className="font-serif text-xl font-medium italic text-arena">
+              ¿No encuentras fecha que te acomode?
+            </p>
+            <a
+              href={WHATSAPP_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-arena px-6 py-2.5 text-sm font-medium text-arena transition-colors hover:bg-arena hover:text-coral"
+            >
+              Preguntarle a Pilar
+            </a>
+          </div>
         </section>
       )}
     </div>

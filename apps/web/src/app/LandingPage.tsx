@@ -324,7 +324,7 @@ const PATH_TONES: Record<
     kicker: "text-arena/65",
     title: "text-arena",
     body: "text-arena/75",
-    cta: "bg-arena text-medianoche hover:bg-cielo",
+    cta: "bg-butter text-medianoche hover:bg-arena",
     tag: "border-arena/30 text-arena/85",
     watermark: "text-arena/[0.08]",
     imageVeil: "from-medianoche/35",
@@ -881,7 +881,7 @@ export function LandingPage({
                   href={DIAGNOSTICO_HREF}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 bg-arena text-medianoche text-sm font-semibold tracking-wide hover:bg-cielo transition-colors"
+                  className="inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 bg-butter text-medianoche text-sm font-semibold tracking-wide hover:bg-arena transition-colors"
                 >
                   Agenda tu sesión diagnóstico
                   <span aria-hidden>→</span>
@@ -951,7 +951,7 @@ export function LandingPage({
       </section>
 
       {/* Qué cambia — the destination, stated plainly, one photo per phase */}
-      <section className="relative overflow-hidden bg-butter text-medianoche">
+      <section className="relative overflow-hidden bg-butter/25 text-medianoche">
         <div className="text-center px-6 sm:px-10 pt-16 sm:pt-20 pb-10 sm:pb-12">
           <Reveal>
             <h2 className="font-serif text-3xl sm:text-5xl leading-[1.15] text-balance max-w-xl mx-auto">
@@ -1237,7 +1237,7 @@ export function LandingPage({
       </section>
 
       {/* CTA final */}
-      <section className="relative overflow-hidden px-[var(--shell-gutter)] py-20 sm:py-28 bg-butter">
+      <section className="relative overflow-hidden px-[var(--shell-gutter)] py-20 sm:py-28 bg-butter/25">
         <Grain opacity={0.06} />
         <Reveal className="relative max-w-2xl mx-auto text-center flex flex-col items-center gap-8">
           <h2 className="font-serif italic font-light text-4xl sm:text-6xl leading-[1.05] text-medianoche text-balance">
