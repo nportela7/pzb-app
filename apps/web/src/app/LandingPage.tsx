@@ -1157,6 +1157,7 @@ export function LandingPage({
       {/* Comunidad */}
       <section className="relative overflow-hidden px-[var(--shell-gutter)] py-16 sm:py-[70px] bg-cielo/40 isolate">
         <span aria-hidden className="tx tx-rings-cielo" />
+        <span aria-hidden className="tx tx-butter-patch" />
         <div className="max-w-3xl mx-auto text-center">
           <Reveal>
             <Eyebrow dot="bg-medianoche">Comunidad</Eyebrow>

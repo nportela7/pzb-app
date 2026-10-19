@@ -279,14 +279,26 @@ a {
     radial-gradient(55% 80% at 92% 90%, rgba(252, 194, 72, 0.16), transparent 70%);
 }
 
-/* A wider spread of the same soft patches of light (cielo, with a trace of
-   butter), for a full-width band: several patches across it instead of one
-   on each side. Each is centred inside the band and fades out before the
-   edges, so none shows a hard line against the section above. */
-.tx-blobs-wide {
+
+/* The same soft patches of light for a whole page: sized in px so they stay
+   round however tall the page is. They go over the header, down the RIGHT
+   margin and along the bottom, and stay out of the left margin of the card
+   stack, where the dates hang on a solid arena box (they have to be opaque so
+   the later date covers the earlier ones) that would show against a patch. */
+.tx-blobs-page {
   background:
-    radial-gradient(30% 62% at 8% 50%, rgba(155, 199, 236, 0.36), transparent 70%),
-    radial-gradient(24% 55% at 38% 55%, rgba(252, 194, 72, 0.2), transparent 70%),
-    radial-gradient(28% 60% at 68% 45%, rgba(155, 199, 236, 0.3), transparent 70%),
-    radial-gradient(22% 55% at 94% 55%, rgba(252, 194, 72, 0.18), transparent 70%);
+    radial-gradient(520px 340px at 5% 5%, rgba(155, 199, 236, 0.36), transparent 70%),
+    radial-gradient(480px 340px at 93% 7%, rgba(252, 194, 72, 0.22), transparent 70%),
+    radial-gradient(520px 420px at 97% 30%, rgba(155, 199, 236, 0.32), transparent 70%),
+    radial-gradient(480px 400px at 95% 55%, rgba(252, 194, 72, 0.2), transparent 70%),
+    radial-gradient(520px 420px at 98% 78%, rgba(155, 199, 236, 0.3), transparent 70%),
+    radial-gradient(520px 260px at 8% 98%, rgba(252, 194, 72, 0.2), transparent 70%),
+    radial-gradient(560px 260px at 60% 99%, rgba(155, 199, 236, 0.28), transparent 70%);
+}
+/* A subtle butter glow for the community section: one patch low on the right
+   and a fainter one high on the left, to warm the cielo a little. */
+.tx-butter-patch {
+  background:
+    radial-gradient(38% 80% at 88% 82%, rgba(252, 194, 72, 0.26), transparent 70%),
+    radial-gradient(30% 70% at 12% 14%, rgba(252, 194, 72, 0.14), transparent 70%);
 }

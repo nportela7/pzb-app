@@ -71,7 +71,11 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
   );
 
   return (
-    <div className="flex-1 bg-arena">
+    <div className="relative isolate flex-1 bg-arena">
+      {/* Soft patches of light spread over the whole light ground of the page
+          (the cards cover the middle; they show in the margins and between
+          blocks). No overflow:hidden here: the card stack needs `sticky`. */}
+      <span aria-hidden className="tx tx-blobs-page" />
       <section className="relative overflow-hidden px-6 sm:px-10 pt-6 sm:pt-12 pb-5">
         <Grain opacity={0.1} />
         <div className="relative flex items-center gap-4 mb-10">
@@ -130,10 +134,7 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
       )}
 
       {events.length > 0 && (
-        <section className="relative isolate overflow-hidden">
-          {/* Same arena as the stack above, with soft patches of light spread
-              across it. */}
-          <span aria-hidden className="tx tx-blobs-wide" />
+        <section>
           <div className="px-6 sm:px-10 py-12 sm:py-16 max-w-3xl mx-auto flex flex-wrap items-baseline justify-between gap-4">
             <p className="font-serif italic text-lg text-gris">
               ¿No encuentras fecha que te acomode?
