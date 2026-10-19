@@ -301,8 +301,8 @@ const PATHS = [
 ];
 
 /**
- * Each card is one of the brand's approved background/ink pairs (medianoche,
- * butter, cielo), never a colour outside the palette.
+ * One colour per path: coaching is medianoche, the company path (Zere Studio)
+ * wears Zere's own blue palette, and the community path is butter.
  * Backgrounds must be opaque: a stacked card covers the one behind it.
  */
 const PATH_TONES: Record<
@@ -331,26 +331,26 @@ const PATH_TONES: Record<
     sheen: "from-arena/25 via-transparent to-medianoche/60",
   },
   empresas: {
+    card: "bg-zere-sky",
+    kicker: "text-zere-ink/60",
+    title: "text-zere-ink",
+    body: "text-zere-ink/75",
+    cta: "bg-zere-deep text-arena hover:bg-zere-ink",
+    tag: "border-zere-deep/30 text-zere-deep",
+    watermark: "text-zere-deep/[0.09]",
+    imageVeil: "from-zere-deep/30",
+    sheen: "from-arena/60 via-transparent to-zere-deep/45",
+  },
+  comunidad: {
     card: "bg-butter",
     kicker: "text-medianoche/70",
     title: "text-medianoche",
     body: "text-medianoche/80",
-    cta: "bg-medianoche text-arena hover:bg-medianoche",
+    cta: "bg-medianoche text-arena hover:bg-medianoche/90",
     tag: "border-medianoche/30 text-medianoche",
     watermark: "text-medianoche/10",
-    imageVeil: "from-medianoche/30",
-    sheen: "from-arena/60 via-transparent to-medianoche/45",
-  },
-  comunidad: {
-    card: "bg-cielo",
-    kicker: "text-medianoche/70",
-    title: "text-medianoche",
-    body: "text-medianoche/80",
-    cta: "bg-medianoche text-arena hover:bg-medianoche",
-    tag: "border-medianoche/30 text-medianoche",
-    watermark: "text-medianoche/10",
-    imageVeil: "from-medianoche/30",
-    sheen: "from-arena/70 via-transparent to-medianoche/45",
+    imageVeil: "from-butter/50",
+    sheen: "from-arena/60 via-transparent to-transparent",
   },
 };
 
@@ -760,7 +760,7 @@ export function LandingPage({
                   style={{ top: `${5.5 + i * 2.75}rem` }}
                 >
                   <article
-                    className={`relative grid overflow-hidden rounded-3xl shadow-[0_-8px_40px_-24px_rgba(14,98,127,0.45)] sm:min-h-[74vh] sm:grid-cols-[1fr_0.8fr] ${tone.card}`}
+                    className={`relative grid overflow-hidden rounded-3xl shadow-[0_-8px_40px_-24px_rgba(14,98,127,0.45)] sm:min-h-[26rem] sm:grid-cols-[1fr_0.8fr] ${tone.card}`}
                   >
                     <Grain opacity={0.8} />
                     <div
