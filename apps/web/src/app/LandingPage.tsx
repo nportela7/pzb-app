@@ -1240,11 +1240,13 @@ export function LandingPage({
       </section>
 
       {/* CTA final */}
-      {/* Cielo fading into medianoche: the section ends on the footer's exact
-          colour, so the two read as one surface. The content stays in the
-          cielo part and the extra bottom padding is the room the fade needs. */}
-      <section className="relative overflow-hidden px-[var(--shell-gutter)] pt-20 pb-40 sm:pt-28 sm:pb-52 bg-[linear-gradient(180deg,var(--color-cielo)_0%,var(--color-cielo)_70%,var(--color-medianoche)_100%)] isolate">
+      {/* Cielo with the same light glow as the paths section, darkening only in
+          its last stretch so it lands on the footer's exact medianoche. The
+          fade is a fixed-height layer and the bottom padding is a little
+          taller than it, so none of the content sits inside the fade. */}
+      <section className="relative overflow-hidden px-[var(--shell-gutter)] pt-20 pb-40 sm:pt-28 sm:pb-44 bg-cielo isolate">
         <span aria-hidden className="tx tx-glow" />
+        <span aria-hidden className="tx tx-fade-down" />
         <Grain opacity={0.06} />
         <Reveal className="relative max-w-2xl mx-auto text-center flex flex-col items-center gap-8">
           <h2 className="font-serif italic font-light text-4xl sm:text-6xl leading-[1.05] text-medianoche text-balance">
@@ -1282,7 +1284,7 @@ export function LandingPage({
               </Link>
             </Show>
           </div>
-          <p className="text-[0.78rem] text-medianoche/85">
+          <p className="text-[0.78rem] text-medianoche/80">
             Te responde Pilar directo por WhatsApp · L–V 10–19h (CDMX)
           </p>
         </Reveal>

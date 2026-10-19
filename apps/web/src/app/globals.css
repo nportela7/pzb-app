@@ -265,3 +265,11 @@ a {
 .tx-rings-cielo {
   background: repeating-radial-gradient(circle at 22% -30%, transparent 0 34px, rgba(247, 240, 229, 0.5) 34px 35px);
 }
+
+/* Darkens the bottom of a section into medianoche so it can merge with the
+   footer. Fixed height on purpose: it must not depend on how tall the content is. */
+.tx-fade-down {
+  top: auto;
+  height: 9rem;
+  background: linear-gradient(180deg, rgba(14, 98, 127, 0) 0%, var(--color-medianoche) 100%);
+}
