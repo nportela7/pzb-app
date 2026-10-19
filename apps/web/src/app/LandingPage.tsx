@@ -765,7 +765,7 @@ export function LandingPage({
                       scales with the window (62vh, capped at 44rem): between the old 74vh,
                       which left a lot of empty space, and the content-only height. */}
                   <article
-                    className={`relative grid overflow-hidden rounded-3xl shadow-[0_-8px_40px_-24px_rgba(14,98,127,0.45)] sm:min-h-[46rem] md:min-h-[40rem] lg:min-h-[max(34rem,min(62vh,44rem))] xl:min-h-[max(30rem,min(62vh,44rem))] sm:grid-cols-[1fr_0.8fr] ${tone.card}`}
+                    className={`relative grid overflow-hidden rounded-3xl shadow-[0_-8px_40px_-24px_rgba(14,98,127,0.45)] sm:min-h-[46rem] md:min-h-[40rem] lg:min-h-[max(37rem,min(62vh,44rem))] xl:min-h-[max(30rem,min(62vh,44rem))] sm:grid-cols-[1fr_0.8fr] ${tone.card}`}
                   >
                     <Grain opacity={0.8} />
                     <div
@@ -779,7 +779,12 @@ export function LandingPage({
                       {String(i + 1).padStart(2, "0")}
                     </span>
 
-                    <div className="relative flex flex-col p-8 sm:px-12 sm:pb-12 sm:pt-24">
+                    {/* Top air = what card 1 had when its copy was vertically centred in the
+                        card: (card height - 19.2rem of content) / 2. Cards 2 and 3 have a
+                        bit more copy, so they get the same top air and their rows simply
+                        sit a little lower, instead of everything being pinned to the
+                        bottom or re-centred per card. */}
+                    <div className="relative flex flex-col p-8 sm:px-12 sm:pb-12 sm:pt-20 lg:pt-[calc((max(37rem,min(62vh,44rem))_-_19.2rem)/2)] xl:pt-[calc((max(30rem,min(62vh,44rem))_-_19.2rem)/2)]">
                       <p
                         className={`text-[0.68rem] uppercase tracking-[0.22em] ${tone.kicker}`}
                       >
@@ -793,12 +798,7 @@ export function LandingPage({
                       <p className={`mt-5 max-w-md leading-relaxed ${tone.body}`}>
                         {path.body}
                       </p>
-                      {/* Tags and button hang from the bottom, the heading block from
-                          the top (a fixed distance under the big number), so the
-                          cards line up whatever their copy length; the slack is
-                          the gap between the two. */}
-                      <div className="mt-auto pt-6">
-                      <div className="flex flex-wrap gap-2.5">
+                      <div className="mt-6 flex flex-wrap gap-2.5">
                         {path.tags.map((tag) => (
                           <span
                             key={tag}
@@ -810,7 +810,7 @@ export function LandingPage({
                       </div>
                       <Link
                         href={path.href}
-                        className={`group mt-9 inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition-colors ${tone.cta}`}
+                        className={`group mt-9 inline-flex items-center gap-2 self-start rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition-colors ${tone.cta}`}
                       >
                         {path.action}
                         <span
@@ -820,7 +820,6 @@ export function LandingPage({
                           &rarr;
                         </span>
                       </Link>
-                      </div>
                     </div>
 
                     <div className="relative order-first min-h-[12rem] sm:order-none sm:min-h-0">
