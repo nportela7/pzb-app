@@ -1240,7 +1240,10 @@ export function LandingPage({
       </section>
 
       {/* CTA final */}
-      <section className="relative overflow-hidden px-[var(--shell-gutter)] py-20 sm:py-28 bg-cielo isolate">
+      {/* Cielo fading into medianoche: the section ends on the footer's exact
+          colour, so the two read as one surface. The content stays in the
+          cielo part and the extra bottom padding is the room the fade needs. */}
+      <section className="relative overflow-hidden px-[var(--shell-gutter)] pt-20 pb-40 sm:pt-28 sm:pb-52 bg-[linear-gradient(180deg,var(--color-cielo)_0%,var(--color-cielo)_70%,var(--color-medianoche)_100%)] isolate">
         <span aria-hidden className="tx tx-glow" />
         <Grain opacity={0.06} />
         <Reveal className="relative max-w-2xl mx-auto text-center flex flex-col items-center gap-8">
@@ -1279,7 +1282,7 @@ export function LandingPage({
               </Link>
             </Show>
           </div>
-          <p className="text-[0.78rem] text-medianoche/75">
+          <p className="text-[0.78rem] text-medianoche/85">
             Te responde Pilar directo por WhatsApp · L–V 10–19h (CDMX)
           </p>
         </Reveal>
