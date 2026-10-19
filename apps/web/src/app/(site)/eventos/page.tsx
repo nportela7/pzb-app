@@ -130,16 +130,19 @@ export default async function EventosPage(props: PageProps<"/eventos">) {
       )}
 
       {events.length > 0 && (
-        <section className="bg-coral text-arena">
-          <div className="px-6 sm:px-10 py-16 sm:py-20 max-w-3xl mx-auto flex flex-wrap items-baseline justify-between gap-4">
-            <p className="font-serif text-xl font-medium italic text-arena">
+        <section className="relative isolate overflow-hidden">
+          {/* Same arena as the stack above, with soft patches of light spread
+              across it. */}
+          <span aria-hidden className="tx tx-blobs-wide" />
+          <div className="px-6 sm:px-10 py-12 sm:py-16 max-w-3xl mx-auto flex flex-wrap items-baseline justify-between gap-4">
+            <p className="font-serif italic text-lg text-gris">
               ¿No encuentras fecha que te acomode?
             </p>
             <a
               href={WHATSAPP_HREF}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full border border-arena px-6 py-2.5 text-sm font-medium text-arena transition-colors hover:bg-arena hover:text-coral"
+              className="rounded-full bg-medianoche text-arena px-6 py-2.5 text-sm font-medium transition-colors hover:bg-medianoche/90"
             >
               Preguntarle a Pilar
             </a>

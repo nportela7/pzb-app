@@ -278,3 +278,15 @@ a {
     radial-gradient(60% 90% at 12% 20%, rgba(155, 199, 236, 0.3), transparent 70%),
     radial-gradient(55% 80% at 92% 90%, rgba(252, 194, 72, 0.16), transparent 70%);
 }
+
+/* A wider spread of the same soft patches of light (cielo, with a trace of
+   butter), for a full-width band: several patches across it instead of one
+   on each side. Each is centred inside the band and fades out before the
+   edges, so none shows a hard line against the section above. */
+.tx-blobs-wide {
+  background:
+    radial-gradient(30% 62% at 8% 50%, rgba(155, 199, 236, 0.36), transparent 70%),
+    radial-gradient(24% 55% at 38% 55%, rgba(252, 194, 72, 0.2), transparent 70%),
+    radial-gradient(28% 60% at 68% 45%, rgba(155, 199, 236, 0.3), transparent 70%),
+    radial-gradient(22% 55% at 94% 55%, rgba(252, 194, 72, 0.18), transparent 70%);
+}
