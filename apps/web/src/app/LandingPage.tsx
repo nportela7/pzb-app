@@ -951,7 +951,7 @@ export function LandingPage({
       </section>
 
       {/* Qué cambia — the destination, stated plainly, one photo per phase */}
-      <section className="relative overflow-hidden bg-butter/25 text-medianoche">
+      <section className="relative overflow-hidden bg-arena text-medianoche">
         <div className="text-center px-6 sm:px-10 pt-16 sm:pt-20 pb-10 sm:pb-12">
           <Reveal>
             <h2 className="font-serif text-3xl sm:text-5xl leading-[1.15] text-balance max-w-xl mx-auto">
@@ -998,7 +998,7 @@ export function LandingPage({
               >
                 {outcome.phase}
               </p>
-              <p className="relative font-serif text-2xl sm:text-[1.9rem] font-semibold leading-snug text-balance transition-transform duration-500 group-hover:-translate-y-1">
+              <p className="relative font-serif text-2xl sm:text-[1.9rem] font-semibold leading-snug text-balance text-arena transition-transform duration-500 group-hover:-translate-y-1">
                 {outcome.statement}
               </p>
               <span className="relative text-[0.7rem] text-arena/60 transition-colors duration-500 group-hover:text-arena/90">
@@ -1237,7 +1237,7 @@ export function LandingPage({
       </section>
 
       {/* CTA final */}
-      <section className="relative overflow-hidden px-[var(--shell-gutter)] py-20 sm:py-28 bg-butter/25">
+      <section className="relative overflow-hidden px-[var(--shell-gutter)] py-20 sm:py-28 bg-cielo">
         <Grain opacity={0.06} />
         <Reveal className="relative max-w-2xl mx-auto text-center flex flex-col items-center gap-8">
           <h2 className="font-serif italic font-light text-4xl sm:text-6xl leading-[1.05] text-medianoche text-balance">
