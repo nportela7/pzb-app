@@ -273,3 +273,9 @@ a {
   height: 9rem;
   background: linear-gradient(180deg, rgba(14, 98, 127, 0) 0%, var(--color-medianoche) 100%);
 }
+
+/* The glow without the dark veil at the bottom, for a section whose bottom has
+   to match the cielo of the next one. */
+.tx-glow-top {
+  background: radial-gradient(110% 130% at 15% 0%, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 55%);
+}

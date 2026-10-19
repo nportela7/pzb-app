@@ -12,13 +12,31 @@ const COMUNIDAD = [
   { href: "/home", label: "Entrar a la comunidad" },
 ];
 
-export function SiteFooter() {
+/**
+ * `tone="cielo"` is for the landing: the closing section above it is cielo, so
+ * the footer keeps that same light blue and only darkens at its very end, down
+ * to medianoche, instead of cutting hard from one to the other. Every other
+ * page keeps the plain medianoche footer.
+ */
+export function SiteFooter({ tone = "medianoche" }: { tone?: "medianoche" | "cielo" }) {
+  const cielo = tone === "cielo";
+  const ink = cielo ? "text-medianoche" : "text-arena";
+  const inkSoft = cielo ? "text-medianoche/80" : "text-arena/70";
+  const label = cielo ? "text-medianoche/70" : "text-arena/60";
+  const hover = cielo ? "hover:text-medianoche" : "hover:text-arena";
   return (
-    <footer className="bg-medianoche text-arena/65">
+    <footer
+      className={
+        cielo
+          ? "relative isolate -mt-px bg-cielo text-medianoche/80"
+          : "bg-medianoche text-arena/65"
+      }
+    >
+      {cielo && <span aria-hidden className="tx tx-fade-down" />}
       <div className="mx-auto grid max-w-6xl gap-12 px-6 sm:px-10 py-16 md:grid-cols-[1.3fr_1fr_1fr]">
         <div>
-          <span className="font-script text-3xl text-arena">PZB.</span>
-          <p className="mt-4 max-w-xs leading-relaxed text-arena/70">
+          <span className={`font-script text-3xl ${ink}`}>PZB.</span>
+          <p className={`mt-4 max-w-xs leading-relaxed ${inkSoft}`}>
             Coaching de identidad, imagen y decisiones. Y experiencias con
             intención para empresas.
           </p>
@@ -34,7 +52,7 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <p className="text-[0.68rem] uppercase tracking-[0.22em] text-arena/60">
+          <p className={`text-[0.68rem] uppercase tracking-[0.22em] ${label}`}>
             Explorar
           </p>
           <nav className="mt-5 flex flex-col gap-3 text-sm">
@@ -42,7 +60,7 @@ export function SiteFooter() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="transition-colors hover:text-arena"
+                className={`transition-colors ${hover}`}
               >
                 {item.label}
               </Link>
@@ -51,7 +69,7 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <p className="text-[0.68rem] uppercase tracking-[0.22em] text-arena/60">
+          <p className={`text-[0.68rem] uppercase tracking-[0.22em] ${label}`}>
             Comunidad
           </p>
           <nav className="mt-5 flex flex-col gap-3 text-sm">
@@ -59,7 +77,7 @@ export function SiteFooter() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="transition-colors hover:text-arena"
+                className={`transition-colors ${hover}`}
               >
                 {item.label}
               </Link>
@@ -68,7 +86,7 @@ export function SiteFooter() {
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-colors hover:text-arena"
+              className={`transition-colors ${hover}`}
             >
               Instagram
             </a>
@@ -76,7 +94,11 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 border-t border-arena/12 px-6 sm:px-10 py-6 text-xs sm:flex-row">
+      <div
+        className={`mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 border-t border-arena/12 px-6 sm:px-10 py-6 text-xs sm:flex-row ${
+          cielo ? "text-arena/80" : ""
+        }`}
+      >
         <span>© {new Date().getFullYear()} Pilar Zambrano B.</span>
         <span className="text-arena/60">
           Ciudad de México · Strategic Life Editor

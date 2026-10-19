@@ -1240,13 +1240,11 @@ export function LandingPage({
       </section>
 
       {/* CTA final */}
-      {/* Cielo with the same light glow as the paths section, darkening only in
-          its last stretch so it lands on the footer's exact medianoche. The
-          fade is a fixed-height layer and the bottom padding is a little
-          taller than it, so none of the content sits inside the fade. */}
-      <section className="relative overflow-hidden px-[var(--shell-gutter)] pt-20 pb-40 sm:pt-28 sm:pb-44 bg-cielo isolate">
-        <span aria-hidden className="tx tx-glow" />
-        <span aria-hidden className="tx tx-fade-down" />
+      {/* Cielo with the paths section's light glow. It stays cielo all the way
+          down: the footer below keeps the same light blue and is the one that
+          darkens, at its very end, so the two read as one surface. */}
+      <section className="relative overflow-hidden px-[var(--shell-gutter)] py-20 sm:py-28 bg-cielo isolate">
+        <span aria-hidden className="tx tx-glow-top" />
         <Grain opacity={0.06} />
         <Reveal className="relative max-w-2xl mx-auto text-center flex flex-col items-center gap-8">
           <h2 className="font-serif italic font-light text-4xl sm:text-6xl leading-[1.05] text-medianoche text-balance">
@@ -1290,7 +1288,7 @@ export function LandingPage({
         </Reveal>
       </section>
 
-      <SiteFooter />
+      <SiteFooter tone="cielo" />
     </div>
   );
 }
