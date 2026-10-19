@@ -266,16 +266,10 @@ a {
   background: repeating-radial-gradient(circle at 22% -30%, transparent 0 34px, rgba(247, 240, 229, 0.5) 34px 35px);
 }
 
-/* Darkens the bottom of a section into medianoche so it can merge with the
-   footer. Fixed height on purpose: it must not depend on how tall the content is. */
-.tx-fade-down {
-  top: auto;
-  height: 9rem;
-  background: linear-gradient(180deg, rgba(14, 98, 127, 0) 0%, var(--color-medianoche) 100%);
-}
-
-/* The glow without the dark veil at the bottom, for a section whose bottom has
-   to match the cielo of the next one. */
-.tx-glow-top {
-  background: radial-gradient(110% 130% at 15% 0%, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 55%);
+/* Soft patches of light, watercolour style: cielo on one side and a trace of
+   butter on the other, over arena. Used by the landing's footer. */
+.tx-blobs {
+  background:
+    radial-gradient(60% 90% at 12% 20%, rgba(155, 199, 236, 0.3), transparent 70%),
+    radial-gradient(55% 80% at 92% 90%, rgba(252, 194, 72, 0.16), transparent 70%);
 }

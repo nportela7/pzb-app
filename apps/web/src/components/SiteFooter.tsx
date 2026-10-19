@@ -13,13 +13,12 @@ const COMUNIDAD = [
 ];
 
 /**
- * `tone="cielo"` is for the landing: the closing section above it is cielo, so
- * the footer keeps that same light blue and only darkens at its very end, down
- * to medianoche, instead of cutting hard from one to the other. Every other
- * page keeps the plain medianoche footer.
+ * `tone="arena"` is for the landing: a light footer with soft patches of
+ * light (cielo and a trace of butter), set apart from the cielo CTA above it
+ * by its own ground. Every other page keeps the plain medianoche footer.
  */
-export function SiteFooter({ tone = "medianoche" }: { tone?: "medianoche" | "cielo" }) {
-  const cielo = tone === "cielo";
+export function SiteFooter({ tone = "medianoche" }: { tone?: "medianoche" | "arena" }) {
+  const cielo = tone === "arena";
   const ink = cielo ? "text-medianoche" : "text-arena";
   const inkSoft = cielo ? "text-medianoche/80" : "text-arena/70";
   const label = cielo ? "text-medianoche/70" : "text-arena/60";
@@ -28,11 +27,11 @@ export function SiteFooter({ tone = "medianoche" }: { tone?: "medianoche" | "cie
     <footer
       className={
         cielo
-          ? "relative isolate -mt-px bg-cielo text-medianoche/80"
+          ? "relative isolate bg-arena text-medianoche/80"
           : "bg-medianoche text-arena/65"
       }
     >
-      {cielo && <span aria-hidden className="tx tx-fade-down" />}
+      {cielo && <span aria-hidden className="tx tx-blobs" />}
       <div className="mx-auto grid max-w-6xl gap-12 px-6 sm:px-10 py-16 md:grid-cols-[1.3fr_1fr_1fr]">
         <div>
           <span className={`font-script text-3xl ${ink}`}>PZB.</span>
@@ -95,12 +94,14 @@ export function SiteFooter({ tone = "medianoche" }: { tone?: "medianoche" | "cie
       </div>
 
       <div
-        className={`mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 border-t border-arena/12 px-6 sm:px-10 py-6 text-xs sm:flex-row ${
-          cielo ? "text-arena/80" : ""
+        className={`mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-6 sm:px-10 py-6 text-xs sm:flex-row ${
+          cielo
+            ? "border-t border-medianoche/15 text-medianoche/75"
+            : "border-t border-arena/12"
         }`}
       >
         <span>© {new Date().getFullYear()} Pilar Zambrano B.</span>
-        <span className="text-arena/60">
+        <span className={cielo ? "text-medianoche/65" : "text-arena/60"}>
           Ciudad de México · Strategic Life Editor
         </span>
       </div>

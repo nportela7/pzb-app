@@ -1240,11 +1240,8 @@ export function LandingPage({
       </section>
 
       {/* CTA final */}
-      {/* Cielo with the paths section's light glow. It stays cielo all the way
-          down: the footer below keeps the same light blue and is the one that
-          darkens, at its very end, so the two read as one surface. */}
       <section className="relative overflow-hidden px-[var(--shell-gutter)] py-20 sm:py-28 bg-cielo isolate">
-        <span aria-hidden className="tx tx-glow-top" />
+        <span aria-hidden className="tx tx-glow" />
         <Grain opacity={0.06} />
         <Reveal className="relative max-w-2xl mx-auto text-center flex flex-col items-center gap-8">
           <h2 className="font-serif italic font-light text-4xl sm:text-6xl leading-[1.05] text-medianoche text-balance">
@@ -1288,7 +1285,7 @@ export function LandingPage({
         </Reveal>
       </section>
 
-      <SiteFooter tone="cielo" />
+      <SiteFooter tone="arena" />
     </div>
   );
 }
