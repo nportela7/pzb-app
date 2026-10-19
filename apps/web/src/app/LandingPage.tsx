@@ -962,13 +962,16 @@ export function LandingPage({
       </section>
 
       {/* Qué cambia — the destination, stated plainly, one photo per phase */}
-      <section className="relative overflow-hidden bg-arena text-medianoche">
-        <div className="relative isolate text-center px-6 sm:px-10 pt-16 sm:pt-20 pb-10 sm:pb-12">
-          <span aria-hidden className="tx tx-rings-arena" />
+      <section className="relative isolate overflow-hidden bg-arena text-medianoche">
+        {/* The rings spread from the middle of the section, behind the photos, so
+            they show as arcs above and below them. */}
+        <span aria-hidden className="tx tx-rings-arena" />
+        <span aria-hidden className="tx tx-grain" />
+        <div className="text-center px-6 sm:px-10 pt-16 sm:pt-20 pb-10 sm:pb-12">
           <Reveal>
-            <h2 className="font-serif text-3xl sm:text-5xl leading-[1.15] text-balance max-w-xl mx-auto">
+            <h2 className="font-serif text-3xl font-semibold sm:text-[3.4rem] leading-[1.12] text-balance max-w-2xl mx-auto">
               A los seis meses, ¿
-              <span className="italic font-normal">
+              <span className="italic font-medium">
                 qué es distinto?
               </span>
             </h2>
@@ -1037,7 +1040,7 @@ export function LandingPage({
 
       {/* Testimonios — the proof wall */}
       <section className="relative isolate overflow-hidden py-16 sm:py-24 bg-cielo/45">
-        <span aria-hidden className="tx tx-grain" />
+        <span aria-hidden className="tx tx-grain tx-grain-strong" />
         <div className="shell relative">
           <Reveal className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-xl">
@@ -1157,8 +1160,9 @@ export function LandingPage({
         <div className="max-w-3xl mx-auto text-center">
           <Reveal>
             <Eyebrow dot="bg-medianoche">Comunidad</Eyebrow>
-            <h2 className="text-3xl sm:text-4xl text-medianoche mt-5 mb-6 text-balance">
-              Una red que se sostiene entre mujeres
+            <h2 className="text-4xl font-semibold text-medianoche mt-5 mb-6 text-balance sm:text-[3.2rem] sm:leading-[1.08]">
+              Una red que se sostiene{" "}
+              <span className="italic font-medium">entre mujeres</span>
             </h2>
             <p className="text-medianoche/75 max-w-xl mx-auto leading-relaxed">
               Un directorio de socias para encontrarse, colaborar y

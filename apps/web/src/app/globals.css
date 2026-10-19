@@ -259,8 +259,13 @@ a {
   background-size: 180px 180px;
   opacity: 0.2;
 }
+/* On cielo the same noise reads weaker, so Client love asks for more. On arena
+   it has to stay low or the cream turns grey. */
+.tx-grain-strong {
+  opacity: 0.34;
+}
 .tx-rings-arena {
-  background: repeating-radial-gradient(circle at 78% 130%, transparent 0 34px, rgba(14, 98, 127, 0.11) 34px 35px);
+  background: repeating-radial-gradient(circle at 50% 50%, transparent 0 34px, rgba(14, 98, 127, 0.085) 34px 35px);
 }
 .tx-rings-cielo {
   background: repeating-radial-gradient(circle at 22% -30%, transparent 0 34px, rgba(247, 240, 229, 0.5) 34px 35px);
